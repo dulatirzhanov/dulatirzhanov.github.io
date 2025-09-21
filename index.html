@@ -89,6 +89,14 @@
       cursor: pointer;
       color: #888;
     }
+  .hero-photo {
+  max-width: 180px;   /* максимальная ширина фото */
+  width: 40vw;        /* на мобильных — до 40% ширины экрана */
+  height: auto;
+  border-radius: 50%; /* делает фото круглым */
+  display: block;
+  margin: 0 auto 20px; /* центрируем и даём отступ снизу */
+    }
 
     .bio {
       margin-top:60px;
@@ -119,6 +127,7 @@
 
 </head>
 <body>
+  <img src="profile.png" alt="Dulat Irzhanov" class="hero-photo">
   <h1>Dulat Irzhanov</h1>
   <p class="muted"><b>dulatedu.com</b></p>
   <p>Data, Education, Leadership</p>
