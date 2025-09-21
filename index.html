@@ -34,9 +34,55 @@
     body { font-family: Arial, sans-serif; text-align: center; padding: 50px; margin: 0 }
     h1 { margin: 0 0 8px }
     p { margin: 8px 0; color: #444 }
-    nav a { margin: 0 8px; text-decoration: none; color: #0a66c2 }
-    nav a:hover { text-decoration: underline }
+    nav a, nav button { margin: 0 8px; text-decoration: none; color: #0a66c2; background: transparent; border: 0; font: inherit; cursor: pointer }
+    nav a:hover, nav button:hover { text-decoration: underline }
     .muted { color:#666 }
+
+    /* Modal */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.4);
+      display: none;
+    }
+    .modal {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: #fff; padding: 28px 32px; border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25); width: min(92vw, 420px);
+      display: none; text-align: center;
+    }
+    .modal h2 { margin: 0 0 12px; color: #0a66c2 }
+    .modal p { color: #555; margin: 0 0 16px }
+    .modal a.cta {
+      display: block; padding: 12px 14px; border-radius: 12px;
+      text-decoration: none; font-weight: bold; margin: 10px 0;
+      background: #f2f6ff; color: #0a66c2; border: 1px solid #d8e6ff;
+    }
+    .modal a.cta:hover { background: #e9f1ff }
+    .close {
+      position: absolute; top: 10px; right: 12px; border: 0; background: transparent;
+      font-size: 20px; line-height: 1; cursor: pointer; color: #888;
+    }
+
+    .bio {
+      margin-top:60px;
+      max-width:700px;
+      margin-left:auto;
+      margin-right:auto;
+      font-size:16px;
+      line-height:1.6;
+      color:#444;
+      text-align:left;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; color: #ddd }
+      p { color: #bbb }
+      .muted { color:#999 }
+      .modal { background: #1a1a1a; box-shadow: 0 12px 40px rgba(0,0,0,.6) }
+      .modal p { color: #ccc }
+      .modal a.cta { background: #162238; color: #cfe0ff; border-color: #284777 }
+      .modal a.cta:hover { background: #1c2b44 }
+      .bio { color:#ccc }
+    }
   </style>
 </head>
 <body>
@@ -44,11 +90,56 @@
   <p class="muted"><b>dulatedu.com</b></p>
   <p>Data, Education, Leadership</p>
 
-  <nav>
+  <nav aria-label="Primary">
     <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
     <a href="https://www.instagram.com/thislifeisg/" target="_blank" rel="noopener noreferrer">Instagram</a> |
-    <a href="https://taplink.cc/dulatirzhanov" target="_blank" rel="noopener noreferrer">Contacts</a> |
+    <button id="openContacts" aria-haspopup="dialog" aria-controls="contactsModal">Contacts</button> |
     <a href="https://taplink.cc/dulatblog" target="_blank" rel="noopener noreferrer">Blog</a>
   </nav>
+
+  <!-- Overlay and Modal -->
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+  <div id="contactsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactsTitle">
+    <button class="close" id="closeContacts" aria-label="Close">×</button>
+    <h2 id="contactsTitle">Contacts</h2>
+    <p>Reach out directly</p>
+
+    <a class="cta" href="mailto:dulatirzhanov@gmail.com">✉️ Email: dulatirzhanov@gmail.com</a>
+    <a class="cta" href="tel:+77761070090">📞 Phone: +7 776 107 00 90</a>
+    <a class="cta" href="https://wa.me/77761070090" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+  </div>
+
+  <div class="bio">
+    <p><strong>Welcome!</strong> I’m Dulat, an education leader from Kazakhstan and Director of School Development at the International Steppe School of Astana (ISSA) by NIS. I lead school strategy, international accreditation (CIS/IB), quality assurance, and process improvement grounded in international standards and data analytics.</p>
+    <p>Previously, I coordinated CIS accreditation across 22 NIS schools and helped scale Professional Learning Communities nationwide. I serve as a CIS Accreditation Team Leader, supporting schools globally.</p>
+    <p><em>Research interests:</em> leadership development, accreditation as a driver of improvement, and data-informed strategy in Central Asia. I write in Kazakh, Russian, and English.</p>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openContacts');
+    const closeBtn = document.getElementById('closeContacts');
+    const modal = document.getElementById('contactsModal');
+    const overlay = document.getElementById('overlay');
+
+    function openModal() {
+      modal.style.display = 'block';
+      overlay.style.display = 'block';
+      overlay.setAttribute('aria-hidden', 'false');
+      closeBtn.focus();
+    }
+    function closeModal() {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden', 'true');
+      openBtn.focus();
+    }
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.style.display === 'block'){ closeModal(); }
+    });
+  </script>
 </body>
 </html>
