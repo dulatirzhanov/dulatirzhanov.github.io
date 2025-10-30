@@ -29,16 +29,43 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-    <style>
+  <style>
     :root { color-scheme: light dark }
     body { font-family: Arial, sans-serif; text-align: center; padding: 50px; margin: 0 }
     h1 { margin: 0 0 8px }
     p { margin: 8px 0; color: #444 }
-    nav a, nav button { margin: 0 8px; text-decoration: none; color: #0a66c2; background: transparent; border: 0; font: inherit; cursor: pointer }
-    nav a:hover, nav button:hover { text-decoration: underline }
     .muted { color:#666 }
 
-    /* Modal */
+    /* ---------- NAVIGATION ---------- */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 6px 0 0;
+    }
+    .nav a, .nav button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      color: #0a66c2;
+      text-decoration: none;
+    }
+    .nav a:hover, .nav button:hover { text-decoration: underline; }
+
+    @media (prefers-color-scheme: dark) {
+      .nav a, .nav button { color: #9ec5ff; }
+      .nav a:hover, .nav button:hover { color: #cfe0ff; }
+    }
+
+    @media (max-width: 420px) {
+      .nav { gap: 10px; }
+    }
+
+    /* ---------- MODAL ---------- */
     .overlay {
       position: fixed;
       inset: 0;
@@ -53,14 +80,11 @@
       padding: 24px 20px;
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0,0,0,.25);
-
-      /* адаптивная ширина и высота */
-      width: calc(100vw - 40px);   /* оставляем по 20px отступа слева и справа */
+      width: calc(100vw - 40px);
       max-width: 420px;
-      max-height: calc(100vh - 120px); /* чтобы окно не вылезало за экран по высоте */
+      max-height: calc(100vh - 120px);
       overflow: auto;
       -webkit-overflow-scrolling: touch;
-
       display: none;
       text-align: center;
     }
@@ -89,45 +113,75 @@
       cursor: pointer;
       color: #888;
     }
-  .hero-photo {
-  max-width: 180px;   /* максимальная ширина фото */
-  width: 40vw;        /* на мобильных — до 40% ширины экрана */
-  height: auto;
-  border-radius: 50%; /* делает фото круглым */
-  display: block;
-  margin: 0 auto 20px; /* центрируем и даём отступ снизу */
+
+    /* ---------- HERO PHOTO ---------- */
+    .hero-photo {
+      max-width: 180px;
+      width: 40vw;
+      height: auto;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 20px;
     }
 
+    /* ---------- BIO SECTION ---------- */
     .bio {
-      margin-top:60px;
-      max-width:700px;
-      margin-left:auto;
-      margin-right:auto;
-      font-size:16px;
-      line-height:1.6;
-      color:#444;
-      text-align:left;
+      margin-top: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+      text-align: left;
     }
 
+    /* ---------- CTA BUTTON ---------- */
+    .cta-post {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      background: rgba(10,102,194,0.06);
+      color: #0a66c2;
+      border: 1px solid rgba(10,102,194,0.25);
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .cta-post:hover {
+      background: rgba(10,102,194,0.1);
+      border-color: rgba(10,102,194,0.35);
+    }
+
+    /* ---------- DARK THEME ---------- */
     @media (prefers-color-scheme: dark) {
-      body { background: #111; color: #ddd }
-      p { color: #bbb }
-      .muted { color:#999 }
-      .modal { background: #1a1a1a; box-shadow: 0 12px 40px rgba(0,0,0,.6) }
-      .modal p { color: #ccc }
-      .modal a.cta { background: #162238; color: #cfe0ff; border-color: #284777 }
-      .modal a.cta:hover { background: #1c2b44 }
-      .bio { color:#ccc }
+      body { background: #111; color: #ddd; }
+      p { color: #bbb; }
+      .muted { color: #999; }
+      .bio { color: #ccc; }
 
-      a[href*="go.dulatedu.com"] {
-  background: #162238;
-  color: #cfe0ff;
-  border-color: #284777;
-}
-a[href*="go.dulatedu.com"]:hover {
-  background: #1c2b44;
-}
+      .modal {
+        background: #1a1a1a;
+        box-shadow: 0 12px 40px rgba(0,0,0,.6);
+      }
+      .modal p { color: #ccc; }
+      .modal a.cta {
+        background: #162238;
+        color: #cfe0ff;
+        border-color: #284777;
+      }
+      .modal a.cta:hover { background: #1c2b44; }
 
+      .cta-post {
+        background: rgba(207,224,255,0.06);
+        color: #cfe0ff;
+        border: 1px solid rgba(207,224,255,0.22);
+      }
+      .cta-post:hover {
+        background: rgba(207,224,255,0.12);
+        border-color: rgba(207,224,255,0.32);
+      }
     }
 
     @media (max-width: 360px) {
@@ -135,30 +189,28 @@ a[href*="go.dulatedu.com"]:hover {
     }
   </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P430YKCERB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-P430YKCERB');
-</script>
-  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P430YKCERB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P430YKCERB');
+  </script>
 </head>
+
 <body>
   <img src="profile.png" alt="Dulat Irzhanov" class="hero-photo">
   <h1>Dulat Irzhanov</h1>
   <p class="muted"><b>dulatedu.com</b></p>
   <p>Data, Education, Leadership</p>
 
-<nav aria-label="Primary">
-  <a href="https://go.dulatedu.com/uBIy" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-  <a href="https://go.dulatedu.com/DOfU" target="_blank" rel="noopener noreferrer">Instagram</a> |
-  <button id="openContacts" aria-haspopup="dialog" aria-controls="contactsModal">Contacts</button> |
-  <a href="blog.html">Blog</a>
-</nav>
-
+  <nav aria-label="Primary" class="nav">
+    <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://www.instagram.com/thislifeisg/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <button id="openContacts" aria-haspopup="dialog" aria-controls="contactsModal" type="button">Contacts</button>
+    <a href="blog.html">Blog</a>
+  </nav>
 
   <!-- Overlay and Modal -->
   <div id="overlay" class="overlay" aria-hidden="true"></div>
@@ -172,35 +224,20 @@ a[href*="go.dulatedu.com"]:hover {
     <a class="cta" href="tel:+77761070090">📞 Phone: +7 776 107 00 90</a>
     <a class="cta" href="https://wa.me/77761070090" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
     <a class="cta" href="https://calendly.com/dulat/consultations"
-   target="_blank" rel="noopener noreferrer">📅 Book a consultation (Calendly)</a>
-
+      target="_blank" rel="noopener noreferrer">📅 Book a consultation (Calendly)</a>
   </div>
 
   <div class="bio">
     <p><strong>Welcome!</strong></p>
-    <p>I’m Dulat, an education leader driving school improvement across Kazakhstan and beyond. As Director of School Development at the International Steppe School of Astana (ISSA) by NIS, I lead strategy, CIS/IB accreditation and quality-assurance initiatives, helping schools align with international standards and use data for measurable impact
+    <p>I’m Dulat, an education leader driving school improvement across Kazakhstan and beyond. As Director of School Development at the International Steppe School of Astana (ISSA) by NIS, I lead strategy, CIS/IB accreditation and quality-assurance initiatives, helping schools align with international standards and use data for measurable impact.</p>
     <p>Previously I coordinated CIS accreditation for 22 Nazarbayev Intellectual Schools and helped scale Professional Learning Communities nationwide. I now serve as a CIS Accreditation Team Leader, supporting schools around the world.</p>
-    <p><em>I’m interested in leadership development, accreditation as a driver of improvement, and data-informed strategy in Central Asia—and I’m open to future research and collaboration opportunities.</p>
-  
-  <p>
-  <a href="https://go.dulatedu.com/YBoW" 
-     target="_blank" 
-     rel="noopener noreferrer" 
-     style="
-       display:inline-block;
-       margin:20px 0;
-       padding:12px 18px;
-       background:#f2f6ff;
-       color:#0a66c2;
-       border:1px solid #d8e6ff;
-       border-radius:12px;
-       font-weight:bold;
-       text-decoration:none;
-       transition:background 0.2s ease;">
-    Read my newest contribution to the CIS Perspectives Blog
-  </a>
-</p>
+    <p><em>I’m interested in leadership development, accreditation as a driver of improvement, and data-informed strategy in Central Asia—and I’m open to future research and collaboration opportunities.</em></p>
 
+    <p>
+      <a class="cta-post" href="https://go.dulatedu.com/YBoW" target="_blank" rel="noopener noreferrer">
+        Read my newest contribution to the CIS Perspectives Blog
+      </a>
+    </p>
   </div>
 
   <script>
@@ -230,8 +267,7 @@ a[href*="go.dulatedu.com"]:hover {
   </script>
 
   <footer style="text-align:center; margin-top:60px; font-size:14px; color:#666;">
-  © 2025 Dulat Irzhanov
-</footer>
-  
+    © 2025 Dulat Irzhanov
+  </footer>
 </body>
 </html>
