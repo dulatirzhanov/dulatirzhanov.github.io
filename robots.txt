@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://dulatedu.com/sitemap.xml
+Sitemap: https://go.dulatedu.com/sitemap.xml
