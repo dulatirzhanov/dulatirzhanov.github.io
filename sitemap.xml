@@ -20,7 +20,7 @@
 
   <!-- Additional pages -->
   <url>
-    <loc>https://dulatedu.com/blog.html</loc>
+    <loc>https://dulatedu.com/blog/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
