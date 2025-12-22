@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title>Дулат Бауыржанұлы | Деректер, Білім, Көшбасшылық</title>
+  <meta name="description" content="Дулат Бауыржанұлының жеке сайты — мектепті дамыту сарапшысы және CIS командасының жетекшісі. Аккредитация, білім беру реформалары және деректерді пайдалану.">
+  <meta name="author" content="Dulat Irzhanov">
+  <meta name="keywords" content="Дулат Бауыржанұлы, мектепті дамыту, CIS аккредитациясы, ISS Astana, Қазақстандағы білім беру, деректерге негізделген көшбасшылық, НЗМ">
+  <meta name="theme-color" content="#0a66c2">
+
+  <link rel="canonical" href="https://dulatedu.com/kz/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dulatedu.com/kz/">
+  <meta property="og:title" content="Дулат Бауыржанұлы | Деректер, Білім, Көшбасшылық">
+  <meta property="og:description" content="Дулат Бауыржанұлының жеке сайты — мектепті дамыту сарапшысы және CIS командасының жетекшісі.">
+  <meta property="og:image" content="https://dulatedu.com/og-image.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Дулат Бауыржанұлы | Деректер, Білім, Көшбасшылық">
+  <meta name="twitter:description" content="Мектепті дамыту сарапшысы және CIS командасының жетекшісі.">
+  <meta name="twitter:image" content="https://dulatedu.com/og-image.jpg">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <style>
+    :root { color-scheme: light dark }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px 20px; margin: 0; position: relative; }
+    h1 { margin: 0 0 8px }
+    p { margin: 8px 0; color: #444 }
+    .muted { color:#666 }
+
+    /* ---------- LANGUAGE SWITCHER (TOP RIGHT) ---------- */
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 10;
+    }
+    .lang-switcher a { 
+      color: #666; 
+      text-decoration: none; 
+      margin: 0 3px;
+      padding: 5px;
+    }
+    .lang-switcher a:hover { text-decoration: underline; }
+    .lang-switcher a.active { 
+      color: #0a66c2 !important; 
+      cursor: default; 
+      text-decoration: none;
+    }
+
+    /* ---------- NAVIGATION ---------- */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0 0;
+    }
+    .nav a, .nav button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      color: #0a66c2;
+      text-decoration: none;
+    }
+    .nav a:hover, .nav button:hover { text-decoration: underline; }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; color: #ddd; }
+      p { color: #bbb; }
+      .muted { color: #999; }
+      .nav a, .nav button { color: #9ec5ff; }
+      .nav a:hover, .nav button:hover { color: #cfe0ff; }
+      .lang-switcher a { color: #999; }
+      .lang-switcher a.active { color: #9ec5ff !important; }
+    }
+
+    /* ---------- MODAL ---------- */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; z-index: 100; }
+    .modal {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: #fff; padding: 24px 20px; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25); width: calc(100vw - 40px);
+      max-width: 420px; max-height: calc(100vh - 120px); overflow: auto;
+      display: none; text-align: center; z-index: 101;
+    }
+    .modal h2 { margin: 0 0 12px; color: #0a66c2 }
+    .modal a.cta {
+      display: block; padding: 12px 14px; border-radius: 12px;
+      text-decoration: none; font-weight: bold; margin: 10px 0;
+      background: #f2f6ff; color: #0a66c2; border: 1px solid #d8e6ff;
+    }
+    .close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; font-size: 20px; cursor: pointer; color: #888; }
+
+    /* ---------- HERO & BIO ---------- */
+    .hero-photo { max-width: 180px; width: 40vw; border-radius: 50%; display: block; margin: 0 auto 20px; }
+    .bio { margin-top: 60px; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 16px; line-height: 1.6; text-align: left; }
+    .cta-post {
+      display: inline-block; margin: 20px 10px 10px 0; padding: 12px 18px; border-radius: 12px;
+      font-weight: bold; text-decoration: none; background: rgba(10,102,194,0.06);
+      color: #0a66c2; border: 1px solid rgba(10,102,194,0.25);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .modal { background: #1a1a1a; }
+      .modal a.cta { background: #162238; color: #cfe0ff; border-color: #284777; }
+      .cta-post { background: rgba(207,224,255,0.06); color: #cfe0ff; border: 1px solid rgba(207,224,255,0.22); }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P430YKCERB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P430YKCERB');
+  </script>
+</head>
+
+<body>
+
+  <div class="lang-switcher">
+    <a href="/">EN</a> | <a href="/ru/">RU</a> | <a href="/kz/" class="active">KZ</a>
+  </div>
+
+  <img src="/profile.png" alt="Dulat Irzhanov" class="hero-photo">
+  <h1>Дулат Бауыржанұлы</h1>
+  <p class="muted"><b>dulatedu.com</b></p>
+  <p>Деректер. Білім. Көшбасшылық.</p>
+
+  <nav aria-label="Primary" class="nav">
+    <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://www.instagram.com/thislifeisg/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <button id="openContacts" type="button">Байланыс</button>
+    <a href="/blog/">Блог</a>
+  </nav>
+
+  <div id="overlay" class="overlay"></div>
+  <div id="contactsModal" class="modal">
+    <button class="close" id="closeContacts">×</button>
+    <h2>Байланыс</h2>
+    <p>Тікелей хабарласыңыз</p>
+    <a class="cta" href="mailto:dulatirzhanov@gmail.com">✉️ Email: dulatirzhanov@gmail.com</a>
+    <a class="cta" href="tel:+77761070090">📞 Тел: +7 776 107 00 90</a>
+    <a class="cta" href="https://wa.me/77761070090" target="_blank">💬 WhatsApp</a>
+    <a class="cta" href="https://calendly.com/dulat/consultations" target="_blank">📅 Консультацияға жазылу (Calendly)</a>
+  </div>
+
+  <div class="bio">
+    <p><strong>Қош келдіңіз!</strong></p>
+    <p>Аты-жөнім – Дулат Бауыржанұлы. Қазақстанда және халықаралық деңгейде мектептердің дамуына үлес қосып жүрген білім беру саласындағы көшбасшымын. «International Steppe School of Astana» (ISSA) мектебінде директордың даму ісі жөніндегі орынбасары ретінде мектеп стратегиясын, Council of International Schools (CIS) аккредитациясын, International Baccalaureate авторизациясын, сондай-ақ сапаны қамтамасыз ету бағытындағы басқа да бастамаларды үйлестіремін. Мектептердің халықаралық стандарттарға сай дамуына және өлшенетін нәтижелерге қол жеткізуіне деректерді тиімді пайдалану арқылы қолдау көрсетемін.</p>
+    <p>Бұған дейін мен 22 Назарбаев Зияткерлік мектебінде CIS аккредитация үдерісін үйлестірдім. Сонымен қатар Қазақстан көлемінде тірек мектептерінің Кәсіби оқу қауымдастықтарының дамуына үлес қостым. Қазіргі таңда CIS аккредитациясының Team Leader рөлінде волонтерлік қызмет атқарып, әлемнің әр түкпіріндегі мектептерге қолдау көрсетемін.</p>
+    <p><em>Мен көшбасшылықты дамытуға, аккредитацияны мектепті жетілдіру құралы ретінде пайдалануға және Орталық Азия контекстінде деректерге негізделген стратегиялық басқару тақырыптарына қызығушылық танытамын. Зерттеу және кәсіби серіктестік мүмкіндіктеріне ашықпын.</em></p>
+
+    <p>
+      <a class="cta-post" href="https://go.dulatedu.com/YBoW" target="_blank">CIS Perspectives Blog-тағы ең соңғы материалымды оқыңыз</a>
+      <a class="cta-post" href="https://go.dulatedu.com/7bCl">Консалтингтік қызметтеріммен танысыңыз</a>
+    </p>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openContacts');
+    const closeBtn = document.getElementById('closeContacts');
+    const modal = document.getElementById('contactsModal');
+    const overlay = document.getElementById('overlay');
+
+    function openModal() { modal.style.display = 'block'; overlay.style.display = 'block'; closeBtn.focus(); }
+    function closeModal() { modal.style.display = 'none'; overlay.style.display = 'none'; }
+    
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+  </script>
+
+  <footer style="text-align:center; margin-top:60px; font-size:14px; color:#666;">
+    © 2025 Dulat Irzhanov
+  </footer>
+</body>
+</html>
