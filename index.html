@@ -31,18 +31,40 @@
 
   <style>
     :root { color-scheme: light dark }
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; margin: 0 }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px 20px; margin: 0; position: relative; }
     h1 { margin: 0 0 8px }
     p { margin: 8px 0; color: #444 }
     .muted { color:#666 }
+
+    /* ---------- LANGUAGE SWITCHER (TOP RIGHT) ---------- */
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 10;
+    }
+    .lang-switcher a { 
+      color: #666; 
+      text-decoration: none; 
+      margin: 0 3px;
+      padding: 5px;
+    }
+    .lang-switcher a:hover { text-decoration: underline; }
+    .lang-switcher a.active { 
+      color: #0a66c2 !important; 
+      cursor: default; 
+      text-decoration: none;
+    }
 
     /* ---------- NAVIGATION ---------- */
     .nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      margin: 6px 0 0;
+      gap: 15px;
+      margin: 15px 0 0;
     }
     .nav a, .nav button {
       appearance: none;
@@ -57,139 +79,49 @@
     .nav a:hover, .nav button:hover { text-decoration: underline; }
 
     @media (prefers-color-scheme: dark) {
-      .nav a, .nav button { color: #9ec5ff; }
-      .nav a:hover, .nav button:hover { color: #cfe0ff; }
-    }
-
-    @media (max-width: 420px) {
-      .nav { gap: 10px; }
-    }
-
-    /* ---------- MODAL ---------- */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.4);
-      display: none;
-    }
-    .modal {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 24px 20px;
-      border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-      width: calc(100vw - 40px);
-      max-width: 420px;
-      max-height: calc(100vh - 120px);
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      display: none;
-      text-align: center;
-    }
-    .modal h2 { margin: 0 0 12px; color: #0a66c2 }
-    .modal p { color: #555; margin: 0 0 16px }
-    .modal a.cta {
-      display: block;
-      padding: 12px 14px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 10px 0;
-      background: #f2f6ff;
-      color: #0a66c2;
-      border: 1px solid #d8e6ff;
-    }
-    .modal a.cta:hover { background: #e9f1ff }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      border: 0;
-      background: transparent;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-      color: #888;
-    }
-
-    /* ---------- HERO PHOTO ---------- */
-    .hero-photo {
-      max-width: 180px;
-      width: 40vw;
-      height: auto;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto 20px;
-    }
-
-    /* ---------- BIO SECTION ---------- */
-    .bio {
-      margin-top: 60px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #444;
-      text-align: left;
-    }
-
-    /* ---------- CTA BUTTON ---------- */
-    .cta-post {
-  display: inline-block;
-  margin: 20px 0 10px; /* 20px сверху, 10px снизу */
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  background: rgba(10,102,194,0.06);
-  color: #0a66c2;
-  border: 1px solid rgba(10,102,194,0.25);
-  transition: background .15s ease, border-color .15s ease;
-}
-    .cta-post:hover {
-      background: rgba(10,102,194,0.1);
-      border-color: rgba(10,102,194,0.35);
-    }
-
-    /* ---------- DARK THEME ---------- */
-    @media (prefers-color-scheme: dark) {
       body { background: #111; color: #ddd; }
       p { color: #bbb; }
       .muted { color: #999; }
-      .bio { color: #ccc; }
-
-      .modal {
-        background: #1a1a1a;
-        box-shadow: 0 12px 40px rgba(0,0,0,.6);
-      }
-      .modal p { color: #ccc; }
-      .modal a.cta {
-        background: #162238;
-        color: #cfe0ff;
-        border-color: #284777;
-      }
-      .modal a.cta:hover { background: #1c2b44; }
-
-      .cta-post {
-        background: rgba(207,224,255,0.06);
-        color: #cfe0ff;
-        border: 1px solid rgba(207,224,255,0.22);
-      }
-      .cta-post:hover {
-        background: rgba(207,224,255,0.12);
-        border-color: rgba(207,224,255,0.32);
-      }
+      .nav a, .nav button { color: #9ec5ff; }
+      .nav a:hover, .nav button:hover { color: #cfe0ff; }
+      .lang-switcher a { color: #999; }
+      .lang-switcher a.active { color: #9ec5ff !important; }
     }
 
-    @media (max-width: 360px) {
-      .modal { padding: 18px 16px; border-radius: 12px; }
+    /* ---------- MODAL ---------- */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; z-index: 100; }
+    .modal {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: #fff; padding: 24px 20px; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25); width: calc(100vw - 40px);
+      max-width: 420px; max-height: calc(100vh - 120px); overflow: auto;
+      display: none; text-align: center; z-index: 101;
+    }
+    .modal h2 { margin: 0 0 12px; color: #0a66c2 }
+    .modal a.cta {
+      display: block; padding: 12px 14px; border-radius: 12px;
+      text-decoration: none; font-weight: bold; margin: 10px 0;
+      background: #f2f6ff; color: #0a66c2; border: 1px solid #d8e6ff;
+    }
+    .close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; font-size: 20px; cursor: pointer; color: #888; }
+
+    /* ---------- HERO & BIO ---------- */
+    .hero-photo { max-width: 180px; width: 40vw; border-radius: 50%; display: block; margin: 0 auto 20px; }
+    .bio { margin-top: 60px; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 16px; line-height: 1.6; text-align: left; }
+    
+    .cta-post {
+      display: inline-block; margin: 20px 10px 10px 0; padding: 12px 18px; border-radius: 12px;
+      font-weight: bold; text-decoration: none; background: rgba(10,102,194,0.06);
+      color: #0a66c2; border: 1px solid rgba(10,102,194,0.25);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .modal { background: #1a1a1a; }
+      .modal a.cta { background: #162238; color: #cfe0ff; border-color: #284777; }
+      .cta-post { background: rgba(207,224,255,0.06); color: #cfe0ff; border: 1px solid rgba(207,224,255,0.22); }
     }
   </style>
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P430YKCERB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -200,7 +132,12 @@
 </head>
 
 <body>
-  <img src="profile.png" alt="Dulat Irzhanov" class="hero-photo">
+
+  <div class="lang-switcher">
+    <a href="/" class="active">EN</a> | <a href="/ru/">RU</a> | <a href="/kz/">KZ</a>
+  </div>
+
+  <img src="/profile.png" alt="Dulat Irzhanov" class="hero-photo">
   <h1>Dulat Irzhanov</h1>
   <p class="muted"><b>dulatedu.com</b></p>
   <p>Data, Education, Leadership</p>
@@ -208,23 +145,19 @@
   <nav aria-label="Primary" class="nav">
     <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://www.instagram.com/thislifeisg/" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <button id="openContacts" aria-haspopup="dialog" aria-controls="contactsModal" type="button">Contacts</button>
+    <button id="openContacts" type="button">Contacts</button>
     <a href="/blog/">Blog</a>
   </nav>
 
-  <!-- Overlay and Modal -->
-  <div id="overlay" class="overlay" aria-hidden="true"></div>
-
-  <div id="contactsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactsTitle">
-    <button class="close" id="closeContacts" aria-label="Close">×</button>
-    <h2 id="contactsTitle">Contacts</h2>
+  <div id="overlay" class="overlay"></div>
+  <div id="contactsModal" class="modal">
+    <button class="close" id="closeContacts">×</button>
+    <h2>Contacts</h2>
     <p>Reach out directly</p>
-
     <a class="cta" href="mailto:dulatirzhanov@gmail.com">✉️ Email: dulatirzhanov@gmail.com</a>
     <a class="cta" href="tel:+77761070090">📞 Phone: +7 776 107 00 90</a>
-    <a class="cta" href="https://wa.me/77761070090" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-    <a class="cta" href="https://calendly.com/dulat/consultations"
-      target="_blank" rel="noopener noreferrer">📅 Book a consultation (Calendly)</a>
+    <a class="cta" href="https://wa.me/77761070090" target="_blank">💬 WhatsApp</a>
+    <a class="cta" href="https://calendly.com/dulat/consultations" target="_blank">📅 Book a consultation (Calendly)</a>
   </div>
 
   <div class="bio">
@@ -234,13 +167,9 @@
     <p><em>I’m interested in leadership development, accreditation as a driver of improvement, and data-informed strategy in Central Asia—and I’m open to future research and collaboration opportunities.</em></p>
 
     <p>
-  <a class="cta-post" href="https://go.dulatedu.com/YBoW" target="_blank" rel="noopener noreferrer">
-    Read my newest contribution to the CIS Perspectives Blog
-  </a>
-  <a class="cta-post" href="https://go.dulatedu.com/7bCl" rel="noopener noreferrer">
-    Explore Consulting Services
-  </a>
-</p>
+      <a class="cta-post" href="https://go.dulatedu.com/YBoW" target="_blank">Read my newest contribution to the CIS Perspectives Blog</a>
+      <a class="cta-post" href="https://go.dulatedu.com/7bCl">Explore Consulting Services</a>
+    </p>
   </div>
 
   <script>
@@ -249,24 +178,13 @@
     const modal = document.getElementById('contactsModal');
     const overlay = document.getElementById('overlay');
 
-    function openModal() {
-      modal.style.display = 'block';
-      overlay.style.display = 'block';
-      overlay.setAttribute('aria-hidden', 'false');
-      closeBtn.focus();
-    }
-    function closeModal() {
-      modal.style.display = 'none';
-      overlay.style.display = 'none';
-      overlay.setAttribute('aria-hidden', 'true');
-      openBtn.focus();
-    }
+    function openModal() { modal.style.display = 'block'; overlay.style.display = 'block'; closeBtn.focus(); }
+    function closeModal() { modal.style.display = 'none'; overlay.style.display = 'none'; }
+    
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', closeModal);
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && overlay.style.display === 'block'){ closeModal(); }
-    });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
   </script>
 
   <footer style="text-align:center; margin-top:60px; font-size:14px; color:#666;">
