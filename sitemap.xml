@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
   Sitemap for dulatedu.com
-  Last updated: 2025-11-02
-  Notes:
-  - "changefreq" and "priority" help search engines understand update frequency.
-  - The canonical URL (without /index.html) is used to avoid duplicate indexing.
+  Strategy:
+  - English (/) is the primary canonical version
+  - Russian (/ru/) and Kazakh (/kz/) are translated alternates
+  - Blog remains EN-only
+  - Services remain RU-only
 -->
 
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Homepage -->
+  <!-- Primary canonical (English) -->
   <url>
     <loc>https://dulatedu.com/</loc>
     <lastmod>2025-11-02</lastmod>
@@ -18,23 +18,34 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Additional pages -->
+  <!-- Russian translation -->
+  <url>
+    <loc>https://dulatedu.com/ru/</loc>
+    <lastmod>2025-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Kazakh translation -->
+  <url>
+    <loc>https://dulatedu.com/kz/</loc>
+    <lastmod>2025-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog (EN only) -->
   <url>
     <loc>https://dulatedu.com/blog/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 
+  <!-- Services (RU only) -->
   <url>
     <loc>https://dulatedu.com/services/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
-
-  <url>
-  <loc>https://go.dulatedu.com/</loc>
-  <lastmod>2025-11-02</lastmod>
-  <priority>0.5</priority>
-</url>
 
 </urlset>
