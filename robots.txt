@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow language versions
+Allow: /ru/
+Allow: /kz/
+
+# Sitemaps
 Sitemap: https://dulatedu.com/sitemap.xml
 Sitemap: https://go.dulatedu.com/sitemap.xml
