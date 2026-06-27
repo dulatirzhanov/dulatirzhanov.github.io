@@ -322,6 +322,10 @@
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
           ${sidebarNav}
           <a class="sidebar-back" href="${LANG_BASE_PATHS[CURRENT_LANG]}">${s("backToLib")}</a>
+          <div class="sidebar-footer">
+            <a href="https://dulatedu.com/">dulatedu.com</a><br>
+            © 2026 Dulat Irzhanov
+          </div>
         </nav>
         <main class="content">${panesHtml}</main>
       `;
