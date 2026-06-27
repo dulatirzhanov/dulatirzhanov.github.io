@@ -302,16 +302,19 @@
         "expert", "reflection", "resources"
       ] : ["main"];
 
-      // Sidebar toggle label per language
-      const toggleLabels = { en: "Case structure", ru: "Структура кейса", kk: "Кейс құрылымы" };
-      const toggleLabel = toggleLabels[CURRENT_LANG] || toggleLabels.en;
+      // Mobile drawer label per language
+      const menuLabels = { en: "Open case menu", ru: "Открыть меню кейса", kk: "Кейс мәзірін ашу" };
+      const menuLabel = menuLabels[CURRENT_LANG] || menuLabels.en;
 
       // Render DOM
       document.body.innerHTML = `
-        <button class="sidebar-toggle" id="sidebarToggle" aria-expanded="false" aria-controls="sidebar">
-          ☰ ${toggleLabel}
-        </button>
-        <nav class="sidebar" id="sidebar" aria-label="${toggleLabel}">
+        <header class="case-topbar">
+          <button class="hamburger" id="hamburger" aria-label="${menuLabel}" aria-controls="sidebar" aria-expanded="false">☰</button>
+          <div class="topbar-title">${f(caseData.title)}</div>
+          <div class="topbar-progress"><span id="topbarProgress"></span></div>
+        </header>
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <nav class="sidebar" id="sidebar" aria-label="${f(caseData.title)}">
           <div class="case-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div>
           <h1>${f(caseData.title)}</h1>
           <div class="lang-switcher">${langSwitcherHtml(CURRENT_LANG, caseLinks)}</div>
@@ -325,24 +328,26 @@
 
       document.title = f(caseData.title) + " — Sim";
 
-      // Mobile sidebar toggle
-      const toggleBtn = document.getElementById("sidebarToggle");
+      // Mobile drawer open/close
       const sidebar = document.getElementById("sidebar");
-      toggleBtn.addEventListener("click", () => {
-        const isOpen = sidebar.classList.toggle("open");
-        toggleBtn.classList.toggle("is-open", isOpen);
-        toggleBtn.setAttribute("aria-expanded", isOpen);
-        toggleBtn.textContent = (isOpen ? "✕ " : "☰ ") + toggleLabel;
-      });
-      // Close sidebar when a nav item is clicked on mobile
-      function closeSidebarOnMobile() {
-        if (window.innerWidth <= 700) {
-          sidebar.classList.remove("open");
-          toggleBtn.classList.remove("is-open");
-          toggleBtn.setAttribute("aria-expanded", "false");
-          toggleBtn.textContent = "☰ " + toggleLabel;
-        }
+      const hamburger = document.getElementById("hamburger");
+      const backdrop = document.getElementById("drawerBackdrop");
+
+      function openDrawer() {
+        sidebar.classList.add("open");
+        backdrop.classList.add("show");
+        hamburger.setAttribute("aria-expanded", "true");
       }
+      function closeDrawer() {
+        sidebar.classList.remove("open");
+        backdrop.classList.remove("show");
+        hamburger.setAttribute("aria-expanded", "false");
+      }
+      hamburger.addEventListener("click", () => {
+        sidebar.classList.contains("open") ? closeDrawer() : openDrawer();
+      });
+      backdrop.addEventListener("click", closeDrawer);
+      document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
 
       if (!hasContent) return;
 
@@ -359,7 +364,9 @@
         const pct = Math.round((visited.size / paneOrder.length) * 100);
         document.getElementById("progressFill").style.width = pct + "%";
         document.getElementById("progressLabel").textContent = pct + s("progressLabel");
-        closeSidebarOnMobile();
+        const topbarProgress = document.getElementById("topbarProgress");
+        if (topbarProgress) topbarProgress.style.width = pct + "%";
+        closeDrawer();
         window.scrollTo(0, 0);
         const content = document.querySelector(".content");
         if (content) content.scrollTop = 0;
