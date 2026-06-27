@@ -123,7 +123,7 @@
       document.body.classList.add("case-view");
 
       const params = new URLSearchParams(window.location.search);
-      const id = params.get("id");
+      const id = params.get("id") || window.SIM_DEFAULT_CASE_ID;
       const caseData = CASES_DATA.find(c => c.id === id);
 
       if (!caseData) {
