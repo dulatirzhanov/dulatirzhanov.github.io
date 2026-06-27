@@ -234,10 +234,11 @@ body.case-view {
   border-top: 1px solid rgba(10,102,194,.12);
   font-size: 13px;
   color: #666;
-  line-height: 1.7;
 }
-.sidebar-footer a { color: #0a66c2; text-decoration: none; }
-.sidebar-footer a:hover { text-decoration: underline; }
+.sidebar-footer .copyright { margin-bottom: 8px; }
+.sidebar-footer .footer-links { display: flex; gap: 18px; }
+.sidebar-footer .footer-links a { color: #0a66c2; text-decoration: underline; }
+.sidebar-footer .footer-links a:hover { color: #084e96; }
 
 /* --- Case content --- */
 .content { flex: 1; max-width: 720px; margin: 0 auto; padding: 48px 40px 80px; }
@@ -389,7 +390,8 @@ body.case-view {
   .progress-label { color: #9ec5ff; }
   .sidebar-back { color: #9ec5ff; }
   .sidebar-footer { border-top-color: rgba(207,224,255,.12); color: #999; }
-  .sidebar-footer a { color: #9ec5ff; }
+  .sidebar-footer .footer-links a { color: #9ec5ff; }
+  .sidebar-footer .footer-links a:hover { color: #cfe0ff; }
 
   /* Case content */
   .content h2 { color: #9ec5ff; }

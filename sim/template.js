@@ -219,6 +219,7 @@
             <h2>${s("actionsTitle")}</h2>
             <p>${f(caseData.actionsIntro)}</p>
             <div class="actions-list">${actionRows}</div>
+            <a class="back-link" data-next="expert">${s("next")}</a>
           </section>
         `;
 
@@ -323,8 +324,11 @@
           ${sidebarNav}
           <a class="sidebar-back" href="${LANG_BASE_PATHS[CURRENT_LANG]}">${s("backToLib")}</a>
           <div class="sidebar-footer">
-            <a href="https://dulatedu.com/">dulatedu.com</a><br>
-            © 2026 Dulat Irzhanov
+            <div class="copyright">© 2026 Dulat Irzhanov</div>
+            <div class="footer-links">
+              <a href="https://dulatedu.com/">dulatedu.com</a>
+              <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
           </div>
         </nav>
         <main class="content">${panesHtml}</main>
