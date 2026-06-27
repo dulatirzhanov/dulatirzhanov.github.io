@@ -242,7 +242,7 @@
 
           panesHtml += `
             <section class="pane" data-id="action${i}">
-              <div class="eyebrow">${f(action.label)}</div>
+              <div class="eyebrow">${s("actionsSection")}</div>
               <h2>${f(action.label)}</h2>
               ${detailHtml}
               ${pqHtml}
@@ -256,7 +256,7 @@
         const expertHtml = f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         panesHtml += `
           <section class="pane" data-id="expert">
-            <div class="eyebrow">${s("expertLabel")}</div>
+            <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("expertLabel")}</h2>
             ${expertHtml}
             <a class="back-link" data-next="reflection">${s("next")}</a>
@@ -267,7 +267,7 @@
         const reflItems = (caseData.reflectionQuestions || []).map(q => `<li>${f(q)}</li>`).join("");
         panesHtml += `
           <section class="pane" data-id="reflection">
-            <div class="eyebrow">${s("reflectionLabel")}</div>
+            <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("reflectionLabel")}</h2>
             <ol class="reflection-list">${reflItems}</ol>
             <a class="back-link" data-next="resources">${s("next")}</a>
@@ -283,7 +283,7 @@
         const emailSubject = encodeURIComponent(f(caseData.title));
         panesHtml += `
           <section class="pane" data-id="resources">
-            <div class="eyebrow">${s("resourcesLabel")}</div>
+            <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("furtherResources")}</h2>
             ${followHtml}
             <div class="share-block">
