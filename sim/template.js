@@ -27,12 +27,24 @@
       document.body.innerHTML = `
         <header>
           <h1>${s("libraryTitle")}</h1>
-          <p class="subtitle">${s("librarySubtitle")}</p>
         </header>
         <nav class="backnav"><a href="/">${s("backToHome")}</a></nav>
+        <p class="subtitle">${s("librarySubtitle")}</p>
+        <div class="subscribe-block">
+          <p class="subscribe-label">${s("subscribeLabel")}</p>
+          <form class="subscribe-form" action="https://formspree.io/f/xyzgpkap" method="POST">
+            <input type="email" name="email" placeholder="${s("subscribePlaceholder")}" required>
+            <button type="submit">${s("subscribeButton")}</button>
+          </form>
+          <p class="subscribe-sent" style="display:none">${s("subscribeSent")}</p>
+        </div>
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
+        <div class="lang-note">
+          <p><strong>KZ:</strong> Осы ақпарат уақыт үнемдеу мақсатымен орыс тілінде жазылды. Алдағы уақытта қазақ тіліне аударылады. Браузердегі авто-аударманы қолдануға болады.</p>
+          <p><strong>EN:</strong> This content is written in Russian to save time. A Kazakh translation is planned for the future. You can use your browser's built-in auto-translate.</p>
+        </div>
       `;
 
       document.title = s("libraryTitle") + " — Sim";
@@ -82,6 +94,17 @@
 
       renderFilters();
       renderCards();
+
+      // Subscribe form — show confirmation without redirect
+      const form = document.querySelector(".subscribe-form");
+      if (form) {
+        form.addEventListener("submit", async e => {
+          e.preventDefault();
+          await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } });
+          form.style.display = "none";
+          document.querySelector(".subscribe-sent").style.display = "block";
+        });
+      }
     }
   };
 
