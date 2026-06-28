@@ -217,12 +217,12 @@ body.case-view {
 .action-row .label { font-size: 20px; font-weight: bold; color: #0a66c2; line-height: 1.3; margin: 0; }
 .action-row .desc { color: #777; font-size: 13px; margin-top: 4px; }
 .action-row button {
-  background: #fff; color: #0a66c2;
-  border: 1px solid rgba(0,0,0,.1); border-radius: 10px;
+  background: rgba(10,102,194,.06); color: #0a66c2;
+  border: 1px solid rgba(10,102,194,.25); border-radius: 10px;
   min-height: 34px; padding: 0 14px; font-weight: bold; font-size: 14px; cursor: pointer;
   flex-shrink: 0; font-family: Arial, sans-serif;
 }
-.action-row button:hover { background: #f5f8ff; }
+.action-row button:hover { background: rgba(10,102,194,.12); }
 
 .pull-quote {
   margin: 24px 0; padding: 16px 18px; border-radius: 14px;
@@ -242,7 +242,7 @@ body.case-view {
 .reflection-list { padding-left: 0; list-style: none; counter-reset: q; }
 .reflection-list li {
   counter-increment: q; margin-bottom: 16px; padding-left: 36px;
-  position: relative; font-size: 16px; line-height: 1.6;
+  position: relative; font-size: 16px; line-height: 1.6; color: #444;
 }
 .reflection-list li::before {
   content: counter(q); position: absolute; left: 0; top: 1px;
@@ -390,7 +390,7 @@ body.case-view {
   .action-row { border-color: rgba(207,224,255,.18); background: #141a22; }
   .action-row .label { color: #cfe0ff; }
   .action-row .desc { color: #aaa; }
-  .action-row button { background: #0f141a; border-color: rgba(255,255,255,.1); color: #9ec5ff; }
+  .action-row button { background: rgba(207,224,255,.06); border-color: rgba(207,224,255,.22); color: #9ec5ff; }
   .action-row button:hover { background: rgba(207,224,255,.12); }
   .pull-quote { background: #141a22; border-color: rgba(207,224,255,.18); color: #ccc; }
   .pull-quote .source { color: #888; }
