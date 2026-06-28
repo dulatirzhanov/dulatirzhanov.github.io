@@ -1,13 +1,10 @@
 (function () {
-  const ALL_LANGS = ["ru", "kk", "en"];
-  const LANG_LABELS = { ru: "RU", kk: "KZ", en: "EN" };
-
   function s(key) {
-    return UI_STRINGS[CURRENT_LANG][key] || UI_STRINGS.en[key] || key;
+    return UI_STRINGS.ru[key] || key;
   }
 
   function tagLabel(tag) {
-    return TAG_LABELS[tag]?.[CURRENT_LANG] || TAG_LABELS[tag]?.en || tag;
+    return TAG_LABELS[tag]?.ru || tag;
   }
 
   function uniqueTags() {
@@ -22,33 +19,17 @@
     return m ? m[0] : text.substring(0, 100) + (text.length > 100 ? "…" : "");
   }
 
-  function langSwitcherHtml(activeLang, links) {
-    return ALL_LANGS.map(l => {
-      const label = LANG_LABELS[l];
-      if (l === activeLang) return `<span class="active">${label}</span>`;
-      return `<a href="${links[l]}">${label}</a>`;
-    }).join(" | ");
-  }
-
   /* ===== LIBRARY ===== */
   window.SimLib = {
     init: function () {
       document.body.classList.add("lib-view");
 
-      const libLinks = {};
-      ALL_LANGS.forEach(l => { libLinks[l] = LANG_BASE_PATHS[l]; });
-
-      const banner = s("i18nBanner") && CURRENT_LANG === "en"
-        ? `<div class="i18n-banner">${s("i18nBanner")}</div>` : "";
-
       document.body.innerHTML = `
-        <div class="lang-switcher">${langSwitcherHtml(CURRENT_LANG, libLinks)}</div>
         <header>
           <h1>${s("libraryTitle")}</h1>
           <p class="subtitle">${s("librarySubtitle")}</p>
         </header>
         <nav class="backnav"><a href="/">${s("backToHome")}</a></nav>
-        ${banner}
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
@@ -81,32 +62,19 @@
         document.getElementById("emptyState").style.display = filtered.length ? "none" : "block";
 
         grid.innerHTML = filtered.map(c => {
-          const displayLang = c.availableLangs.includes(CURRENT_LANG) ? CURRENT_LANG : c.availableLangs[0];
+          const displayLang = c.availableLangs.includes("ru") ? "ru" : c.availableLangs[0];
           const title = c.title[displayLang] || c.title.ru || "";
           const excerpt = c.excerpt[displayLang] || c.excerpt.ru || "";
           const chapter = c.chapter[displayLang] || c.chapter.ru || "";
-          const fallbackNote = displayLang !== CURRENT_LANG
-            ? ` <span class="fallback-lang">(${LANG_LABELS[displayLang]})</span>` : "";
-
-          const langPills = ALL_LANGS.map(l => {
-            const on = c.availableLangs.includes(l);
-            if (on) {
-              const href = LANG_BASE_PATHS[l] + "case.html?id=" + c.id;
-              return `<a href="${href}" class="lang-pill" onclick="event.stopPropagation()">${LANG_LABELS[l]}</a>`;
-            }
-            return `<span class="lang-pill off">${LANG_LABELS[l]}</span>`;
-          }).join("");
-
           const tagPills = c.tags.map(tag => `<span class="tag">${tagLabel(tag)}</span>`).join("");
-          const caseHref = LANG_BASE_PATHS[displayLang] + "case.html?id=" + c.id;
+          const caseHref = LANG_BASE_PATHS.ru + "case.html?id=" + c.id;
 
           return `
             <a class="card" href="${caseHref}">
               <div class="chapter">${chapter}</div>
-              <div class="title">${title}${fallbackNote}</div>
+              <div class="title">${title}</div>
               <div class="excerpt">${excerpt}</div>
               <div class="tags">${tagPills}</div>
-              <div class="langs">${langPills}</div>
             </a>
           `;
         }).join("");
@@ -128,13 +96,12 @@
 
       if (!caseData) {
         document.body.innerHTML = `<div style="padding:60px 40px;font-family:Arial,sans-serif">
-          <p>Case not found. <a href="${LANG_BASE_PATHS[CURRENT_LANG]}" style="color:#0a66c2">${s("backToLib")}</a></p>
+          <p>Кейс не найден. <a href="${LANG_BASE_PATHS.ru}" style="color:#0a66c2">${s("backToLib")}</a></p>
         </div>`;
         return;
       }
 
-      const displayLang = caseData.availableLangs.includes(CURRENT_LANG)
-        ? CURRENT_LANG : caseData.availableLangs[0];
+      const displayLang = caseData.availableLangs.includes("ru") ? "ru" : caseData.availableLangs[0];
 
       function f(obj) {
         if (!obj) return "";
@@ -145,14 +112,6 @@
       const scenes = caseData.narrativeScenes || [];
       const actions = caseData.actions || [];
       const hasContent = scenes.length > 0;
-
-      // Lang switcher links for this case
-      const caseLinks = {};
-      ALL_LANGS.forEach(l => {
-        caseLinks[l] = caseData.availableLangs.includes(l)
-          ? LANG_BASE_PATHS[l] + "case.html?id=" + id
-          : LANG_BASE_PATHS[l];
-      });
 
       // Sidebar nav
       let sidebarNav = "";
@@ -310,14 +269,10 @@
         "expert", "reflection", "resources"
       ] : ["main"];
 
-      // Mobile drawer label per language
-      const menuLabels = { en: "Open case menu", ru: "Открыть меню кейса", kk: "Кейс мәзірін ашу" };
-      const menuLabel = menuLabels[CURRENT_LANG] || menuLabels.en;
-
       // Render DOM
       document.body.innerHTML = `
         <header class="case-topbar">
-          <button class="hamburger" id="hamburger" aria-label="${menuLabel}" aria-controls="sidebar" aria-expanded="false">☰</button>
+          <button class="hamburger" id="hamburger" aria-label="Открыть меню кейса" aria-controls="sidebar" aria-expanded="false">☰</button>
           <div class="topbar-title">${f(caseData.title)}</div>
           <div class="topbar-progress"><span id="topbarProgress"></span></div>
         </header>
@@ -325,11 +280,10 @@
         <nav class="sidebar" id="sidebar" aria-label="${f(caseData.title)}">
           <div class="case-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div>
           <h1>${f(caseData.title)}</h1>
-          <div class="lang-switcher">${langSwitcherHtml(CURRENT_LANG, caseLinks)}</div>
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
           ${sidebarNav}
-          <a class="sidebar-back" href="${LANG_BASE_PATHS[CURRENT_LANG]}">${s("backToLib")}</a>
+          <a class="sidebar-back" href="${LANG_BASE_PATHS.ru}">${s("backToLib")}</a>
           <div class="sidebar-footer">
             <div class="copyright">© 2026 Dulat Irzhanov</div>
             <div class="footer-links">
