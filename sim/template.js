@@ -242,12 +242,23 @@
         `;
 
         // Reflection questions
-        const reflItems = (caseData.reflectionQuestions || []).map(q => `<li>${f(q)}</li>`).join("");
+        let reflHtml = "";
+        let inList = false;
+        (caseData.reflectionQuestions || []).forEach(q => {
+          if (q.isHeading) {
+            if (inList) { reflHtml += "</ol>"; inList = false; }
+            reflHtml += `<p class="reflection-section-title">${f(q)}</p>`;
+          } else {
+            if (!inList) { reflHtml += `<ol class="reflection-list">`; inList = true; }
+            reflHtml += `<li>${f(q)}</li>`;
+          }
+        });
+        if (inList) reflHtml += "</ol>";
         panesHtml += `
           <section class="pane" data-id="reflection">
             <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("reflectionLabel")}</h2>
-            <ol class="reflection-list">${reflItems}</ol>
+            ${reflHtml}
             <a class="back-link" data-next="resources">${s("next")}</a>
           </section>
         `;

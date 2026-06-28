@@ -282,6 +282,7 @@ body.case-view {
 .accreditation-toggle:hover { background: rgba(10,102,194,.12); }
 .accreditation-note { font-size: 16px; color: #444; line-height: 1.6; margin-top: 14px; }
 
+.reflection-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #0a66c2; margin: 24px 0 12px; }
 .reflection-list { padding-left: 0; list-style: none; counter-reset: q; }
 .reflection-list li {
   counter-increment: q; margin-bottom: 16px; padding-left: 36px;
