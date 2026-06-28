@@ -213,11 +213,17 @@
 
         // Expert commentary
         const expertHtml = f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
+        const accNote = f(caseData.expertCommentary?.accreditationNote);
+        const accHtml = accNote ? `
+          <button class="accreditation-toggle" aria-expanded="false">Как это выглядит с точки зрения международной аккредитации?</button>
+          <p class="accreditation-note" hidden>${accNote}</p>
+        ` : "";
         panesHtml += `
           <section class="pane" data-id="expert">
             <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("expertLabel")}</h2>
             ${expertHtml}
+            ${accHtml}
             <a class="back-link" data-next="reflection">${s("next")}</a>
           </section>
         `;
@@ -344,6 +350,14 @@
       navItems.forEach(item => item.addEventListener("click", () => showPane(item.dataset.pane)));
       document.querySelectorAll("[data-next]").forEach(el => {
         el.addEventListener("click", e => { e.preventDefault(); showPane(el.dataset.next); });
+      });
+      document.querySelectorAll(".accreditation-toggle").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const note = btn.nextElementSibling;
+          const expanded = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!expanded));
+          note.hidden = expanded;
+        });
       });
 
       showPane("scene0");
