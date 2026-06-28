@@ -287,13 +287,6 @@
               <a class="cta" href="mailto:${caseData.shareEmail}?subject=${emailSubject}">${s("shareButton")}</a>
               <span class="email-text">${s("shareEmailLabel")} ${caseData.shareEmail}</span>
             </div>
-            <div class="content-footer">
-              <div class="copyright">© 2026 Dulat Irzhanov</div>
-              <div class="footer-links">
-                <a href="https://dulatedu.com/">dulatedu.com</a>
-                <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
-              </div>
-            </div>
           </section>
         `;
       }
@@ -329,16 +322,7 @@
             </div>
           </div>
         </nav>
-        <main class="content">
-          ${panesHtml}
-          <footer class="case-page-footer">
-            <div class="copyright">© 2026 Dulat Irzhanov</div>
-            <div class="footer-links">
-              <a href="https://dulatedu.com/">dulatedu.com</a>
-              <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-          </footer>
-        </main>
+        <main class="content">${panesHtml}</main>
       `;
 
       document.title = f(caseData.title) + " — Sim";
