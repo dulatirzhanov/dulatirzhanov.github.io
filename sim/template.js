@@ -32,11 +32,11 @@
         <p class="subtitle">${s("librarySubtitle")}</p>
         <div class="subscribe-block">
           <p class="subscribe-label">${s("subscribeLabel")}</p>
-          <form class="subscribe-form" action="https://formspree.io/f/xyzgpkap" method="POST">
-            <input type="email" name="email" placeholder="${s("subscribePlaceholder")}" required>
+          <form class="subscribe-form" action="https://dulatedu.us6.list-manage.com/subscribe/post?u=9b32c150eb1859f084bfe3bcb&amp;id=c702192e41&amp;f_id=009822e2f0" method="POST" target="_blank">
+            <input type="email" name="EMAIL" placeholder="${s("subscribePlaceholder")}" required>
+            <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_9b32c150eb1859f084bfe3bcb_c702192e41" tabindex="-1" value=""></div>
             <button type="submit">${s("subscribeButton")}</button>
           </form>
-          <p class="subscribe-sent" style="display:none">${s("subscribeSent")}</p>
         </div>
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
@@ -95,16 +95,6 @@
       renderFilters();
       renderCards();
 
-      // Subscribe form — show confirmation without redirect
-      const form = document.querySelector(".subscribe-form");
-      if (form) {
-        form.addEventListener("submit", async e => {
-          e.preventDefault();
-          await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } });
-          form.style.display = "none";
-          document.querySelector(".subscribe-sent").style.display = "block";
-        });
-      }
     }
   };
 
