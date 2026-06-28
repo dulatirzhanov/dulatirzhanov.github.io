@@ -43,7 +43,7 @@
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
         <div class="lang-note">
           <p><strong>KZ:</strong> Осы ақпарат уақыт үнемдеу мақсатымен орыс тілінде жазылды. Алдағы уақытта қазақ тіліне аударылады. Браузердегі авто-аударманы қолдануға болады.</p>
-          <p><strong>EN:</strong> This content is written in Russian to save time. A Kazakh translation is planned for the future. You can use your browser's built-in auto-translate.</p>
+          <p><strong>EN:</strong> This content is written in Russian to save time. An English translation is planned for the future. You can use your browser's built-in auto-translate.</p>
         </div>
         <footer class="lib-footer">
           <div class="copyright">© 2026 Dulat Irzhanov</div>
