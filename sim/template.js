@@ -322,7 +322,16 @@
             </div>
           </div>
         </nav>
-        <main class="content">${panesHtml}</main>
+        <main class="content">
+          ${panesHtml}
+          <footer class="case-page-footer">
+            <div class="copyright">© 2026 Dulat Irzhanov</div>
+            <div class="footer-links">
+              <a href="https://dulatedu.com/">dulatedu.com</a>
+              <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </footer>
+        </main>
       `;
 
       document.title = f(caseData.title) + " — Sim";
