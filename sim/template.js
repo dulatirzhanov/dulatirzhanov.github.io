@@ -282,7 +282,7 @@
           <h1>${f(caseData.title)}</h1>
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
-          ${sidebarNav}
+          <div class="sidebar-nav">${sidebarNav}</div>
           <a class="sidebar-back" href="${LANG_BASE_PATHS.ru}">${s("backToLib")}</a>
           <div class="sidebar-footer">
             <div class="copyright">© 2026 Dulat Irzhanov</div>
