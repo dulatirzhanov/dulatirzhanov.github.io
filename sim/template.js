@@ -54,7 +54,7 @@
         </footer>
       `;
 
-      document.title = s("libraryTitle") + " — Sim";
+      document.title = s("libraryTitle") + " — Dulat Irzhanov";
 
       let activeFilter = "all";
 
@@ -333,7 +333,7 @@
         <main class="content">${panesHtml}</main>
       `;
 
-      document.title = f(caseData.title) + " — Sim";
+      document.title = f(caseData.title) + " — Dulat Irzhanov";
 
       // Mobile drawer open/close
       const sidebar = document.getElementById("sidebar");
