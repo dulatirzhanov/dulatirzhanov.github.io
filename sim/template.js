@@ -235,7 +235,7 @@
         const expertHtml = f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         const accNote = f(caseData.expertCommentary?.accreditationNote);
         const accHtml = accNote ? `
-          <button class="accreditation-toggle" aria-expanded="false">Как это выглядит с точки зрения международной аккредитации?</button>
+          <button class="accreditation-toggle" aria-expanded="false">Как это выглядит с точки зрения международной аккредитации? <span class="acc-chevron">▾</span></button>
           <p class="accreditation-note" hidden>${accNote}</p>
         ` : "";
         panesHtml += `
@@ -381,6 +381,8 @@
           const expanded = btn.getAttribute("aria-expanded") === "true";
           btn.setAttribute("aria-expanded", String(!expanded));
           note.hidden = expanded;
+          const chevron = btn.querySelector(".acc-chevron");
+          if (chevron) chevron.textContent = expanded ? "▾" : "▲";
         });
       });
 
