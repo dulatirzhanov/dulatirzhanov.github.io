@@ -58,6 +58,16 @@ nav.backnav a:hover { text-decoration: underline; }
 .lang-note p { margin: 0 0 6px; }
 .lang-note p:last-child { margin-bottom: 0; }
 
+.lib-footer {
+  margin-top: 48px; padding: 24px 0 40px;
+  border-top: 1px solid rgba(10,102,194,.12);
+  font-size: 14px; color: #666;
+}
+.lib-footer .copyright { margin-bottom: 8px; }
+.lib-footer .footer-links { display: flex; gap: 18px; }
+.lib-footer .footer-links a { color: #0a66c2; text-decoration: underline; }
+.lib-footer .footer-links a:hover { color: #084e96; }
+
 /* --- Filters — same recipe as .cta-post on main index.html --- */
 .filters {
   display: flex;
@@ -475,6 +485,9 @@ body.case-view {
   .case-page-footer { border-top-color: rgba(207,224,255,.12); color: #999; }
   .case-page-footer .footer-links a { color: #9ec5ff; }
   .case-page-footer .footer-links a:hover { color: #cfe0ff; }
+  .lib-footer { border-top-color: rgba(207,224,255,.12); color: #999; }
+  .lib-footer .footer-links a { color: #9ec5ff; }
+  .lib-footer .footer-links a:hover { color: #cfe0ff; }
 }
 
 @media (max-width: 700px) and (prefers-color-scheme: dark) {
