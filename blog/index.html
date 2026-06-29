@@ -62,10 +62,82 @@ nav a:hover { text-decoration:underline; }
   font-size: 20px;
   color: #0a66c2;
 }
+.post-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+.post-title-link:hover,
+.post-title-link:focus-visible {
+  text-decoration: underline;
+}
 .post-meta {
   font-size: 13px;
   color: #777;
   margin-top: 4px;
+}
+.post-summary {
+  position: relative;
+  display: inline-block;
+  margin-top: 10px;
+  max-width: 720px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.45;
+  cursor: help;
+}
+.summary-text {
+  border-bottom: 1px dotted rgba(10,102,194,.35);
+}
+.summary-tooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  width: min(540px, calc(100vw - 80px));
+  padding: 12px 14px;
+  border: 1px solid rgba(10,102,194,.22);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(16,32,54,.18);
+  color: #333;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+  visibility: hidden;
+}
+.summary-tooltip p {
+  margin: 0;
+}
+.summary-tooltip p + p {
+  margin-top: 8px;
+}
+.post-summary:hover .summary-tooltip,
+.post-summary:focus .summary-tooltip,
+.post-summary:focus-within .summary-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+.post-summary:focus-visible {
+  outline: 3px solid rgba(10,102,194,.22);
+  outline-offset: 4px;
+}
+.post-read {
+  margin-top: 12px;
+}
+.read-link {
+  color: #0a66c2;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.read-link:hover,
+.read-link:focus-visible {
+  text-decoration: underline;
 }
 .post-actions {
   display: flex;
@@ -88,6 +160,14 @@ nav a:hover { text-decoration:underline; }
   body { background:#111; color:#ddd; }
   .post-card { background: #141a22; border-color: rgba(207,224,255,.18); }
   .post-title { color: #cfe0ff; }
+  .post-summary { color: #bbb; }
+  .summary-text { border-bottom-color: rgba(207,224,255,.38); }
+  .summary-tooltip {
+    background: #0f141a;
+    border-color: rgba(207,224,255,.24);
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+    color: #ddd;
+  }
   .iconbtn { background: #0f141a; border-color: rgba(255,255,255,.1) }
 }
 
@@ -248,13 +328,25 @@ nav a:hover { text-decoration:underline; }
   <!-- Post 1 -->
   <article class="post-card" data-languages="kz en">
     <div class="post-head">
-      <h2 class="post-title">What Three School Visits Taught Me</h2>
+      <h2 class="post-title">
+        <a class="post-title-link" href="https://www.linkedin.com/posts/dulat-irzhanov_%D0%BB%D0%B8%D0%BD%D0%BA%D0%B5%D0%B4%D0%B8%D0%BD%D0%B4%D0%B0%D2%93%D1%8B%D0%BB%D0%B0%D1%80-%D1%81%D3%99%D0%BB%D0%B5%D0%BC-%D0%BF%D0%BE%D1%81%D1%82-%D1%85%D0%B0%D0%BB%D1%8B%D2%9B%D0%B0%D1%80%D0%B0%D0%BB%D1%8B%D2%9B-activity-7324030580780609536-OdLe" target="_blank" rel="noopener noreferrer">What Three School Visits Taught Me</a>
+      </h2>
       <div class="post-actions">
-        <a class="iconbtn" href="https://www.linkedin.com/posts/dulat-irzhanov_%D0%BB%D0%B8%D0%BD%D0%BA%D0%B5%D0%B4%D0%B8%D0%BD%D0%B4%D0%B0%D2%93%D1%8B%D0%BB%D0%B0%D1%80-%D1%81%D3%99%D0%BB%D0%B5%D0%BC-%D0%BF%D0%BE%D1%81%D1%82-%D1%85%D0%B0%D0%BB%D1%8B%D2%9B%D0%B0%D1%80%D0%B0%D0%BB%D1%8B%D2%9B-activity-7324030580780609536-OdLe" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"></a>
+        <a class="iconbtn" href="https://www.linkedin.com/posts/dulat-irzhanov_%D0%BB%D0%B8%D0%BD%D0%BA%D0%B5%D0%B4%D0%B8%D0%BD%D0%B4%D0%B0%D2%93%D1%8B%D0%BB%D0%B0%D1%80-%D1%81%D3%99%D0%BB%D0%B5%D0%BC-%D0%BF%D0%BE%D1%81%D1%82-%D1%85%D0%B0%D0%BB%D1%8B%D2%9B%D0%B0%D1%80%D0%B0%D0%BB%D1%8B%D2%9B-activity-7324030580780609536-OdLe" target="_blank" rel="noopener noreferrer" aria-label="Read on LinkedIn"></a>
         <script>document.currentScript.previousElementSibling.innerHTML = useSvg('svg-linkedin');</script>
       </div>
     </div>
     <div class="post-meta">2 May 2025 — KZ + EN</div>
+    <div class="post-summary" tabindex="0" aria-describedby="summary-post-1-tooltip">
+      <span class="summary-text">International school visits showed how context shapes each school, how diverse evaluation teams learn from one another, and how CIS/NIS systems create professional growth.</span>
+      <div class="summary-tooltip" id="summary-post-1-tooltip" role="tooltip">
+        <p><strong>KZ:</strong> Халықаралық мектептерге сапарлар әр мектепті контекст қалыптастыратынын, әртүрлі сарапшылар бір-бірінен үйренетінін және CIS/NIS жүйелері кәсіби өсуге мүмкіндік беретінін көрсетті.</p>
+        <p><strong>RU:</strong> Визиты в международные школы показали, как контекст формирует каждую школу, как разные экспертные команды учатся друг у друга и как системы CIS/NIS создают профессиональный рост.</p>
+      </div>
+    </div>
+    <div class="post-read">
+      <a class="read-link" href="https://www.linkedin.com/posts/dulat-irzhanov_%D0%BB%D0%B8%D0%BD%D0%BA%D0%B5%D0%B4%D0%B8%D0%BD%D0%B4%D0%B0%D2%93%D1%8B%D0%BB%D0%B0%D1%80-%D1%81%D3%99%D0%BB%D0%B5%D0%BC-%D0%BF%D0%BE%D1%81%D1%82-%D1%85%D0%B0%D0%BB%D1%8B%D2%9B%D0%B0%D1%80%D0%B0%D0%BB%D1%8B%D2%9B-activity-7324030580780609536-OdLe" target="_blank" rel="noopener noreferrer">Read on LinkedIn <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </article>
 
   <!-- Post 2 -->
