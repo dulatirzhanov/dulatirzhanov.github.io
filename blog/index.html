@@ -103,7 +103,7 @@ nav a:hover { text-decoration:underline; }
   .intro { color:#ccc; }
 }
 
-  .navhint {
+.navhint {
   max-width:700px;
   margin:0 auto 36px;
   font-size:15px;
@@ -113,6 +113,60 @@ nav a:hover { text-decoration:underline; }
 }
 @media (prefers-color-scheme: dark){
   .navhint { color:#bbb; }
+}
+
+.language-filter {
+  max-width: 700px;
+  margin: -14px auto 36px;
+  text-align: center;
+}
+.filter-note {
+  margin: 0 0 12px;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.filter-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.filter-button {
+  appearance: none;
+  border: 1px solid rgba(10,102,194,.28);
+  border-radius: 8px;
+  background: #fff;
+  color: #0a66c2;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  min-width: 52px;
+  padding: 10px 12px;
+}
+.filter-button:hover,
+.filter-button.active {
+  background: #0a66c2;
+  color: #fff;
+}
+.filter-button:focus-visible {
+  outline: 3px solid rgba(10,102,194,.25);
+  outline-offset: 2px;
+}
+.post-card[hidden] { display: none; }
+@media (prefers-color-scheme: dark){
+  .filter-note { color:#bbb; }
+  .filter-button {
+    background: #0f141a;
+    border-color: rgba(207,224,255,.28);
+    color: #cfe0ff;
+  }
+  .filter-button:hover,
+  .filter-button.active {
+    background: #cfe0ff;
+    color: #0f141a;
+  }
 }
 
 </style>
@@ -140,7 +194,15 @@ nav a:hover { text-decoration:underline; }
   Reflections on school leadership, accreditation, and decision-making in education. Use the icons on each card to open the full post
 </p>
 
-</p>
+<section class="language-filter" aria-label="Filter publications by language">
+  <p class="filter-note">Choose a language to show publications available in that language. Select All to return to the full list.</p>
+  <div class="filter-controls">
+    <button class="filter-button active" type="button" data-language-filter="all" aria-pressed="true">All</button>
+    <button class="filter-button" type="button" data-language-filter="en" aria-pressed="false">EN</button>
+    <button class="filter-button" type="button" data-language-filter="kz" aria-pressed="false">KZ</button>
+    <button class="filter-button" type="button" data-language-filter="ru" aria-pressed="false">RU</button>
+  </div>
+</section>
 
 <section class="post-list">
 
@@ -184,7 +246,7 @@ nav a:hover { text-decoration:underline; }
   <!-- Posts -->
 
   <!-- Post 1 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="kz en">
     <div class="post-head">
       <h2 class="post-title">What Three School Visits Taught Me</h2>
       <div class="post-actions">
@@ -196,7 +258,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 2 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="kz en">
     <div class="post-head">
       <h2 class="post-title">When the School Feels the Difference</h2>
       <div class="post-actions">
@@ -208,7 +270,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 3 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="kz en">
     <div class="post-head">
       <h2 class="post-title">The Question I Kept Asking Myself</h2>
       <div class="post-actions">
@@ -220,7 +282,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 4 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="kz en">
     <div class="post-head">
       <h2 class="post-title">What Quality Teaching Actually Looks Like</h2>
       <div class="post-actions">
@@ -232,7 +294,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 5 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="kz en">
     <div class="post-head">
       <h2 class="post-title">Why Good Ideas Don't Stick (ADKAR)</h2>
       <div class="post-actions">
@@ -244,7 +306,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 6 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="kz en">
     <div class="post-head">
       <h2 class="post-title">What the NIS Human Reserve Taught Me About Leadership</h2>
       <div class="post-actions">
@@ -256,7 +318,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 7 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="ru en">
     <div class="post-head">
       <h2 class="post-title">The Conversation I Didn't Expect</h2>
       <div class="post-actions">
@@ -271,7 +333,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 8 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="ru en">
     <div class="post-head">
       <h2 class="post-title">How I Started Seeing My Life as a System</h2>
       <div class="post-actions">
@@ -286,7 +348,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 9 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="ru en">
     <div class="post-head">
       <h2 class="post-title">The Village Is Not a Dead End</h2>
       <div class="post-actions">
@@ -301,7 +363,7 @@ nav a:hover { text-decoration:underline; }
   </article>
 
   <!-- Post 10 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="en ru">
     <div class="post-head">
       <h2 class="post-title">Me & my laptop on how we became a CIS Accreditation Team Leader</h2>
       <div class="post-actions">
@@ -315,11 +377,11 @@ nav a:hover { text-decoration:underline; }
         <script>document.currentScript.previousElementSibling.innerHTML = useSvg('svg-external');</script>
       </div>
     </div>
-    <div class="post-meta">24 Aug 2025 — EN / RU / EN </div>
+    <div class="post-meta">24 Aug 2025 — EN / RU</div>
   </article>
 
 <!-- Post 11 -->
-<article class="post-card">
+<article class="post-card" data-languages="en ru">
   <div class="post-head">
     <h2 class="post-title">One Reel. One Question. One Rethink.</h2>
     <div class="post-actions">
@@ -343,7 +405,7 @@ nav a:hover { text-decoration:underline; }
 </article>
 
 <!-- Post 12 -->
-<article class="post-card">
+<article class="post-card" data-languages="en kz">
   <div class="post-head">
     <h2 class="post-title">When Integrity Becomes Institutional Design</h2>
     <div class="post-actions">
@@ -377,7 +439,7 @@ nav a:hover { text-decoration:underline; }
 
 
 <!-- Post 13 -->
-<article class="post-card">
+<article class="post-card" data-languages="en ru">
   <div class="post-head">
     <h2 class="post-title">The Decision Nobody Documented</h2>
     <div class="post-actions">
@@ -410,7 +472,7 @@ nav a:hover { text-decoration:underline; }
 </article>
 
 <!-- Post 14 -->
-<article class="post-card">
+<article class="post-card" data-languages="en ru">
   <div class="post-head">
     <h2 class="post-title">When a School Relies on a Management Model, Not a Person</h2>
     <div class="post-actions">
@@ -434,7 +496,7 @@ nav a:hover { text-decoration:underline; }
 </article>
 
    <!-- Post 15 -->
-  <article class="post-card">
+  <article class="post-card" data-languages="en">
     <div class="post-head">
       <h2 class="post-title">The Professional Muscle We Rarely Talk About</h2>
       <div class="post-actions">
@@ -446,6 +508,28 @@ nav a:hover { text-decoration:underline; }
   </article>
   
 </section>
+
+<script>
+  const filterButtons = document.querySelectorAll('[data-language-filter]');
+  const postCards = document.querySelectorAll('.post-card[data-languages]');
+
+  function setLanguageFilter(language) {
+    postCards.forEach((card) => {
+      const languages = card.dataset.languages.split(' ');
+      card.hidden = language !== 'all' && !languages.includes(language);
+    });
+
+    filterButtons.forEach((button) => {
+      const isActive = button.dataset.languageFilter === language;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => setLanguageFilter(button.dataset.languageFilter));
+  });
+</script>
 
 <footer style="text-align:center; margin-top:60px; font-size:14px; color:#666;">
   © 2026 Dulat Irzhanov
