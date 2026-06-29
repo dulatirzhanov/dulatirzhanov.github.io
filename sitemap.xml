@@ -6,6 +6,7 @@
   - Russian (/ru/) and Kazakh (/kz/) are translated alternates
   - Blog remains EN-only
   - Services remain RU-only
+  - Sim library is listed only at /sim/
 -->
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -13,39 +14,37 @@
   <!-- Primary canonical (English) -->
   <url>
     <loc>https://dulatedu.com/</loc>
-    <lastmod>2025-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-06-29</lastmod>
   </url>
 
   <!-- Russian translation -->
   <url>
     <loc>https://dulatedu.com/ru/</loc>
-    <lastmod>2025-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-06-29</lastmod>
   </url>
 
   <!-- Kazakh translation -->
   <url>
     <loc>https://dulatedu.com/kz/</loc>
-    <lastmod>2025-11-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-06-29</lastmod>
   </url>
 
   <!-- Blog (EN only) -->
   <url>
     <loc>https://dulatedu.com/blog/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-06-29</lastmod>
   </url>
 
   <!-- Services (RU only) -->
   <url>
     <loc>https://dulatedu.com/services/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-06-29</lastmod>
+  </url>
+
+  <!-- Sim library -->
+  <url>
+    <loc>https://dulatedu.com/sim/</loc>
+    <lastmod>2026-06-29</lastmod>
   </url>
 
 </urlset>
