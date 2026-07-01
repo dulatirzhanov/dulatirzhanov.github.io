@@ -114,6 +114,31 @@ nav a:hover { text-decoration:underline; }
 .summary-tooltip p + p {
   margin-top: 8px;
 }
+.summary-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+.summary-close:hover,
+.summary-close:focus-visible {
+  background: rgba(10,102,194,.08);
+  color: #0a66c2;
+  outline: none;
+}
 .post-summary.is-open .summary-tooltip {
   opacity: 1;
   pointer-events: auto;
@@ -165,6 +190,14 @@ nav a:hover { text-decoration:underline; }
     border-color: rgba(207,224,255,.24);
     box-shadow: 0 12px 28px rgba(0,0,0,.35);
     color: #ddd;
+  }
+  .summary-close {
+    color: #aaa;
+  }
+  .summary-close:hover,
+  .summary-close:focus-visible {
+    background: rgba(207,224,255,.12);
+    color: #cfe0ff;
   }
   .iconbtn { background: #0f141a; border-color: rgba(255,255,255,.1) }
 }
@@ -684,6 +717,7 @@ nav a:hover { text-decoration:underline; }
     const tooltipId = `summary-post-${index + 1}-tooltip`;
     const text = document.createElement('span');
     const tooltip = document.createElement('div');
+    const closeButton = document.createElement('button');
     const kz = document.createElement('p');
     const ru = document.createElement('p');
     const kzLabel = document.createElement('strong');
@@ -703,13 +737,18 @@ nav a:hover { text-decoration:underline; }
     tooltip.id = tooltipId;
     tooltip.setAttribute('role', 'tooltip');
 
+    closeButton.className = 'summary-close';
+    closeButton.type = 'button';
+    closeButton.setAttribute('aria-label', 'Close translation tooltip');
+    closeButton.textContent = '×';
+
     kzLabel.textContent = 'KZ:';
     kz.append(kzLabel, ` ${content.kz}`);
 
     ruLabel.textContent = 'RU:';
     ru.append(ruLabel, ` ${content.ru}`);
 
-    tooltip.append(kz, ru);
+    tooltip.append(closeButton, kz, ru);
     summary.append(text, tooltip);
   }
 
@@ -799,12 +838,19 @@ nav a:hover { text-decoration:underline; }
     document.querySelectorAll('.post-summary').forEach((summary) => {
       summary.addEventListener('click', (event) => {
         event.stopPropagation();
+        if (event.target.closest('.summary-close')) {
+          setSummaryOpen(summary, false);
+          return;
+        }
+
         const wasOpen = summary.classList.contains('is-open');
         closeAllSummaries();
         setSummaryOpen(summary, !wasOpen);
       });
 
       summary.addEventListener('keydown', (event) => {
+        if (event.target.closest('.summary-close')) return;
+
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           const wasOpen = summary.classList.contains('is-open');
@@ -826,6 +872,11 @@ nav a:hover { text-decoration:underline; }
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') closeAllSummaries();
     });
+  }
+
+  function openFirstSummaryHint() {
+    const firstSummary = document.querySelector('.post-summary');
+    if (firstSummary) setSummaryOpen(firstSummary, true);
   }
 
   function setLanguageFilter(language) {
@@ -850,6 +901,7 @@ nav a:hover { text-decoration:underline; }
   enhanceSummaries();
   enhanceReadActions();
   initSummaryTooltips();
+  openFirstSummaryHint();
 </script>
 
 <footer style="text-align:center; margin-top:60px; font-size:14px; color:#666;">
