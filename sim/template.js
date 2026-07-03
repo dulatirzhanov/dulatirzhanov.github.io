@@ -115,7 +115,7 @@
       const caseData = CASES_DATA.find(c => c.id === id);
 
       if (!caseData) {
-        document.body.innerHTML = `<div style="padding:60px 40px;font-family:Arial,sans-serif">
+        document.body.innerHTML = `<div style="padding:60px 40px;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
           <p>Кейс не найден. <a href="${LANG_BASE_PATHS.ru}" style="color:#205c73">${s("backToLib")}</a></p>
         </div>`;
         return;

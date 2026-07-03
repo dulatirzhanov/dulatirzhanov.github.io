@@ -214,7 +214,7 @@ body.case-view {
 .nav-item.sub { padding-left: 26px; font-size: 14px; }
 .nav-item .check {
   width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
-  border: 2px solid #ccd8ea;
+  border: 2px solid rgba(32,92,115,.3);
   display: flex; align-items: center; justify-content: center;
   font-size: 10px; color: transparent;
 }
@@ -504,7 +504,7 @@ body.case-view {
   .action-row .desc { color: #aaa; }
   .action-row button { background: #141413; border-color: rgba(255,255,255,.1); color: #9ed0dc; }
   .action-row button:hover { background: #191916; }
-  .pull-quote { background: #191916; border-color: rgba(223,238,233,.18); color: #ccc; }
+  .pull-quote { background: #191916; border-color: rgba(223,238,233,.18); color: #c9c3b7; }
   .pull-quote .source { color: #888; }
   .resource-list a, .back-link { color: #9ed0dc; }
   .accreditation-toggle { background: rgba(223,238,233,.06); color: #dfeee9; border-color: rgba(223,238,233,.22); }
