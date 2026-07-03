@@ -10,7 +10,7 @@ html {
 }
 
 .home-page {
-  padding: 72px 20px 48px;
+  padding: 72px clamp(20px, 6vw, 72px) 48px;
   text-align: center;
 }
 
@@ -59,10 +59,14 @@ html {
 
 .home-page .nav a,
 .home-page .nav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 38px;
+  line-height: 1.2;
   border: 1px solid rgba(32, 92, 115, 0.18);
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   background: #fff;
   text-decoration: none;
 }
@@ -176,9 +180,35 @@ html {
   outline: none;
 }
 
+.site-footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(32, 92, 115, 0.12);
+  text-align: center;
+  font-size: 14px;
+}
+
+.site-footer p {
+  margin: 6px 0;
+  color: #6f7875;
+}
+
+.site-footer .social-links a {
+  margin: 0 8px;
+  color: #6f7875;
+  text-decoration: none;
+}
+
+.site-footer .social-links a:hover,
+.site-footer .social-links a:focus-visible {
+  color: #205c73;
+  text-decoration: underline;
+  outline: none;
+}
+
 .blog-page {
   max-width: 960px;
-  padding: 56px 24px 64px;
+  padding: 56px clamp(18px, 5vw, 48px) 64px;
   line-height: 1.65;
 }
 
@@ -409,6 +439,20 @@ html {
 
   .home-page .tagline {
     color: #d4cfc3;
+  }
+
+  .site-footer {
+    border-top-color: rgba(223, 238, 233, 0.12);
+  }
+
+  .site-footer p,
+  .site-footer .social-links a {
+    color: #9d978b;
+  }
+
+  .site-footer .social-links a:hover,
+  .site-footer .social-links a:focus-visible {
+    color: #9ed0dc;
   }
 
   .home-page .cta-primary {
