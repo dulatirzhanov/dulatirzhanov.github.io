@@ -456,14 +456,14 @@ html {
   }
 
   .home-page .cta-primary {
-    background: #9ed0dc;
-    color: #11110f;
+    background: #2e6b81;
+    color: #eaf4f7;
     box-shadow: none;
   }
 
   .home-page .cta-primary:hover,
   .home-page .cta-primary:focus-visible {
-    background: #badfe8;
+    background: #3a7e96;
   }
 
   .proof-card span,
