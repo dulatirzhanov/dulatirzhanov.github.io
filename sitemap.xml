@@ -5,7 +5,6 @@
   - English (/) is the primary canonical version
   - Russian (/ru/) and Kazakh (/kz/) are translated alternates
   - Blog remains EN-only
-  - Services remain RU-only
   - Sim library is listed only at /sim/
 -->
 
@@ -35,15 +34,15 @@
     <lastmod>2026-06-29</lastmod>
   </url>
 
-  <!-- Services (RU only) -->
-  <url>
-    <loc>https://dulatedu.com/services/</loc>
-    <lastmod>2026-06-29</lastmod>
-  </url>
-
   <!-- Sim library -->
   <url>
     <loc>https://dulatedu.com/sim/</loc>
+    <lastmod>2026-06-29</lastmod>
+  </url>
+
+  <!-- Services -->
+  <url>
+    <loc>https://dulatedu.com/services/</loc>
     <lastmod>2026-06-29</lastmod>
   </url>
 
