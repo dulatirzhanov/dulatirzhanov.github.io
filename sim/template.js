@@ -116,7 +116,7 @@
 
       if (!caseData) {
         document.body.innerHTML = `<div style="padding:60px 40px;font-family:Arial,sans-serif">
-          <p>Кейс не найден. <a href="${LANG_BASE_PATHS.ru}" style="color:#0a66c2">${s("backToLib")}</a></p>
+          <p>Кейс не найден. <a href="${LANG_BASE_PATHS.ru}" style="color:#205c73">${s("backToLib")}</a></p>
         </div>`;
         return;
       }
