@@ -423,7 +423,7 @@ html {
   .home-page .nav button,
   .blog-page nav a,
   .blog-page .read-link {
-    color: #9ed0dc;
+    color: #dfeee9;
   }
 
   .proof-card,
@@ -464,7 +464,7 @@ html {
 
   .site-footer .social-links a:hover,
   .site-footer .social-links a:focus-visible {
-    color: #9ed0dc;
+    color: #dfeee9;
   }
 
   .home-page .cta-primary {
@@ -492,7 +492,7 @@ html {
 
   .blog-page .filter-button:hover,
   .blog-page .filter-button.active {
-    background: #9ed0dc;
+    background: #dfeee9;
     color: #11110f;
   }
 }
