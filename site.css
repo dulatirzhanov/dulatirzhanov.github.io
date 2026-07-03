@@ -164,19 +164,19 @@ html {
   display: inline-block;
   padding: 14px 28px;
   border-radius: 10px;
-  background: #205c73;
-  color: #fff;
+  background: transparent;
+  color: #205c73;
+  border: 2px solid rgba(32, 92, 115, 0.55);
   font-weight: 700;
   font-size: 17px;
   text-decoration: none;
-  box-shadow: 0 10px 26px rgba(32, 92, 115, 0.28);
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .home-page .cta-primary:hover,
 .home-page .cta-primary:focus-visible {
-  background: #17475a;
-  transform: translateY(-1px);
+  background: #eef5f4;
+  border-color: #205c73;
   outline: none;
 }
 
@@ -419,14 +419,19 @@ html {
     color: #9ed0dc;
   }
 
-  .home-page .nav a,
-  .home-page .nav button,
   .proof-card,
   .blog-page .post-card,
   .blog-page .filter-button,
   .blog-page .iconbtn {
     background: #191916;
     border-color: rgba(223, 238, 233, 0.12);
+  }
+
+  .home-page .nav a,
+  .home-page .nav button {
+    background: transparent;
+    border-color: rgba(223, 238, 233, 0.22);
+    color: #dfeee9;
   }
 
   .home-page .nav a:hover,
@@ -456,14 +461,15 @@ html {
   }
 
   .home-page .cta-primary {
-    background: #2e6b81;
-    color: #eaf4f7;
-    box-shadow: none;
+    background: transparent;
+    color: #9ed0dc;
+    border-color: rgba(158, 208, 220, 0.45);
   }
 
   .home-page .cta-primary:hover,
   .home-page .cta-primary:focus-visible {
-    background: #3a7e96;
+    background: #20201c;
+    border-color: #9ed0dc;
   }
 
   .proof-card span,
