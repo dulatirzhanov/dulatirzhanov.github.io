@@ -156,7 +156,7 @@ html {
 }
 
 .home-page .cta-row {
-  margin: 26px 0 4px;
+  margin: 44px 0 8px;
   text-align: center;
 }
 
@@ -165,8 +165,8 @@ html {
   padding: 14px 28px;
   border-radius: 10px;
   background: transparent;
-  color: #205c73;
-  border: 2px solid rgba(32, 92, 115, 0.55);
+  color: #14343e;
+  border: 2px solid rgba(20, 52, 62, 0.5);
   font-weight: 700;
   font-size: 17px;
   text-decoration: none;
@@ -175,8 +175,8 @@ html {
 
 .home-page .cta-primary:hover,
 .home-page .cta-primary:focus-visible {
-  background: #eef5f4;
-  border-color: #205c73;
+  background: #fbfaf7;
+  border-color: rgba(154, 106, 39, 0.6);
   outline: none;
 }
 
@@ -462,14 +462,14 @@ html {
 
   .home-page .cta-primary {
     background: transparent;
-    color: #9ed0dc;
-    border-color: rgba(158, 208, 220, 0.45);
+    color: #dfeee9;
+    border-color: rgba(223, 238, 233, 0.35);
   }
 
   .home-page .cta-primary:hover,
   .home-page .cta-primary:focus-visible {
     background: #20201c;
-    border-color: #9ed0dc;
+    border-color: rgba(154, 106, 39, 0.6);
   }
 
   .proof-card span,
