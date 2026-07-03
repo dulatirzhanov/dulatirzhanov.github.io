@@ -36,7 +36,7 @@
 
   <style>
     :root { color-scheme: light dark }
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px 20px; margin: 0; position: relative; }
+    body { text-align: center; padding: 50px 20px; margin: 0; position: relative; }
     h1 { margin: 0 0 8px }
     p { margin: 8px 0; color: #444 }
     .muted { color:#666 }
@@ -114,16 +114,9 @@
     .hero-photo { max-width: 180px; width: 40vw; border-radius: 50%; display: block; margin: 0 auto 20px; }
     .bio { margin-top: 60px; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 16px; line-height: 1.6; text-align: left; }
     
-    .cta-post {
-      display: inline-block; margin: 20px 10px 10px 0; padding: 12px 18px; border-radius: 12px;
-      font-weight: bold; text-decoration: none; background: rgba(10,102,194,0.06);
-      color: #0a66c2; border: 1px solid rgba(10,102,194,0.25);
-    }
-    
     @media (prefers-color-scheme: dark) {
       .modal { background: #1a1a1a; }
       .modal a.cta { background: #162238; color: #cfe0ff; border-color: #284777; }
-      .cta-post { background: rgba(207,224,255,0.06); color: #cfe0ff; border: 1px solid rgba(207,224,255,0.22); }
     }
   </style>
   <link rel="stylesheet" href="/site.css">
@@ -146,7 +139,7 @@
   <img src="/profile.png" alt="Dulat Irzhanov" class="hero-photo" width="180" height="180" decoding="async" fetchpriority="high">
     <h1>Dulat Irzhanov</h1>
   <p class="muted"><b>dulatedu.com</b></p>
-  <p>
+  <p class="tagline">
     Advisory work on leadership decisions in education<br>
     when the cost of error becomes institutional.
   </p>
@@ -211,11 +204,8 @@
   </p>
 
 
-    <p>
-      <a class="cta-post" href="https://go.dulatedu.com/YBoW" target="_blank">Published analysis for CIS Perspectives</a>
-      <a class="cta-post" href="https://go.dulatedu.com/pmuL" target="_blank">Selected podcast conversation</a>
-      <a class="cta-post" href="/sim/">Cases Library</a>
-      <a class="cta-post" href="https://go.dulatedu.com/ttFs">Request an advisory conversation</a>
+    <p class="cta-row">
+      <a class="cta-primary" href="https://go.dulatedu.com/ttFs">Request an advisory conversation</a>
     </p>
   </div>
 
