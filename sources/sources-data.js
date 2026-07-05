@@ -14,7 +14,7 @@ const SOURCES_TOPICS = [
   sources: [
     {
       authorsShort: "Blunden, H., & Steffel, M. (2024)",
-      apa: "Blunden, H., & Steffel, M. (2024, September 10). Research: How to Delegate Decision-Making Strategically. Harvard Business Review. https://hbr.org/2024/09/research-how-to-delegate-decision-making-strategically",
+      apa: "Blunden, H., & Steffel, M. (2024, September 10). Research: How to delegate decision-making strategically. *Harvard Business Review*. https://hbr.org/2024/09/research-how-to-delegate-decision-making-strategically",
       readUrl: "https://www.scribd.com/document/813127119/Research-How-to-Delegate-Decision-Making-Strategically",
       stars: 5,
       starsNote: "Harvard Business Review, статья основана на эмпирических исследованиях.",
@@ -25,7 +25,7 @@ const SOURCES_TOPICS = [
     },
     {
       authorsShort: "Einhorn, C. S. (2025)",
-      apa: "Einhorn, C. S. (2025, August 25). Should You Delegate That Decision? Ask These 4 Questions. Harvard Business Review. https://hbr.org/2025/08/should-you-delegate-that-decision-ask-these-4-questions",
+      apa: "Einhorn, C. S. (2025, August 25). Should you delegate that decision? Ask these 4 questions. *Harvard Business Review*. https://hbr.org/2025/08/should-you-delegate-that-decision-ask-these-4-questions",
       readUrl: "https://www.vicleaders.com.au/media/website_pages/media-and-pr/should-you-delegate-that-decision-ask-these-4-questions/4-questions-HBR-article.pdf",
       stars: 5,
       starsNote: "Harvard Business Review, практический материал на основе современных исследований лидерства.",
@@ -36,7 +36,7 @@ const SOURCES_TOPICS = [
     },
     {
       authorsShort: "Sackstein, S. (2026)",
-      apa: "Sackstein, S. (2026, March 23). How to Delegate Without Guilt. Phi Delta Kappan. https://kappanonline.org/how-to-delegate-without-guilt/",
+      apa: "Sackstein, S. (2026, March 23). How to delegate without guilt. *Phi Delta Kappan*. https://kappanonline.org/how-to-delegate-without-guilt/",
       readUrl: "https://kappanonline.org/how-to-delegate-without-guilt/",
       stars: 4,
       starsNote: "Phi Delta Kappan, один из наиболее авторитетных профессиональных журналов по образовательному лидерству и школьному управлению.",
@@ -47,7 +47,7 @@ const SOURCES_TOPICS = [
     },
     {
       authorsShort: "Михайлова В. Е. (2024)",
-      apa: "Михайлова, В. Е. (2024). Система делегирования полномочий и распределения ответственности в образовательной организации. Наука и практика в образовании, 5(1), 15–21. https://doi.org/10.54158/27132838_2024_5_1_15",
+      apa: "Михайлова, В. Е. (2024). Система делегирования полномочий и распределения ответственности в образовательной организации. *Наука и практика в образовании*, *5*(1), 15–21. https://doi.org/10.54158/27132838_2024_5_1_15",
       readUrl: "https://cyberleninka.ru/article/n/sistema-delegirovaniya-polnomochiy-i-raspredeleniya-otvetstvennosti-v-obrazovatelnoy-organizatsii",
       stars: 4,
       starsNote: "Современная научная статья, опубликованная в российском рецензируемом журнале и находящаяся в открытом доступе.",

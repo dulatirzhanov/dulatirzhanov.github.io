@@ -8,6 +8,11 @@
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
+  /* *текст* в поле apa рендерится курсивом (названия изданий, том) */
+  function apaHtml(s) {
+    return esc(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  }
+
   function starsHtml(n) {
     return "★★★★★☆☆☆☆☆".slice(5 - n, 10 - n);
   }
@@ -45,7 +50,7 @@
       <article class="source-card" id="src-${i + 1}">
         <div class="source-num">Источник ${i + 1}</div>
         <h2 class="source-title">${esc(src.authorsShort)}</h2>
-        <div class="apa"><span class="apa-label">APA 7</span>${esc(src.apa)}</div>
+        <div class="apa"><span class="apa-label">APA 7</span>${apaHtml(src.apa)}</div>
         <a class="read-link" href="${esc(src.readUrl)}" target="_blank" rel="noopener">📖 Читать →</a>
         <p class="authority"><span class="stars">${starsHtml(src.stars)}</span>${esc(src.starsNote)}</p>
         <div class="source-section-label">Краткое саммари</div>
