@@ -33,92 +33,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-
-  <style>
-    :root { color-scheme: light dark }
-    body { text-align: center; padding: 50px 20px; margin: 0; position: relative; }
-    h1 { margin: 0 0 8px }
-    p { margin: 8px 0; color: #444 }
-    .muted { color:#666 }
-
-    /* ---------- LANGUAGE SWITCHER (TOP RIGHT) ---------- */
-    .lang-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      z-index: 10;
-    }
-    .lang-switcher a { 
-      color: #666; 
-      text-decoration: none; 
-      margin: 0 3px;
-      padding: 5px;
-    }
-    .lang-switcher a:hover { text-decoration: underline; }
-    .lang-switcher a.active { 
-      color: #8a6a35 !important; 
-      cursor: default; 
-      text-decoration: none;
-    }
-
-    /* ---------- NAVIGATION ---------- */
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin: 15px 0 0;
-    }
-    .nav a, .nav button {
-      appearance: none;
-      background: transparent;
-      border: 0;
-      padding: 0;
-      font: inherit;
-      cursor: pointer;
-      color: #205c73;
-      text-decoration: none;
-    }
-    .nav a:hover, .nav button:hover { text-decoration: underline; }
-
-    @media (prefers-color-scheme: dark) {
-      body { background: #11110f; color: #e6e2d8; }
-      p { color: #bbb; }
-      .muted { color: #999; }
-      .nav a, .nav button { color: #dfeee9; }
-      .nav a:hover, .nav button:hover { color: #dfeee9; }
-      .lang-switcher a { color: #999; }
-      .lang-switcher a.active { color: #c59b58 !important; }
-    }
-
-    /* ---------- MODAL ---------- */
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; z-index: 100; }
-    .modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: #fff; padding: 24px 20px; border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25); width: calc(100vw - 40px);
-      max-width: 420px; max-height: calc(100vh - 120px); overflow: auto;
-      display: none; text-align: center; z-index: 101;
-    }
-    .modal h2 { margin: 0 0 12px; color: #205c73 }
-    .modal a.cta {
-      display: block; padding: 12px 14px; border-radius: 12px;
-      text-decoration: none; font-weight: bold; margin: 10px 0;
-      background: #eef5f4; color: #205c73; border: 1px solid #c7d9d5;
-    }
-    .close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; font-size: 20px; cursor: pointer; color: #888; }
-
-    /* ---------- HERO & BIO ---------- */
-    .hero-photo { max-width: 180px; width: 40vw; border-radius: 50%; display: block; margin: 0 auto 20px; }
-    .bio { margin-top: 60px; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 16px; line-height: 1.6; text-align: left; }
-    @media (prefers-color-scheme: dark) {
-      .modal { background: #191916; }
-      .modal a.cta { background: #1b2a2f; color: #dfeee9; border-color: #33505b; }
-    }
-  </style>
-  <link rel="stylesheet" href="/site.css?v=3">
+<link rel="stylesheet" href="/site.css?v=4">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P430YKCERB"></script>
   <script>
@@ -164,10 +79,10 @@
   <div id="contactsModal" class="modal">
     <button class="close" id="closeContacts">×</button>
 <h2>Байланыс</h2>
-<p>Басқарушылық шешімдерді талқылауға арналған.</p>
+<p>Ақпарат жеткілікті болғанымен, болып жатқан жағдайға әлі нақты атау табылмаған сәтке арналған.</p>
 
-<a class="cta" href="mailto:dulatirzhanov@gmail.com">Жағдайды сипаттау үшін Email</a>
-<a class="cta" href="https://wa.me/77761070090" target="_blank">Жұмыс форматымен танысқан соң жазу үшін WhatsApp</a>
+<a class="cta" href="mailto:dulatirzhanov@gmail.com">Нақтылауды қажет ететін жағдайды Email арқылы сипаттау</a>
+<a class="cta" href="https://wa.me/77761070090" target="_blank">Алғашқы қысқа хабарлама үшін WhatsApp</a>
 <a class="cta" href="https://calendly.com/dulat/consultations" target="_blank">Әңгімені сұрату</a>
   </div>
 
@@ -181,23 +96,20 @@
   </p>
 
   <p>
-    Мен жедел кеңес, ұсыныс немесе баға бермеймін.
-    Бұл жұмыс таңдалған бағытқа қатысты
-    ішкі күмән пайда болғанда
-    және қателіктің нақты құны айқындалғанда басталады.
+    Әдетте бұл былай көрінеді: өзгерістер басталған, бірақ жүйе жауап бермейді;
+    команда жұмыс істеп жатыр, бірақ маңызды нәрсе айтылмай қалады;
+    аккредитация жүріп жатыр, бірақ ішкі күмән жоғалмайды.
   </p>
 
   <p>
-    Менің тәжірибем халықаралық мектептерге аккредиттеуді жүргізу мен сүйемелдеуді,
-    күрделі мектеп жүйелерінің ішінде жұмыс істеуді
-    және институционалдық өзгерістер кезеңінде
-    басқару командаларын қолдауды қамтиды.
+    Мұндай жағдайда ақпарат көбіне жеткілікті болады.
+    Жетпейтіні - болып жатқан нәрсеге дәл атау беру.
+    Әңгіме сол жерден басталады.
   </p>
 
   <p>
-    Егер сіз дайын идеялар, құралдар
-    немесе бұрын қабылданған шешімге растау ғана іздеп отырсаңыз,
-    бұл қызмет сізге арналмаған болуы ықтимал.
+    Мен дайын шешім ұсынбаймын және жобаларды басынан аяғына дейін басқармаймын.
+    Жұмыс бір әңгімеден басталады. Кейде соның өзі жеткілікті.
   </p>
 
     <p class="cta-row">
