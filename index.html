@@ -203,12 +203,13 @@
 
 
     <p class="cta-row">
-      <a class="cta-primary" href="https://go.dulatedu.com/ttFs">Request an advisory conversation</a>
+      <button class="cta-primary" id="openContactsCta" type="button">Request an advisory conversation</button>
     </p>
   </div>
 
   <script>
     const openBtn = document.getElementById('openContacts');
+    const openCta = document.getElementById('openContactsCta');
     const closeBtn = document.getElementById('closeContacts');
     const modal = document.getElementById('contactsModal');
     const overlay = document.getElementById('overlay');
@@ -217,6 +218,7 @@
     function closeModal() { modal.style.display = 'none'; overlay.style.display = 'none'; }
     
     openBtn.addEventListener('click', openModal);
+    openCta.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', closeModal);
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });

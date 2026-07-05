@@ -13,19 +13,19 @@
   <!-- Primary canonical (English) -->
   <url>
     <loc>https://dulatedu.com/</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-05</lastmod>
   </url>
 
   <!-- Russian translation -->
   <url>
     <loc>https://dulatedu.com/ru/</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-05</lastmod>
   </url>
 
   <!-- Kazakh translation -->
   <url>
     <loc>https://dulatedu.com/kz/</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-05</lastmod>
   </url>
 
   <!-- Blog (EN only) -->
@@ -37,12 +37,6 @@
   <!-- Sim library -->
   <url>
     <loc>https://dulatedu.com/sim/</loc>
-    <lastmod>2026-06-29</lastmod>
-  </url>
-
-  <!-- Services -->
-  <url>
-    <loc>https://dulatedu.com/services/</loc>
     <lastmod>2026-06-29</lastmod>
   </url>
 
