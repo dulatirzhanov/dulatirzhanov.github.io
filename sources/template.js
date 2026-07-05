@@ -12,8 +12,24 @@
     return "★★★★★☆☆☆☆☆".slice(5 - n, 10 - n);
   }
 
+  function subscribeBlock() {
+    return `
+      <div class="subscribe-block">
+        <p class="subscribe-label">Подпишитесь, чтобы получать уведомление о новых материалах:</p>
+        <form class="subscribe-form" action="https://dulatedu.us6.list-manage.com/subscribe/post?u=9b32c150eb1859f084bfe3bcb&amp;id=c702192e41&amp;f_id=009822e2f0" method="POST" target="_blank">
+          <input type="email" name="EMAIL" placeholder="Ваш email" required>
+          <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_9b32c150eb1859f084bfe3bcb_c702192e41" tabindex="-1" value=""></div>
+          <button type="submit">Подписаться</button>
+        </form>
+      </div>`;
+  }
+
   function footer() {
     return `
+      <div class="lang-note">
+        <p><strong>KZ:</strong> Осы ақпарат уақыт үнемдеу мақсатымен орыс тілінде жазылды. Алдағы уақытта қазақ тіліне аударылады. Браузердегі авто-аударманы қолдануға болады.</p>
+        <p><strong>EN:</strong> This content is written in Russian to save time. An English translation is planned for the future. You can use your browser's built-in auto-translate.</p>
+      </div>
       <footer class="lib-footer">
         <div class="copyright">© 2026 Dulat Irzhanov</div>
         <div class="footer-links">
@@ -57,6 +73,7 @@
         <nav class="backnav"><a href="/sources/">← Все темы</a> &nbsp;·&nbsp; <a href="/">← На главную</a></nav>
         <p class="subtitle">${esc(topic.intro)}</p>
         <p class="topic-updated">Обновлено: ${esc(topic.updated)} · Источников: ${topic.sources.length}</p>
+        ${subscribeBlock()}
         <nav class="toc">
           <div class="toc-label">В этом обзоре</div>
           <ol>${toc}</ol>
@@ -82,6 +99,7 @@
         </header>
         <nav class="backnav"><a href="/">← На главную</a></nav>
         <p class="subtitle">Аннотированные обзоры современных источников по школьному управлению: авторитетность, краткое саммари и практическое значение для директоров школ.</p>
+        ${subscribeBlock()}
         <div class="topic-list">${cards}</div>
         ${footer()}`;
     }
