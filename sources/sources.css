@@ -6,7 +6,7 @@ body {
   font-family: var(--font-sans);
   margin: 0 auto;
   padding: 56px clamp(18px, 5vw, 48px) 64px;
-  max-width: 860px;
+  max-width: 900px;
   line-height: 1.65;
   background: var(--color-bg);
   color: var(--color-ink);
@@ -18,15 +18,15 @@ nav.backnav a:hover { text-decoration: underline; }
 
 h1 {
   margin: 0 0 18px;
-  font-size: 36px;
-  line-height: 1.15;
+  font-size: 38px;
+  line-height: 1.12;
   color: var(--color-heading);
 }
 
-.topic-intro {
+.subtitle {
   color: #36423f;
   font-size: 18px;
-  margin: 0 0 12px;
+  margin: 0 0 28px;
   padding-left: 18px;
   border-left: 3px solid var(--color-accent-strong);
   line-height: 1.6;
@@ -137,11 +137,15 @@ h1 {
 .topic-card .excerpt { font-size: 15px; color: var(--color-body); margin: 0; }
 .topic-card:hover .title { color: var(--color-link-strong); }
 
-.page-footer {
-  margin-top: 48px; padding-top: 24px;
+.lib-footer {
+  margin-top: 48px; padding: 24px 0 40px;
   border-top: 1px solid rgba(32,92,115,.12);
   font-size: 14px; color: #666;
 }
+.lib-footer .copyright { margin-bottom: 8px; }
+.lib-footer .footer-links { display: flex; gap: 18px; }
+.lib-footer .footer-links a { color: var(--color-link); text-decoration: underline; }
+.lib-footer .footer-links a:hover { color: var(--color-link-strong); }
 
 @media (max-width: 700px) {
   body { padding: 36px 18px 48px; }
@@ -152,7 +156,7 @@ h1 {
 @media (prefers-color-scheme: dark) {
   body { background: #11110f; color: #e6e2d8; }
   h1, .source-title, .topic-card .title, .source-section-label { color: #dfeee9; }
-  .topic-intro { color: #cfcabd; border-left-color: #c59b58; }
+  .subtitle { color: #cfcabd; border-left-color: #c59b58; }
   nav.backnav a, .toc a { color: #dfeee9; }
   .toc, .apa, .practice { background: #191916; border-color: rgba(223,238,233,.12); }
   .source-card, .topic-card { background: #191916; border-color: rgba(223,238,233,.12); box-shadow: none; }
@@ -162,5 +166,6 @@ h1 {
   .apa .apa-label, .topic-updated, .topic-card .meta { color: #8f8a7e; }
   .practice { border-left-color: #c59b58; }
   .topic-card:hover .title { color: #ffffff; }
-  .page-footer { color: #8f8a7e; border-top-color: rgba(223,238,233,.12); }
+  .lib-footer { color: #8f8a7e; border-top-color: rgba(223,238,233,.12); }
+  .lib-footer .footer-links a { color: #dfeee9; }
 }

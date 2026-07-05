@@ -13,7 +13,14 @@
   }
 
   function footer() {
-    return `<footer class="page-footer">© ${new Date().getFullYear()} Дулат Иржанов</footer>`;
+    return `
+      <footer class="lib-footer">
+        <div class="copyright">© 2026 Dulat Irzhanov</div>
+        <div class="footer-links">
+          <a href="https://dulatedu.com/">dulatedu.com</a>
+          <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </footer>`;
   }
 
   function sourceCard(src, i) {
@@ -44,12 +51,12 @@
         `<li><a href="#src-${i + 1}">${esc(s.authorsShort)}</a></li>`).join("");
 
       document.body.innerHTML = `
-        <nav class="backnav"><a href="/sources/">← Все темы</a> &nbsp;·&nbsp; <a href="/">На главную</a></nav>
         <header>
           <h1>${esc(topic.title)}</h1>
-          <p class="topic-intro">${esc(topic.intro)}</p>
-          <p class="topic-updated">Обновлено: ${esc(topic.updated)} · Источников: ${topic.sources.length}</p>
         </header>
+        <nav class="backnav"><a href="/sources/">← Все темы</a> &nbsp;·&nbsp; <a href="/">← На главную</a></nav>
+        <p class="subtitle">${esc(topic.intro)}</p>
+        <p class="topic-updated">Обновлено: ${esc(topic.updated)} · Источников: ${topic.sources.length}</p>
         <nav class="toc">
           <div class="toc-label">В этом обзоре</div>
           <ol>${toc}</ol>
@@ -70,11 +77,11 @@
         </a>`).join("");
 
       document.body.innerHTML = `
-        <nav class="backnav"><a href="/">← На главную</a></nav>
         <header>
           <h1>Библиотека источников</h1>
-          <p class="topic-intro">Аннотированные обзоры современных источников по школьному управлению: авторитетность, краткое саммари и практическое значение для директоров школ.</p>
         </header>
+        <nav class="backnav"><a href="/">← На главную</a></nav>
+        <p class="subtitle">Аннотированные обзоры современных источников по школьному управлению: авторитетность, краткое саммари и практическое значение для директоров школ.</p>
         <div class="topic-list">${cards}</div>
         ${footer()}`;
     }
