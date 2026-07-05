@@ -196,10 +196,14 @@ body {
 
 .home-page .bio {
   max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 52px;
   padding-top: 32px;
   border-top: 1px solid var(--line-teal);
   font-size: 17px;
+  line-height: 1.6;
+  text-align: left;
 }
 
 .home-page .bio p {
