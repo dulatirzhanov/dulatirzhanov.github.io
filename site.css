@@ -369,6 +369,7 @@ body {
 
 .blog-page {
   max-width: 960px;
+  margin: 0 auto;
   padding: 56px clamp(18px, 5vw, 48px) 64px;
   line-height: 1.65;
 }
@@ -470,9 +471,18 @@ body {
 
 .blog-page .post-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+}
+
+.blog-page .post-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .blog-page .post-title {
