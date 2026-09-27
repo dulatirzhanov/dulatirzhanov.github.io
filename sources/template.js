@@ -29,6 +29,26 @@
       </div>`;
   }
 
+  /* [текст](url) -> ссылка, после esc(); для APA-цитат прямо в тексте записки */
+  function noteHtml(s) {
+    return esc(s).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  }
+
+  /* Необязательное поле темы: expert = { label, paragraphs: [...], note } */
+  function expertBlock(topic) {
+    if (!topic.expert) return "";
+    const e = topic.expert;
+    const paras = e.paragraphs.map(p => `<p>${noteHtml(p)}</p>`).join("");
+    const note = e.note ? `<p class="expert-note-small">${noteHtml(e.note)}</p>` : "";
+    return `
+      <section class="expert-note">
+        <div class="source-section-label">${esc(e.label || "Экспертная записка")}</div>
+        ${paras}
+        ${note}
+      </section>`;
+  }
+
   function footer() {
     return `
       <div class="lang-note">
@@ -78,6 +98,7 @@
         <nav class="backnav"><a href="/sources/">← Все темы</a> &nbsp;·&nbsp; <a href="/">← На главную</a></nav>
         <p class="subtitle">${esc(topic.intro)}</p>
         <p class="topic-updated">Обновлено: ${esc(topic.updated)} · Источников: ${topic.sources.length}</p>
+        ${expertBlock(topic)}
         ${subscribeBlock()}
         <nav class="toc">
           <div class="toc-label">В этом обзоре</div>
