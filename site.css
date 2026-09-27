@@ -214,7 +214,27 @@ body {
   margin-bottom: 18px;
 }
 
-.home-page .bio p:first-child strong {
+.home-page .bio .bio-heading {
+  margin-top: 36px;
+  margin-bottom: 18px;
+}
+
+.home-page .bio ul {
+  margin: 14px 0;
+  padding-left: 20px;
+}
+
+.home-page .bio li {
+  margin: 12px 0;
+  color: var(--color-body);
+}
+
+.home-page .bio li strong {
+  color: var(--color-heading);
+}
+
+.home-page .bio p:first-child strong,
+.home-page .bio .bio-heading strong {
   color: var(--color-accent);
   font-size: 13px;
   letter-spacing: 0.08em;
@@ -833,7 +853,8 @@ body {
   }
 
   .proof-card span,
-  .home-page .bio p:first-child strong {
+  .home-page .bio p:first-child strong,
+  .home-page .bio .bio-heading strong {
     color: #c59b58;
   }
 
