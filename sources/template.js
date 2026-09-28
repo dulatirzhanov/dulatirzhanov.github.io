@@ -58,7 +58,7 @@
       <footer class="lib-footer">
         <div class="copyright">© 2026 Dulat Irzhanov</div>
         <div class="footer-links">
-          <a href="https://dulatedu.com/">dulatedu.com</a>
+          <a href="/ru/">dulatedu.com</a>
           <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </footer>`;
@@ -98,7 +98,7 @@
         <header>
           <h1>${esc(topic.title)}</h1>
         </header>
-        <nav class="backnav"><a href="/sources/">← Все темы</a> &nbsp;·&nbsp; <a href="/">← На главную</a></nav>
+        <nav class="backnav"><a href="/sources/">← Все темы</a> &nbsp;·&nbsp; <a href="/ru/">← На главную</a></nav>
         <p class="subtitle">${esc(topic.intro)}</p>
         <p class="topic-updated">Обновлено: ${esc(topic.updated)} · Источников: ${topic.sources.length}</p>
         ${expertBlock(topic)}
@@ -129,7 +129,7 @@
         <header>
           <h1>Библиотека источников</h1>
         </header>
-        <nav class="backnav"><a href="/">← На главную</a></nav>
+        <nav class="backnav"><a href="/ru/">← На главную</a></nav>
         <p class="subtitle">Аннотированные обзоры современных источников по школьному управлению: авторитетность, краткое саммари и практическое значение для директоров школ.</p>
         ${subscribeBlock()}
         <div class="topic-list">${cards}</div>
