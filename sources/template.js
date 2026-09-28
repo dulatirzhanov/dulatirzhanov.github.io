@@ -52,7 +52,6 @@
   function footer() {
     return `
       <div class="lang-note">
-        <p><strong>KZ:</strong> <a href="/sources/kz/">Қазақша нұсқасы</a></p>
         <p><strong>EN:</strong> This content is written in Russian to save time. An English translation is planned for the future. You can use your browser's built-in auto-translate.</p>
       </div>
       <footer class="lib-footer">
