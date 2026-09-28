@@ -1,10 +1,25 @@
 (function () {
   function s(key) {
-    return UI_STRINGS.ru[key] || key;
+    return UI_STRINGS[CURRENT_LANG]?.[key] ?? UI_STRINGS.ru[key] ?? key;
   }
 
   function tagLabel(tag) {
-    return TAG_LABELS[tag]?.ru || tag;
+    return TAG_LABELS[tag]?.[CURRENT_LANG] || TAG_LABELS[tag]?.ru || tag;
+  }
+
+  function basePath() {
+    return LANG_BASE_PATHS[CURRENT_LANG] || LANG_BASE_PATHS.ru || "/sim/";
+  }
+
+  function homePath() {
+    return CURRENT_LANG === "kk" ? "/kz/" : CURRENT_LANG === "ru" ? "/ru/" : "/";
+  }
+
+  function languageSwitcher(caseId) {
+    const suffix = caseId ? `case.html?id=${caseId}` : "";
+    const kzClass = CURRENT_LANG === "kk" ? ' class="active"' : "";
+    const ruClass = CURRENT_LANG === "ru" ? ' class="active"' : "";
+    return `<div class="lang-switcher"><a href="${LANG_BASE_PATHS.kk}${suffix}"${kzClass}>KZ</a> | <a href="${LANG_BASE_PATHS.ru}${suffix}"${ruClass}>RU</a></div>`;
   }
 
   function uniqueTags() {
@@ -25,10 +40,11 @@
       document.body.classList.add("lib-view");
 
       document.body.innerHTML = `
+        ${languageSwitcher()}
         <header>
           <h1>${s("libraryTitle")}</h1>
         </header>
-        <nav class="backnav"><a href="/">${s("backToHome")}</a></nav>
+        <nav class="backnav"><a href="${homePath()}">${s("backToHome")}</a></nav>
         <p class="subtitle">${s("librarySubtitle")}</p>
         <div class="subscribe-block">
           <p class="subscribe-label">${s("subscribeLabel")}</p>
@@ -41,20 +57,17 @@
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
-        <div class="lang-note">
-          <p><strong>KZ:</strong> Осы ақпарат уақыт үнемдеу мақсатымен орыс тілінде жазылды. Алдағы уақытта қазақ тіліне аударылады. Браузердегі авто-аударманы қолдануға болады.</p>
-          <p><strong>EN:</strong> This content is written in Russian to save time. An English translation is planned for the future. You can use your browser's built-in auto-translate.</p>
-        </div>
+        <div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser's built-in auto-translate.</p></div>
         <footer class="lib-footer">
           <div class="copyright">© 2026 Dulat Irzhanov</div>
           <div class="footer-links">
-            <a href="https://dulatedu.com/">dulatedu.com</a>
+            <a href="${homePath()}">dulatedu.com</a>
             <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </footer>
       `;
 
-      document.title = s("libraryTitle") + " — Dulat Irzhanov";
+      document.title = s("libraryTitle") + " | Dulat Irzhanov";
 
       let activeFilter = "all";
 
@@ -81,12 +94,12 @@
         document.getElementById("emptyState").style.display = filtered.length ? "none" : "block";
 
         grid.innerHTML = filtered.map(c => {
-          const displayLang = c.availableLangs.includes("ru") ? "ru" : c.availableLangs[0];
+          const displayLang = c.availableLangs.includes(CURRENT_LANG) ? CURRENT_LANG : c.availableLangs[0];
           const title = c.title[displayLang] || c.title.ru || "";
           const excerpt = c.excerpt[displayLang] || c.excerpt.ru || "";
           const chapter = c.chapter[displayLang] || c.chapter.ru || "";
           const tagPills = c.tags.map(tag => `<span class="tag">${tagLabel(tag)}</span>`).join("");
-          const caseHref = LANG_BASE_PATHS.ru + "case.html?id=" + c.id;
+          const caseHref = basePath() + "case.html?id=" + c.id;
 
           return `
             <a class="card" href="${caseHref}">
@@ -116,12 +129,12 @@
 
       if (!caseData) {
         document.body.innerHTML = `<div style="padding:60px 40px;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
-          <p>Кейс не найден. <a href="${LANG_BASE_PATHS.ru}" style="color:#205c73">${s("backToLib")}</a></p>
+          <p>${s("caseNotFound")} <a href="${basePath()}" style="color:#205c73">${s("backToLib")}</a></p>
         </div>`;
         return;
       }
 
-      const displayLang = caseData.availableLangs.includes("ru") ? "ru" : caseData.availableLangs[0];
+      const displayLang = caseData.availableLangs.includes(CURRENT_LANG) ? CURRENT_LANG : caseData.availableLangs[0];
 
       function f(obj) {
         if (!obj) return "";
@@ -235,7 +248,7 @@
         const expertHtml = f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         const accNote = f(caseData.expertCommentary?.accreditationNote);
         const accHtml = accNote ? `
-          <button class="accreditation-toggle" aria-expanded="false">Как это выглядит с точки зрения международной аккредитации? <span class="acc-chevron">▾</span></button>
+          <button class="accreditation-toggle" aria-expanded="false">${s("accreditationView")} <span class="acc-chevron">▾</span></button>
           <p class="accreditation-note" hidden>${accNote}</p>
         ` : "";
         panesHtml += `
@@ -288,10 +301,10 @@
               <span class="email-text">${s("shareEmailLabel")} ${caseData.shareEmail}</span>
             </div>
             <div class="content-footer">
-              <a class="sidebar-back" href="${LANG_BASE_PATHS.ru}" style="display:inline-block;margin-bottom:14px;">${s("backToLib")}</a>
+               <a class="sidebar-back" href="${basePath()}" style="display:inline-block;margin-bottom:14px;">${s("backToLib")}</a>
               <div class="copyright">© 2026 Dulat Irzhanov</div>
               <div class="footer-links">
-                <a href="https://dulatedu.com/">dulatedu.com</a>
+                 <a href="${homePath()}">dulatedu.com</a>
                 <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
               </div>
             </div>
@@ -309,8 +322,9 @@
 
       // Render DOM
       document.body.innerHTML = `
+        ${languageSwitcher(caseData.id)}
         <header class="case-topbar">
-          <button class="hamburger" id="hamburger" aria-label="Открыть меню кейса" aria-controls="sidebar" aria-expanded="false">☰</button>
+          <button class="hamburger" id="hamburger" aria-label="${s("openMenu")}" aria-controls="sidebar" aria-expanded="false">☰</button>
           <div class="topbar-title">${f(caseData.title)}</div>
           <div class="topbar-progress"><span id="topbarProgress"></span></div>
         </header>
@@ -321,11 +335,11 @@
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
           <div class="sidebar-nav">${sidebarNav}</div>
-          <a class="sidebar-back" href="${LANG_BASE_PATHS.ru}">${s("backToLib")}</a>
+          <a class="sidebar-back" href="${basePath()}">${s("backToLib")}</a>
           <div class="sidebar-footer">
             <div class="copyright">© 2026 Dulat Irzhanov</div>
             <div class="footer-links">
-              <a href="https://dulatedu.com/">dulatedu.com</a>
+              <a href="${homePath()}">dulatedu.com</a>
               <a href="https://www.linkedin.com/in/dulat-irzhanov/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
           </div>
@@ -333,7 +347,7 @@
         <main class="content">${panesHtml}</main>
       `;
 
-      document.title = f(caseData.title) + " — Dulat Irzhanov";
+      document.title = f(caseData.title) + " | Dulat Irzhanov";
 
       // Mobile drawer open/close
       const sidebar = document.getElementById("sidebar");
