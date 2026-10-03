@@ -270,10 +270,17 @@
         actions.forEach((action, i) => {
           const pq = action.pullQuote;
           const pqText = f(pq?.text);
+          const quoteDisclosure = CURRENT_LANG === "ru" && pq?.kind === "practice" && pq?.adapted
+            ? s("quoteAdaptedLabel") : "";
+          const quoteSource = f(pq?.source);
+          const quoteMeta = quoteDisclosure || quoteSource ? `<span class="source">
+            ${quoteDisclosure ? `<span class="quote-disclosure">${quoteDisclosure}</span>` : ""}
+            ${quoteSource ? `<span class="quote-source">${quoteSource}</span>` : ""}
+          </span>` : "";
           const pqHtml = pqText ? `
             <div class="pull-quote">
               ${pqText}
-              ${f(pq?.source) ? `<span class="source">${f(pq.source)}</span>` : ""}
+              ${quoteMeta}
             </div>` : "";
 
           const resItems = (action.resources || []).filter(r => r.url).map(r =>
@@ -296,7 +303,21 @@
         });
 
         // Expert commentary
-        const expertHtml = f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
+        const analysisLabelKeys = {
+          research: "analysisResearchLabel",
+          interpretation: "analysisInterpretationLabel",
+          practice: "analysisPracticeLabel",
+          application: "analysisApplicationLabel"
+        };
+        const analysisSections = CURRENT_LANG === "ru" ? (caseData.analysisSections || []) : [];
+        const expertHtml = analysisSections.length ? analysisSections.map(section => {
+          const sectionHtml = f(section.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
+          const labelKey = analysisLabelKeys[section.kind] || "analysisInterpretationLabel";
+          return `<section class="analysis-section analysis-${section.kind}">
+            <div class="analysis-label">${s(labelKey)}</div>
+            ${sectionHtml}
+          </section>`;
+        }).join("") : f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         const accNote = f(caseData.expertCommentary?.accreditationNote);
         const accHtml = accNote ? `
           <button class="accreditation-toggle" aria-expanded="false">${s("accreditationView")} <span class="acc-chevron">▾</span></button>
