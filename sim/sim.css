@@ -33,6 +33,12 @@ body.lib-view h1 {
   border-left: 3px solid var(--color-accent-strong);
   line-height: 1.6;
 }
+.library-promise {
+  max-width: 720px;
+  margin: 0 0 28px;
+  color: var(--color-body);
+  font-size: 16px;
+}
 
 nav.backnav { text-align: left; margin: 0 0 34px; }
 nav.backnav a { color: var(--color-link); text-decoration: none; }

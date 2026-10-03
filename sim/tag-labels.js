@@ -1,6 +1,6 @@
 const TAG_LABELS = {
   daily:      { ru: "Ежедневное",     kk: "Күнделікті",       en: "Daily" },
-  strategic:  { ru: "Стратегическое", kk: "Стратегиялық",     en: "Strategic" },
+  strategic:  { ru: "Стратегия",      kk: "Стратегиялық",     en: "Strategic" },
   discipline: { ru: "Дисциплина",     kk: "Тәртіп",           en: "Discipline" },
   staff:      { ru: "Персонал",       kk: "Қызметкерлер",     en: "Staff" },
   retention:  { ru: "Удержание",      kk: "Сақтап қалу",      en: "Retention" },

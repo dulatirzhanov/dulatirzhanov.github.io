@@ -46,6 +46,7 @@
         </header>
         <nav class="backnav"><a href="${homePath()}">${s("backToHome")}</a></nav>
         <p class="subtitle">${s("librarySubtitle")}</p>
+        ${CURRENT_LANG === "ru" ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
         <div class="subscribe-block">
           <p class="subscribe-label">${s("subscribeLabel")}</p>
           <form class="subscribe-form" action="https://dulatedu.us6.list-manage.com/subscribe/post?u=9b32c150eb1859f084bfe3bcb&amp;id=c702192e41&amp;f_id=009822e2f0" method="POST" target="_blank">
