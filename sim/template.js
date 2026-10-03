@@ -39,14 +39,40 @@
     init: function () {
       document.body.classList.add("lib-view");
 
-      document.body.innerHTML = `
-        ${languageSwitcher()}
-        <header>
-          <h1>${s("libraryTitle")}</h1>
-        </header>
-        <nav class="backnav"><a href="${homePath()}">${s("backToHome")}</a></nav>
-        <p class="subtitle">${s("librarySubtitle")}</p>
-        ${CURRENT_LANG === "ru" ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
+      const howBlock = CURRENT_LANG === "ru" ? `
+        <details class="how-block" id="how">
+          <summary><span>${s("howTitle")}</span><small>${s("howSummary")}</small></summary>
+          <div class="how-content">
+            <p class="section-intro">${s("howIntro")}</p>
+            <div class="how-steps">
+            <div class="how-step"><span>1</span><div><strong>${s("howStep1Title")}</strong><p>${s("howStep1Text")}</p></div></div>
+            <div class="how-step"><span>2</span><div><strong>${s("howStep2Title")}</strong><p>${s("howStep2Text")}</p></div></div>
+            <div class="how-step"><span>3</span><div><strong>${s("howStep3Title")}</strong><p>${s("howStep3Text")}</p></div></div>
+            </div>
+            <p class="how-note">${s("howNote")}</p>
+          </div>
+        </details>
+      ` : "";
+
+      const libraryActions = CURRENT_LANG === "ru" ? `
+        <div class="library-actions">
+          <a class="primary" href="#cases">${s("jumpToCases")}</a>
+          <a href="#how" id="howOpen">${s("jumpToHow")}</a>
+        </div>
+      ` : "";
+
+      const aboutBlock = CURRENT_LANG === "ru" ? `
+        <section class="about-block" aria-labelledby="about-title">
+          <img src="/profile.png" alt="Дулат Иржанов" width="88" height="88">
+          <div>
+            <h2 id="about-title">${s("aboutTitle")}</h2>
+            <p>${s("aboutText")}</p>
+            <p class="about-method">${s("aboutMethod")}</p>
+          </div>
+        </section>
+      ` : "";
+
+      const subscribeBlock = `
         <div class="subscribe-block">
           <p class="subscribe-label">${s("subscribeLabel")}</p>
           <form class="subscribe-form" action="https://dulatedu.us6.list-manage.com/subscribe/post?u=9b32c150eb1859f084bfe3bcb&amp;id=c702192e41&amp;f_id=009822e2f0" method="POST" target="_blank">
@@ -55,9 +81,25 @@
             <button type="submit">${s("subscribeButton")}</button>
           </form>
         </div>
+      `;
+
+      document.body.innerHTML = `
+        ${languageSwitcher()}
+        <header>
+          <h1>${s("libraryTitle")}</h1>
+        </header>
+        <nav class="backnav"><a href="${homePath()}">${s("backToHome")}</a></nav>
+        <p class="subtitle">${s("librarySubtitle")}</p>
+        ${CURRENT_LANG === "ru" ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
+        ${libraryActions}
+        ${CURRENT_LANG === "ru" ? "" : subscribeBlock}
+        ${CURRENT_LANG === "ru" ? `<h2 class="cases-heading" id="cases">${s("casesTitle")}</h2>` : ""}
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
+        ${howBlock}
+        ${aboutBlock}
+        ${CURRENT_LANG === "ru" ? subscribeBlock : ""}
         <div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser's built-in auto-translate.</p></div>
         <footer class="lib-footer">
           <div class="copyright">© 2026 Dulat Irzhanov</div>
@@ -69,6 +111,14 @@
       `;
 
       document.title = s("libraryTitle") + " | Dulat Irzhanov";
+
+      const howOpen = document.getElementById("howOpen");
+      if (howOpen) {
+        howOpen.addEventListener("click", () => {
+          const how = document.getElementById("how");
+          if (how) how.open = true;
+        });
+      }
 
       let activeFilter = "all";
 
