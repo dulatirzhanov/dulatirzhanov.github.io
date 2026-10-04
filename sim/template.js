@@ -80,6 +80,7 @@
             <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_9b32c150eb1859f084bfe3bcb_c702192e41" tabindex="-1" value=""></div>
             <button type="submit">${s("subscribeButton")}</button>
           </form>
+          ${CURRENT_LANG === "ru" ? `<p class="subscribe-note">${s("subscribeNote")}</p>` : ""}
         </div>
       `;
 
@@ -193,6 +194,7 @@
       }
 
       const caseIndex = CASES_DATA.indexOf(caseData) + 1;
+      const versionDate = f(caseData.versionDate);
       const scenes = caseData.narrativeScenes || [];
       const actions = caseData.actions || [];
       const hasContent = scenes.length > 0;
@@ -261,6 +263,10 @@
             <div class="eyebrow">${s("actionsSection")}</div>
             <h2>${s("actionsTitle")}</h2>
             <p>${f(caseData.actionsIntro)}</p>
+            ${CURRENT_LANG === "ru" ? `<aside class="actions-guidance">
+              <strong>${s("actionsGuidanceTitle")}</strong>
+              <p>${s("actionsGuidanceText")}</p>
+            </aside>` : ""}
             <div class="actions-list">${actionRows}</div>
             <a class="back-link" data-next="expert">${s("next")}</a>
           </section>
@@ -270,13 +276,10 @@
         actions.forEach((action, i) => {
           const pq = action.pullQuote;
           const pqText = f(pq?.text);
-          const quoteDisclosure = CURRENT_LANG === "ru" && pq?.kind === "practice" && pq?.adapted
-            ? s("quoteAdaptedLabel") : "";
           const quoteSource = f(pq?.source);
-          const quoteMeta = quoteDisclosure || quoteSource ? `<span class="source">
-            ${quoteDisclosure ? `<span class="quote-disclosure">${quoteDisclosure}</span>` : ""}
-            ${quoteSource ? `<span class="quote-source">${quoteSource}</span>` : ""}
-          </span>` : "";
+          const quoteMetaText = quoteSource || (CURRENT_LANG === "ru" && pq?.kind === "practice" && pq?.adapted
+            ? s("quoteAdaptedLabel") : "");
+          const quoteMeta = quoteMetaText ? `<span class="source"><span class="quote-source">${quoteMetaText}</span></span>` : "";
           const pqHtml = pqText ? `
             <div class="pull-quote">
               ${pqText}
@@ -319,9 +322,15 @@
           </section>`;
         }).join("") : f(caseData.expertCommentary?.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         const accNote = f(caseData.expertCommentary?.accreditationNote);
+        const accNoteHtml = accNote.split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         const accHtml = accNote ? `
-          <button class="accreditation-toggle" aria-expanded="false">${s("accreditationView")} <span class="acc-chevron">▾</span></button>
-          <p class="accreditation-note" hidden>${accNote}</p>
+          <details class="accreditation-block">
+            <summary><span>${s("accreditationView")}</span>${CURRENT_LANG === "ru" ? `<small>${s("accreditationSummary")}</small>` : ""}</summary>
+            <div class="accreditation-content">
+              ${CURRENT_LANG === "ru" ? `<p class="accreditation-disclaimer">${s("accreditationDisclaimer")}</p>` : ""}
+              <div class="accreditation-note">${accNoteHtml}</div>
+            </div>
+          </details>
         ` : "";
         panesHtml += `
           <section class="pane" data-id="expert">
@@ -362,13 +371,24 @@
         const followHtml = followItems ? `<ul class="resource-list">${followItems}</ul>` : "";
 
         const emailSubject = encodeURIComponent(f(caseData.title));
+        const feedbackQuestions = CURRENT_LANG === "ru" ? `
+          <ol class="feedback-questions">
+            <li>${s("shareQuestion1")}</li>
+            <li>${s("shareQuestion2")}</li>
+            <li>${s("shareQuestion3")}</li>
+            <li>${s("shareQuestion4")}</li>
+          </ol>
+          <p class="share-privacy">${s("sharePrivacy")}</p>
+        ` : "";
         panesHtml += `
           <section class="pane" data-id="resources">
             <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("furtherResources")}</h2>
             ${followHtml}
             <div class="share-block">
-              <p style="margin-top:0"><strong>${s("shareCTA")}</strong> ${s("shareText")}</p>
+              <p class="share-heading"><strong>${s("shareCTA")}</strong></p>
+              <p>${s("shareText")}</p>
+              ${feedbackQuestions}
               <a class="cta" href="mailto:${caseData.shareEmail}?subject=${emailSubject}">${s("shareButton")}</a>
               <span class="email-text">${s("shareEmailLabel")} ${caseData.shareEmail}</span>
             </div>
@@ -404,6 +424,7 @@
         <nav class="sidebar" id="sidebar" aria-label="${f(caseData.title)}">
           <div class="case-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div>
           <h1>${f(caseData.title)}</h1>
+          ${versionDate ? `<div class="case-version">${s("versionLabel")} ${versionDate}</div>` : ""}
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
           <div class="sidebar-nav">${sidebarNav}</div>
@@ -469,17 +490,6 @@
       document.querySelectorAll("[data-next]").forEach(el => {
         el.addEventListener("click", e => { e.preventDefault(); showPane(el.dataset.next); });
       });
-      document.querySelectorAll(".accreditation-toggle").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const note = btn.nextElementSibling;
-          const expanded = btn.getAttribute("aria-expanded") === "true";
-          btn.setAttribute("aria-expanded", String(!expanded));
-          note.hidden = expanded;
-          const chevron = btn.querySelector(".acc-chevron");
-          if (chevron) chevron.textContent = expanded ? "▾" : "▲";
-        });
-      });
-
       showPane("scene0");
     }
   };
