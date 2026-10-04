@@ -38,8 +38,9 @@
   window.SimLib = {
     init: function () {
       document.body.classList.add("lib-view");
+      const hasReleaseOneContent = CURRENT_LANG === "ru" || CURRENT_LANG === "kk";
 
-      const howBlock = CURRENT_LANG === "ru" ? `
+      const howBlock = hasReleaseOneContent ? `
         <details class="how-block" id="how">
           <summary><span>${s("howTitle")}</span><small>${s("howSummary")}</small></summary>
           <div class="how-content">
@@ -54,14 +55,14 @@
         </details>
       ` : "";
 
-      const libraryActions = CURRENT_LANG === "ru" ? `
+      const libraryActions = hasReleaseOneContent ? `
         <div class="library-actions">
           <a class="primary" href="#cases">${s("jumpToCases")}</a>
           <a href="#how" id="howOpen">${s("jumpToHow")}</a>
         </div>
       ` : "";
 
-      const aboutBlock = CURRENT_LANG === "ru" ? `
+      const aboutBlock = hasReleaseOneContent ? `
         <section class="about-block" aria-labelledby="about-title">
           <img src="/profile.png" alt="Дулат Иржанов" width="88" height="88">
           <div>
@@ -80,7 +81,7 @@
             <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_9b32c150eb1859f084bfe3bcb_c702192e41" tabindex="-1" value=""></div>
             <button type="submit">${s("subscribeButton")}</button>
           </form>
-          ${CURRENT_LANG === "ru" ? `<p class="subscribe-note">${s("subscribeNote")}</p>` : ""}
+          ${hasReleaseOneContent ? `<p class="subscribe-note">${s("subscribeNote")}</p>` : ""}
         </div>
       `;
 
@@ -91,16 +92,16 @@
         </header>
         <nav class="backnav"><a href="${homePath()}">${s("backToHome")}</a></nav>
         <p class="subtitle">${s("librarySubtitle")}</p>
-        ${CURRENT_LANG === "ru" ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
+        ${hasReleaseOneContent ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
         ${libraryActions}
-        ${CURRENT_LANG === "ru" ? "" : subscribeBlock}
-        ${CURRENT_LANG === "ru" ? `<h2 class="cases-heading" id="cases">${s("casesTitle")}</h2>` : ""}
+        ${hasReleaseOneContent ? "" : subscribeBlock}
+        ${hasReleaseOneContent ? `<h2 class="cases-heading" id="cases">${s("casesTitle")}</h2>` : ""}
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
         ${howBlock}
         ${aboutBlock}
-        ${CURRENT_LANG === "ru" ? subscribeBlock : ""}
+        ${hasReleaseOneContent ? subscribeBlock : ""}
         <div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser's built-in auto-translate.</p></div>
         <footer class="lib-footer">
           <div class="copyright">© 2026 Dulat Irzhanov</div>
@@ -198,6 +199,7 @@
       const scenes = caseData.narrativeScenes || [];
       const actions = caseData.actions || [];
       const hasContent = scenes.length > 0;
+      const hasReleaseOneContent = CURRENT_LANG === "ru" || CURRENT_LANG === "kk";
 
       // Sidebar nav
       let sidebarNav = "";
@@ -263,7 +265,7 @@
             <div class="eyebrow">${s("actionsSection")}</div>
             <h2>${s("actionsTitle")}</h2>
             <p>${f(caseData.actionsIntro)}</p>
-            ${CURRENT_LANG === "ru" ? `<aside class="actions-guidance">
+            ${hasReleaseOneContent ? `<aside class="actions-guidance">
               <strong>${s("actionsGuidanceTitle")}</strong>
               <p>${s("actionsGuidanceText")}</p>
             </aside>` : ""}
@@ -277,7 +279,7 @@
           const pq = action.pullQuote;
           const pqText = f(pq?.text);
           const quoteSource = f(pq?.source);
-          const quoteMetaText = quoteSource || (CURRENT_LANG === "ru" && pq?.kind === "practice" && pq?.adapted
+          const quoteMetaText = quoteSource || (hasReleaseOneContent && pq?.kind === "practice" && pq?.adapted
             ? s("quoteAdaptedLabel") : "");
           const quoteMeta = quoteMetaText ? `<span class="source"><span class="quote-source">${quoteMetaText}</span></span>` : "";
           const pqHtml = pqText ? `
@@ -312,7 +314,7 @@
           practice: "analysisPracticeLabel",
           application: "analysisApplicationLabel"
         };
-        const analysisSections = CURRENT_LANG === "ru" ? (caseData.analysisSections || []) : [];
+        const analysisSections = hasReleaseOneContent ? (caseData.analysisSections || []) : [];
         const expertHtml = analysisSections.length ? analysisSections.map(section => {
           const sectionHtml = f(section.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
           const labelKey = analysisLabelKeys[section.kind] || "analysisInterpretationLabel";
@@ -325,9 +327,9 @@
         const accNoteHtml = accNote.split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
         const accHtml = accNote ? `
           <details class="accreditation-block">
-            <summary><span>${s("accreditationView")}</span>${CURRENT_LANG === "ru" ? `<small>${s("accreditationSummary")}</small>` : ""}</summary>
+            <summary><span>${s("accreditationView")}</span>${hasReleaseOneContent ? `<small>${s("accreditationSummary")}</small>` : ""}</summary>
             <div class="accreditation-content">
-              ${CURRENT_LANG === "ru" ? `<p class="accreditation-disclaimer">${s("accreditationDisclaimer")}</p>` : ""}
+              ${hasReleaseOneContent ? `<p class="accreditation-disclaimer">${s("accreditationDisclaimer")}</p>` : ""}
               <div class="accreditation-note">${accNoteHtml}</div>
             </div>
           </details>
@@ -371,7 +373,7 @@
         const followHtml = followItems ? `<ul class="resource-list">${followItems}</ul>` : "";
 
         const emailSubject = encodeURIComponent(f(caseData.title));
-        const feedbackQuestions = CURRENT_LANG === "ru" ? `
+        const feedbackQuestions = hasReleaseOneContent ? `
           <ol class="feedback-questions">
             <li>${s("shareQuestion1")}</li>
             <li>${s("shareQuestion2")}</li>
