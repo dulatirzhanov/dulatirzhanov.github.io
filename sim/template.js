@@ -92,10 +92,11 @@
           <h1>${s("libraryTitle")}</h1>
         </header>
         <p class="subtitle">${s("librarySubtitle")}</p>
-        ${hasReleaseOneContent ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
-        ${libraryActions}
+        ${hasReleaseOneContent ? `<ol class="how-strip"><li><span>1</span>${s("howStep1Title")}</li><li><span>2</span>${s("howStep2Title")}</li><li><span>3</span>${s("howStep3Title")}</li></ol>` : ""}
+        ${hasReleaseOneContent ? `<p class="topic-updated">${LX_().count(CASES_DATA.length)} · ${LX_().updated(latestVersion())}</p>` : ""}
+        ${hasReleaseOneContent ? `<details class="about"><summary><span>${LX_().about}</span><span class="pm" aria-hidden="true"></span></summary><p>${s("libraryPromise")}</p></details>` : ""}
         ${hasReleaseOneContent ? "" : subscribeBlock}
-        ${hasReleaseOneContent ? `<h2 class="cases-heading" id="cases">${s("casesTitle")}</h2>` : ""}
+        ${hasReleaseOneContent ? `<div class="list-tools"><h2 class="cases-heading" id="cases">${s("casesTitle")}</h2></div>` : ""}
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
@@ -122,10 +123,15 @@
         });
       }
 
+      function LX_() { return LX[CURRENT_LANG] || LX.ru; }
+      function latestVersion() {
+        const c = CASES_DATA[0]; const v = c && c.versionDate; return v ? (v[CURRENT_LANG] || v.ru || "") : "";
+      }
       let activeFilter = "all";
 
       function renderFilters() {
         const container = document.getElementById("filters");
+        if (CASES_DATA.length < 6) { container.style.display = "none"; return; }
         const allChip = `<button class="filter-chip ${activeFilter === "all" ? "active" : ""}" data-tag="all">${s("filterAll")}</button>`;
         const chips = uniqueTags().map(tag => {
           const label = tagLabel(tag);
@@ -156,10 +162,10 @@
 
           return `
             <a class="card" href="${caseHref}">
-              <div class="chapter">${chapter}</div>
+              <div class="tc-top"><span class="tc-count">${LX_().caseWord} ${CASES_DATA.indexOf(c) + 1} · ${chapter} · <span class="nw">${LX_().mins(caseMinutes(c, displayLang))}</span></span></div>
               <div class="title">${title}</div>
-              <div class="excerpt">${excerpt}</div>
-              <div class="tags">${tagPills}</div>
+              <div class="excerpt">${firstSentence(excerpt)}</div>
+              <div class="tc-foot"><span class="tags">${tagPills}</span><span class="tc-cta">${LX_().start} <span aria-hidden="true">→</span></span></div>
             </a>
           `;
         }).join("");
@@ -170,6 +176,23 @@
 
     }
   };
+
+  /* Подписи страницы библиотеки кейсов */
+  function plRu(n, a, b, c) { const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? a : (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? b : c); }
+  const LX = {
+    ru: { count: n => n + " " + plRu(n, "кейс", "кейса", "кейсов"), updated: d => "обновлено " + d, about: "О библиотеке", start: "Начать кейс", mins: n => "около " + n + " мин", caseWord: "Кейс" },
+    kk: { count: n => n + " кейс", updated: d => d, about: "Кітапхана туралы", start: "Кейсті бастау", mins: n => "шамамен " + n + " мин", caseWord: "Кейс" },
+    en: { count: n => n + " cases", updated: d => "updated " + d, about: "About the library", start: "Start the case", mins: n => "about " + n + " min", caseWord: "Case" }
+  };
+  function caseMinutes(c, lang) {
+    const g = o => (o && (o[lang] || o.ru)) || "";
+    const w = x => String(x || "").split(/\s+/).filter(Boolean).length;
+    const sc = (c.narrativeScenes || []).reduce((a, x) => a + w(g(x.text)), 0);
+    const ac = c.actions || [];
+    const av = ac.length ? ac.reduce((a, x) => a + w(g(x.detail)), 0) / ac.length : 0;
+    const an = (c.analysisSections || []).reduce((a, x) => a + w(g(x.text)), 0);
+    return Math.max(5, Math.round((sc + av + an + 250) / 170 / 5) * 5);
+  }
 
   /* Подписи входа в кейс («О кейсе») и кнопок навигации */
   const INTRO = {

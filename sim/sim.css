@@ -751,12 +751,12 @@ body.lib-view .subtitle { padding-left: 0; border-left: 0; color: var(--color-bo
 .pane-nav { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
 .pane-nav .back-link { display: inline-block; margin: 0; padding: 10px 18px; border: 1px solid rgba(32,92,115,.3); border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; color: var(--chrome-ink); background: transparent; }
 .pane-nav .back-link:hover { background: var(--color-surface-soft); }
-.pane-nav .back-link.primary { background: var(--color-heading); color: var(--color-bg); border-color: transparent; }
+.pane-nav .back-link.primary { background: var(--color-surface-soft); color: var(--chrome-ink); border-color: rgba(32,92,115,.5); }
 @media (prefers-color-scheme: dark) {
   .intro-card { background: #191916; border-color: rgba(223,238,233,.14); }
   .intro-label { color: #c59b58; }
-  .pane-nav .back-link { border-color: rgba(223,238,233,.38); }
-  .pane-nav .back-link.primary { background: #dfeee9; color: #11110f; }
+  .pane-nav .back-link { border-color: rgba(223,238,233,.2); }
+  .pane-nav .back-link.primary { background: #1f1f1b; color: #dfeee9; border-color: rgba(223,238,233,.5); }
 }
 
 /* телефон. Язык в меню, крупные зоны нажатия */
@@ -803,3 +803,32 @@ body.lib-view .subtitle { padding-left: 0; border-left: 0; color: var(--color-bo
   .lib-footer .footer-links a, .content-footer .footer-links a, .sidebar-footer .footer-links a { display: inline-block; padding: 10px 0; }
   .crumbs a { padding: 8px 0; }
 }
+
+/* Библиотека кейсов в логике страницы источников */
+.pm { flex: none; width: 22px; text-align: center; font-size: 22px; line-height: 1; color: var(--color-accent-strong); }
+.pm::before { content: "+"; }
+details[open] > summary .pm::before { content: "2"; }
+details.about > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 2px; font-size: 16px; font-weight: 700; color: var(--chrome-ink); }
+details.about > summary::-webkit-details-marker { display: none; }
+details.about { margin: 0 0 12px; border-top: 1px solid rgba(32,92,115,.14); border-bottom: 1px solid rgba(32,92,115,.14); }
+details.about > p { margin: 0; padding: 0 2px 20px; font-size: 16px; line-height: 1.65; color: var(--color-body); max-width: 64ch; }
+.topic-updated { font-size: 14px; color: var(--chrome-muted); margin: 0 0 24px; }
+.how-strip { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 18px; padding: 0; }
+.how-strip li { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--color-body); }
+.how-strip li span { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: 700; color: var(--color-accent-strong); border: 1px solid currentColor; }
+.list-tools { margin: 36px 0 14px; }
+.list-tools .cases-heading { margin: 0; }
+.card .tc-top { margin: 0 0 8px; }
+.card .tc-count { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--color-accent-strong); }
+.card .excerpt { margin: 0 0 14px; font-size: 16.5px; }
+.card .tc-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(32,92,115,.14); padding-top: 12px; }
+.card .tc-foot .tags { margin: 0; }
+.card .tc-cta { font-size: 14px; font-weight: 700; color: var(--chrome-ink); }
+.card:hover .tc-cta { text-decoration: underline; text-underline-offset: 4px; }
+@media (prefers-color-scheme: dark) {
+  .pm, .card .tc-count, .how-strip li span { color: #c59b58; }
+  details.about { border-color: rgba(223,238,233,.14); }
+  .card .tc-foot { border-color: rgba(223,238,233,.14); }
+}
+@media (max-width: 700px) { .card .tc-foot { flex-direction: column; align-items: flex-start; gap: 8px; } }
+.card .tc-count .nw { white-space: nowrap; }
