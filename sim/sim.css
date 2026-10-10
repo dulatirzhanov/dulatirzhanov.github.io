@@ -967,3 +967,8 @@ details[open] > summary .pm::before { content: "\2212"; }
 .seg-opt { flex: 0 0 46px; max-width: 46px; min-width: 0; }
 @media (max-width: 700px) { .seg-opt { flex-basis: 24px; max-width: 24px; } }
 @media (max-width: 360px) { .seg-opt { flex-basis: 18px; max-width: 18px; } }
+
+/* Буквы A-D над короткими линиями, приглушённым серым */
+.seg-letter { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: 12px; font-weight: 700; line-height: 1; letter-spacing: 0; color: var(--chrome-muted); opacity: .85; pointer-events: none; }
+.seg-opt.current .seg-letter { color: var(--chrome-ink); opacity: 1; }
+.seg-opt:hover .seg-letter, .seg-opt:focus-visible .seg-letter { color: var(--chrome-ink); }
