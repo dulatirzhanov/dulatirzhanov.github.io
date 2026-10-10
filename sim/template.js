@@ -196,9 +196,9 @@
 
   /* Подписи входа в кейс («О кейсе») и кнопок навигации */
   const INTRO = {
-    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Выбрать, как поступить: четыре направления, A-D.", "Сравнить свой выбор с разбором и ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная", stages: ["Ситуация", "Варианты", "Разбор", "Вопросы"], stagesLabel: "Этапы кейса", overview: "Обзор", resources: "Ресурсы", questions: "Вопросы", facts: "Что известно", takeaway: "Главное" },
-    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Choose how to act: four directions, A-D.", "Compare your choice with the analysis and answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home", stages: ["Situation", "Options", "Analysis", "Questions"], stagesLabel: "Case stages", overview: "Overview", resources: "Resources", questions: "Questions", facts: "What we know", takeaway: "Key point" },
-    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Қалай әрекет ету керегін таңдаңыз: төрт бағыт, A-D.", "Таңдауыңызды талдаумен салыстырып, сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет", stages: ["Жағдай", "Нұсқалар", "Талдау", "Сұрақтар"], stagesLabel: "Кейс кезеңдері", overview: "Шолу", resources: "Ресурстар", questions: "Сұрақтар", facts: "Не белгілі", takeaway: "Негізгі ой" }
+    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Выбрать, как поступить: четыре направления, A-D.", "Сравнить свой выбор с разбором и ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная", stages: ["Ситуация", "Варианты", "Разбор", "Вопросы"], stagesLabel: "Этапы кейса", screenOf: (n, m) => "Экран " + n + " из " + m, toc: "Содержание", nextUp: "Дальше", navHint: "Полоса вверху показывает ваш путь по кейсу: четыре этапа и по сегменту на каждый экран. Нажмите на название этапа или на любой сегмент, чтобы перейти. Работают и стрелки на клавиатуре.", inStage: n => "Экраны этапа «" + n + "»:", overview: "Обзор", resources: "Ресурсы", questions: "Вопросы", takeaway: "Главное" },
+    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Choose how to act: four directions, A-D.", "Compare your choice with the analysis and answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home", stages: ["Situation", "Options", "Analysis", "Questions"], stagesLabel: "Case stages", screenOf: (n, m) => "Screen " + n + " of " + m, toc: "Contents", nextUp: "Next", navHint: "The bar at the top shows your path through the case: four stages and one segment per screen. Click a stage name or any segment to jump there. The arrow keys work too.", inStage: n => "Screens in “" + n + "”:", overview: "Overview", resources: "Resources", questions: "Questions", takeaway: "Key point" },
+    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Қалай әрекет ету керегін таңдаңыз: төрт бағыт, A-D.", "Таңдауыңызды талдаумен салыстырып, сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет", stages: ["Жағдай", "Нұсқалар", "Талдау", "Сұрақтар"], stagesLabel: "Кейс кезеңдері", screenOf: (n, m) => m + " экранның " + n + "-і", toc: "Мазмұны", nextUp: "Әрі қарай", navHint: "Жоғарғы жолақ кейс бойынша жолыңызды көрсетеді: төрт кезең және әр экранға бір сегмент. Өту үшін кезең атауын немесе кез келген сегментті басыңыз. Пернетақтадағы көрсеткілер де жұмыс істейді.", inStage: n => "«" + n + "» кезеңінің экрандары:", overview: "Шолу", resources: "Ресурстар", questions: "Сұрақтар", takeaway: "Негізгі ой" }
   };
 
   /* ===== CASE PAGE ===== */
@@ -237,10 +237,6 @@
         + (caseData.analysisSections || []).reduce((a, sc) => a + wordsOf(f(sc.text)), 0) + 100;
       const readMinutes = Math.max(5, Math.round(readWords / 170 / 5) * 5);
 
-      const factsArr = caseData.keyFacts && caseData.keyFacts[displayLang];
-      const factsHtml = Array.isArray(factsArr) && factsArr.length
-        ? `<aside class="facts"><div class="facts-label">${I.facts}</div><dl>${factsArr.map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></aside>` : "";
-
       // Sidebar nav
       let sidebarNav = "";
       if (hasContent) {
@@ -278,6 +274,7 @@
               <div class="intro-label">${I.youWill}</div>
               <ol>${I.steps.map(x => `<li>${x}</li>`).join("")}</ol>
               <div class="intro-time">${I.time(readMinutes)}</div>
+              <p class="intro-nav-hint">${I.navHint}</p>
             </div>
             <div class="pane-nav"><a class="back-link primary" data-next="scene0">${I.start} →</a></div>
           </section>`;
@@ -295,7 +292,6 @@
               <div class="eyebrow">${s("situationSection")}</div>
               <h2>${f(scene.heading)}</h2>
               ${textHtml}
-              ${i === 0 ? factsHtml : ""}
               ${bridgeHtml}
               <div class="pane-nav"><a class="back-link" data-next="${i === 0 ? "intro" : "scene" + (i - 1)}">${I.back}</a><a class="back-link primary" data-next="${nextPane}">${nextBtnText}</a></div>
             </section>
@@ -376,7 +372,8 @@
           const useParas = section === interp ? paras.slice(1) : paras;
           const sectionHtml = useParas.map(p => `<p>${p.trim()}</p>`).join("");
           const labelKey = analysisLabelKeys[section.kind] || "analysisInterpretationLabel";
-          if (section.kind === "research") {
+          if (!useParas.length) return "";
+          if (section.kind === "research" || section.kind === "interpretation") {
             return `<details class="analysis-section analysis-${section.kind}"><summary class="analysis-label">${s(labelKey)}<span class="pm" aria-hidden="true"></span></summary>${sectionHtml}</details>`;
           }
           return `<section class="analysis-section analysis-${section.kind}">
@@ -550,26 +547,54 @@
         if (p === "reflection") return I.questions;
         if (p === "resources") return I.resources;
         if (p.startsWith("scene")) return f(scenes[+p.slice(5)].heading);
-        if (p.startsWith("action")) return f(actions[+p.slice(6)].label).split(".")[0];
+        if (p.startsWith("action")) return f(actions[+p.slice(6)].label);
+        if (p === "expert") return I.stages[2];
         return p;
       }
       const stepperEl = document.getElementById("stepper");
       const substepsEl = document.getElementById("substeps");
+      function stageOf(p) { return stageDefs.find(sd => sd.panes.includes(p)); }
       function renderStepper(paneId) {
         const cur = stageDefs.findIndex(sd => sd.panes.includes(paneId));
-        stepperEl.innerHTML = "<ol>" + stageDefs.map((sd, i) =>
-          `<li class="stage ${i < cur ? "done" : i === cur ? "current" : "todo"}"><button type="button" data-pane="${sd.panes[0]}"${i === cur ? ' aria-current="step"' : ""}><span class="stage-n">${i < cur ? "✓" : i + 1}</span><span class="stage-l">${sd.label}</span></button></li>`).join("") + "</ol>";
-        const sd = stageDefs[cur];
-        substepsEl.innerHTML = sd && sd.panes.length > 1
-          ? sd.panes.map(p => `<button type="button" class="chip${p === paneId ? " active" : ""}" data-pane="${p}">${subLabel(p)}</button>`).join("") : "";
-        document.querySelectorAll("#stepper button, #substeps button").forEach(b => b.addEventListener("click", () => showPane(b.dataset.pane)));
+        const total = paneOrder.length, pos = paneOrder.indexOf(paneId) + 1;
+        stepperEl.innerHTML = '<ol class="segbar">' + stageDefs.map((sd, i) => {
+          const cls = i < cur ? "done" : i === cur ? "current" : "todo";
+          const segs = sd.panes.map(p => {
+            const k = paneOrder.indexOf(p) + 1;
+            const st = k < pos ? "done" : k === pos ? "current" : "todo";
+            return `<button type="button" class="seg ${st}" data-pane="${p}" data-tip="${subLabel(p)}" aria-label="${subLabel(p)}"${k === pos ? ' aria-current="step"' : ""}></button>`;
+          }).join("");
+          return `<li class="seg-group ${cls}" style="flex:${sd.panes.length} 1 auto"><button type="button" class="seg-label" data-pane="${sd.panes[0]}">${i < cur ? '<span class="seg-check" aria-hidden="true">✓</span>' : ""}${sd.label}</button><div class="seg-row">${segs}</div></li>`;
+        }).join("") + "</ol>";
+        substepsEl.innerHTML = `<div class="seg-caption"><span class="seg-count">${I.screenOf(pos, total)}</span> · ${subLabel(paneId)}</div>`;
+        document.querySelectorAll("#stepper button").forEach(b => b.addEventListener("click", () => showPane(b.dataset.pane)));
+        const nav = document.querySelector(".pane.active .pane-nav");
+        if (nav) {
+          const old = nav.querySelector(".next-hint"); if (old) old.remove();
+          if (pos < total) {
+            const np = paneOrder[pos], ns = stageOf(np), cs = stageOf(paneId);
+            const label = subLabel(np);
+            const text = ns !== cs && ns.label !== label ? ns.label + " · " + label : label;
+            nav.insertAdjacentHTML("beforeend", `<span class="next-hint">${I.nextUp}: ${text}</span>`);
+          }
+        }
       }
+      let currentPaneId = "intro";
+      document.addEventListener("keydown", e => {
+        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const tg = e.target && e.target.tagName;
+        if (tg === "INPUT" || tg === "TEXTAREA" || tg === "SELECT") return;
+        const k = paneOrder.indexOf(currentPaneId) + (e.key === "ArrowRight" ? 1 : -1);
+        if (k >= 0 && k < paneOrder.length) { e.preventDefault(); showPane(paneOrder[k]); }
+      });
 
       function showPane(paneId, push) {
         if (push !== false && location.hash !== "#" + paneId) history.pushState({ pane: paneId }, "", "#" + paneId);
         panes.forEach(p => p.classList.toggle("active", p.dataset.id === paneId));
         navItems.forEach(n => n.classList.toggle("active", n.dataset.pane === paneId));
         visited.add(paneId);
+        currentPaneId = paneId;
         renderStepper(paneId);
         navItems.forEach(n => { if (visited.has(n.dataset.pane)) n.classList.add("visited"); });
         const pct = Math.round((visited.size / paneOrder.length) * 100);
