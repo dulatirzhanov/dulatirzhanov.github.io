@@ -563,7 +563,7 @@
             const k = paneOrder.indexOf(p) + 1;
             const st = k < pos ? "done" : k === pos ? "current" : "todo";
             const opt = /^action\d+$/.test(p);
-            return `<button type="button" class="seg ${st}${opt ? " seg-opt" : ""}" data-pane="${p}" data-tip="${subLabel(p)}" aria-label="${subLabel(p)}"${k === pos ? ' aria-current="step"' : ""}>${opt ? `<span class="seg-letter">${subLabel(p).split(".")[0]}</span>` : ""}</button>`;
+            return `<button type="button" class="seg ${st}${opt ? " seg-opt" : ""}" data-pane="${p}" data-tip="${subLabel(p)}" aria-label="${subLabel(p)}"${k === pos ? ' aria-current="step"' : ""}></button>`;
           }).join("");
           return `<li class="seg-group ${cls}" style="flex:${sd.panes.filter(x => !/^action\d+$/.test(x)).length} 1 auto"><button type="button" class="seg-label" data-pane="${sd.panes[0]}">${i < cur ? '<span class="seg-check" aria-hidden="true">✓</span>' : ""}${sd.label}</button><div class="seg-row">${segs}</div></li>`;
         }).join("") + "</ol>";

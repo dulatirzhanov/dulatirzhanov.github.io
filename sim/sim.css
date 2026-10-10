@@ -963,16 +963,7 @@ details[open] > summary .pm::before { content: "\2212"; }
   .action-row button { align-self: center; }
 }
 
-/* Варианты A-D в полосе: компактные плитки с буквами, чтобы отличались от обычных экранов */
-.seg-opt { flex: 0 0 30px; max-width: 30px; min-width: 0; }
-.seg-opt::before { top: 50%; transform: translateY(-50%); height: 28px; border-radius: 7px; background: transparent; border: 2px solid currentColor; opacity: .3; }
-.seg-opt.done::before { opacity: .6; }
-.seg-opt.current::before { top: 50%; height: 28px; background: var(--color-accent-strong); border-color: var(--color-accent-strong); opacity: 1; }
-.seg-opt:hover::before, .seg-opt:focus-visible::before { opacity: .85; }
-.seg-letter { position: relative; z-index: 1; display: block; font-size: 13px; font-weight: 700; line-height: 1; color: var(--chrome-muted); pointer-events: none; }
-.seg-opt.done .seg-letter { color: var(--chrome-ink); }
-.seg-opt.current .seg-letter { color: #fff; }
-.seg-row { align-items: center; }
-@media (prefers-color-scheme: dark) { .seg-opt.current::before { background: #c59b58; border-color: #c59b58; } .seg-opt.current .seg-letter { color: #11110f; } }
-@media (max-width: 700px) { .seg-opt { flex-basis: 26px; max-width: 26px; } .seg-opt::before { height: 26px; } .seg-letter { font-size: 12px; } }
-@media (max-width: 360px) { .seg-opt { flex-basis: 22px; max-width: 22px; } }
+/* Линии вариантов A-D в полосе чуть короче остальных */
+.seg-opt { flex: 0 0 46px; max-width: 46px; min-width: 0; }
+@media (max-width: 700px) { .seg-opt { flex-basis: 24px; max-width: 24px; } }
+@media (max-width: 360px) { .seg-opt { flex-basis: 18px; max-width: 18px; } }
