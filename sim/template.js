@@ -196,9 +196,9 @@
 
   /* Подписи входа в кейс («О кейсе») и кнопок навигации */
   const INTRO = {
-    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Выбрать, как поступить: четыре направления, A-D.", "Сравнить свой выбор с разбором и ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная" },
-    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Choose how to act: four directions, A-D.", "Compare your choice with the analysis and answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home" },
-    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Қалай әрекет ету керегін таңдаңыз: төрт бағыт, A-D.", "Таңдауыңызды талдаумен салыстырып, сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет" }
+    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Выбрать, как поступить: четыре направления, A-D.", "Сравнить свой выбор с разбором и ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная", stages: ["Ситуация", "Варианты", "Разбор", "Вопросы"], stagesLabel: "Этапы кейса", overview: "Обзор", resources: "Ресурсы", questions: "Вопросы", facts: "Что известно", takeaway: "Главное" },
+    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Choose how to act: four directions, A-D.", "Compare your choice with the analysis and answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home", stages: ["Situation", "Options", "Analysis", "Questions"], stagesLabel: "Case stages", overview: "Overview", resources: "Resources", questions: "Questions", facts: "What we know", takeaway: "Key point" },
+    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Қалай әрекет ету керегін таңдаңыз: төрт бағыт, A-D.", "Таңдауыңызды талдаумен салыстырып, сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет", stages: ["Жағдай", "Нұсқалар", "Талдау", "Сұрақтар"], stagesLabel: "Кейс кезеңдері", overview: "Шолу", resources: "Ресурстар", questions: "Сұрақтар", facts: "Не белгілі", takeaway: "Негізгі ой" }
   };
 
   /* ===== CASE PAGE ===== */
@@ -237,6 +237,10 @@
         + (caseData.analysisSections || []).reduce((a, sc) => a + wordsOf(f(sc.text)), 0) + 100;
       const readMinutes = Math.max(5, Math.round(readWords / 170 / 5) * 5);
 
+      const factsArr = caseData.keyFacts && caseData.keyFacts[displayLang];
+      const factsHtml = Array.isArray(factsArr) && factsArr.length
+        ? `<aside class="facts"><div class="facts-label">${I.facts}</div><dl>${factsArr.map(r => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl></aside>` : "";
+
       // Sidebar nav
       let sidebarNav = "";
       if (hasContent) {
@@ -269,8 +273,6 @@
       } else {
         panesHtml += `
           <section class="pane" data-id="intro">
-            <div class="eyebrow">${I.eyebrow}</div>
-            <h2>${f(caseData.title)}</h2>
             <p class="intro-lead">${f(caseData.excerpt)}</p>
             <div class="intro-card">
               <div class="intro-label">${I.youWill}</div>
@@ -293,6 +295,7 @@
               <div class="eyebrow">${s("situationSection")}</div>
               <h2>${f(scene.heading)}</h2>
               ${textHtml}
+              ${i === 0 ? factsHtml : ""}
               ${bridgeHtml}
               <div class="pane-nav"><a class="back-link" data-next="${i === 0 ? "intro" : "scene" + (i - 1)}">${I.back}</a><a class="back-link primary" data-next="${nextPane}">${nextBtnText}</a></div>
             </section>
@@ -343,7 +346,7 @@
           ).join("");
           const resHtml = resItems ? `<ul class="resource-list">${resItems}</ul>` : "";
 
-          const detailHtml = f(action.detail).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
+          const detailHtml = f(action.detail).split("\n\n").map((p, pi) => `<p${pi === 0 ? " class=\"lead-par\"" : ""}>${p.trim()}</p>`).join("");
 
           panesHtml += `
             <section class="pane" data-id="action${i}">
@@ -365,9 +368,17 @@
           application: "analysisApplicationLabel"
         };
         const analysisSections = hasReleaseOneContent ? (caseData.analysisSections || []) : [];
-        const expertHtml = analysisSections.length ? analysisSections.map(section => {
-          const sectionHtml = f(section.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
+        const interp = analysisSections.find(sec => sec.kind === "interpretation");
+        const interpParas = interp ? f(interp.text).split("\n\n") : [];
+        const takeawayHtml = interpParas.length ? `<aside class="takeaway"><div class="takeaway-label">${I.takeaway}</div><p>${interpParas[0].trim()}</p></aside>` : "";
+        const expertHtml = analysisSections.length ? takeawayHtml + analysisSections.map(section => {
+          const paras = f(section.text).split("\n\n");
+          const useParas = section === interp ? paras.slice(1) : paras;
+          const sectionHtml = useParas.map(p => `<p>${p.trim()}</p>`).join("");
           const labelKey = analysisLabelKeys[section.kind] || "analysisInterpretationLabel";
+          if (section.kind === "research") {
+            return `<details class="analysis-section analysis-${section.kind}"><summary class="analysis-label">${s(labelKey)}<span class="pm" aria-hidden="true"></span></summary>${sectionHtml}</details>`;
+          }
           return `<section class="analysis-section analysis-${section.kind}">
             <div class="analysis-label">${s(labelKey)}</div>
             ${sectionHtml}
@@ -476,7 +487,7 @@
         <div class="drawer-backdrop" id="drawerBackdrop"></div>
         <nav class="sidebar" id="sidebar" aria-label="${f(caseData.title)}">
           <div class="case-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div>
-          <h1>${f(caseData.title)}</h1>
+          <div class="sidebar-title">${f(caseData.title)}</div>
           ${versionDate ? `<div class="case-version">${s("versionLabel")} ${versionDate}</div>` : ""}
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
@@ -491,7 +502,7 @@
             </div>
           </div>
         </nav>
-        <main class="content"><nav class="crumbs" aria-label="Path"><a href="${homePath()}">${I.crumbHome}</a><span aria-hidden="true">/</span><a href="${basePath()}">${I.crumbCases}</a><span aria-hidden="true">/</span><span aria-current="page">${s("caseLabel")} ${caseIndex}</span></nav>${panesHtml}</main>
+        <main class="content"><nav class="crumbs" aria-label="Path"><a href="${homePath()}">${I.crumbHome}</a><span aria-hidden="true">/</span><a href="${basePath()}">${I.crumbCases}</a><span aria-hidden="true">/</span><span aria-current="page">${s("caseLabel")} ${caseIndex}</span></nav><header class="case-head"><div class="case-head-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div><h1 class="case-head-title">${f(caseData.title)}</h1></header><nav class="stepper" id="stepper" aria-label="${I.stagesLabel}"></nav><div class="substeps" id="substeps"></div>${panesHtml}</main>
       `;
 
       document.title = f(caseData.title) + " | Dulat Irzhanov";
@@ -527,11 +538,39 @@
       const panes = document.querySelectorAll(".pane");
       const visited = new Set();
 
+      const stageDefs = [
+        { label: I.stages[0], panes: ["intro", ...scenes.map((_, i) => `scene${i}`)] },
+        { label: I.stages[1], panes: ["actionsOverview", ...actions.map((_, i) => `action${i}`)] },
+        { label: I.stages[2], panes: ["expert"] },
+        { label: I.stages[3], panes: ["reflection", "resources"] }
+      ];
+      function subLabel(p) {
+        if (p === "intro") return I.nav;
+        if (p === "actionsOverview") return I.overview;
+        if (p === "reflection") return I.questions;
+        if (p === "resources") return I.resources;
+        if (p.startsWith("scene")) return f(scenes[+p.slice(5)].heading);
+        if (p.startsWith("action")) return f(actions[+p.slice(6)].label).split(".")[0];
+        return p;
+      }
+      const stepperEl = document.getElementById("stepper");
+      const substepsEl = document.getElementById("substeps");
+      function renderStepper(paneId) {
+        const cur = stageDefs.findIndex(sd => sd.panes.includes(paneId));
+        stepperEl.innerHTML = "<ol>" + stageDefs.map((sd, i) =>
+          `<li class="stage ${i < cur ? "done" : i === cur ? "current" : "todo"}"><button type="button" data-pane="${sd.panes[0]}"${i === cur ? ' aria-current="step"' : ""}><span class="stage-n">${i < cur ? "✓" : i + 1}</span><span class="stage-l">${sd.label}</span></button></li>`).join("") + "</ol>";
+        const sd = stageDefs[cur];
+        substepsEl.innerHTML = sd && sd.panes.length > 1
+          ? sd.panes.map(p => `<button type="button" class="chip${p === paneId ? " active" : ""}" data-pane="${p}">${subLabel(p)}</button>`).join("") : "";
+        document.querySelectorAll("#stepper button, #substeps button").forEach(b => b.addEventListener("click", () => showPane(b.dataset.pane)));
+      }
+
       function showPane(paneId, push) {
         if (push !== false && location.hash !== "#" + paneId) history.pushState({ pane: paneId }, "", "#" + paneId);
         panes.forEach(p => p.classList.toggle("active", p.dataset.id === paneId));
         navItems.forEach(n => n.classList.toggle("active", n.dataset.pane === paneId));
         visited.add(paneId);
+        renderStepper(paneId);
         navItems.forEach(n => { if (visited.has(n.dataset.pane)) n.classList.add("visited"); });
         const pct = Math.round((visited.size / paneOrder.length) * 100);
         document.getElementById("progressFill").style.width = pct + "%";
