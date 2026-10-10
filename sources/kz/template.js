@@ -158,7 +158,7 @@
         '<p class="topic-updated">' + srcWord(total) + ' · шолудың өзі шамамен ' + minutesFor(topic.sources) + ' мин · жаңартылған ' + dateRu(topic.updated) + '</p>' +
         '<details class="about"><summary><span>Топтама туралы толығырақ</span><span class="pm" aria-hidden="true"></span></summary><p>' + esc(topic.intro) + '</p></details>' +
         expertBlock(topic) +
-        '<div class="list-tools"><h2 class="list-title">' + (steps ? 'Мына ретпен оқыңыз' : 'Дереккөздер') + '</h2><button type="button" id="toggle-all" class="link-btn" data-open="0">Барлығын ашу</button></div>' +
+        '<div class="list-tools"><h2 class="list-title">Дереккөздер</h2><button type="button" id="toggle-all" class="link-btn" data-open="0">Барлығын ашу</button></div>' +
         (steps ? routeBlock(topic, steps) : plainList(topic)) +
         subscribeBlock() +
         footer();

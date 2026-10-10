@@ -164,7 +164,7 @@
         '<p class="topic-updated">' + srcWord(total) + ' · обзор целиком около ' + minutesFor(topic.sources) + ' мин · обновлено ' + dateRu(topic.updated) + '</p>' +
         '<details class="about"><summary><span>О подборке целиком</span><span class="pm" aria-hidden="true"></span></summary><p>' + esc(topic.intro) + '</p></details>' +
         expertBlock(topic) +
-        '<div class="list-tools"><h2 class="list-title">' + (steps ? 'Читать в таком порядке' : 'Источники') + '</h2><button type="button" id="toggle-all" class="link-btn" data-open="0">Развернуть все</button></div>' +
+        '<div class="list-tools"><h2 class="list-title">Источники</h2><button type="button" id="toggle-all" class="link-btn" data-open="0">Развернуть все</button></div>' +
         (steps ? routeBlock(topic, steps) : plainList(topic)) +
         subscribeBlock() +
         footer();
