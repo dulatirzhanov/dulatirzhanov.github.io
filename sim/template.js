@@ -171,6 +171,13 @@
     }
   };
 
+  /* Подписи входа в кейс («О кейсе») и кнопок навигации */
+  const INTRO = {
+    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Выбрать, как поступить: четыре направления, A-D.", "Сравнить свой выбор с разбором и ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная" },
+    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Choose how to act: four directions, A-D.", "Compare your choice with the analysis and answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home" },
+    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Қалай әрекет ету керегін таңдаңыз: төрт бағыт, A-D.", "Таңдауыңызды талдаумен салыстырып, сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет" }
+  };
+
   /* ===== CASE PAGE ===== */
   window.SimCase = {
     init: function () {
@@ -200,10 +207,17 @@
       const actions = caseData.actions || [];
       const hasContent = scenes.length > 0;
       const hasReleaseOneContent = CURRENT_LANG === "ru" || CURRENT_LANG === "kk";
+      const I = INTRO[CURRENT_LANG] || INTRO.ru;
+      const wordsOf = x => String(x || "").split(/\s+/).filter(Boolean).length;
+      const readWords = scenes.reduce((a, sc) => a + wordsOf(f(sc.text)), 0)
+        + (actions.length ? actions.reduce((a, ac) => a + wordsOf(f(ac.detail)), 0) / actions.length : 0) + 150
+        + (caseData.analysisSections || []).reduce((a, sc) => a + wordsOf(f(sc.text)), 0) + 100;
+      const readMinutes = Math.max(5, Math.round(readWords / 170 / 5) * 5);
 
       // Sidebar nav
       let sidebarNav = "";
       if (hasContent) {
+        sidebarNav += `<div class="nav-item" data-pane="intro"><span class="check">✓</span><span>${I.nav}</span></div>`;
         sidebarNav += `<div class="nav-section-title">${s("situationSection")}</div>`;
         scenes.forEach((scene, i) => {
           sidebarNav += `<div class="nav-item" data-pane="scene${i}"><span class="check">✓</span><span>${f(scene.heading)}</span></div>`;
@@ -230,6 +244,19 @@
           </div>
         `;
       } else {
+        panesHtml += `
+          <section class="pane" data-id="intro">
+            <div class="eyebrow">${I.eyebrow}</div>
+            <h2>${f(caseData.title)}</h2>
+            <p class="intro-lead">${f(caseData.excerpt)}</p>
+            <div class="intro-card">
+              <div class="intro-label">${I.youWill}</div>
+              <ol>${I.steps.map(x => `<li>${x}</li>`).join("")}</ol>
+              <div class="intro-time">${I.time(readMinutes)}</div>
+            </div>
+            <div class="pane-nav"><a class="back-link primary" data-next="scene0">${I.start} →</a></div>
+          </section>`;
+
         // Scene panes
         scenes.forEach((scene, i) => {
           const isLast = i === scenes.length - 1;
@@ -244,7 +271,7 @@
               <h2>${f(scene.heading)}</h2>
               ${textHtml}
               ${bridgeHtml}
-              <a class="back-link" data-next="${nextPane}">${nextBtnText}</a>
+              <div class="pane-nav"><a class="back-link" data-next="${i === 0 ? "intro" : "scene" + (i - 1)}">${I.back}</a><a class="back-link primary" data-next="${nextPane}">${nextBtnText}</a></div>
             </section>
           `;
         });
@@ -270,7 +297,7 @@
               <p>${s("actionsGuidanceText")}</p>
             </aside>` : ""}
             <div class="actions-list">${actionRows}</div>
-            <a class="back-link" data-next="expert">${s("next")}</a>
+            <div class="pane-nav"><a class="back-link" data-next="scene${scenes.length - 1}">${I.back}</a><a class="back-link primary" data-next="expert">${s("next")}</a></div>
           </section>
         `;
 
@@ -302,7 +329,7 @@
               ${detailHtml}
               ${pqHtml}
               ${resHtml}
-              <a class="back-link" data-next="actionsOverview">${s("backToActions")}</a>
+              <div class="pane-nav"><a class="back-link" data-next="actionsOverview">${s("backToActions")}</a></div>
             </section>
           `;
         });
@@ -340,7 +367,7 @@
             <h2>${s("expertLabel")}</h2>
             ${expertHtml}
             ${accHtml}
-            <a class="back-link" data-next="reflection">${s("next")}</a>
+            <div class="pane-nav"><a class="back-link" data-next="actionsOverview">${I.back}</a><a class="back-link primary" data-next="reflection">${s("next")}</a></div>
           </section>
         `;
 
@@ -362,7 +389,7 @@
             <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("reflectionLabel")}</h2>
             ${reflHtml}
-            <a class="back-link" data-next="resources">${s("next")}</a>
+            <div class="pane-nav"><a class="back-link" data-next="expert">${I.back}</a><a class="back-link primary" data-next="resources">${s("next")}</a></div>
           </section>
         `;
 
@@ -408,6 +435,7 @@
 
       // Pane order for progress tracking
       const paneOrder = hasContent ? [
+        "intro",
         ...scenes.map((_, i) => `scene${i}`),
         "actionsOverview",
         ...actions.map((_, i) => `action${i}`),
@@ -432,6 +460,7 @@
           <div class="sidebar-nav">${sidebarNav}</div>
           <a class="sidebar-back" href="${basePath()}">${s("backToLib")}</a>
           <div class="sidebar-footer">
+            <div class="drawer-lang">${languageSwitcher(caseData.id)}</div>
             <div class="copyright">© 2026 Dulat Irzhanov</div>
             <div class="footer-links">
               <a href="${homePath()}">dulatedu.com</a>
@@ -439,7 +468,7 @@
             </div>
           </div>
         </nav>
-        <main class="content">${panesHtml}</main>
+        <main class="content"><nav class="crumbs" aria-label="Path"><a href="${homePath()}">${I.crumbHome}</a><span aria-hidden="true">/</span><a href="${basePath()}">${I.crumbCases}</a><span aria-hidden="true">/</span><span aria-current="page">${s("caseLabel")} ${caseIndex}</span></nav>${panesHtml}</main>
       `;
 
       document.title = f(caseData.title) + " | Dulat Irzhanov";
@@ -452,17 +481,20 @@
       function openDrawer() {
         sidebar.classList.add("open");
         backdrop.classList.add("show");
+        document.body.classList.add("drawer-open");
         hamburger.setAttribute("aria-expanded", "true");
       }
       function closeDrawer() {
         sidebar.classList.remove("open");
         backdrop.classList.remove("show");
+        document.body.classList.remove("drawer-open");
         hamburger.setAttribute("aria-expanded", "false");
       }
       hamburger.addEventListener("click", () => {
         sidebar.classList.contains("open") ? closeDrawer() : openDrawer();
       });
       backdrop.addEventListener("click", closeDrawer);
+      window.addEventListener("resize", () => { if (window.innerWidth > 700) closeDrawer(); });
       document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
 
       if (!hasContent) return;
@@ -472,7 +504,8 @@
       const panes = document.querySelectorAll(".pane");
       const visited = new Set();
 
-      function showPane(paneId) {
+      function showPane(paneId, push) {
+        if (push !== false && location.hash !== "#" + paneId) history.pushState({ pane: paneId }, "", "#" + paneId);
         panes.forEach(p => p.classList.toggle("active", p.dataset.id === paneId));
         navItems.forEach(n => n.classList.toggle("active", n.dataset.pane === paneId));
         visited.add(paneId);
@@ -492,7 +525,12 @@
       document.querySelectorAll("[data-next]").forEach(el => {
         el.addEventListener("click", e => { e.preventDefault(); showPane(el.dataset.next); });
       });
-      showPane("scene0");
+      window.addEventListener("popstate", () => {
+        const id = location.hash.slice(1);
+        showPane(paneOrder.includes(id) ? id : "intro", false);
+      });
+      const startId = location.hash.slice(1);
+      showPane(paneOrder.includes(startId) ? startId : "intro", false);
     }
   };
 })();

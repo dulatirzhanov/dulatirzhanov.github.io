@@ -739,3 +739,67 @@ body.lib-view .subtitle { padding-left: 0; border-left: 0; color: var(--color-bo
 @media (prefers-color-scheme: dark) {
   body.lib-view .subtitle { color: #cfcabd; }
 }
+
+/* вход в кейс, кнопки навигации, путь */
+.content .crumbs { margin: 0 0 22px; }
+.intro-lead { font-size: 18px; line-height: 1.6; color: var(--color-body); margin: 0 0 22px; }
+.intro-card { border: 1px solid rgba(32,92,115,.14); border-radius: 8px; padding: 18px 22px; background: var(--color-surface); margin: 0 0 26px; }
+.intro-label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent-strong); margin: 0 0 8px; }
+.intro-card ol { margin: 0 0 12px; padding-left: 22px; }
+.intro-card li { margin: 4px 0; font-size: 16px; }
+.intro-time { font-size: 14px; color: var(--chrome-muted); }
+.pane-nav { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+.pane-nav .back-link { display: inline-block; margin: 0; padding: 10px 18px; border: 1px solid rgba(32,92,115,.3); border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; color: var(--chrome-ink); background: transparent; }
+.pane-nav .back-link:hover { background: var(--color-surface-soft); }
+.pane-nav .back-link.primary { background: var(--color-heading); color: var(--color-bg); border-color: transparent; }
+@media (prefers-color-scheme: dark) {
+  .intro-card { background: #191916; border-color: rgba(223,238,233,.14); }
+  .intro-label { color: #c59b58; }
+  .pane-nav .back-link { border-color: rgba(223,238,233,.38); }
+  .pane-nav .back-link.primary { background: #dfeee9; color: #11110f; }
+}
+
+/* телефон. Язык в меню, крупные зоны нажатия */
+.drawer-lang { display: none; }
+@media (max-width: 700px) {
+  body.case-view > .lang-switcher { display: none; }
+  .drawer-lang { display: block; margin-bottom: 14px; }
+  .drawer-lang .lang-switcher { position: static; display: flex; align-items: center; gap: 6px; font-size: 15px; }
+  .drawer-lang .lang-switcher a { padding: 8px 10px; }
+  .action-row button { min-height: 44px; min-width: 88px; }
+}
+@media (max-width: 480px) {
+  .pane-nav .back-link { flex: 1 1 0; text-align: center; padding: 13px 14px; }
+}
+
+/* меню на телефоне. Вся панель прокручивается как один блок,
+   страница под ней заблокирована, закрытая панель не перехватывает касания */
+@media (max-width: 700px) {
+  body.drawer-open { overflow: hidden; }
+  .sidebar {
+    display: block;
+    height: 100%;
+    height: 100dvh;
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    visibility: hidden;
+    transition: transform .25s ease, visibility 0s linear .25s;
+  }
+  .sidebar.open { visibility: visible; transition-delay: 0s; }
+  .sidebar-nav { flex: none; overflow: visible; margin: 0; padding: 0; }
+  .drawer-backdrop { touch-action: none; overscroll-behavior: contain; }
+}
+
+/* библиотека на телефоне выровнена влево, как источники; зоны нажатия не меньше 40 px */
+@media (max-width: 700px) {
+  body.lib-view h1 { text-align: left; }
+  body.lib-view .subtitle, .subtitle { text-align: left; border-top: 0; padding-top: 0; }
+  nav.backnav, .subscribe-block { text-align: left; }
+  .subscribe-form, .filters, .library-actions { justify-content: flex-start; }
+  .filter-chip { min-height: 42px; padding: 9px 14px; }
+  .lib-footer .footer-links a, .content-footer .footer-links a, .sidebar-footer .footer-links a { display: inline-block; padding: 10px 0; }
+  .crumbs a { padding: 8px 0; }
+}

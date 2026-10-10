@@ -142,3 +142,9 @@ details.src > summary .pm { align-self: center; }
 .lang-note { margin-top: 48px; }
 .lib-footer { margin-top: 48px; color: #666; }
 @media (prefers-color-scheme: dark) { .subscribe-label { color: #aaa; } .lib-footer { color: #999; } }
+
+@media (max-width: 700px) {
+  .lib-footer .footer-links a { display: inline-block; padding: 10px 0; }
+  .crumbs a { padding: 8px 0; }
+  .link-btn { padding: 10px 0; }
+}
