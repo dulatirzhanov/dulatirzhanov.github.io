@@ -155,7 +155,7 @@
         '<nav class="crumbs" aria-label="Жол"><a href="/kz/">Басты бет</a><span aria-hidden="true">/</span><a href="/sources/kz/">Дереккөздер кітапханасы</a></nav>' +
         '<header><h1>' + esc(topic.title) + '</h1></header>' +
         '<div class="lead"><div class="lead-label">Қашан қажет</div><p>' + esc(m.lead || topic.intro) + '</p></div>' +
-        '<p class="topic-updated">' + srcWord(total) + ' · шолудың өзі шамамен ' + minutesFor(topic.sources) + ' мин · жаңартылған ' + dateRu(topic.updated) + '</p>' +
+        '<p class="topic-updated">' + srcWord(total) + ' · шолудың өзі шамамен ' + minutesFor(topic.sources) + ' мин · ' + dateRu(topic.updated) + '</p>' +
         '<details class="about"><summary><span>Топтама туралы толығырақ</span><span class="pm" aria-hidden="true"></span></summary><p>' + esc(topic.intro) + '</p></details>' +
         expertBlock(topic) +
         '<div class="list-tools"><h2 class="list-title">Дереккөздер</h2><button type="button" id="toggle-all" class="link-btn" data-open="0">Барлығын ашу</button></div>' +
@@ -179,7 +179,7 @@
           (isNew(t.updated) ? '<span class="chip-new">Жаңа</span>' : '') + '</div>' +
           '<div class="title">' + esc(t.title) + '</div>' +
           '<p class="excerpt">' + esc(m.lead || t.intro) + '</p>' +
-          '<div class="tc-foot"><span class="meta">' + hint + ' · жаңартылған ' + dateRu(t.updated) + '</span>' +
+          '<div class="tc-foot"><span class="meta">' + hint + ' · ' + dateRu(t.updated) + '</span>' +
           '<span class="tc-cta">Топтаманы ашу <span aria-hidden="true">→</span></span></div></a>';
       }).join("");
 
