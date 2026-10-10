@@ -114,14 +114,9 @@ details.src > summary .pm { align-self: center; }
 .src-body .apa { margin: 0; }
 
 /* ---------- Подписка и подвал ---------- */
-.subscribe-block { max-width: none; margin: 48px 0 0; padding: 22px 0 0; background: none; border: 0; border-top: 1px solid var(--v2-line); border-radius: 0; }
-.subscribe-title { margin: 0 0 4px; font-size: 19px; color: var(--v2-ink); }
-.subscribe-label { font-size: 15px; color: var(--v2-muted); margin: 0 0 14px; }
 .subscribe-form input[type="email"] { max-width: 300px; font-size: 15px; }
 .subscribe-form button { background: transparent; color: var(--v2-ink); border: 1px solid var(--v2-line-strong); }
 .subscribe-form button:hover { background: var(--v2-soft); }
-.lib-footer { margin-top: 40px; color: var(--v2-muted); }
-.lib-footer .lang-line { font-size: 13px; margin: 0 0 14px; }
 .lib-footer .footer-links a { color: var(--color-link); }
 @media (prefers-color-scheme: dark) {
   .lib-footer .footer-links a { color: #dfeee9; }
@@ -139,3 +134,11 @@ details.src > summary .pm { align-self: center; }
 @media (prefers-reduced-motion: reduce) {
   .topic-card { transition: none; }
 }
+
+/* Подписка и подвал как в библиотеке кейсов; подписка отстоит от списка, чтобы читаться отдельным блоком */
+.subscribe-block { max-width: 480px; margin: 80px 0 36px; padding: 0; border: 0; border-radius: 0; background: none; }
+.subscribe-label { font-size: 14px; color: #59635f; margin: 0 0 12px; }
+.subscribe-note { max-width: 440px; margin: 10px 0 0; color: #777; font-size: 12px; line-height: 1.5; }
+.lang-note { margin-top: 48px; }
+.lib-footer { margin-top: 48px; color: #666; }
+@media (prefers-color-scheme: dark) { .subscribe-label { color: #aaa; } .lib-footer { color: #999; } }

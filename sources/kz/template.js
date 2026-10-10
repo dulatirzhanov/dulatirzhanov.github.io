@@ -35,20 +35,19 @@
   function subscribeBlock() {
     return '' +
       '<section class="subscribe-block" id="subscribe">' +
-      '<h2 class="subscribe-title">Жаңа топтамалар туралы хат</h2>' +
-      '<p class="subscribe-label">Хат жаңа топтама шыққанда келеді. Одан кез келген хаттағы сілтеме арқылы бас тартуға болады.</p>' +
+      '<p class="subscribe-label">Жаңа топтамалар туралы хабар алу үшін жазылыңыз:</p>' +
       '<form class="subscribe-form" action="https://dulatedu.us6.list-manage.com/subscribe/post?u=9b32c150eb1859f084bfe3bcb&amp;id=c702192e41&amp;f_id=009822e2f0" method="POST" target="_blank">' +
       '<label class="sr-only" for="sub-email">Email мекенжайыңыз</label>' +
       '<input id="sub-email" type="email" name="EMAIL" placeholder="name@school.kz" autocomplete="email" required>' +
       '<div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_9b32c150eb1859f084bfe3bcb_c702192e41" tabindex="-1" value=""></div>' +
       '<button type="submit">Жазылу</button>' +
-      '</form></section>';
+      '</form><p class="subscribe-note">Жаңа топтамалар дайын болуына қарай жарияланады. Email мекенжайын жаңартулар туралы хаттар үшін ғана пайдаланамын.</p></section>';
   }
 
   function footer() {
     return '' +
+      '<div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser built-in auto-translate.</p></div>' +
       '<footer class="lib-footer">' +
-      '<p class="lang-line"><strong>EN:</strong> An English translation is planned for the future. Browser auto-translate works.</p>' +
       '<div class="copyright">© 2026 Dulat Irzhanov</div>' +
       '<div class="footer-links">' +
       '<a href="/kz/">dulatedu.com</a>' +

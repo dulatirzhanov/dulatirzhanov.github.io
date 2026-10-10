@@ -41,20 +41,19 @@
   function subscribeBlock() {
     return '' +
       '<section class="subscribe-block" id="subscribe">' +
-      '<h2 class="subscribe-title">Письмо о новых подборках</h2>' +
-      '<p class="subscribe-label">Приходит, когда выходит новая подборка. Отписаться можно в любом письме.</p>' +
+      '<p class="subscribe-label">Получать письма о новых подборках:</p>' +
       '<form class="subscribe-form" action="https://dulatedu.us6.list-manage.com/subscribe/post?u=9b32c150eb1859f084bfe3bcb&amp;id=c702192e41&amp;f_id=009822e2f0" method="POST" target="_blank">' +
       '<label class="sr-only" for="sub-email">Ваш email</label>' +
       '<input id="sub-email" type="email" name="EMAIL" placeholder="name@school.kz" autocomplete="email" required>' +
       '<div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_9b32c150eb1859f084bfe3bcb_c702192e41" tabindex="-1" value=""></div>' +
       '<button type="submit">Подписаться</button>' +
-      '</form></section>';
+      '</form><p class="subscribe-note">Новые подборки появляются по мере готовности. Я использую адрес только для писем об обновлениях.</p></section>';
   }
 
   function footer() {
     return '' +
+      '<div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser built-in auto-translate.</p></div>' +
       '<footer class="lib-footer">' +
-      '<p class="lang-line"><strong>EN:</strong> The content is in Russian; an English version is planned. Browser auto-translate works.</p>' +
       '<div class="copyright">© 2026 Dulat Irzhanov</div>' +
       '<div class="footer-links">' +
       '<a href="/ru/">dulatedu.com</a>' +
