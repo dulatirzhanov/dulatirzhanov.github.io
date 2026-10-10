@@ -87,10 +87,10 @@
 
       document.body.innerHTML = `
         ${languageSwitcher()}
+        <nav class="crumbs" aria-label="${s("crumbsLabel")}"><a href="${homePath()}">${s("crumbHome")}</a><span aria-hidden="true">/</span><span aria-current="page">${s("libraryTitle")}</span></nav>
         <header>
           <h1>${s("libraryTitle")}</h1>
         </header>
-        <nav class="backnav"><a href="${homePath()}">${s("backToHome")}</a></nav>
         <p class="subtitle">${s("librarySubtitle")}</p>
         ${hasReleaseOneContent ? `<p class="library-promise">${s("libraryPromise")}</p>` : ""}
         ${libraryActions}

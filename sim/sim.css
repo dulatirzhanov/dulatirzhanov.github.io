@@ -722,3 +722,20 @@ body.case-view {
 @media (max-width: 700px) and (prefers-color-scheme: dark) {
   .sidebar { background: #191916; }
 }
+
+/* ===== Шапка и подвал библиотеки как у страницы источников ===== */
+:root { --chrome-muted: #5d6764; --chrome-ink: var(--color-heading); }
+@media (prefers-color-scheme: dark) { :root { --chrome-muted: #a39e91; --chrome-ink: #dfeee9; } }
+
+.crumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 52px 0 14px; font-size: 14px; color: var(--chrome-muted); text-align: left; }
+.crumbs a { color: var(--chrome-muted); text-decoration: none; padding: 4px 0; }
+.crumbs a:hover { color: var(--chrome-ink); text-decoration: underline; text-underline-offset: 3px; }
+.crumbs span[aria-hidden] { opacity: .6; }
+.crumbs [aria-current] { color: var(--chrome-ink); }
+@media (max-width: 700px) { .crumbs { margin-top: 36px; } }
+
+body.lib-view .subtitle { padding-left: 0; border-left: 0; color: var(--color-body); font-size: 18px; }
+
+@media (prefers-color-scheme: dark) {
+  body.lib-view .subtitle { color: #cfcabd; }
+}

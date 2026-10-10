@@ -1,6 +1,8 @@
 const UI_STRINGS = {
   en: {
     backToHome: "← Back to Home",
+    crumbHome: "Home",
+    crumbsLabel: "Path",
     libraryTitle: "Case Library",
     librarySubtitle: "Practical decision cases for school principals — drawn from real situations, presented without a single \"correct\" answer.",
     i18nBanner: "Most cases are currently available in Russian and Kazakh — English translations are in progress.",
@@ -33,6 +35,8 @@ const UI_STRINGS = {
   },
   ru: {
     backToHome: "← На главную",
+    crumbHome: "Главная",
+    crumbsLabel: "Путь",
     libraryTitle: "Библиотека кейсов",
     librarySubtitle: "Интерактивный тренажер для директоров школ и всех, кто хочет понять, как устроена школа как организация.",
     libraryPromise: "В основе библиотеки лежит институциональный дизайн школы, то есть система ролей, правил и процессов, которая помогает сохранять знания и устойчиво работать даже при смене людей.",
@@ -102,6 +106,8 @@ const UI_STRINGS = {
   },
   kk: {
     backToHome: "← Басты бетке",
+    crumbHome: "Басты бет",
+    crumbsLabel: "Жол",
     libraryTitle: "Кейстер кітапханасы",
     librarySubtitle: "Мектептің ұйым ретінде қалай жұмыс істейтінін түсінгісі келетін директорлар мен өзге оқырмандарға арналған интерактивті тренажер.",
     libraryPromise: "Кітапхананың өзегінде мектептің институционалдық дизайны тұр. Рөлдер, қағидалар мен процестер білімді сақтап, адамдар ауысқанда да мектептің тұрақты жұмыс істеуіне көмектеседі.",
