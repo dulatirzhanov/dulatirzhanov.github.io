@@ -562,9 +562,10 @@
           const segs = sd.panes.map(p => {
             const k = paneOrder.indexOf(p) + 1;
             const st = k < pos ? "done" : k === pos ? "current" : "todo";
-            return `<button type="button" class="seg ${st}" data-pane="${p}" data-tip="${subLabel(p)}" aria-label="${subLabel(p)}"${k === pos ? ' aria-current="step"' : ""}></button>`;
+            const opt = /^action\d+$/.test(p);
+            return `<button type="button" class="seg ${st}${opt ? " seg-opt" : ""}" data-pane="${p}" data-tip="${subLabel(p)}" aria-label="${subLabel(p)}"${k === pos ? ' aria-current="step"' : ""}>${opt ? `<span class="seg-letter">${subLabel(p).split(".")[0]}</span>` : ""}</button>`;
           }).join("");
-          return `<li class="seg-group ${cls}" style="flex:${sd.panes.length} 1 auto"><button type="button" class="seg-label" data-pane="${sd.panes[0]}">${i < cur ? '<span class="seg-check" aria-hidden="true">✓</span>' : ""}${sd.label}</button><div class="seg-row">${segs}</div></li>`;
+          return `<li class="seg-group ${cls}" style="flex:${sd.panes.filter(x => !/^action\d+$/.test(x)).length} 1 auto"><button type="button" class="seg-label" data-pane="${sd.panes[0]}">${i < cur ? '<span class="seg-check" aria-hidden="true">✓</span>' : ""}${sd.label}</button><div class="seg-row">${segs}</div></li>`;
         }).join("") + "</ol>";
         substepsEl.innerHTML = `<div class="seg-caption"><span class="seg-count">${I.screenOf(pos, total)}</span> · ${subLabel(paneId)}</div>`;
         document.querySelectorAll("#stepper button").forEach(b => b.addEventListener("click", () => showPane(b.dataset.pane)));
