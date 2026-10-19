@@ -1,0 +1,157 @@
+/* Движение для главной страницы. Подключается только из /index.html поверх site.css.
+   Правила: transform и opacity, кривые ease-out, UI до 300 мс, ховер только для мыши,
+   prefers-reduced-motion оставляет плавное появление без смещения. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ---------- обратная связь на ссылках и кнопках ---------- */
+
+.home-page .nav a,
+.home-page .nav button,
+.proof-card,
+.modal a.cta,
+.lang-switcher a,
+.site-footer .social-links a {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms var(--ease-out);
+}
+
+.home-page .nav a:active,
+.home-page .nav button:active,
+.modal a.cta:active {
+  transform: scale(0.97);
+}
+
+.proof-card:active {
+  transform: scale(0.985);
+}
+
+.home-page .cta-primary::after {
+  display: inline-block;
+  transition: transform 180ms var(--ease-out);
+}
+
+.home-page .cta-primary:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-page .cta-primary:hover::after,
+  .home-page .cta-primary:focus-visible::after {
+    transform: translateX(4px);
+  }
+}
+
+/* ---------- вход при загрузке: CSS-анимация, без JS ---------- */
+
+@keyframes home-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes home-photo-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes home-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.home-page .hero-photo,
+.home-page h1,
+.home-page .muted,
+.home-page .tagline,
+.home-page .proof-card,
+.home-page .nav {
+  animation: home-rise 420ms var(--ease-out) backwards;
+}
+
+.home-page .hero-photo { animation-name: home-photo-in; }
+.home-page h1          { animation-delay: 60ms; }
+.home-page .muted      { animation-delay: 110ms; }
+.home-page .tagline    { animation-delay: 160ms; }
+.home-page .proof-card:nth-child(1) { animation-delay: 220ms; }
+.home-page .proof-card:nth-child(2) { animation-delay: 280ms; }
+.home-page .proof-card:nth-child(3) { animation-delay: 340ms; }
+.home-page .nav        { animation-delay: 400ms; }
+
+.lang-switcher { animation: home-fade 400ms ease 200ms backwards; }
+
+/* ---------- появление текста при прокрутке ---------- */
+
+.home-page .reveal {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.home-page .reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* ---------- окно «Контакты»: JS переключает inline display, переход идет через allow-discrete ---------- */
+
+.home-page .overlay {
+  opacity: 0;
+  transition: opacity 180ms ease, display 180ms allow-discrete;
+}
+
+.home-page .overlay[style*="display: block"] { opacity: 1; }
+
+.home-page .modal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.96);
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out),
+    display 180ms allow-discrete;
+}
+
+.home-page .modal[style*="display: block"] {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@starting-style {
+  .home-page .overlay[style*="display: block"] { opacity: 0; }
+
+  .home-page .modal[style*="display: block"] {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+}
+
+/* ---------- reduced motion: остается мягкое появление, смещения нет ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .hero-photo,
+  .home-page h1,
+  .home-page .muted,
+  .home-page .tagline,
+  .home-page .proof-card,
+  .home-page .nav {
+    animation: home-fade 200ms ease backwards;
+  }
+
+  .home-page .reveal { transform: none; }
+
+  .home-page .reveal.is-in { transition: opacity 200ms ease; transition-delay: 0ms; }
+
+  .home-page .modal,
+  .home-page .modal[style*="display: block"] { transform: translate(-50%, -50%); }
+
+  .home-page .nav a:active,
+  .home-page .nav button:active,
+  .modal a.cta:active,
+  .proof-card:active,
+  .home-page .cta-primary:active { transform: none; }
+}
