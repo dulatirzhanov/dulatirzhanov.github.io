@@ -1,0 +1,56 @@
+/* Движение для библиотеки источников (/sources/, /sources/kz/). Подключается после sources-v2.css.
+   Две вещи: раскрытие <details> (строки источников, «О подборке», экспертная записка) и отклик на нажатие.
+   Высота у аккордеона единственное допустимое исключение из правила transform/opacity. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root { interpolate-size: allow-keywords; }
+
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 180ms var(--ease-out), content-visibility 180ms allow-discrete;
+  }
+
+  details[open]::details-content { block-size: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details::details-content {
+    opacity: 0;
+    transition: opacity 100ms linear, content-visibility 100ms allow-discrete;
+  }
+
+  details[open]::details-content { opacity: 1; }
+}
+
+/* «Развернуть все» / «Свернуть все» открывает десять строк разом: без анимации, чтобы список просматривался сразу.
+   template.js ставит body.bulk на 60 мс. */
+body.bulk details::details-content { transition: none; }
+
+.topic-card,
+.btn-read,
+.link-btn,
+.subscribe-form button {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms var(--ease-out);
+}
+
+.topic-card:active { transform: scale(0.99); }
+
+.btn-read:active,
+.link-btn:active,
+.subscribe-form button:active { transform: scale(0.98); }
+
+@media (prefers-reduced-motion: reduce) {
+  .topic-card:active,
+  .btn-read:active,
+  .link-btn:active,
+  .subscribe-form button:active { transform: none; }
+}

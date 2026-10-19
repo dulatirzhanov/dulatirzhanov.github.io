@@ -1,0 +1,27 @@
+/* Движение для экспресс-аудита (/tools/). Подключается после tools.css.
+   Это рабочая форма: движение только как отклик на действие, без входных анимаций. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms var(--ease-out);
+}
+
+.button:active { transform: scale(0.98); }
+
+/* Поля формы: граница при фокусе проявляется за 120 мс, а не щелчком */
+.audit-field input,
+.audit-field textarea,
+.self-email input {
+  transition: border-color 120ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:active { transform: none; }
+}

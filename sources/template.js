@@ -135,6 +135,8 @@
     var rows = [].slice.call(document.querySelectorAll("details.src"));
     if (all) all.addEventListener("click", function () {
       var open = all.getAttribute("data-open") !== "1";
+      document.body.classList.add("bulk");
+      setTimeout(function () { document.body.classList.remove("bulk"); }, 60);
       rows.forEach(function (d) { d.open = open; });
       all.setAttribute("data-open", open ? "1" : "0");
       all.textContent = open ? "Свернуть все" : "Развернуть все";

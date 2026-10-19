@@ -1,0 +1,45 @@
+/* Движение для блога (/blog/). Подключается после site.css.
+   1) фильтр EN/KZ/RU: карточки, которые возвращаются в список, проявляются за 160 мс;
+   2) на телефоне раскрытие саммари проявляется так же, как на десктопе;
+   3) отклик на нажатие у кнопок фильтра и иконок. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* 1. Только после клика по фильтру: html.is-filtering ставит скрипт на странице.
+   При загрузке страницы карточки не анимируются. */
+.blog-page .post-card { transition: opacity 160ms var(--ease-out); }
+
+@starting-style {
+  .is-filtering .blog-page .post-card { opacity: 0; }
+}
+
+/* 2. Телефон: саммари раскрывается через display, поэтому нужен allow-discrete */
+@media (max-width: 700px) {
+  .blog-page .summary-tooltip {
+    transition: opacity 160ms var(--ease-out), visibility 160ms linear, display 160ms allow-discrete;
+  }
+
+  @starting-style {
+    .blog-page .post-summary.is-open .summary-tooltip { opacity: 0; }
+  }
+}
+
+/* 3. Нажатие */
+.blog-page .filter-button,
+.blog-page .iconbtn {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms var(--ease-out);
+}
+
+.blog-page .filter-button:active,
+.blog-page .iconbtn:active { transform: scale(0.97); }
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-page .filter-button:active,
+  .blog-page .iconbtn:active { transform: none; }
+}

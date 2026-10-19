@@ -33,6 +33,7 @@
 
 <link rel="stylesheet" href="/site.css?v=6">
 <link rel="stylesheet" href="/page-transition.css?v=1">
+<link rel="stylesheet" href="/blog/blog-motion.css?v=1">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P430YKCERB"></script>
@@ -621,6 +622,7 @@
   }
 
   function setLanguageFilter(language) {
+    document.documentElement.classList.add('is-filtering');
     closeAllSummaries();
 
     postCards.forEach((card) => {
