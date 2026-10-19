@@ -1,0 +1,76 @@
+/* Движение для библиотеки кейсов (/sim/, /sim/ru/, /sim/kz/). Подключается после sim.css.
+   Три вещи: появление экрана кейса, раскрытие <details>, отклик на нажатие.
+   transform и opacity, ease-out, до 200 мс, ховер не трогаем, prefers-reduced-motion учтен. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* 1. Смена экрана кейса: новый экран проявляется за 140 мс, без смещения.
+   Стрелки на клавиатуре переключают экраны без анимации: template.js ставит body.nav-key. */
+.pane.active {
+  opacity: 1;
+  transition: opacity 140ms var(--ease-out);
+}
+
+@starting-style {
+  .pane.active { opacity: 0; }
+}
+
+body.nav-key .pane.active { transition: none; }
+
+/* 2. Раскрытие <details>: «О библиотеке», «Как это работает», разбор, взгляд аккредитации.
+   Высота здесь единственное допустимое исключение: у аккордеона нет transform-аналога. */
+@media (prefers-reduced-motion: no-preference) {
+  :root { interpolate-size: allow-keywords; }
+
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 200ms var(--ease-out), content-visibility 200ms allow-discrete;
+  }
+
+  details[open]::details-content { block-size: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details::details-content {
+    opacity: 0;
+    transition: opacity 100ms linear, content-visibility 100ms allow-discrete;
+  }
+
+  details[open]::details-content { opacity: 1; }
+}
+
+/* 3. Отклик на нажатие: кнопки вариантов, «Дальше/Назад», фильтры, ссылки-кнопки, карточки */
+.action-row button,
+.pane-nav .back-link,
+.filter-chip,
+.library-actions a,
+.share-block .cta,
+.card {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms var(--ease-out);
+}
+
+.action-row button:active,
+.pane-nav .back-link:active,
+.filter-chip:active,
+.library-actions a:active,
+.share-block .cta:active {
+  transform: scale(0.98);
+}
+
+.card:active { transform: scale(0.99); }
+
+@media (prefers-reduced-motion: reduce) {
+  .action-row button:active,
+  .pane-nav .back-link:active,
+  .filter-chip:active,
+  .library-actions a:active,
+  .share-block .cta:active,
+  .card:active { transform: none; }
+}

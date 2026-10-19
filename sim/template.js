@@ -587,10 +587,11 @@
         const tg = e.target && e.target.tagName;
         if (tg === "INPUT" || tg === "TEXTAREA" || tg === "SELECT") return;
         const k = paneOrder.indexOf(currentPaneId) + (e.key === "ArrowRight" ? 1 : -1);
-        if (k >= 0 && k < paneOrder.length) { e.preventDefault(); showPane(paneOrder[k]); }
+        if (k >= 0 && k < paneOrder.length) { e.preventDefault(); showPane(paneOrder[k], undefined, true); }
       });
 
-      function showPane(paneId, push) {
+      function showPane(paneId, push, viaKey) {
+        document.body.classList.toggle("nav-key", !!viaKey);
         if (push !== false && location.hash !== "#" + paneId) history.pushState({ pane: paneId }, "", "#" + paneId);
         panes.forEach(p => p.classList.toggle("active", p.dataset.id === paneId));
         navItems.forEach(n => n.classList.toggle("active", n.dataset.pane === paneId));
