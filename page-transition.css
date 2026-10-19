@@ -1,0 +1,15 @@
+/* Плавная смена страницы при переходе между EN, RU, KZ и блогом (View Transitions API).
+   Подключается только из этих четырех статичных страниц: оба конца перехода должны подключать файл.
+   Библиотеки /sim/ и /sources/ собирают страницу скриптами из пустого body, поэтому они не участвуют.
+   Chrome, Edge, Safari 18.2+. Остальные браузеры открывают страницу как раньше. Для prefers-reduced-motion отключено. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: ease-out;
+  }
+}
