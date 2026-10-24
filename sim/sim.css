@@ -922,7 +922,8 @@ details[open] > summary .pm::before { content: "\2212"; }
 .seg-group.current .seg-label { color: var(--chrome-ink); }
 .seg-group.done .seg-label { color: var(--color-body); }
 .seg-check { font-size: 12px; color: var(--color-accent-strong); }
-.seg-row { display: flex; gap: 3px; min-width: max-content; }
+/* the row's width is computed from the segment count (--n, --o set in template.js), so no browser has to guess it from the empty buttons */
+.seg-row { --sw: 24px; --ow: 46px; --sg: 3px; display: flex; gap: var(--sg); min-width: calc((var(--n, 1) - var(--o, 0)) * var(--sw) + var(--o, 0) * var(--ow) + (var(--n, 1) - 1) * var(--sg)); }
 /* explicit flex-basis: Safari ignores the min-width of a 0%-basis item when it sizes the group, and the segments spill over the next stage label */
 .seg { position: relative; flex: 1 1 24px; min-width: 24px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--chrome-ink); }
 .seg::before { content: ""; position: absolute; left: 0; right: 0; top: 19px; height: 6px; border-radius: 3px; background: currentColor; opacity: .18; transition: opacity .12s; }
@@ -942,7 +943,7 @@ details[open] > summary .pm::before { content: "\2212"; }
 @media (prefers-color-scheme: dark) { .seg.current::before { background: #c59b58; } .seg-check { color: #c59b58; } .intro-nav-hint { border-top-color: rgba(223,238,233,.14); } }
 @media (max-width: 700px) {
   .stepper .segbar { gap: 4px; }
-  .seg-row { gap: 2px; }
+  .seg-row { --ow: 24px; --sg: 2px; }
   .seg-label { font-size: 13px; }
   .seg { flex-basis: 24px; min-width: 24px; }
   .seg::after { display: none; }
@@ -950,6 +951,7 @@ details[open] > summary .pm::before { content: "\2212"; }
 @media (max-width: 360px) {
   .seg-label { font-size: 12px; gap: 3px; }
   .seg { flex-basis: 17px; min-width: 17px; }
+  .seg-row { --sw: 17px; --ow: 18px; }
 }
 
 /* Блоки вариантов A-D компактнее */
