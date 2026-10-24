@@ -922,8 +922,9 @@ details[open] > summary .pm::before { content: "\2212"; }
 .seg-group.current .seg-label { color: var(--chrome-ink); }
 .seg-group.done .seg-label { color: var(--color-body); }
 .seg-check { font-size: 12px; color: var(--color-accent-strong); }
-.seg-row { display: flex; gap: 3px; }
-.seg { position: relative; flex: 1; min-width: 24px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--chrome-ink); }
+.seg-row { display: flex; gap: 3px; min-width: max-content; }
+/* explicit flex-basis: Safari ignores the min-width of a 0%-basis item when it sizes the group, and the segments spill over the next stage label */
+.seg { position: relative; flex: 1 1 24px; min-width: 24px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--chrome-ink); }
 .seg::before { content: ""; position: absolute; left: 0; right: 0; top: 19px; height: 6px; border-radius: 3px; background: currentColor; opacity: .18; transition: opacity .12s; }
 .seg.done::before { opacity: .5; }
 .seg.current::before { top: 17px; height: 10px; background: var(--color-accent-strong); opacity: 1; }
@@ -943,12 +944,12 @@ details[open] > summary .pm::before { content: "\2212"; }
   .stepper .segbar { gap: 4px; }
   .seg-row { gap: 2px; }
   .seg-label { font-size: 13px; }
-  .seg { min-width: 24px; }
+  .seg { flex-basis: 24px; min-width: 24px; }
   .seg::after { display: none; }
 }
 @media (max-width: 360px) {
   .seg-label { font-size: 12px; gap: 3px; }
-  .seg { min-width: 17px; }
+  .seg { flex-basis: 17px; min-width: 17px; }
 }
 
 /* Блоки вариантов A-D компактнее */
