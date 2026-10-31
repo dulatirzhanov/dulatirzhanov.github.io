@@ -71,7 +71,7 @@
   document.getElementById("printAudit").addEventListener("click", () => { document.body.classList.remove("print-blank"); update(); window.print(); });
   document.getElementById("printBlankAudit").addEventListener("click", () => { document.body.classList.add("print-blank"); window.print(); });
   window.addEventListener("afterprint", () => document.body.classList.remove("print-blank"));
-  document.getElementById("sendToAuthor").addEventListener("click", () => openEmail("dulatirzhanov@gmail.com"));
+  document.getElementById("sendToAuthor").addEventListener("click", () => openEmail("d@dulatedu.com"));
   document.getElementById("sendToSelf").addEventListener("click", () => { const email = document.getElementById("selfEmail").value.trim(); if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) openEmail(email); else window.alert(t.invalidEmail); });
   document.getElementById("clearAudit").addEventListener("click", () => { if (!window.confirm(t.confirmClear)) return; form.reset(); update(); });
   if (new URLSearchParams(window.location.search).get("print") === "blank") document.body.classList.add("print-blank");
