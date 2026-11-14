@@ -42,14 +42,14 @@ for(const lang of ['ru','kk']) {
   const url=`/sim/${dir}/${item.id}.html`;
   const c=context(files,{...globals,SIM_DEFAULT_CASE_ID:item.id,location:{search:'',hash:'',pathname:url}});
   const body=render(c,'sim/template.js','SimCase.init()');
-  let shell=metadata(read(`sim/${dir}/case.html`),item.title[lang]+' | '+(lang==='kk'?'Дулат Бауыржанұлы':'Дулат Иржанов'),short(item.excerpt[lang]||item.excerpt.ru),url,`/sim/ru/${item.id}.html`,`/sim/kz/${item.id}.html`,'article');
+  let shell=metadata(read(`sim/${dir}/case.html`),item.seoTitle?.[lang] || item.title[lang]+' | '+(lang==='kk'?'Дулат Бауыржанұлы':'Дулат Иржанов'),short(item.excerpt[lang]||item.excerpt.ru),url,`/sim/ru/${item.id}.html`,`/sim/kz/${item.id}.html`,'article');
   shell=shell.replace('<body>','<body class="case-view">\n'+body+'\n<noscript><style>.pane{display:block!important}.sidebar,.case-topbar,.drawer-backdrop,.pane-nav,.stepper,.substeps{display:none!important}.content{margin:0 auto;max-width:900px;height:auto;overflow:visible}</style></noscript>');
   shell=shell.replace('<script>SimCase.init();</script>',`<script>window.SIM_DEFAULT_CASE_ID=${JSON.stringify(item.id)};SimCase.init();</script>`);
   write(url.slice(1),shell); built.push(url);
  }
  // Links remain available to crawlers and readers without JavaScript.
  const index=`sim/${dir}/index.html`;
- let shell=read(index).replace(/\n<!-- library-fallback -->[\s\S]*?<!-- \/library-fallback -->\n/,'');
+ let shell=read(index).replace(/\r?\n<!-- library-fallback -->[\s\S]*?<!-- \/library-fallback -->\r?\n/g,'');
  const fallback=`\n<!-- library-fallback -->\n<noscript><h1>${lang==='kk'?'Кейстер кітапханасы':'Библиотека кейсов'}</h1></noscript>\n<div id="library-fallback"><ul>${data.map(x=>`<li><a href="/sim/${dir}/${x.id}.html">${esc(x.title[lang]||x.title.ru)}</a></li>`).join('')}</ul></div>\n<!-- /library-fallback -->\n`;
  write(index,shell.replace('<body>','<body>'+fallback));
 }
