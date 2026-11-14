@@ -84,16 +84,16 @@ function sheetPage(item,lang,dir) {
   h2 { margin: 9px 0 3px; font: 700 10.5pt/1.2 "PT Sans", Arial, sans-serif; color: #17566e; text-transform: uppercase; letter-spacing: .03em; }
   ul, ol { margin: 0; padding-left: 16px; }
   li { margin: 0 0 1.5px; }
-  table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9.4pt; line-height: 1.28; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9pt; line-height: 1.25; }
   th, td { border: .6pt solid #9ba9a5; padding: 2.5px 5px; vertical-align: top; text-align: left; }
   th { width: 16mm; background: #eaf1ef; color: #173f50; font-size: 8.5pt; }
-  td.who { width: 36mm; color: #17566e; font-weight: 700; }
+  td.who { width: 42mm; color: #17566e; font-weight: 700; }
   .foot { margin-top: 8px; padding-top: 4px; border-top: .5pt solid #aeb8b5; display: flex; justify-content: space-between; gap: 10px; font-size: 8pt; color: #444; }
   @media print {
     @page { size: A4 portrait; margin: 0; }
     html body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .bar { display: none; }
-    .sheet { margin: 0; box-shadow: none; width: 210mm; min-height: 0; height: 297mm; padding: 11mm 13mm 9mm; overflow: hidden; }
+    .sheet { margin: 0; box-shadow: none; width: 210mm; min-height: 0; height: 297mm; padding: 10mm 13mm 8mm; overflow: hidden; }
   }
   </style>
 </head>
