@@ -386,6 +386,7 @@
           research: "analysisResearchLabel",
           interpretation: "analysisInterpretationLabel",
           practice: "analysisPracticeLabel",
+          legal: "analysisLegalLabel",
           application: "analysisApplicationLabel"
         };
         const analysisSections = hasReleaseOneContent ? (caseData.analysisSections || []) : [];
