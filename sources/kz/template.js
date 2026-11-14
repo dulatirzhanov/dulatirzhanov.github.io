@@ -1,7 +1,7 @@
 /*
  * «Дереккөздер кітапханасы» бөлімінің қазақша нұсқасы.
  * SourcesIndex.init() - список тем (index.html)
- * SourcesTopic.init() - страница темы (topic.html?id=<id>)
+ * SourcesTopic.init() - страница темы (<id>.html, собирается tools/build-pages.js)
  * Данные: sources-data.js (тексты) + sources-meta.js (lead и маршрут чтения).
  */
 (function () {
@@ -148,8 +148,9 @@
 
   window.SourcesTopic = {
     init: function () {
-      var id = new URLSearchParams(location.search).get("id");
+      var id = new URLSearchParams(location.search).get("id") || window.SOURCES_DEFAULT_TOPIC_ID;
       var topic = SOURCES_TOPICS.find(function (t) { return t.id === id; }) || SOURCES_TOPICS[0];
+      if (/topic\.html$/.test(location.pathname)) { location.replace("/sources/kz/" + topic.id + ".html" + location.hash); return; }
       var m = meta(topic.id);
       document.title = topic.title + " | Дереккөздер кітапханасы | Дулат Бауыржанұлы";
       var steps = routeOf(topic);
@@ -157,7 +158,7 @@
       var total = topic.sources.length;
 
       document.body.innerHTML = '' +
-        '<div class="lang-switcher"><a href="/sources/kz/topic.html?id=' + esc(topic.id) + '" class="active">KZ</a> | <a href="/sources/topic.html?id=' + esc(topic.id) + '">RU</a></div>' +
+        '<div class="lang-switcher"><a href="/sources/kz/' + esc(topic.id) + '.html" class="active">KZ</a> | <a href="/sources/' + esc(topic.id) + '.html">RU</a></div>' +
         '<nav class="crumbs" aria-label="Жол"><a href="/kz/">Басты бет</a><span aria-hidden="true">/</span><a href="/sources/kz/">Дереккөздер кітапханасы</a></nav>' +
         '<header><h1>' + esc(topic.title) + '</h1></header>' +
         '<div class="lead"><div class="lead-label">Қашан қажет</div><p>' + esc(m.lead || topic.intro) + '</p></div>' +
@@ -180,7 +181,7 @@
         var first = routeOf(t);
         var hint = first ? "Оқу реті белгіленген" : "Оқу реті еркін";
         return '' +
-          '<a class="topic-card" href="/sources/kz/topic.html?id=' + esc(t.id) + '">' +
+          '<a class="topic-card" href="/sources/kz/' + esc(t.id) + '.html">' +
           '<div class="tc-top"><span class="tc-count">' + srcWord(t.sources.length) + ' · шамамен ' + minutesFor(t.sources) + ' мин</span>' +
           (isNew(t.updated) ? '<span class="chip-new">Жаңа</span>' : '') + '</div>' +
           '<div class="title">' + esc(t.title) + '</div>' +

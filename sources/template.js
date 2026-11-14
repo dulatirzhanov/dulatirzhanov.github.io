@@ -1,7 +1,7 @@
 /*
  * Рендер раздела «Библиотека источников» (прототип v2).
  * SourcesIndex.init() - список тем (index.html)
- * SourcesTopic.init() - страница темы (topic.html?id=<id>)
+ * SourcesTopic.init() - страница темы (<id>.html, собирается tools/build-pages.js)
  * Данные: sources-data.js (тексты) + sources-meta.js (lead и маршрут чтения).
  */
 (function () {
@@ -154,8 +154,9 @@
 
   window.SourcesTopic = {
     init: function () {
-      var id = new URLSearchParams(location.search).get("id");
+      var id = new URLSearchParams(location.search).get("id") || window.SOURCES_DEFAULT_TOPIC_ID;
       var topic = SOURCES_TOPICS.find(function (t) { return t.id === id; }) || SOURCES_TOPICS[0];
+      if (/topic\.html$/.test(location.pathname)) { location.replace("/sources/" + topic.id + ".html" + location.hash); return; }
       var m = meta(topic.id);
       document.title = topic.title + " | Библиотека источников | Дулат Иржанов";
       var steps = routeOf(topic);
@@ -163,7 +164,7 @@
       var total = topic.sources.length;
 
       document.body.innerHTML = '' +
-        '<div class="lang-switcher"><a href="/sources/kz/topic.html?id=' + esc(topic.id) + '">KZ</a> | <a href="/sources/topic.html?id=' + esc(topic.id) + '" class="active">RU</a></div>' +
+        '<div class="lang-switcher"><a href="/sources/kz/' + esc(topic.id) + '.html">KZ</a> | <a href="/sources/' + esc(topic.id) + '.html" class="active">RU</a></div>' +
         '<nav class="crumbs" aria-label="Путь"><a href="/ru/">Главная</a><span aria-hidden="true">/</span><a href="/sources/">Библиотека источников</a></nav>' +
         '<header><h1>' + esc(topic.title) + '</h1></header>' +
         '<div class="lead"><div class="lead-label">Когда пригодится</div><p>' + esc(m.lead || topic.intro) + '</p></div>' +
@@ -186,7 +187,7 @@
         var first = routeOf(t);
         var hint = first ? "Есть порядок чтения" : "Порядок чтения любой";
         return '' +
-          '<a class="topic-card" href="/sources/topic.html?id=' + esc(t.id) + '">' +
+          '<a class="topic-card" href="/sources/' + esc(t.id) + '.html">' +
           '<div class="tc-top"><span class="tc-count">' + srcWord(t.sources.length) + ' · около ' + minutesFor(t.sources) + ' мин</span>' +
           (isNew(t.updated) ? '<span class="chip-new">Новое</span>' : '') + '</div>' +
           '<div class="title">' + esc(t.title) + '</div>' +

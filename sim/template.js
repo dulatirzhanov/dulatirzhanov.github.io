@@ -20,11 +20,20 @@
     return `<section class="contact-block" aria-labelledby="contact-heading"><h2 id="contact-heading">${s("contactTitle")}</h2><p>${s("contactText")}</p><div class="contact-actions"><a class="contact-write" href="${homePath()}#contacts">${s("contactWrite")}</a><a href="/tools/${lang}/express-audit.html">${s("contactForm")}</a></div></section>`;
   }
 
+  /* Адрес кейса: отдельная страница <id>.html (собирает tools/build-pages.js),
+     если у кейса есть заголовок на этом языке; иначе старый адрес case.html?id= */
+  function caseUrl(lang, id) {
+    const c = CASES_DATA.find(x => x.id === id);
+    const base = LANG_BASE_PATHS[lang];
+    return c && c.title && c.title[lang] ? `${base}${id}.html` : `${base}case.html?id=${id}`;
+  }
+
   function languageSwitcher(caseId) {
-    const suffix = caseId ? `case.html?id=${caseId}` : "";
     const kzClass = CURRENT_LANG === "kk" ? ' class="active"' : "";
     const ruClass = CURRENT_LANG === "ru" ? ' class="active"' : "";
-    return `<div class="lang-switcher"><a href="${LANG_BASE_PATHS.kk}${suffix}"${kzClass}>KZ</a> | <a href="${LANG_BASE_PATHS.ru}${suffix}"${ruClass}>RU</a></div>`;
+    const kzHref = caseId ? caseUrl("kk", caseId) : LANG_BASE_PATHS.kk;
+    const ruHref = caseId ? caseUrl("ru", caseId) : LANG_BASE_PATHS.ru;
+    return `<div class="lang-switcher"><a href="${kzHref}"${kzClass}>KZ</a> | <a href="${ruHref}"${ruClass}>RU</a></div>`;
   }
 
   function uniqueTags() {
@@ -69,7 +78,7 @@
 
       const aboutBlock = hasReleaseOneContent ? `
         <section class="about-block" aria-labelledby="about-title">
-          <img src="/profile.png" alt="Дулат Иржанов" width="88" height="88">
+          <img src="/profile.png" alt="${CURRENT_LANG === 'kk' ? 'Дулат Бауыржанұлы' : 'Дулат Иржанов'}" width="88" height="88">
           <div>
             <h2 id="about-title">${s("aboutTitle")}</h2>
             <p>${s("aboutText")}</p>
@@ -164,7 +173,7 @@
           const excerpt = c.excerpt[displayLang] || c.excerpt.ru || "";
           const chapter = c.chapter[displayLang] || c.chapter.ru || "";
           const tagPills = c.tags.map(tag => `<span class="tag">${tagLabel(tag)}</span>`).join("");
-          const caseHref = basePath() + "case.html?id=" + c.id;
+          const caseHref = caseUrl(CURRENT_LANG, c.id);
 
           return `
             <a class="card" href="${caseHref}">
@@ -215,6 +224,12 @@
       const params = new URLSearchParams(window.location.search);
       const id = params.get("id") || window.SIM_DEFAULT_CASE_ID;
       const caseData = CASES_DATA.find(c => c.id === id);
+
+      // Старый адрес case.html?id=... ведет на отдельную страницу кейса, если она есть
+      if (caseData && /case\.html$/.test(window.location.pathname) && caseData.title && caseData.title[CURRENT_LANG]) {
+        window.location.replace(`${LANG_BASE_PATHS[CURRENT_LANG]}${caseData.id}.html${window.location.hash}`);
+        return;
+      }
 
       if (!caseData) {
         document.body.innerHTML = `<div style="padding:60px 40px;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
