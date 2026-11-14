@@ -1,0 +1,29 @@
+/* Contact actions share the site's typography and colors. No motion is needed. */
+.modal h2 { font-family: "PT Sans", sans-serif; }
+.modal .contact-email-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 0 0 14px;
+  font: 16px/1.4 "PT Sans", sans-serif;
+}
+.contact-email-tools [data-email-address] { user-select: all; }
+.contact-email-tools button {
+  min-height: 44px;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.contact-email-tools button[hidden] { display: none; }
+.modal .contact-copy-status {
+  margin: 0;
+  color: var(--color-body);
+  font: 16px/1.4 "PT Sans", sans-serif;
+}
+.contact-copy-status:empty { display: none; }

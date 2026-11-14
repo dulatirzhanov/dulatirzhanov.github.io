@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="/page-transition.css?v=1">
 
   <script src="/analytics.js?v=1"></script>
+  <link rel="stylesheet" href="/contacts.css?v=1">
 </head>
 
 <body class="home-page">
@@ -79,9 +80,11 @@
     <h2 id="contactsTitle">Contacts</h2>
     <p class="modal-note">The first conversation is free. A simple question is reason enough to write.</p>
 
-<a class="cta" href="mailto:d@dulatedu.com">Email</a>
-<a class="cta" href="https://wa.me/77761070090" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+<a class="cta" href="mailto:d@dulatedu.com?subject=Question%20from%20dulatedu.com&amp;body=Hello%20Dulat!%0D%0A%0D%0AI'm%20contacting%20you%20through%20your%20website.%0D%0A%0D%0AMy%20question%3A%20">Write an email</a>
+<p class="contact-email-tools"><span data-email-address>d@dulatedu.com</span><button type="button" data-copy-email data-success="Email address copied." data-fallback="Select and copy the email address." hidden>Copy address</button></p>
+<a class="cta" href="https://wa.me/77761070090?text=Hello%20Dulat!%20I%20found%20your%20website%20and%20would%20like%20to%20ask%20a%20question%3A%20" target="_blank" rel="noopener noreferrer">Write on WhatsApp</a>
 <a class="cta" href="https://calendly.com/dulat/consultations" target="_blank" rel="noopener noreferrer">Book a time to talk</a>
+    <p class="contact-copy-status" data-copy-status role="status" aria-live="polite"></p>
   </div>
 
   <div class="bio">
@@ -151,7 +154,7 @@
     </p>
   </div>
 
-  <script src="/contacts.js?v=2" defer></script>
+  <script src="/contacts.js?v=3" defer></script>
 
   <script src="/home-motion.js?v=2" defer></script>
 

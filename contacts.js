@@ -6,10 +6,32 @@
   let returnFocus;
   let previousOverflow;
 
+  const copyEmail = modal.querySelector('[data-copy-email]');
+  if (copyEmail) {
+    const status = modal.querySelector('[data-copy-status]');
+    const address = modal.querySelector('[data-email-address]');
+    copyEmail.hidden = false;
+    copyEmail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(address.textContent.trim());
+        status.textContent = copyEmail.dataset.success;
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(address);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent = copyEmail.dataset.fallback;
+      }
+    });
+  }
+
   function syncDialog() {
     const open = location.hash === '#contacts';
     if (open === (modal.style.display === 'block')) return;
     if (open) {
+      const copyStatus = modal.querySelector('[data-copy-status]');
+      if (copyStatus) copyStatus.textContent = '';
       returnFocus = document.activeElement;
       previousOverflow = document.body.style.overflow;
       modal.style.display = overlay.style.display = 'block';
