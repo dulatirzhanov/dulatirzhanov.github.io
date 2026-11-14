@@ -58,7 +58,7 @@ for(const lang of ['ru','kk']) {
 function sheetPage(item,lang,dir) {
  const f=o=>(o&&(o[lang]||o[item.availableLangs[0]]||o.ru))||'';
  const sh=item.printSheet, plan=item.actionPlan, url=`/sim/${dir}/${item.id}.html`;
- const ui={ru:{print:'Распечатать',back:'К кейсу',who:'Кто',open:'Читать кейс онлайн'}}[lang]||{print:'Print',back:'Back',who:'Who',open:'Read the case online'};
+ const ui={ru:{print:'Распечатать',back:'К кейсу',who:'Кто',open:'Читать кейс онлайн'},kk:{print:'Басып шығару',back:'Кейске қайту',who:'Кім',open:'Кейсті онлайн оқу'}}[lang]||{print:'Print',back:'Back',who:'Who',open:'Read the case online'};
  const li=a=>a.map(x=>`<li>${esc(f(x))}</li>`).join('');
  const opts=sh.options.map((x,i)=>{const t=f(x),k=t.indexOf('. ');return `<li><b>${'ABCD'[i]}. ${esc(t.slice(0,k+1))}</b> ${esc(t.slice(k+2))}</li>`;}).join('');
  const hor=plan.horizons.map(h=>`<tr><th rowspan="${h.items.length}">${esc(f(h.title))}</th>${h.items.map((it,i)=>`${i?'<tr>':''}<td class="who">${esc(f(it.who))}</td><td>${esc(f(it.what))}</td></tr>`).join('')}`).join('');
@@ -88,7 +88,11 @@ function sheetPage(item,lang,dir) {
   th, td { border: .6pt solid #9ba9a5; padding: 2.5px 5px; vertical-align: top; text-align: left; }
   th { width: 16mm; background: #eaf1ef; color: #173f50; font-size: 8.5pt; }
   td.who { width: 42mm; color: #17566e; font-weight: 700; }
-  .foot { margin-top: 8px; padding-top: 4px; border-top: .5pt solid #aeb8b5; display: flex; justify-content: space-between; gap: 10px; font-size: 8pt; color: #444; }
+${lang==='kk'?`  /* Kazakh text runs longer: a smaller table keeps the sheet on one A4 page. */
+  table { font-size: 8pt; line-height: 1.15; }
+  th { font-size: 7.5pt; }
+  td.who { width: 38mm; }
+`:''}  .foot { margin-top: 8px; padding-top: 4px; border-top: .5pt solid #aeb8b5; display: flex; justify-content: space-between; gap: 10px; font-size: 8pt; color: #444; }
   @media print {
     @page { size: A4 portrait; margin: 0; }
     html body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
