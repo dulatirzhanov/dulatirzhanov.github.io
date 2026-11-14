@@ -50,8 +50,12 @@
       '</form><p class="subscribe-note">Новые подборки появляются по мере готовности. Я использую адрес только для писем об обновлениях.</p></section>';
   }
 
+  function contactBlock() {
+    return '<section class="contact-block" aria-labelledby="contact-heading"><h2 id="contact-heading">Первый разговор</h2><p>Первый разговор бесплатный. Можно написать с простым вопросом.</p><div class="contact-actions"><a class="contact-write" href="/ru/#contacts">Написать</a><a href="/tools/ru/express-audit.html">Анкета школы</a></div></section>';
+  }
+
   function footer() {
-    return '' +
+    return contactBlock() +
       '<div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser built-in auto-translate.</p></div>' +
       '<footer class="lib-footer">' +
       '<div class="copyright">© 2026 Dulat Irzhanov</div>' +

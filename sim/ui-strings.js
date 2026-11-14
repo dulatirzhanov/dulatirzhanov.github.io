@@ -1,5 +1,10 @@
 const UI_STRINGS = {
   en: {
+    contactTitle: "First conversation",
+    contactText: "The first conversation is free. A simple question is reason enough to write.",
+    contactWrite: "Get in touch",
+    contactForm: "School questionnaire",
+
     backToHome: "← Back to Home",
     crumbHome: "Home",
     crumbsLabel: "Path",
@@ -34,6 +39,11 @@ const UI_STRINGS = {
     openMenu: "Open case menu"
   },
   ru: {
+    contactTitle: "Первый разговор",
+    contactText: "Первый разговор бесплатный. Можно написать с простым вопросом.",
+    contactWrite: "Написать",
+    contactForm: "Анкета школы",
+
     backToHome: "← На главную",
     crumbHome: "Главная",
     crumbsLabel: "Путь",
@@ -105,6 +115,11 @@ const UI_STRINGS = {
     openMenu: "Открыть меню кейса"
   },
   kk: {
+    contactTitle: "Алғашқы әңгіме",
+    contactText: "Алғашқы әңгіме тегін. Қарапайым сұрақпен де хабарласуға болады.",
+    contactWrite: "Хабарласу",
+    contactForm: "Мектеп сауалнамасы",
+
     backToHome: "← Басты бетке",
     crumbHome: "Басты бет",
     crumbsLabel: "Жол",

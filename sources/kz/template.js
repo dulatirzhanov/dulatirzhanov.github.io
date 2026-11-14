@@ -44,8 +44,12 @@
       '</form><p class="subscribe-note">Жаңа топтамалар дайын болуына қарай жарияланады. Email мекенжайын жаңартулар туралы хаттар үшін ғана пайдаланамын.</p></section>';
   }
 
+  function contactBlock() {
+    return '<section class="contact-block" aria-labelledby="contact-heading"><h2 id="contact-heading">Алғашқы әңгіме</h2><p>Алғашқы әңгіме тегін. Қарапайым сұрақпен де хабарласуға болады.</p><div class="contact-actions"><a class="contact-write" href="/kz/#contacts">Хабарласу</a><a href="/tools/kz/express-audit.html">Мектеп сауалнамасы</a></div></section>';
+  }
+
   function footer() {
-    return '' +
+    return contactBlock() +
       '<div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser built-in auto-translate.</p></div>' +
       '<footer class="lib-footer">' +
       '<div class="copyright">© 2026 Dulat Irzhanov</div>' +

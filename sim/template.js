@@ -15,6 +15,11 @@
     return CURRENT_LANG === "kk" ? "/kz/" : CURRENT_LANG === "ru" ? "/ru/" : "/";
   }
 
+  function contactBlock() {
+    const lang = CURRENT_LANG === "kk" ? "kz" : CURRENT_LANG === "ru" ? "ru" : "en";
+    return `<section class="contact-block" aria-labelledby="contact-heading"><h2 id="contact-heading">${s("contactTitle")}</h2><p>${s("contactText")}</p><div class="contact-actions"><a class="contact-write" href="${homePath()}#contacts">${s("contactWrite")}</a><a href="/tools/${lang}/express-audit.html">${s("contactForm")}</a></div></section>`;
+  }
+
   function languageSwitcher(caseId) {
     const suffix = caseId ? `case.html?id=${caseId}` : "";
     const kzClass = CURRENT_LANG === "kk" ? ' class="active"' : "";
@@ -104,6 +109,7 @@
         ${aboutBlock}
         ${hasReleaseOneContent ? subscribeBlock : ""}
         <div class="lang-note"><p><strong>EN:</strong> An English translation is planned for the future. You can use your browser's built-in auto-translate.</p></div>
+        ${contactBlock()}
         <footer class="lib-footer">
           <div class="copyright">© 2026 Dulat Irzhanov</div>
           <div class="footer-links">
@@ -454,6 +460,7 @@
               <a class="cta" href="mailto:${caseData.shareEmail}?subject=${emailSubject}">${s("shareButton")}</a>
               <span class="email-text">${s("shareEmailLabel")} ${caseData.shareEmail}</span>
             </div>
+            ${contactBlock()}
             <div class="content-footer">
                <a class="sidebar-back" href="${basePath()}" style="display:inline-block;margin-bottom:14px;">${s("backToLib")}</a>
               <div class="copyright">© 2026 Dulat Irzhanov</div>
@@ -492,6 +499,7 @@
           <div class="progress-label" id="progressLabel">0${s("progressLabel")}</div>
           <div class="sidebar-nav">${sidebarNav}</div>
           <a class="sidebar-back" href="${basePath()}">${s("backToLib")}</a>
+          <a class="sidebar-back" href="${homePath()}#contacts">${s("contactWrite")}</a>
           <div class="sidebar-footer">
             <div class="drawer-lang">${languageSwitcher(caseData.id)}</div>
             <div class="copyright">© 2026 Dulat Irzhanov</div>

@@ -1017,3 +1017,15 @@ textarea {
 @media (max-width: 700px) {
   .lang-switcher a { padding: 10px 8px; margin: 0; }
 }
+/* First contact remains visible before the proof cards on phones. */
+.home-page .hero-contact { max-width: 600px; margin: 18px auto 0; }
+.home-page .hero-contact p { margin: 0 0 12px; font-size: 18px; line-height: 1.45; }
+.hero-contact-button { min-height: 46px; padding: 10px 22px; border: 0; border-radius: 8px; background: var(--color-heading); color: var(--color-bg); cursor: pointer; font: inherit; font-weight: 700; }
+.hero-contact-button:focus-visible, .modal button:focus-visible, .modal a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+.modal { max-height: calc(100dvh - 40px); overflow-y: auto; }
+.blog-page nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+.blog-page nav a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 700px) {
+  .home-page .hero-contact { margin-top: 16px; }
+  .home-page .hero-contact p { font-size: 17px; }
+}

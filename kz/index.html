@@ -36,7 +36,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/site.css?v=8">
+<link rel="stylesheet" href="/site.css?v=9">
 <link rel="stylesheet" href="/home-motion.css?v=1">
 <link rel="stylesheet" href="/page-transition.css?v=1">
 
@@ -53,6 +53,10 @@
   <h1>Дулат Бауыржанұлы</h1>
   <p class="muted"><b>dulatedu.com</b></p>
   <p class="tagline">Білім берудегі басқарушылық шешімдер, қателіктің құнын бүкіл ұйым төлейтін кезде.</p>
+  <div class="hero-contact">
+    <p>Мектеп басшыларына басқару және акредиттеу мәселелерінде көмектесемін.</p>
+    <button class="hero-contact-button" id="openContactsHero" type="button">Хабарласу</button>
+  </div>
 
   <div class="proof-grid" aria-label="Сарапшылықты дәлелдейтін материалдар">
     <a class="proof-card" href="https://www.cois.org/about-cis/news/post/~board/perspectives-blog/post/me-and-my-laptop-on-how-we-became-a-cis-accreditation-team-leader?utm_source=mywebsite&amp;utm_medium=landing&amp;utm_campaign=pb&amp;utm_content=mywebsite" target="_blank" rel="noopener noreferrer">
@@ -70,8 +74,9 @@
   </div>
 
   <nav aria-label="Негізгі мәзір" class="nav">
-    <a href="/blog/">Блог</a>
+    <a href="/blog/?lang=kz">Блог</a>
     <a href="/sources/kz/">Дереккөздер</a>
+    <a href="/tools/kz/express-audit.html">Мектеп сауалнамасы</a>
     <button id="openContacts" type="button">Байланыс</button>
   </nav>
 
@@ -154,21 +159,7 @@
     </p>
   </div>
 
-  <script>
-    const openBtn = document.getElementById('openContacts');
-    const closeBtn = document.getElementById('closeContacts');
-    const modal = document.getElementById('contactsModal');
-    const overlay = document.getElementById('overlay');
-
-    function openModal() { modal.style.display = 'block'; overlay.style.display = 'block'; closeBtn.focus(); }
-    function closeModal() { modal.style.display = 'none'; overlay.style.display = 'none'; }
-    
-    openBtn.addEventListener('click', openModal);
-    document.getElementById('openContactsCta').addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
-  </script>
+  <script src="/contacts.js?v=1" defer></script>
 
   <script src="/home-motion.js?v=2" defer></script>
 
