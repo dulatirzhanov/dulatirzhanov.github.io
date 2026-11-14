@@ -986,3 +986,19 @@ details[open] > summary .pm::before { content: "\2212"; }
 .contact-actions .contact-write { padding: 10px 18px; border-radius: 8px; background: var(--color-heading); color: var(--color-bg); text-decoration: none; }
 .contact-actions a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 @media (max-width: 700px) { .contact-block { padding: 20px; } }
+
+/* --- Шаг «Что сделать»: план по срокам, фразы для разговора, печатный лист --- */
+.plan-horizon, .plan-say, .plan-sheet { margin: 28px 0 0; }
+.plan-horizon h3, .plan-say h3, .plan-sheet h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.3; color: var(--color-heading); }
+.plan-note { margin: 0 0 12px; font-size: 14.5px; line-height: 1.55; color: var(--color-body); max-width: 66ch; }
+.plan-list { margin: 0; padding: 0; list-style: none; counter-reset: plan; display: grid; gap: 12px; }
+.plan-list li { counter-increment: plan; position: relative; padding: 14px 16px 14px 48px; border: 1px solid var(--line-teal); border-radius: 8px; background: var(--color-surface); }
+.plan-list li::before { content: counter(plan); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--color-accent-strong); color: #fff; font-size: 13px; font-weight: 700; line-height: 24px; text-align: center; }
+.plan-what { font-size: 16px; line-height: 1.55; color: var(--color-ink); max-width: 66ch; }
+.plan-meta { display: grid; gap: 4px; margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--color-body); }
+.plan-meta b { color: var(--color-heading); }
+.say-item { margin: 0 0 14px; }
+.say-to { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--color-accent-strong); }
+.say-item blockquote { margin: 0; padding: 12px 16px; border-left: 3px solid var(--color-accent-strong); background: var(--color-surface); border-radius: 0 8px 8px 0; font-size: 16px; line-height: 1.6; color: var(--color-ink); max-width: 66ch; }
+.plan-sheet { padding: 18px 20px; border: 1px solid var(--line-teal); border-radius: 8px; background: var(--color-surface-soft); }
+.plan-sheet p { margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: var(--color-body); max-width: 60ch; }

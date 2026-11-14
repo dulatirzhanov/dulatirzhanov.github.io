@@ -258,6 +258,7 @@
       const readWords = scenes.reduce((a, sc) => a + wordsOf(f(sc.text)), 0)
         + (actions.length ? actions.reduce((a, ac) => a + wordsOf(f(ac.detail)), 0) / actions.length : 0) + 150
         + (caseData.analysisSections || []).reduce((a, sc) => a + wordsOf(f(sc.text)), 0) + 100;
+      const hasPlan = !!(caseData.actionPlan && caseData.actionPlan.intro && caseData.actionPlan.intro[CURRENT_LANG]);
       const readMinutes = Math.max(5, Math.round(readWords / 170 / 5) * 5);
 
       // Sidebar nav
@@ -275,6 +276,7 @@
         });
         sidebarNav += `<div class="nav-section-title">${s("conclusionSection")}</div>`;
         sidebarNav += `<div class="nav-item" data-pane="expert"><span class="check">✓</span><span>${s("expertLabel")}</span></div>`;
+        if (hasPlan) sidebarNav += `<div class="nav-item" data-pane="plan"><span class="check">✓</span><span>${s("planLabel")}</span></div>`;
         sidebarNav += `<div class="nav-item" data-pane="reflection"><span class="check">✓</span><span>${s("reflectionLabel")}</span></div>`;
         sidebarNav += `<div class="nav-item" data-pane="resources"><span class="check">✓</span><span>${s("resourcesLabel")}</span></div>`;
       }
@@ -424,9 +426,48 @@
             <h2>${s("expertLabel")}</h2>
             ${expertHtml}
             ${accHtml}
-            <div class="pane-nav"><a class="back-link" data-next="actionsOverview">${I.back}</a><a class="back-link primary" data-next="reflection">${s("next")}</a></div>
+            <div class="pane-nav"><a class="back-link" data-next="actionsOverview">${I.back}</a><a class="back-link primary" data-next="${hasPlan ? "plan" : "reflection"}">${s("next")}</a></div>
           </section>
         `;
+
+        // Action plan: what to do this week, month and year, what to say, printable sheet
+        if (hasPlan) {
+          const plan = caseData.actionPlan;
+          const horizonsHtml = (plan.horizons || []).map(h => `
+            <div class="plan-horizon">
+              <h3>${f(h.title)}</h3>
+              ${h.note ? `<p class="plan-note">${f(h.note)}</p>` : ""}
+              <ol class="plan-list">${(h.items || []).map(it => `
+                <li>
+                  <div class="plan-what">${f(it.what)}</div>
+                  <div class="plan-meta"><span><b>${s("planWho")}:</b> ${f(it.who)}</span><span><b>${s("planDone")}:</b> ${f(it.done)}</span></div>
+                </li>`).join("")}</ol>
+            </div>`).join("");
+          const say = caseData.sayPhrases;
+          const sayHtml = say && (say.items || []).length ? `
+            <div class="plan-say">
+              <h3>${s("planSayTitle")}</h3>
+              ${say.intro ? `<p class="plan-note">${f(say.intro)}</p>` : ""}
+              ${say.items.map(it => `<div class="say-item"><div class="say-to">${f(it.to)}</div><blockquote>${f(it.text)}</blockquote></div>`).join("")}
+            </div>` : "";
+          const sheetHtml = caseData.printSheet ? `
+            <div class="plan-sheet share-block">
+              <h3>${s("planSheetTitle")}</h3>
+              <p>${s("planSheetText")}</p>
+              <a class="cta" href="${basePath()}${caseData.id}-sheet.html" target="_blank" rel="noopener">${s("planSheetButton")}</a>
+            </div>` : "";
+          panesHtml += `
+            <section class="pane" data-id="plan">
+              <div class="eyebrow">${s("conclusionSection")}</div>
+              <h2>${s("planLabel")}</h2>
+              ${plan.intro ? `<p>${f(plan.intro)}</p>` : ""}
+              ${horizonsHtml}
+              ${sayHtml}
+              ${sheetHtml}
+              <div class="pane-nav"><a class="back-link" data-next="expert">${I.back}</a><a class="back-link primary" data-next="reflection">${s("next")}</a></div>
+            </section>
+          `;
+        }
 
         // Reflection questions
         let reflHtml = "";
@@ -446,7 +487,7 @@
             <div class="eyebrow">${s("conclusionSection")}</div>
             <h2>${s("reflectionLabel")}</h2>
             ${reflHtml}
-            <div class="pane-nav"><a class="back-link" data-next="expert">${I.back}</a><a class="back-link primary" data-next="resources">${s("next")}</a></div>
+            <div class="pane-nav"><a class="back-link" data-next="${hasPlan ? "plan" : "expert"}">${I.back}</a><a class="back-link primary" data-next="resources">${s("next")}</a></div>
           </section>
         `;
 
@@ -497,7 +538,7 @@
         ...scenes.map((_, i) => `scene${i}`),
         "actionsOverview",
         ...actions.map((_, i) => `action${i}`),
-        "expert", "reflection", "resources"
+        "expert", ...(hasPlan ? ["plan"] : []), "reflection", "resources"
       ] : ["main"];
 
       // Render DOM
@@ -566,7 +607,7 @@
       const stageDefs = [
         { label: I.stages[0], panes: ["intro", ...scenes.map((_, i) => `scene${i}`)] },
         { label: I.stages[1], panes: ["actionsOverview", ...actions.map((_, i) => `action${i}`)] },
-        { label: I.stages[2], panes: ["expert"] },
+        { label: I.stages[2], panes: hasPlan ? ["expert", "plan"] : ["expert"] },
         { label: I.stages[3], panes: ["reflection", "resources"] }
       ];
       function subLabel(p) {
@@ -574,6 +615,7 @@
         if (p === "actionsOverview") return I.overview;
         if (p === "reflection") return I.questions;
         if (p === "resources") return I.resources;
+        if (p === "plan") return s("planLabel");
         if (p.startsWith("scene")) return f(scenes[+p.slice(5)].heading);
         if (p.startsWith("action")) return f(actions[+p.slice(6)].label);
         if (p === "expert") return I.stages[2];
