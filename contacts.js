@@ -15,6 +15,10 @@
       modal.style.display = overlay.style.display = 'block';
       document.body.style.overflow = 'hidden';
       close.focus();
+      // Menu and bio buttons are tracked by analytics.js; include the new entry paths.
+      if (window.track && !['openContacts', 'openContactsCta'].includes(returnFocus.id)) {
+        window.track('contact_open', { source: returnFocus.id === 'openContactsHero' ? 'hero' : 'direct_link', page: location.pathname });
+      }
     } else {
       modal.style.display = overlay.style.display = 'none';
       document.body.style.overflow = previousOverflow || '';
