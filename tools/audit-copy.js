@@ -53,7 +53,9 @@
       notice: "Документ составлен по сведениям, предоставленным представителем школы. Он служит основой для первого разговора и не является заключением о качестве работы школы.",
       profile: "Профиль школы", managementRequest: "С чем обращается школа", deadline: "Срок решения", leadership: "Управление и рабочие системы", horizon: "Планы на два-пять лет",
       blankSubtitle: "Форма для заполнения от руки", blankInstruction: "Пишите кратко. Если места недостаточно, продолжите ответ на отдельном листе.",
-      emailSubject: "Анкета школы", source: "Форма: dulatedu.com"
+      emailSubject: "Анкета школы", source: "Форма: dulatedu.com",
+      brandLine: "Управленческие решения в образовании", confidential: "Конфиденциально", dateLabel: "Дата",
+      shortLabels: { school: "Школа", type: "Тип", founded: "Основана, учеников", curriculum: "Программа", owner: "Учредитель", principal: "Директор", licence: "Лицензия и аккредитации" }
     },
     kk: {
       title: "Мектеп сауалнамасы", eyebrow: "Алғашқы әңгіме алдында · тегін",
@@ -104,7 +106,11 @@
       notice: "Құжат мектеп өкілі ұсынған мәліметтер негізінде жасалды. Ол алғашқы әңгімеге дайындалуға арналған және мектеп жұмысының сапасы туралы қорытынды болып саналмайды.",
       profile: "Мектеп туралы мәлімет", managementRequest: "Мектептің хабарласу себебі", deadline: "Шешім қабылдау мерзімі", leadership: "Басқару және жұмыс жүйелері", horizon: "Екі-бес жылға арналған жоспарлар",
       blankSubtitle: "Қолмен толтыруға арналған нысан", blankInstruction: "Қысқа жазыңыз. Орын жетпесе, жауапты бөлек парақта жалғастырыңыз.",
-      emailSubject: "Мектеп сауалнамасы", source: "Нысан: dulatedu.com"
+      emailSubject: "Мектеп сауалнамасы", source: "Нысан: dulatedu.com",
+      brandLine: "Білім берудегі басқарушылық шешімдер", confidential: "Құпия", dateLabel: "Күні",
+      shortLabels: { school: "Мектеп", type: "Түрі", founded: "Құрылған жылы, оқушы саны", curriculum: "Бағдарлама", owner: "Құрылтайшы", principal: "Директор", licence: "Лицензия және акредиттеу" },
+      // в части браузеров нет казахских названий месяцев, дата собирается вручную
+      formatDate: d => `${d.getFullYear()} жылғы ${d.getDate()} ${["қаңтар","ақпан","наурыз","сәуір","мамыр","маусым","шілде","тамыз","қыркүйек","қазан","қараша","желтоқсан"][d.getMonth()]}`
     },
     en: {
       title: "School questionnaire", eyebrow: "Before the first conversation · free",
@@ -155,7 +161,9 @@
       notice: "This document is based on information supplied by a representative of the school. It supports an initial conversation and is not an evaluation of the quality of the school.",
       profile: "School profile", managementRequest: "Why the school is writing", deadline: "Decision deadline", leadership: "Governance and operating systems", horizon: "Plans for the next two to five years",
       blankSubtitle: "Form for handwritten completion", blankInstruction: "Keep your answers brief. If you need more space, continue on a separate sheet.",
-      emailSubject: "School questionnaire", source: "Form: dulatedu.com"
+      emailSubject: "School questionnaire", source: "Form: dulatedu.com",
+      brandLine: "Leadership decisions in education", confidential: "Confidential", dateLabel: "Date",
+      shortLabels: { school: "School", type: "Type", founded: "Founded, enrolment", curriculum: "Curriculum", owner: "Owner", principal: "Principal", licence: "Licence and accreditation" }
     }
   };
 })();

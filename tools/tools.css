@@ -286,59 +286,51 @@
   .print-footer a { color: #205c73; text-decoration: none; }
 }
 
+/* Печатная версия анкеты: бланк на A4, черный текст и тонкие линейки, ответы цветом.
+   PT Sans для всего текста: основной 10.5 pt, название 14 pt, разделы 11.5 pt, подписи полей 9.5 pt. */
 @media print {
-  @page { size: A4 portrait; margin: 12mm 13mm 14mm; }
-  .audit-view { max-width: none; padding: 0; background: #fff; color: #1f2826; font: 10.5pt/1.32 Arial, sans-serif; }
+  @page {
+    size: A4 portrait;
+    margin: 15mm 17mm 16mm;
+    @bottom-left { content: "dulatedu.com"; color: #333; font: 8pt "PT Sans", Arial, sans-serif; }
+    @bottom-right { content: counter(page) "/" counter(pages); color: #333; font: 8pt "PT Sans", Arial, sans-serif; }
+  }
+  .audit-view { max-width: none; padding: 0; background: #fff; color: #111; font: 10.5pt/1.3 "PT Sans", Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .audit-view > main > :not(.audit-print), .audit-view > .tool-nav, .audit-view > .tool-footer { display: none !important; }
-  .audit-print { display: block !important; padding-bottom: 0; }
+  .audit-print { display: block !important; padding: 0; }
   .audit-blank { display: none !important; }
   body.print-blank .audit-report { display: none !important; }
   body.print-blank .audit-blank { display: block !important; }
-  .audit-print-head { margin-bottom: 4mm; }
-  .audit-print-brand { display: flex; justify-content: space-between; padding-bottom: 2mm; border-bottom: .6pt solid #9eaaa6; color: #173f50; font-size: 8pt; font-weight: 800; letter-spacing: .12em; }
-  .audit-print-brand span { color: #6f8c22; font-weight: 700; }
-  .audit-print-title { display: flex; align-items: flex-end; justify-content: space-between; padding: 5mm 0 4mm; border-bottom: 2pt solid #205c73; }
-  .audit-print-title span { color: #6f8c22; font-size: 8pt; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-  .audit-print-title .audit-print-name { margin: 1.2mm 0 0; color: #173f50; font-size: 22pt; line-height: 1; }
-  .audit-print-title b { color: #59615f; font-size: 9pt; font-weight: 400; }
-  .audit-print-meta { display: grid; grid-template-columns: 1.5fr 1fr; gap: 6mm; padding: 3mm 0 0; }
-  .audit-print-meta div { display: grid; gap: .7mm; }
-  .audit-print-meta span { color: #6b7471; font-size: 7.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-  .audit-print-meta strong { color: #173f50; font-size: 11pt; }
-  .audit-print-notice { margin: 0 0 5mm; padding: 2.5mm 3mm; border-left: 2pt solid #8aa12c; background: #f3f5ee; color: #505955; font-size: 8.5pt; line-height: 1.3; }
-  #auditPrintAnswers section { break-inside: avoid; margin: 0 0 4mm; }
-  #auditPrintAnswers h2 { display: flex; align-items: center; gap: 2mm; margin: 0 0 2.5mm; padding-bottom: 1.5mm; border-bottom: .7pt solid #aeb9b5; color: #173f50; font-size: 13pt; }
-  #auditPrintAnswers h2 span { color: #7a9224; font-size: 8pt; letter-spacing: .06em; }
-  .print-profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; }
-  .print-profile-grid > div { display: grid; gap: .8mm; padding-bottom: 2mm; border-bottom: .4pt solid #d6dcda; }
-  .print-profile-grid .profile-wide { grid-column: 1 / -1; }
-  .print-profile-grid span { color: #69736f; font-size: 8pt; font-weight: 700; text-transform: uppercase; }
-  .print-profile-grid strong { color: #202825; font-size: 10pt; font-weight: 500; }
-  .print-highlight { padding: 4mm 4.5mm; border: 1pt solid #205c73; background: #f4f8f7; }
-  .print-highlight > span { color: #6f8c22; font-size: 8pt; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
-  .print-highlight > p { margin: 2mm 0 3mm; color: #173f50; font-size: 12pt; line-height: 1.38; }
-  .print-highlight > div { display: flex; gap: 3mm; padding-top: 2mm; border-top: .5pt solid #bdc9c5; font-size: 9pt; }
-  .print-highlight b { color: #68726e; }
-  .print-highlight strong { color: #202825; }
-  .print-response { break-inside: avoid; margin-bottom: 3mm; }
-  .print-response h3 { margin: 0 0 1mm; color: #40514b; font-size: 9pt; line-height: 1.3; }
-  .print-response p { margin: 0; color: #202825; font-size: 10.5pt; white-space: normal; }
-  .audit-print footer { display: flex; justify-content: space-between; margin-top: 4mm; padding-top: 1.5mm; border-top: .5pt solid #aeb8b5; color: #606966; font-size: 7.5pt; }
-  .audit-print footer a { color: #205c73; text-decoration: none; }
-  .audit-blank .audit-print-head { margin-bottom: 3mm; }
-  .audit-blank .audit-print-notice { margin-bottom: 4mm; }
-  #blankPrintAnswers { display: grid; gap: 3mm; }
-  .blank-question { break-inside: avoid; margin: 0 !important; }
-  .blank-question h2 { display: block !important; margin: 0 0 1.5mm !important; padding: 0 !important; border: 0 !important; color: #173f50 !important; font-size: 10pt !important; line-height: 1.3; }
-  .blank-question div { min-height: 11mm; background: repeating-linear-gradient(to bottom, transparent 0, transparent 7mm, #c7cfcc 7.2mm, transparent 7.4mm); border-bottom: .5pt solid #c7cfcc; }
-  .blank-question:nth-child(1) div,
-  .blank-question:nth-child(2) div,
-  .blank-question:nth-child(8) div,
-  .blank-question:nth-child(11) div,
-  .blank-question:nth-child(12) div,
-  .blank-question:nth-child(13) div,
-  .blank-question:nth-child(14) div { min-height: 18mm; }
-  .blank-question:nth-child(12) div,
-  .blank-question:nth-child(13) div { min-height: 38mm; }
-  .audit-blank footer { display: none; }
+
+  /* шапка: знак, имя, строка о роде занятий; справа гриф */
+  .form-masthead { display: flex; align-items: center; gap: 3.5mm; }
+  .form-mark { display: grid; place-items: center; width: 11mm; height: 11mm; background: #173f50; color: #fff; font: 700 13pt/1 "PT Serif", Georgia, serif; letter-spacing: .02em; }
+  .form-brand strong { display: block; color: #111; font-size: 15pt; font-weight: 700; letter-spacing: .04em; line-height: 1.1; text-transform: uppercase; }
+  .form-brand span { display: block; margin-top: .8mm; color: #173f50; font-size: 7.5pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .form-side { margin-left: auto; color: #333; font-size: 8pt; line-height: 1.4; text-align: right; }
+
+  .form-title { margin: 7mm 0 5mm; padding-bottom: 1.6mm; border-bottom: .8pt solid #111; }
+  .form-name { margin: 0; color: #111; font-size: 14pt; font-weight: 700; line-height: 1.2; }
+  .form-sub { margin: .8mm 0 0; color: #17566e; font-size: 10pt; }
+
+  .form-section { margin: 0 0 5.5mm; }
+  .form-section h2 { margin: 0 0 1.5mm; color: #111; font-size: 11.5pt; font-weight: 700; line-height: 1.25; break-after: avoid; }
+
+  /* поле: подпись на линейке, ответ цветом */
+  .form-row { display: flex; gap: 6mm; break-inside: avoid; }
+  .form-field { display: flex; flex: 1 1 100%; align-items: flex-end; gap: 2.5mm; min-width: 0; min-height: 8.2mm; padding-bottom: .9mm; border-bottom: .5pt solid #111; }
+  .form-field.is-half { flex-basis: 50%; }
+  .form-field.is-third { flex-basis: 33.3%; }
+  .form-label { flex: none; max-width: 60%; color: #111; font-size: 9.5pt; line-height: 1.25; }
+  .form-value { flex: 1; min-width: 0; color: #17566e; font-size: 10.5pt; line-height: 1.25; overflow-wrap: anywhere; }
+
+  /* развернутый ответ: вопрос, под ним текст на линейке */
+  .form-block { margin: 0 0 2.6mm; break-inside: avoid; }
+  .form-question { margin: 0; padding-top: 1.6mm; color: #111; font-size: 9.5pt; line-height: 1.3; }
+  .form-answer { min-height: 6.4mm; margin: 0; padding: .8mm 0 1.1mm; border-bottom: .5pt solid #111; color: #17566e; font-size: 10.5pt; line-height: 1.35; overflow-wrap: anywhere; }
+  .form-row + .form-block { margin-top: 1.4mm; }
+  .form-block i { display: block; height: 7.6mm; border-bottom: .5pt solid #111; }
+  .audit-blank .form-field { min-height: 9.6mm; }
+
+  .form-note { margin: 6mm 0 0; color: #444; font-size: 8pt; line-height: 1.35; break-inside: avoid; }
 }

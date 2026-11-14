@@ -20,6 +20,8 @@
   // Номера вопросов по порядку в audit-copy.js (с нуля).
   const Q = { reason: 0, tried: 1, deadline: 2, school: 3, type: 4, founded: 5, curriculum: 6, licence: 7, owner: 8, principal: 9, decisions: 10, team: 11, systems: 12, plans: 13, contact: 14 };
 
+  const formatDate = date => t.formatDate ? t.formatDate(date) : new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric" }).format(date);
+
   function escapeHtml(value) {
     return String(value || "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   }
@@ -42,24 +44,37 @@
     return `<section class="audit-section${section.wide ? " is-wide" : ""}"><div class="audit-section-head"><span>${sectionIndex + 1}</span><div><h2>${t.sections[sectionIndex].title}</h2><p>${section.note}</p></div></div><div class="audit-fields">${fields}</div></section>`;
   }).join("");
 
-  const printHead = subtitle => `<header class="audit-print-head"><div class="audit-print-brand">DULAT IRZHANOV <span>EDUCATION ADVISORY · dulatedu.com</span></div><div class="audit-print-title"><div><span>${subtitle}</span><p class="audit-print-name">${t.title}</p></div><b class="auditDate"></b></div>`;
-  const printFoot = subtitle => `<footer><span>${subtitle}</span><a href="https://dulatedu.com/">dulatedu.com</a></footer>`;
+  // Печатная версия сверстана как бланк: подпись поля стоит на линейке, ответ набран цветом.
+  const printHead = subtitle => `<header class="form-masthead"><div class="form-mark" aria-hidden="true">DI</div><div class="form-brand"><strong>Dulat Irzhanov</strong><span>${t.brandLine}</span></div><div class="form-side">${t.confidential}<br>dulatedu.com</div></header><div class="form-title"><p class="form-name">${t.title}</p><p class="form-sub">${subtitle} · <span class="auditDate"></span></p></div>`;
+
+  // items: ответы по порядку вопросов; blank: пустой бланк с линейками для письма от руки.
+  function printBody(items, blank) {
+    const text = index => items && items[index].answer ? escapeHtml(items[index].answer).replaceAll("\n", "<br>") : "";
+    const field = (label, index, size) => `<div class="form-field${size ? " is-" + size : ""}"><span class="form-label">${escapeHtml(label)}</span><span class="form-value">${text(index)}</span></div>`;
+    const block = (index, lines) => `<div class="form-block"><p class="form-question">${escapeHtml(questions[index][0])}</p>${blank ? "<i></i>".repeat(lines) : `<p class="form-answer">${text(index)}</p>`}</div>`;
+    const part = (title, body) => `<section class="form-section"><h2>${title}</h2>${body}</section>`;
+    const short = t.shortLabels;
+    return part(t.sections[0].title, block(Q.reason, 4) + block(Q.tried, 3) + `<div class="form-row">${field(t.deadline, Q.deadline)}</div>`)
+      + part(t.sections[1].title, `<div class="form-row">${field(short.school, Q.school)}</div><div class="form-row">${field(short.type, Q.type, "half")}${field(short.founded, Q.founded, "half")}</div><div class="form-row">${field(short.curriculum, Q.curriculum, "half")}${field(short.owner, Q.owner, "half")}</div><div class="form-row">${field(short.principal, Q.principal)}</div>` + block(Q.licence, 2))
+      + part(t.sections[2].title, block(Q.decisions, 2) + block(Q.team, 2) + block(Q.systems, 2) + block(Q.plans, 3))
+      + part(t.sections[3].title, `<div class="form-row">${field(t.preparedBy, Q.contact)}</div>`);
+  }
 
   app.innerHTML = `<div class="tool-view audit-view">
     <nav class="tool-nav"><a href="https://dulatedu.com/">dulatedu.com</a><span class="language-switch"><a href="${routes.ru}"${lang === "ru" ? ' aria-current="page"' : ""}>RU</a><a href="${routes.kk}"${lang === "kk" ? ' aria-current="page"' : ""}>KZ</a><a href="${routes.en}"${lang === "en" ? ' aria-current="page"' : ""}>EN</a></span></nav>
     <main><header class="tool-hero"><div class="tool-eyebrow">${t.eyebrow}</div><h1>${t.title}</h1><p class="tool-lede">${t.lede}</p><p class="privacy-note">${t.privacy}</p></header>
     <section class="audit-overview">${t.metrics.map(item => `<div><strong>${item[0]}</strong><span>${item[1]}</span></div>`).join("")}</section>
     <form id="auditForm" novalidate>${formSections}<section class="audit-complete"><div><h2>${t.complete}</h2><p id="completionText">${t.filled(0, total)}</p></div><div class="completion-bar"><span id="completionBar"></span></div><div class="audit-actions"><button type="button" class="button primary" id="sendWhatsApp">${t.sendWhatsApp}</button><button type="button" class="button" id="sendEmail">${t.sendEmail}</button></div><p class="audit-status" id="auditStatus" role="status" aria-live="polite" hidden></p><p class="email-note">${t.sendNote}</p><div class="audit-actions audit-actions-secondary"><button type="button" class="button" id="copyAnswers">${t.copy}</button><button type="button" class="button" id="printAudit">${t.print}</button><button type="button" class="button" id="printBlankAudit">${t.printBlank}</button><button type="button" class="button quiet" id="clearAudit">${t.clear}</button></div></section></form>
-    <section class="audit-print audit-report print-only">${printHead(t.reportSubtitle)}<div class="audit-print-meta"><div><span>${t.school}</span><strong id="auditSchool">${t.notGiven}</strong></div><div><span>${t.preparedBy}</span><strong id="auditPreparedBy">${t.notGiven}</strong></div></div></header><p class="audit-print-notice">${t.notice}</p><div id="auditPrintAnswers"></div>${printFoot(t.reportSubtitle)}</section>
-    <section class="audit-print audit-blank print-only">${printHead(t.blankSubtitle)}</header><p class="audit-print-notice">${t.blankInstruction}</p><div id="blankPrintAnswers"></div>${printFoot(t.blankSubtitle)}</section>
+    <section class="audit-print audit-report print-only">${printHead(t.reportSubtitle)}<div id="auditPrintAnswers"></div><p class="form-note">${t.notice}</p></section>
+    <section class="audit-print audit-blank print-only">${printHead(t.blankSubtitle)}<div id="blankPrintAnswers"></div><p class="form-note">${t.blankInstruction}</p></section>
     </main><footer class="tool-footer"><span>© 2026 Dulat Irzhanov</span><a href="https://dulatedu.com/">dulatedu.com</a></footer></div>`;
 
   const form = document.getElementById("auditForm");
+  const dateText = formatDate(new Date());
+  const pageStyle = document.head.appendChild(document.createElement("style"));
   const fields = Array.from(form.querySelectorAll("input[name], textarea[name]"));
   const status = document.getElementById("auditStatus");
   const answers = () => fields.map((field, index) => ({ question: questions[index][0], answer: field.value.trim() }));
-  const valueHtml = item => escapeHtml(item.answer || t.notGiven).replaceAll("\n", "<br>");
-
   function track(name, params) {
     if (typeof window.gtag === "function") window.gtag("event", name, params || {});
   }
@@ -96,16 +111,17 @@
     const completed = items.filter(item => item.answer).length;
     document.getElementById("completionText").textContent = t.filled(completed, total);
     document.getElementById("completionBar").style.width = `${completed / total * 100}%`;
-    document.getElementById("auditSchool").textContent = items[Q.school].answer || t.notGiven;
-    document.getElementById("auditPreparedBy").textContent = items[Q.contact].answer || t.notGiven;
-    const response = index => `<div class="print-response"><h3>${index + 1}. ${escapeHtml(items[index].question)}</h3><p>${valueHtml(items[index])}</p></div>`;
-    const profile = [Q.type, Q.founded, Q.curriculum, Q.owner, Q.licence, Q.principal];
-    document.getElementById("auditPrintAnswers").innerHTML = `<section class="print-highlight"><span>${t.managementRequest}</span><p>${valueHtml(items[Q.reason])}</p><div><b>${t.deadline}</b><strong>${valueHtml(items[Q.deadline])}</strong></div></section><section class="print-content-section">${response(Q.tried)}</section><section class="print-profile"><h2><span>01</span> ${t.profile}</h2><div class="print-profile-grid">${profile.map((index, position) => `<div${position > 3 ? ' class="profile-wide"' : ""}><span>${escapeHtml(items[index].question)}</span><strong>${valueHtml(items[index])}</strong></div>`).join("")}</div></section><section class="print-content-section"><h2><span>02</span> ${t.leadership}</h2>${response(Q.decisions)}${response(Q.team)}${response(Q.systems)}</section><section class="print-content-section"><h2><span>03</span> ${t.horizon}</h2>${response(Q.plans)}</section>`;
+    document.getElementById("auditPrintAnswers").innerHTML = printBody(items, false);
+    // строка в верхнем поле каждой страницы: школа и дата, как номер дела на бланке
+    // на пустом бланке название школы из черновика не печатается
+    const blankPrint = document.body.classList.contains("print-blank");
+    const running = [blankPrint ? "" : items[Q.school].answer, dateText].filter(Boolean).join("; ").replace(/[\\"\n\r]/g, " ");
+    pageStyle.textContent = `@media print { @page { @top-right { content: "${running}"; color: #333; font: 8pt "PT Sans", Arial, sans-serif; } } }`;
   }
 
   // В сообщение идут только вопросы, на которые есть ответ.
   function reportText() {
-    const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric" }).format(new Date());
+    const date = formatDate(new Date());
     const filled = answers().map((item, index) => ({ ...item, index })).filter(item => item.answer);
     return [t.title, date, "", ...filled.flatMap(item => [`${item.index + 1}. ${item.question}`, item.answer, ""]), t.source].join("\n");
   }
@@ -157,9 +173,8 @@
     track("school_form_send", { method: "email_copy" });
   }
 
-  const dateText = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(new Date());
   document.querySelectorAll(".auditDate").forEach(node => { node.textContent = dateText; });
-  document.getElementById("blankPrintAnswers").innerHTML = questions.map((question, index) => `<section class="blank-question"><h2>${index + 1}. ${escapeHtml(question[0])}</h2><div></div></section>`).join("");
+  document.getElementById("blankPrintAnswers").innerHTML = printBody(null, true);
 
   let started = false;
   fields.forEach(field => field.addEventListener("input", () => {
@@ -174,8 +189,8 @@
     track("school_form_send", { method: "copy" });
   });
   document.getElementById("printAudit").addEventListener("click", () => { document.body.classList.remove("print-blank"); update(); window.print(); track("school_form_send", { method: "print" }); });
-  document.getElementById("printBlankAudit").addEventListener("click", () => { document.body.classList.add("print-blank"); window.print(); });
-  window.addEventListener("afterprint", () => document.body.classList.remove("print-blank"));
+  document.getElementById("printBlankAudit").addEventListener("click", () => { document.body.classList.add("print-blank"); update(); window.print(); });
+  window.addEventListener("afterprint", () => { document.body.classList.remove("print-blank"); update(); });
   document.getElementById("clearAudit").addEventListener("click", () => {
     if (!window.confirm(t.confirmClear)) return;
     form.reset();
