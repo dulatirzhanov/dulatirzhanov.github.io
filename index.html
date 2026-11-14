@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Dulat Irzhanov | Leadership Decisions in Education</title>
-  <meta name="description" content="Dulat Irzhanov on leadership decisions in education when the cost of error becomes institutional. CIS accreditation experience, a published essay, and a cases library for school leaders.">
+  <meta name="description" content="Dulat Irzhanov on leadership decisions in education when the cost of error becomes institutional. Work with school heads and owners, first conversation free. CIS accreditation experience, a published essay, and a cases library for school leaders.">
   <meta name="author" content="Dulat Irzhanov">
   <meta name="keywords" content="Dulat Irzhanov, school development, CIS accreditation, ISS Astana, education in Kazakhstan, data-driven leadership, quality assurance, NIS, school improvement">
   <meta name="theme-color" content="#205c73">
@@ -33,7 +33,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/site.css?v=7">
+<link rel="stylesheet" href="/site.css?v=8">
 <link rel="stylesheet" href="/home-motion.css?v=1">
 <link rel="stylesheet" href="/page-transition.css?v=1">
 
@@ -61,11 +61,11 @@
   </p>
 
   <div class="proof-grid" aria-label="Selected proof of expertise">
-    <a class="proof-card" href="https://go.dulatedu.com/YBoW" target="_blank" rel="noopener noreferrer">
+    <a class="proof-card" href="https://www.cois.org/about-cis/news/post/~board/perspectives-blog/post/me-and-my-laptop-on-how-we-became-a-cis-accreditation-team-leader?utm_source=mywebsite&amp;utm_medium=landing&amp;utm_campaign=pb&amp;utm_content=mywebsite" target="_blank" rel="noopener noreferrer">
       <span>Published essay</span>
       <strong>CIS Perspectives</strong>
     </a>
-    <a class="proof-card" href="https://go.dulatedu.com/pmuL" target="_blank" rel="noopener noreferrer">
+    <a class="proof-card" href="https://youtu.be/z8PInhPn9qo?utm_source=youtube&amp;utm_medium=personalweb&amp;utm_campaign=podcast1" target="_blank" rel="noopener noreferrer">
       <span>School podcast</span>
       <strong>Why institutional design matters</strong>
     </a>
@@ -82,20 +82,29 @@
   </nav>
 
   <div id="overlay" class="overlay"></div>
-  <div id="contactsModal" class="modal">
-    <button class="close" id="closeContacts">×</button>
-<h2>Contacts</h2>
+  <div id="contactsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactsTitle">
+    <button class="close" id="closeContacts" type="button" aria-label="Close">×</button>
+    <h2 id="contactsTitle">Contacts</h2>
+    <p class="modal-note">The first conversation is free. A simple question is reason enough to write.</p>
 
 <a class="cta" href="mailto:d@dulatedu.com">Email</a>
-<a class="cta" href="https://wa.me/77761070090" target="_blank">WhatsApp</a>
+<a class="cta" href="https://wa.me/77761070090" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+<a class="cta" href="https://calendly.com/dulat/consultations" target="_blank" rel="noopener noreferrer">Book a time to talk</a>
   </div>
 
   <div class="bio">
     <p><strong>About</strong></p>
 
   <p>
-    I have worked in rural and urban schools, in the Nazarbayev Intellectual Schools
-    system and its central office, and I take part in international school accreditation processes.
+    I started as a teacher in a rural school, then worked in an urban school,
+    in the Nazarbayev Intellectual Schools system and its central office.
+    I now lead school development at ISS Astana.
+  </p>
+
+  <p>
+    At NIS I worked on CIS accreditation for a network of 22 schools and on a national
+    programme supporting 191 rural schools. As a Council of International Schools volunteer,
+    I lead teams that evaluate international schools in different countries.
   </p>
 
   <p>
@@ -108,6 +117,46 @@
     I work in Kazakh, Russian and English, so practice from abroad reaches readers
     already adapted to their context.
   </p>
+
+  <p class="bio-heading"><strong>Where I can help</strong></p>
+
+  <p>
+    School heads and owners write to me when a decision is already on the table
+    and reversing it later would be costly. Changes have been launched, yet the school
+    runs as before. The team is busy, yet the main issue goes unspoken.
+    Accreditation is underway and the doubt stays.
+  </p>
+
+  <ul class="bio-list">
+    <li><strong>Seeing the school clearly.</strong> An outside read of how the school is run, what its documents say and what is missing.</li>
+    <li><strong>Decisions and governance.</strong> Who decides what, how the founder, board and head of school share responsibility, and where decisions are recorded.</li>
+    <li><strong>Strategy and development plans.</strong> Turning intentions into priorities with owners and measures.</li>
+    <li><strong>Policies and procedures.</strong> A coherent set of documents that describes how the school actually works.</li>
+    <li><strong>Preparing for external review.</strong> Getting a school ready to be examined by an outside body, including international accreditation.</li>
+    <li><strong>Regular conversations with the head of school.</strong> A standing thinking partner on current decisions who knows international practice.</li>
+  </ul>
+
+  <p>
+    I do not evaluate for CIS accreditation any school I have advised.
+    Work with a school's documents begins with a confidentiality agreement.
+  </p>
+
+  <p class="bio-heading"><strong>First conversation</strong></p>
+
+  <p>
+    The first conversation is free and carries no obligation. A simple question is
+    reason enough to write, and a few lines by email or WhatsApp will do. If further
+    work is needed, we agree on terms after that conversation.
+  </p>
+
+  <p>
+    To prepare, you can fill in a <a href="/tools/en/express-audit.html">short questionnaire about the school</a>.
+    It takes about ten minutes.
+  </p>
+
+    <p class="cta-row">
+      <button class="cta-primary" id="openContactsCta" type="button">Get in touch</button>
+    </p>
   </div>
 
   <script>
@@ -120,12 +169,13 @@
     function closeModal() { modal.style.display = 'none'; overlay.style.display = 'none'; }
     
     openBtn.addEventListener('click', openModal);
+    document.getElementById('openContactsCta').addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', closeModal);
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
   </script>
 
-  <script src="/home-motion.js?v=1" defer></script>
+  <script src="/home-motion.js?v=2" defer></script>
 
   <footer class="site-footer">
     <p class="social-links">

@@ -14,8 +14,13 @@
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-in');
-      io.unobserve(entry.target);
+      // при прыжке вниз (клавиша End, якорь) элементы выше не пересекают экран: показываем их вместе с текущим
+      var upTo = below.indexOf(entry.target);
+      for (var i = 0; i <= upTo; i++) {
+        if (below[i].classList.contains('is-in')) continue;
+        below[i].classList.add('is-in');
+        io.unobserve(below[i]);
+      }
     });
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
 

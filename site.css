@@ -341,6 +341,18 @@ textarea {
   color: var(--color-body);
 }
 
+.home-page .bio a {
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-decoration-color: var(--line-accent);
+  text-underline-offset: 4px;
+}
+
+.home-page .bio a:hover,
+.home-page .bio a:focus-visible {
+  text-decoration-color: var(--color-accent);
+}
+
 .home-page .bio li strong {
   color: var(--color-heading);
 }
