@@ -151,7 +151,7 @@
       var id = new URLSearchParams(location.search).get("id");
       var topic = SOURCES_TOPICS.find(function (t) { return t.id === id; }) || SOURCES_TOPICS[0];
       var m = meta(topic.id);
-      document.title = topic.title + " | Дереккөздер кітапханасы | Дулат Иржанов";
+      document.title = topic.title + " | Дереккөздер кітапханасы | Дулат Бауыржанұлы";
       var steps = routeOf(topic);
       if (window.track) window.track("topic_open", { topic_id: topic.id, lang: "kk" });
       var total = topic.sources.length;
@@ -174,7 +174,7 @@
 
   window.SourcesIndex = {
     init: function () {
-      document.title = "Дереккөздер кітапханасы | Дулат Иржанов";
+      document.title = "Дереккөздер кітапханасы | Дулат Бауыржанұлы";
       var cards = SOURCES_TOPICS.map(function (t) {
         var m = meta(t.id);
         var first = routeOf(t);
