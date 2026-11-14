@@ -148,7 +148,7 @@
 
   window.SourcesTopic = {
     init: function () {
-      var id = new URLSearchParams(location.search).get("id") || window.SOURCES_DEFAULT_TOPIC_ID;
+      var id = window.SOURCES_DEFAULT_TOPIC_ID || new URLSearchParams(location.search).get("id");
       var topic = SOURCES_TOPICS.find(function (t) { return t.id === id; }) || SOURCES_TOPICS[0];
       if (/topic\.html$/.test(location.pathname)) { location.replace("/sources/kz/" + topic.id + ".html" + location.hash); return; }
       var m = meta(topic.id);

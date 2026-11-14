@@ -222,7 +222,7 @@
       document.body.classList.add("case-view");
 
       const params = new URLSearchParams(window.location.search);
-      const id = params.get("id") || window.SIM_DEFAULT_CASE_ID;
+      const id = window.SIM_DEFAULT_CASE_ID || params.get("id");
       const caseData = CASES_DATA.find(c => c.id === id);
 
       // Старый адрес case.html?id=... ведет на отдельную страницу кейса, если она есть

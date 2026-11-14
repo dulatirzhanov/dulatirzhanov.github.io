@@ -34,45 +34,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <!-- build-pages:start -->
-  <url>
-    <loc>https://dulatedu.com/sim/ru/case-001.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sim/kz/case-001.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sim/ru/case-002.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sim/kz/case-002.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sources/delegation.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sources/admissions.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sources/ai-policy.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sources/kz/delegation.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sources/kz/admissions.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://dulatedu.com/sources/kz/ai-policy.html</loc>
-    <lastmod>2026-11-15</lastmod>
-  </url>
+  <url><loc>https://dulatedu.com/sim/ru/case-001.html</loc></url>
+  <url><loc>https://dulatedu.com/sim/ru/case-002.html</loc></url>
+  <url><loc>https://dulatedu.com/sim/kz/case-001.html</loc></url>
+  <url><loc>https://dulatedu.com/sim/kz/case-002.html</loc></url>
+  <url><loc>https://dulatedu.com/sources/delegation.html</loc></url>
+  <url><loc>https://dulatedu.com/sources/admissions.html</loc></url>
+  <url><loc>https://dulatedu.com/sources/ai-policy.html</loc></url>
+  <url><loc>https://dulatedu.com/sources/kz/delegation.html</loc></url>
+  <url><loc>https://dulatedu.com/sources/kz/admissions.html</loc></url>
+  <url><loc>https://dulatedu.com/sources/kz/ai-policy.html</loc></url>
   <!-- build-pages:end -->
 </urlset>
