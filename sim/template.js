@@ -128,7 +128,7 @@
         </footer>
       `;
 
-      document.title = s("libraryTitle") + " | Dulat Irzhanov";
+      document.title = s("libraryTitle") + " | " + (CURRENT_LANG === "kk" ? "Дулат Бауыржанұлы" : "Дулат Иржанов");
 
       const howOpen = document.getElementById("howOpen");
       if (howOpen) {
@@ -573,7 +573,7 @@
         <main class="content"><nav class="crumbs" aria-label="Path"><a href="${homePath()}">${I.crumbHome}</a><span aria-hidden="true">/</span><a href="${basePath()}">${I.crumbCases}</a><span aria-hidden="true">/</span><span aria-current="page">${s("caseLabel")} ${caseIndex}</span></nav><header class="case-head"><div class="case-head-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div><h1 class="case-head-title">${f(caseData.title)}</h1><div class="case-head-byline">${CURRENT_LANG === "kk" ? "Дулат Бауыржанұлы" : CURRENT_LANG === "en" ? "Dulat Irzhanov" : "Дулат Иржанов"}${versionDate ? ` <span aria-hidden="true">·</span> ${s("versionLabel")} ${versionDate}` : ""}</div></header><nav class="stepper" id="stepper" aria-label="${I.stagesLabel}"></nav><div class="substeps" id="substeps"></div>${panesHtml}</main>
       `;
 
-      document.title = f(caseData.seoTitle) || f(caseData.title) + " | Dulat Irzhanov";
+      document.title = f(caseData.seoTitle) || f(caseData.title) + " | " + (CURRENT_LANG === "kk" ? "Дулат Бауыржанұлы" : "Дулат Иржанов");
 
       // Mobile drawer open/close
       const sidebar = document.getElementById("sidebar");
