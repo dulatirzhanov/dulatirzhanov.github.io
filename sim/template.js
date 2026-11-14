@@ -177,6 +177,7 @@
 
           return `
             <a class="card" href="${caseHref}">
+              <span class="tc-tile" aria-hidden="true"><span>${LX_().caseWord}</span><b>${String(CASES_DATA.indexOf(c) + 1).padStart(2, "0")}</b></span>
               <div class="tc-top"><span class="tc-count">${LX_().caseWord} ${CASES_DATA.indexOf(c) + 1} · ${chapter} · <span class="nw">${LX_().mins(caseMinutes(c, displayLang))}</span></span></div>
               <div class="title">${title}</div>
               <div class="excerpt">${firstSentence(excerpt)}</div>
@@ -569,7 +570,7 @@
             </div>
           </div>
         </nav>
-        <main class="content"><nav class="crumbs" aria-label="Path"><a href="${homePath()}">${I.crumbHome}</a><span aria-hidden="true">/</span><a href="${basePath()}">${I.crumbCases}</a><span aria-hidden="true">/</span><span aria-current="page">${s("caseLabel")} ${caseIndex}</span></nav><header class="case-head"><div class="case-head-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div><h1 class="case-head-title">${f(caseData.title)}</h1></header><nav class="stepper" id="stepper" aria-label="${I.stagesLabel}"></nav><div class="substeps" id="substeps"></div>${panesHtml}</main>
+        <main class="content"><nav class="crumbs" aria-label="Path"><a href="${homePath()}">${I.crumbHome}</a><span aria-hidden="true">/</span><a href="${basePath()}">${I.crumbCases}</a><span aria-hidden="true">/</span><span aria-current="page">${s("caseLabel")} ${caseIndex}</span></nav><header class="case-head"><div class="case-head-label">${s("caseLabel")} ${caseIndex} · ${f(caseData.chapter)}</div><h1 class="case-head-title">${f(caseData.title)}</h1><div class="case-head-byline">${CURRENT_LANG === "kk" ? "Дулат Бауыржанұлы" : CURRENT_LANG === "en" ? "Dulat Irzhanov" : "Дулат Иржанов"}${versionDate ? ` <span aria-hidden="true">·</span> ${s("versionLabel")} ${versionDate}` : ""}</div></header><nav class="stepper" id="stepper" aria-label="${I.stagesLabel}"></nav><div class="substeps" id="substeps"></div>${panesHtml}</main>
       `;
 
       document.title = f(caseData.seoTitle) || f(caseData.title) + " | Dulat Irzhanov";

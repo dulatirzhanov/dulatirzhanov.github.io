@@ -1,0 +1,478 @@
+/* =====================================================================
+   Case Library: editorial layer (журнальная верстка).
+   Подключается после sim.css и sim-motion.css и переопределяет их.
+   Ориентир: печатный журнал о менеджменте. Белая бумага, черная краска,
+   один красный акцент, антиква для чтения, гротеск для служебного.
+   Чтобы откатить: убрать <link sim-editorial.css> из оболочек sim/<язык>/.
+   ===================================================================== */
+
+/* --- Шрифт: Source Serif 4 (Adobe, SIL OFL 1.1), оси wght 200-900, opsz 8-60.
+       Казахские буквы лежат в подмножестве cyrillic-ext, Ұұ в cyrillic. --- */
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 200 900; font-display: swap;
+  src: url("/fonts/source-serif-4-cyrillic-ext.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 200 900; font-display: swap;
+  src: url("/fonts/source-serif-4-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 200 900; font-display: swap;
+  src: url("/fonts/source-serif-4-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 200 900; font-display: swap;
+  src: url("/fonts/source-serif-4-cyrillic-ext-italic.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 200 900; font-display: swap;
+  src: url("/fonts/source-serif-4-cyrillic-italic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 200 900; font-display: swap;
+  src: url("/fonts/source-serif-4-latin-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+/* --- Токены --- */
+:root {
+  --e-serif: "Source Serif 4", "PT Serif", Georgia, "Times New Roman", serif;
+  --e-sans: "PT Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --e-paper: #ffffff;
+  --e-paper-2: #f6f4f0;      /* врезки: «бумага потемнее» */
+  --e-ink: #231f20;          /* черная краска журнала */
+  --e-ink-2: #3d393a;        /* основной текст */
+  --e-muted: #6b6566;        /* подписи, даты */
+  --e-rule: #dcd8d2;         /* волосяная линейка */
+  --e-red: #b33333;          /* красная линейка и рубрики */
+  --e-red-ink: #9e2a2a;      /* красный для мелкого текста, контраст 6.9:1 */
+  --e-on-ink: #ffffff;
+  --chrome-muted: var(--e-muted);
+  --chrome-ink: var(--e-ink);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --e-paper: #161415;
+    --e-paper-2: #201d1e;
+    --e-ink: #efebe6;
+    --e-ink-2: #d6d0c9;
+    --e-muted: #a49d97;
+    --e-rule: #3a3536;
+    --e-red: #e0675c;
+    --e-red-ink: #ec8a80;
+    --e-on-ink: #161415;
+  }
+}
+
+/* --- Основа --- */
+html { background: var(--e-paper); }
+body.lib-view, body.case-view { background: var(--e-paper); color: var(--e-ink); font-family: var(--e-sans); }
+body.lib-view ::selection, body.case-view ::selection { background: rgba(179, 51, 51, .18); }
+body.lib-view a:focus-visible, body.case-view a:focus-visible,
+body.lib-view button:focus-visible, body.case-view button:focus-visible { outline: 2px solid var(--e-red); outline-offset: 3px; }
+
+.crumbs, .crumbs a { color: var(--e-muted); font-family: var(--e-sans); font-size: 13px; letter-spacing: .02em; }
+.crumbs [aria-current] { color: var(--e-ink); }
+.lang-switcher a { font-family: var(--e-sans); }
+.lang-switcher a.active { color: var(--e-red-ink) !important; } /* site.css ставит !important */
+
+/* =====================================================================
+   БИБЛИОТЕКА
+   ===================================================================== */
+body.lib-view { max-width: 980px; }
+
+/* Шапка как обложка: тонкая черная линейка, крупное светлое название,
+   под ним красная полоса и курсивный подзаголовок */
+body.lib-view > header { border-top: 1px solid var(--e-ink); padding-top: 22px; }
+body.lib-view h1 {
+  font-family: var(--e-serif);
+  font-weight: 300;
+  font-variation-settings: "opsz" 60;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--e-ink);
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+body.lib-view .subtitle {
+  position: relative;
+  max-width: 34em;
+  margin: 0 0 26px;
+  padding: 18px 0 0;
+  border: 0;
+  border-top: 5px solid var(--e-red);
+  font-family: var(--e-serif);
+  font-style: italic;
+  font-variation-settings: "opsz" 24;
+  font-size: clamp(19px, 2.4vw, 23px);
+  line-height: 1.45;
+  color: var(--e-ink-2);
+  text-wrap: pretty;
+}
+
+/* Три шага как оглавление номера: красные цифры, без кружков */
+.how-strip { gap: 8px 28px; margin: 0 0 14px; }
+.how-strip li { font-family: var(--e-sans); font-size: 14px; color: var(--e-ink-2); gap: 8px; }
+.how-strip li span {
+  width: auto; height: auto; border: 0; border-radius: 0;
+  font-family: var(--e-serif); font-size: 20px; font-weight: 600; line-height: 1;
+  color: var(--e-red);
+}
+.topic-updated { font-family: var(--e-sans); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--e-muted); margin: 0 0 28px; }
+
+details.about, .how-block { border-color: var(--e-rule); }
+details.about > summary, .how-block summary { font-family: var(--e-sans); font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--e-ink); }
+details.about > p { font-family: var(--e-serif); font-size: 18px; line-height: 1.6; color: var(--e-ink-2); }
+.pm, .how-block summary::after { color: var(--e-red); }
+.how-block summary small { color: var(--e-muted); text-transform: none; letter-spacing: 0; }
+
+/* Рубрика «Кейсы»: красный заголовок над черной линейкой */
+.list-tools { margin: 44px 0 0; }
+.cases-heading, .list-tools .cases-heading {
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--e-ink);
+  font-family: var(--e-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--e-red);
+}
+
+.filter-chip {
+  border-radius: 0; border-color: var(--e-rule); background: transparent;
+  color: var(--e-ink); font-family: var(--e-sans); font-size: 13px; letter-spacing: .04em;
+}
+.filter-chip.active, .filter-chip:hover { background: var(--e-ink); border-color: var(--e-ink); color: var(--e-on-ink); }
+
+/* Карточки как список в каталоге кейсов: слева «обложка» с номером,
+   справа рубрика, название, первая фраза. Разделители волосяные */
+.grid { gap: 0; }
+.card {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  column-gap: 28px;
+  row-gap: 0;
+  align-items: start;
+  padding: 28px 0;
+  border: 0;
+  border-bottom: 1px solid var(--e-rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.card > * { grid-column: 2; }
+.card > .tc-tile { grid-column: 1; grid-row: 1 / span 4; }
+.tc-tile {
+  display: flex; flex-direction: column; justify-content: space-between;
+  width: 112px; aspect-ratio: 1; padding: 10px 12px 8px;
+  border: 1.5px solid var(--e-ink);
+  color: var(--e-ink);
+  transition: background-color .2s ease, color .2s ease;
+}
+.tc-tile span { font-family: var(--e-sans); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.tc-tile b { font-family: var(--e-serif); font-weight: 300; font-variation-settings: "opsz" 60; font-size: 54px; line-height: .9; letter-spacing: -.02em; }
+.card:hover .tc-tile { background: var(--e-ink); color: var(--e-on-ink); }
+
+.card .tc-top { margin: 0 0 8px; }
+.card .tc-count { font-family: var(--e-sans); font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--e-red-ink); }
+.card .title {
+  font-family: var(--e-serif);
+  font-weight: 600;
+  font-variation-settings: "opsz" 36;
+  font-size: clamp(23px, 3vw, 29px);
+  line-height: 1.18;
+  letter-spacing: -.005em;
+  color: var(--e-ink);
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.card:hover .title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: var(--e-red); }
+.card .excerpt { font-family: var(--e-serif); font-size: 18px; line-height: 1.55; color: var(--e-ink-2); margin: 0 0 14px; max-width: 60ch; }
+.card .tc-foot { border-top: 0; padding-top: 0; }
+.card .tag { font-family: var(--e-sans); font-size: 12px; color: var(--e-muted); }
+.card .tc-cta { font-family: var(--e-sans); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--e-red-ink); }
+.card:hover .tc-cta { text-decoration: none; }
+.empty-state { font-family: var(--e-serif); color: var(--e-muted); }
+
+/* Как пользоваться: номера красной антиквой */
+.how-content .section-intro, .how-step p { font-family: var(--e-serif); font-size: 17px; color: var(--e-ink-2); }
+.how-step { border-color: var(--e-rule); }
+.how-step strong { font-family: var(--e-sans); color: var(--e-ink); }
+.how-step > span { background: none; border-radius: 0; color: var(--e-red); font-family: var(--e-serif); font-size: 22px; font-weight: 600; }
+.how-note { background: var(--e-paper-2); border-color: var(--e-rule); border-radius: 0; color: var(--e-ink-2); }
+
+/* Об авторе: колонка «об авторах» в конце статьи */
+.about-block {
+  margin-top: 44px;
+  padding: 22px 0 0;
+  border: 0;
+  border-top: 2px solid var(--e-ink);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.about-block img { border-radius: 0; filter: grayscale(1) contrast(1.05); }
+.about-block h2 { font-family: var(--e-sans); font-size: 15px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--e-red); }
+.about-block p { font-family: var(--e-serif); font-size: 17px; line-height: 1.55; color: var(--e-ink-2); }
+.about-block .about-method { font-style: italic; color: var(--e-muted); }
+
+/* Подписка и примечание о языке */
+.subscribe-label { font-family: var(--e-sans); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--e-ink); }
+.subscribe-form input[type="email"] { border-radius: 0; border: 0; border-bottom: 1px solid var(--e-ink); background: transparent; color: var(--e-ink); font-family: var(--e-serif); font-size: 17px; }
+.subscribe-form button { border-radius: 0; background: var(--e-ink); color: var(--e-on-ink); border-color: var(--e-ink); font-family: var(--e-sans); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 13px; }
+.subscribe-form button:hover { background: var(--e-red); border-color: var(--e-red); }
+.subscribe-note { color: var(--e-muted); }
+.lang-note { border-radius: 0; background: transparent; border-color: var(--e-rule); color: var(--e-muted); font-family: var(--e-sans); }
+
+/* Подвал как колонтитул журнала */
+.lib-footer, .content-footer, .case-page-footer {
+  border-top: 1px solid var(--e-ink);
+  color: var(--e-muted);
+  font-family: var(--e-sans);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.lib-footer .footer-links a, .content-footer .footer-links a, .case-page-footer .footer-links a, .sidebar-footer .footer-links a {
+  color: var(--e-ink); text-decoration: none; border-bottom: 1px solid var(--e-rule);
+}
+.lib-footer .footer-links a:hover, .content-footer .footer-links a:hover, .case-page-footer .footer-links a:hover { border-bottom-color: var(--e-red); color: var(--e-ink); }
+
+/* Блок «Первый разговор» */
+.contact-block { background: var(--e-paper-2); border-top: 2px solid var(--e-ink); border-radius: 0; }
+.contact-block h2 { font-family: var(--e-serif); font-weight: 400; font-variation-settings: "opsz" 40; font-size: 30px; color: var(--e-ink); }
+.contact-block p { font-family: var(--e-serif); font-size: 18px; color: var(--e-ink-2); }
+.contact-actions a { color: var(--e-ink); font-family: var(--e-sans); text-decoration-color: var(--e-red); }
+.contact-actions .contact-write { border-radius: 0; background: var(--e-ink); color: var(--e-on-ink); letter-spacing: .06em; text-transform: uppercase; font-size: 14px; }
+.contact-actions .contact-write:hover { background: var(--e-red); }
+
+/* =====================================================================
+   КЕЙС
+   ===================================================================== */
+body.case-view { max-width: 860px; }
+.content { max-width: 760px; }
+
+/* Шапка кейса как первая полоса статьи */
+.case-head { margin: 0 0 30px; padding-top: 18px; border-top: 5px solid var(--e-red); }
+.case-head-label { font-family: var(--e-sans); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--e-muted); margin: 0 0 12px; }
+.case-head-title {
+  font-family: var(--e-serif);
+  font-weight: 300;
+  font-variation-settings: "opsz" 60;
+  font-size: clamp(34px, 5.6vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -.012em;
+  color: var(--e-ink);
+  text-wrap: balance;
+}
+.case-head-byline { margin-top: 14px; font-family: var(--e-sans); font-size: 15px; color: var(--e-ink-2); }
+.case-head-byline span { color: var(--e-rule); margin: 0 4px; }
+
+/* Полоса этапов: тонкие линейки, текущий экран красный */
+.seg-label { font-family: var(--e-sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--e-muted); }
+.seg-group.current .seg-label { color: var(--e-ink); }
+.seg-group.done .seg-label { color: var(--e-ink-2); }
+.seg { color: var(--e-ink); }
+.seg::before { border-radius: 0; height: 3px; top: 21px; }
+.seg.current::before { top: 19px; height: 7px; background: var(--e-red); }
+.seg-check { color: var(--e-red); }
+.seg-letter { font-family: var(--e-sans); color: var(--e-muted); }
+.seg::after { border-radius: 0; background: var(--e-ink); color: var(--e-on-ink); border: 0; font-family: var(--e-sans); }
+.seg-caption, .next-hint { font-family: var(--e-sans); color: var(--e-muted); }
+.seg-count { color: var(--e-ink); }
+.substeps { border-bottom: 1px solid var(--e-rule); padding-bottom: 14px; margin-bottom: 34px; }
+.substeps:empty { border: 0; padding: 0; }
+.substeps .chip { border-radius: 0; font-family: var(--e-sans); border-color: var(--e-rule); color: var(--e-ink-2); }
+.substeps .chip.active { background: var(--e-ink); border-color: var(--e-ink); color: var(--e-on-ink); }
+
+/* Текст: антиква, длина строки около 64 знаков, переносы */
+.pane { hyphens: auto; -webkit-hyphens: auto; }
+.content p, .pane p {
+  font-family: var(--e-serif);
+  font-size: 19px;
+  line-height: 1.62;
+  color: var(--e-ink-2);
+  max-width: 64ch;
+  text-wrap: pretty;
+}
+.pane .lead-par, .intro-lead {
+  font-family: var(--e-serif);
+  font-style: italic;
+  font-variation-settings: "opsz" 24;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--e-ink);
+  max-width: 34em;
+}
+.content h2 {
+  font-family: var(--e-serif);
+  font-weight: 400;
+  font-variation-settings: "opsz" 48;
+  font-size: clamp(27px, 3.6vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -.008em;
+  color: var(--e-ink);
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+.content h3, .plan-horizon h3, .plan-say h3, .plan-sheet h3 {
+  font-family: var(--e-sans); font-weight: 700; font-size: 19px; color: var(--e-ink);
+}
+
+/* Рубрики внутри текста: красный гротеск */
+.eyebrow, .analysis-label, .reflection-section-title, .say-to {
+  font-family: var(--e-sans); font-weight: 700; letter-spacing: .1em; color: var(--e-red-ink);
+}
+
+/* Врезки («Коротко о главном» в журнале): черная линейка сверху,
+   красный заголовок с линейкой, текст гротеском. Углы прямые */
+.intro-card, .facts, .analysis-application, .actions-guidance, .plan-sheet, .share-block, .bridge-question {
+  border: 0;
+  border-top: 2px solid var(--e-ink);
+  border-radius: 0;
+  background: var(--e-paper-2);
+  box-shadow: none;
+  padding: 18px 22px 20px;
+}
+.intro-label, .facts-label, .takeaway-label {
+  font-family: var(--e-sans);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--e-red);
+  padding-bottom: 8px;
+  margin: 0 0 12px;
+  border-bottom: 1px solid var(--e-red);
+}
+.intro-card li, .facts dl div, .actions-guidance p, .plan-sheet p, .share-block p, .feedback-questions li {
+  font-family: var(--e-sans); font-size: 16px; line-height: 1.5; color: var(--e-ink-2);
+}
+.intro-card ol { padding-left: 20px; }
+.intro-card li::marker { color: var(--e-red); font-weight: 700; }
+.intro-time { font-family: var(--e-sans); color: var(--e-muted); }
+.intro-nav-hint { border-top-color: var(--e-rule) !important; font-family: var(--e-sans) !important; font-size: 14px !important; }
+.facts dt { color: var(--e-muted); }
+.facts dd { color: var(--e-ink); }
+.actions-guidance strong { font-family: var(--e-sans); color: var(--e-ink); }
+.bridge-question { font-family: var(--e-serif); font-weight: 600; font-size: 19px; color: var(--e-ink); border-left: 0; }
+
+/* Главное: вынос между линейками, как цитата на полосе */
+.takeaway {
+  margin: 8px 0 34px;
+  padding: 16px 0 18px;
+  border: 0;
+  border-top: 1px solid var(--e-ink);
+  border-bottom: 1px solid var(--e-ink);
+  border-radius: 0;
+  background: transparent;
+}
+.takeaway-label { border-bottom: 0; padding-bottom: 0; margin-bottom: 8px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--e-red-ink); }
+.takeaway p { font-family: var(--e-serif); font-style: italic; font-variation-settings: "opsz" 32; font-size: 23px; line-height: 1.42; color: var(--e-ink); }
+
+.pull-quote {
+  margin: 30px 0; padding: 18px 0;
+  border: 0; border-top: 1px solid var(--e-ink); border-bottom: 1px solid var(--e-ink); border-radius: 0;
+  background: transparent;
+  font-family: var(--e-serif); font-style: italic; font-size: 23px; line-height: 1.42; color: var(--e-ink);
+}
+.pull-quote .source { font-family: var(--e-sans); font-style: normal; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--e-muted); }
+
+/* Разбор: разделы через волосяную линейку */
+.analysis-section + .analysis-section { border-top-color: var(--e-rule); }
+.analysis-practice { border-left: 2px solid var(--e-red); }
+details.analysis-section > summary.analysis-label { font-family: var(--e-sans); font-size: 13px; }
+
+/* Варианты A-D: список, как оглавление */
+.actions-list { gap: 0; border-top: 2px solid var(--e-ink); }
+.action-row {
+  border: 0; border-bottom: 1px solid var(--e-rule); border-radius: 0;
+  background: transparent; box-shadow: none;
+  padding: 16px 0;
+}
+.action-row .label { font-family: var(--e-serif); font-weight: 600; font-variation-settings: "opsz" 28; font-size: 21px; color: var(--e-ink); }
+.action-row .desc { font-family: var(--e-sans); font-size: 14.5px; color: var(--e-muted); }
+.action-row button {
+  border-radius: 0; background: transparent; border: 1px solid var(--e-ink); color: var(--e-ink);
+  font-family: var(--e-sans); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase;
+}
+.action-row button:hover { background: var(--e-ink); color: var(--e-on-ink); }
+
+/* Вопросы для размышления и план: номера красной антиквой */
+.reflection-list li { font-family: var(--e-serif); font-size: 19px; color: var(--e-ink-2); padding-left: 40px; }
+.reflection-list li::before {
+  width: auto; height: auto; border-radius: 0; background: none;
+  font-family: var(--e-serif); font-size: 24px; font-weight: 600; line-height: 1; color: var(--e-red); top: 2px;
+}
+.plan-list { gap: 0; border-top: 2px solid var(--e-ink); }
+.plan-list li { border: 0; border-bottom: 1px solid var(--e-rule); border-radius: 0; background: transparent; padding: 16px 0 16px 46px; }
+.plan-list li::before {
+  width: auto; height: auto; border-radius: 0; background: none; left: 0; top: 14px;
+  font-family: var(--e-serif); font-size: 26px; font-weight: 600; line-height: 1; color: var(--e-red);
+}
+.plan-what { font-family: var(--e-serif); font-size: 18.5px; color: var(--e-ink); }
+.plan-meta { font-family: var(--e-sans); color: var(--e-muted); }
+.plan-meta b { color: var(--e-ink); }
+.plan-note { font-family: var(--e-sans); color: var(--e-muted); }
+.say-item blockquote {
+  border-left: 2px solid var(--e-red); border-radius: 0; background: transparent;
+  font-family: var(--e-serif); font-style: italic; font-size: 19px; color: var(--e-ink);
+}
+
+/* Источники и раскрывающиеся блоки */
+.resource-list a { color: var(--e-ink); text-decoration: underline; text-decoration-color: var(--e-red); text-underline-offset: 3px; font-family: var(--e-serif); font-size: 18px; }
+.accreditation-block { border-color: var(--e-rule); }
+.accreditation-block summary { font-family: var(--e-sans); color: var(--e-ink); }
+.accreditation-block summary::after { color: var(--e-red); }
+.accreditation-disclaimer { border-left: 2px solid var(--e-red); background: var(--e-paper-2); color: var(--e-ink-2); font-family: var(--e-sans); }
+.accreditation-note { font-family: var(--e-serif); color: var(--e-ink-2); }
+
+/* Кнопки «Назад / Дальше»: прямоугольные, основная черная */
+.pane-nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--e-rule); }
+.pane-nav .back-link {
+  border-radius: 0; border: 1px solid var(--e-ink); background: transparent; color: var(--e-ink);
+  font-family: var(--e-sans); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+}
+.pane-nav .back-link:hover { background: var(--e-paper-2); }
+.pane-nav .back-link.primary { background: var(--e-ink); border-color: var(--e-ink); color: var(--e-on-ink); }
+.pane-nav .back-link.primary:hover { background: var(--e-red); border-color: var(--e-red); }
+.share-block .cta { border-radius: 0; border-color: var(--e-ink); background: transparent; color: var(--e-ink); font-family: var(--e-sans); }
+.share-block .cta:hover { background: var(--e-ink); color: var(--e-on-ink); }
+
+/* Меню на телефоне */
+.case-topbar { background: var(--e-paper); border-bottom: 1px solid var(--e-ink); }
+.case-topbar .topbar-title { font-family: var(--e-serif); font-weight: 600; color: var(--e-ink); }
+.case-topbar .hamburger { border-radius: 0; background: transparent; border-color: var(--e-ink); color: var(--e-ink); }
+.case-topbar .topbar-progress { background: var(--e-rule); }
+.case-topbar .topbar-progress > span, .progress-fill { background: var(--e-red); }
+.sidebar { background: var(--e-paper); border-color: var(--e-rule); border-radius: 0; }
+.sidebar-title { font-family: var(--e-serif); font-weight: 600; color: var(--e-ink); }
+.sidebar .case-label, .nav-section-title, .case-version { font-family: var(--e-sans); color: var(--e-muted); }
+.progress-track { background: var(--e-rule); border-radius: 0; }
+.progress-label { color: var(--e-red-ink); }
+.nav-item { color: var(--e-ink-2); border-radius: 0; }
+.nav-item:hover { background: var(--e-paper-2); }
+.nav-item.active { background: var(--e-paper-2); color: var(--e-ink); box-shadow: inset 2px 0 0 var(--e-red); }
+.nav-item .check { border-color: var(--e-rule); }
+.nav-item.visited .check { background: var(--e-ink); border-color: var(--e-ink); color: var(--e-on-ink); }
+.sidebar-back { color: var(--e-ink); }
+.sidebar-footer { border-top-color: var(--e-rule); color: var(--e-muted); }
+
+/* =====================================================================
+   ТЕЛЕФОН
+   ===================================================================== */
+@media (max-width: 700px) {
+  body.lib-view > header { padding-top: 16px; }
+  .card { grid-template-columns: 64px minmax(0, 1fr); column-gap: 16px; padding: 22px 0; }
+  .tc-tile { width: 64px; padding: 6px 7px 5px; }
+  .tc-tile span { font-size: 8.5px; letter-spacing: .1em; }
+  .tc-tile b { font-size: 30px; }
+  .card .excerpt { font-size: 17px; }
+  .card .tc-foot { flex-direction: row; align-items: center; }
+  .content p, .pane p { font-size: 18px; }
+  .pane .lead-par, .intro-lead { font-size: 20px; }
+  .takeaway p, .pull-quote { font-size: 21px; }
+  .intro-card, .facts, .analysis-application, .actions-guidance, .plan-sheet, .share-block, .bridge-question { padding: 16px 16px 18px; }
+  .case-head { padding-top: 14px; margin-bottom: 24px; }
+}
+@media (max-width: 340px) {
+  .card { grid-template-columns: minmax(0, 1fr); }
+  .card > * { grid-column: 1; }
+  .card > .tc-tile { display: none; }
+}
