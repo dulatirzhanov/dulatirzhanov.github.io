@@ -218,6 +218,8 @@
       }
 
       const displayLang = caseData.availableLangs.includes(CURRENT_LANG) ? CURRENT_LANG : caseData.availableLangs[0];
+      const track = (name, extra) => { if (window.track) window.track(name, Object.assign({ case_id: caseData.id, lang: CURRENT_LANG }, extra || {})); };
+      track("case_open");
 
       function f(obj) {
         if (!obj) return "";
@@ -592,6 +594,10 @@
 
       function showPane(paneId, push, viaKey) {
         document.body.classList.toggle("nav-key", !!viaKey);
+        if (!visited.has(paneId)) {
+          if (/^action[0-9]+$/.test(paneId)) track("case_option_open", { option: paneId });
+          else if (paneId === "expert") track("case_analysis_open");
+        }
         if (push !== false && location.hash !== "#" + paneId) history.pushState({ pane: paneId }, "", "#" + paneId);
         panes.forEach(p => p.classList.toggle("active", p.dataset.id === paneId));
         navItems.forEach(n => n.classList.toggle("active", n.dataset.pane === paneId));

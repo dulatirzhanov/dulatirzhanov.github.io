@@ -149,6 +149,7 @@
       var m = meta(topic.id);
       document.title = topic.title + " | Дереккөздер кітапханасы | Дулат Иржанов";
       var steps = routeOf(topic);
+      if (window.track) window.track("topic_open", { topic_id: topic.id, lang: "kk" });
       var total = topic.sources.length;
 
       document.body.innerHTML = '' +
