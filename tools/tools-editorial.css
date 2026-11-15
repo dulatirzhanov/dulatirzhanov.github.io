@@ -149,8 +149,12 @@ html, body { background: var(--e-paper); }
    линейке, ответ на той же линейке, короткие факты по два поля в строке.
    Меняется только оформление. Цвета заданы значениями, не токенами:
    на бумаге темная тема не применяется.
-   Ответы: по умолчанию #9E2A2A PT Sans (вариант A); вариант B,
-   класс body.answers-serif: краска #231F20 шрифтом Source Serif 4.
+   Пустой бланк (.audit-blank, .form-*): бланк по образцу HKS.
+   Заполненная анкета (.audit-report, .rep-*): полоса журнала по второй
+   странице образца: слева повод и контакт, справа таблица фактов и ответы
+   об управлении, красные заголовки с черной линейкой. Ответы набраны
+   краской #231F20 шрифтом Source Serif 4; вариант body.answers-red
+   красит их в #9E2A2A.
    ===================================================================== */
 @media print {
   @page {
@@ -193,11 +197,50 @@ html, body { background: var(--e-paper); }
   .form-answer { border-bottom: .5pt solid #231f20; }
   .form-block i { border-bottom: .5pt solid #231f20; }
 
-  /* ответы цветом: вариант A */
-  .form-value, .form-answer { color: #9e2a2a; font: 400 10.5pt/1.3 "PT Sans", Arial, sans-serif; }
-  /* вариант B: краска и Source Serif 4 */
-  body.answers-serif .form-value,
-  body.answers-serif .form-answer { color: #231f20; font: 400 9.6pt/1.26 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 14; }
-
   .form-note { margin-top: 3.5mm; color: #6b6566; font: 400 8pt/1.35 "PT Sans", Arial, sans-serif; }
+
+  /* ---------- заполненная анкета: полоса журнала ---------- */
+  .audit-report { position: relative; display: flex !important; flex-direction: column; min-height: 252mm; padding-left: 5.5mm; color: #231f20; }
+  .rep-head, .rep-cols { display: grid; grid-template-columns: 31% minmax(0, 1fr); align-items: stretch; }
+  .rep-cols { flex: 1 1 auto; }
+  .rep-head { margin: 4mm 0 10mm; }
+  .rep-head-main { grid-column: 2; margin-left: 3mm; padding-top: 3mm; border-top: 1.5pt solid #b33333; }
+  .rep-title { margin: 0; color: #231f20; font: 400 21pt/1.12 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 36; letter-spacing: -.005em; }
+  .rep-sub { margin: 1.6mm 0 0; color: #3d393a; font: 400 11.5pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 14; }
+
+  .rep-left { padding-right: 4mm; }
+  .rep-right { padding-left: 3mm; border-left: .25pt solid #231f20; }
+  .rep-cols h2 { margin: 0 0 2.6mm; padding-bottom: 1.3mm; border-bottom: .5pt solid #231f20; color: #b33333; font: 700 16pt/1.1 "PT Sans", Arial, sans-serif; letter-spacing: -.01em; }
+  .rep-cols .rep-h2-next { margin-top: 8mm; }
+
+  .rep-qa { margin: 0 0 3.2mm; break-inside: avoid; }
+  .rep-qa h3 { margin: 0 0 .9mm; color: #231f20; font: 700 8.3pt/1.25 "PT Sans", Arial, sans-serif; }
+  .rep-qa p { margin: 0; color: #231f20; font: 400 9.6pt/1.42 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 11; hyphens: auto; overflow-wrap: anywhere; }
+  .rep-school { margin: 0 0 3mm; color: #231f20; font: 400 8.6pt/1.35 "PT Sans", Arial, sans-serif; }
+  .rep-school b { font-weight: 700; }
+
+  .rep-table { width: 100%; margin: 0 0 1mm; border-collapse: collapse; table-layout: fixed; }
+  .rep-table thead th { padding: 1.6mm 2mm 1.3mm 0; border-bottom: .5pt solid #231f20; color: #231f20; font: 700 7.4pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .09em; text-align: left; text-transform: uppercase; }
+  .rep-table thead th:first-child, .rep-table tbody th { width: 31%; }
+  .rep-table tbody th, .rep-table tbody td { padding: 1.9mm 2mm 1.9mm 0; border-top: .25pt solid #231f20; vertical-align: top; text-align: left; }
+  .rep-table tbody tr:first-child th, .rep-table tbody tr:first-child td { border-top: 0; }
+  .rep-table tbody th { color: #231f20; font: 400 8.4pt/1.3 "PT Sans", Arial, sans-serif; }
+  .rep-table tbody td { color: #231f20; font: 400 9.4pt/1.35 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 11; hyphens: auto; overflow-wrap: anywhere; }
+
+  .rep-text { column-count: 2; column-gap: 5mm; }
+  .rep-note { margin: 6mm 0 0; padding-top: 2mm; border-top: .25pt solid #231f20; color: #6b6566; font: 400 7.4pt/1.4 "PT Sans", Arial, sans-serif; break-inside: avoid; }
+  .rep-vert { position: absolute; bottom: 0; left: 0; margin: 0; color: #231f20; font: 700 5.8pt/1 "PT Sans", Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+  body.answers-red .rep-qa p, body.answers-red .rep-table tbody td { color: #9e2a2a; }
+
+  /* длинные ответы: размер уменьшается ступенями, см. data-rep-size в express-audit.js */
+  body[data-rep-size="m"] .rep-qa p, body[data-rep-size="m"] .rep-table tbody td { font-size: 8.8pt; line-height: 1.36; }
+  body[data-rep-size="m"] .rep-qa { margin-bottom: 2.6mm; }
+  body[data-rep-size="s"] .rep-qa p, body[data-rep-size="s"] .rep-table tbody td { font-size: 8pt; line-height: 1.32; }
+  body[data-rep-size="s"] .rep-qa h3 { font-size: 7.6pt; }
+  body[data-rep-size="s"] .rep-qa { margin-bottom: 2.2mm; }
+  body[data-rep-size="s"] .rep-table tbody th, body[data-rep-size="s"] .rep-table tbody td { padding-top: 1.4mm; padding-bottom: 1.4mm; }
+  body[data-rep-size="xs"] .rep-qa p, body[data-rep-size="xs"] .rep-table tbody td { font-size: 7.5pt; line-height: 1.28; }
+  body[data-rep-size="xs"] .rep-qa h3, body[data-rep-size="xs"] .rep-table tbody th { font-size: 7.2pt; }
+  body[data-rep-size="xs"] .rep-qa { margin-bottom: 1.8mm; }
+  body[data-rep-size="xs"] .rep-table tbody th, body[data-rep-size="xs"] .rep-table tbody td { padding-top: 1.1mm; padding-bottom: 1.1mm; }
 }

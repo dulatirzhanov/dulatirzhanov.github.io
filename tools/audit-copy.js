@@ -54,7 +54,7 @@
       profile: "Профиль школы", managementRequest: "С чем обращается школа", deadline: "Срок принятия решения", leadership: "Управление и рабочие системы", horizon: "Планы на два-пять лет",
       blankSubtitle: "Форма для заполнения", blankInstruction: "Пишите кратко. Если места недостаточно, продолжите ответ на отдельном листе.",
       emailSubject: "Анкета школы", source: "Форма: dulatedu.com",
-      brandLine: "Управленческие решения в образовании", confidential: "Конфиденциально", dateLabel: "Дата",
+      brandLine: "Управленческие решения в образовании", confidential: "Конфиденциально", dateLabel: "Дата", pageWord: "стр.", factHead: ["Параметр", "Сведения"],
       shortLabels: { school: "Школа", type: "Тип", founded: "Год основания, число учеников", curriculum: "Программа", owner: "Учредитель", principal: "Директор", licence: "Лицензия и аккредитации" }
     },
     kk: {
@@ -107,7 +107,7 @@
       profile: "Мектеп туралы мәлімет", managementRequest: "Мектептің хабарласу себебі", deadline: "Шешім қабылдау мерзімі", leadership: "Басқару және жұмыс жүйелері", horizon: "Екі-бес жылға арналған жоспарлар",
       blankSubtitle: "Толтыруға арналған нысан", blankInstruction: "Қысқа жазыңыз. Орын жетпесе, жауапты бөлек парақта жалғастырыңыз.",
       emailSubject: "Мектеп сауалнамасы", source: "Нысан: dulatedu.com",
-      brandLine: "Білім берудегі басқарушылық шешімдер", confidential: "Құпия", dateLabel: "Күні",
+      brandLine: "Білім берудегі басқарушылық шешімдер", confidential: "Құпия", dateLabel: "Күні", pageWord: "бет", factHead: ["Көрсеткіш", "Мәліметтер"],
       shortLabels: { school: "Мектеп", type: "Түрі", founded: "Құрылған жылы, оқушы саны", curriculum: "Бағдарлама", owner: "Құрылтайшы", principal: "Директор", licence: "Лицензия және акредиттеу" },
       // в части браузеров нет казахских названий месяцев, дата собирается вручную
       formatDate: d => `${d.getFullYear()} жылғы ${d.getDate()} ${["қаңтар","ақпан","наурыз","сәуір","мамыр","маусым","шілде","тамыз","қыркүйек","қазан","қараша","желтоқсан"][d.getMonth()]}`
@@ -162,7 +162,7 @@
       profile: "School profile", managementRequest: "Reason for contacting me", deadline: "Decision deadline", leadership: "Governance and operating systems", horizon: "Plans for the next two to five years",
       blankSubtitle: "Form to complete", blankInstruction: "Keep your answers brief. If you need more space, continue on a separate sheet.",
       emailSubject: "School questionnaire", source: "Form: dulatedu.com",
-      brandLine: "Leadership decisions in education", confidential: "Confidential", dateLabel: "Date",
+      brandLine: "Leadership decisions in education", confidential: "Confidential", dateLabel: "Date", pageWord: "page", factHead: ["Item", "Details"],
       shortLabels: { school: "School", type: "Type", founded: "Founded, enrolment", curriculum: "Curriculum", owner: "Owner", principal: "Principal", licence: "Licence and accreditation" }
     }
   };
