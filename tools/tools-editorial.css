@@ -219,7 +219,7 @@ html, body { background: var(--e-paper); }
   .rep-right { position: relative; padding-left: 3.2mm; }
   /* вертикальный разделитель 0.25 pt от линейки заголовка до низа колонок */
   .rep-right::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
-  .rep-cols h2 { position: relative; margin: 0 0 3.6mm; padding-bottom: .9mm; color: #b33333; font: 700 16pt/1.1 "PT Sans", Arial, sans-serif; letter-spacing: -.02em; }
+  .rep-cols h2 { position: relative; margin: 0 0 3.6mm; padding-bottom: .1mm; color: #b33333; font: 700 16pt/1.1 "PT Sans", Arial, sans-serif; letter-spacing: -.02em; }
   .rep-cols h2::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: bottom; }
   .rep-right > h2::after { left: -3.2mm; }
   .rep-left > h2::after { left: -2.1mm; }
