@@ -426,3 +426,41 @@ details.analysis-section > summary.analysis-label { font-family: var(--e-sans); 
   .card > * { grid-column: 1; }
   .card > .tc-tile { display: none; }
 }
+
+/* =====================================================================
+   РЕДКИЕ СОСТОЯНИЯ: кейс не найден, кейс без текста, сообщение после подписки
+   ===================================================================== */
+.subscribe-sent { font-family: var(--e-sans); color: var(--e-ink); }
+.coming-soon-pane { color: var(--e-muted); }
+.coming-soon-pane h2 { font-family: var(--e-serif); font-weight: 300; font-variation-settings: "opsz" 48; color: var(--e-ink); }
+.coming-soon-pane p { font-family: var(--e-serif); font-style: italic; font-size: 19px; }
+
+/* «Кейс не найден» (sim/template.js): тот же каркас, что у 404, без отдельного файла */
+.case-missing { box-sizing: border-box; width: min(980px, 100% - 48px); margin: 56px auto 0; padding-top: 22px; border-top: 1px solid var(--e-ink); }
+.case-missing h1 {
+  margin: 0 0 22px;
+  font-family: var(--e-serif);
+  font-weight: 300;
+  font-variation-settings: "opsz" 60;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--e-ink);
+  text-wrap: balance;
+}
+.case-missing p { max-width: 34em; margin: 0; padding-top: 18px; border-top: 5px solid var(--e-red); }
+.case-missing a { font-family: var(--e-sans); font-size: 16px; font-weight: 700; color: var(--e-ink); text-underline-offset: 4px; }
+.case-missing a:hover { color: var(--e-red-ink); }
+
+/* Без JavaScript библиотека показывает заголовок из <noscript> и список #library-fallback
+   (scripts/build-library-pages.mjs); класс lib-view на body ставит template.js, поэтому правила по тегу */
+body > h1 { box-sizing: border-box; width: min(980px, 100% - 48px); margin: 40px auto 22px; padding-top: 22px; border-top: 1px solid var(--e-ink); font-family: var(--e-serif); font-weight: 300; font-variation-settings: "opsz" 60; font-size: clamp(40px, 7vw, 68px); line-height: 1.02; letter-spacing: -0.015em; color: var(--e-ink); }
+#library-fallback { box-sizing: border-box; width: min(980px, 100% - 48px); margin: 0 auto 56px; }
+#library-fallback ul { list-style: none; margin: 0; padding: 18px 0 0; border-top: 5px solid var(--e-red); }
+#library-fallback li { border-bottom: 1px solid var(--e-rule); }
+#library-fallback a { display: block; padding: 12px 0; font-family: var(--e-serif); font-size: 21px; line-height: 1.35; color: var(--e-ink); text-decoration: none; }
+#library-fallback a:hover { color: var(--e-red-ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Наведение там, где старые правила sim.css сильнее слоя по специфичности */
+.filter-chip.active:hover { background: var(--e-ink); border-color: var(--e-ink); color: var(--e-on-ink); }
+.sidebar-footer .footer-links a:hover { border-bottom-color: var(--e-red); color: var(--e-ink); }

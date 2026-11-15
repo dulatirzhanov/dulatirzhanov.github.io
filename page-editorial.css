@@ -1,0 +1,95 @@
+/* =====================================================================
+   Одиночные страницы в журнальном стиле: 404 и заглушки переадресаций.
+   Сообщение «кейс не найден» живет в sim/sim-editorial.css (.case-missing),
+   чтобы не грузить этот файл на каждой странице кейса. Подключается после /editorial-base.css
+   (шрифт Source Serif 4 и токены --e-*). Своих цветов нет: только токены,
+   поэтому темная тема идет от data-theme, как на остальных страницах.
+   Чтобы откатить: убрать <link page-editorial.css> со страницы.
+   ===================================================================== */
+
+html { background: var(--e-paper); }
+body.page-single {
+  min-height: 100vh;
+  background: var(--e-paper);
+  color: var(--e-ink-2);
+  font-family: var(--e-sans);
+}
+body.page-single ::selection { background: rgba(179, 51, 51, .18); }
+.page-single a { color: var(--e-ink); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.page-single a:hover { color: var(--e-red-ink); }
+.page-single a:focus-visible { outline: 2px solid var(--e-red); outline-offset: 3px; }
+
+/* --- Основная колонка --- */
+.page-main { max-width: 980px; margin: 0 auto; padding: 72px 24px 72px; } /* сверху место для кнопки темы, она плавает в углу */
+.page-main > header { border-top: 1px solid var(--e-ink); padding-top: 22px; }
+.page-title {
+  margin: 0 0 22px;
+  font-family: var(--e-serif);
+  font-weight: 300;
+  font-variation-settings: "opsz" 60;
+  font-size: clamp(64px, 14vw, 132px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--e-ink);
+}
+.page-brand {
+  margin: 0 0 14px;
+  font-family: var(--e-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--e-red-ink);
+}
+
+/* --- Три языка колонками: красная линейка, рубрика, курсивная строка, ссылки --- */
+.page-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 40px;
+  border-top: 5px solid var(--e-red);
+  padding-top: 22px;
+}
+.page-col h2 {
+  margin: 0 0 10px;
+  font-family: var(--e-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--e-red-ink);
+}
+.page-col p {
+  margin: 0 0 18px;
+  font-family: var(--e-serif);
+  font-style: italic;
+  font-variation-settings: "opsz" 24;
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.45;
+  color: var(--e-ink-2);
+  text-wrap: pretty;
+}
+.page-links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--e-rule); }
+.page-links li { border-bottom: 1px solid var(--e-rule); }
+.page-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--e-sans);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.page-links a:hover, .page-links a:focus-visible { text-decoration: underline; }
+.page-links small { margin-left: .5em; font-weight: 400; color: var(--e-muted); }
+
+@media (max-width: 760px) {
+  .page-main { padding: 72px 16px 56px; }
+  .page-cols { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* --- Заглушка переадресации: пустая бумага и одна строка, пока идет переход --- */
+.page-redirect { display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; text-align: center; }
+.page-redirect p { margin: 0; font-family: var(--e-serif); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--e-ink-2); }

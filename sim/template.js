@@ -233,9 +233,10 @@
       }
 
       if (!caseData) {
-        document.body.innerHTML = `<div style="padding:60px 40px;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
-          <p>${s("caseNotFound")} <a href="${basePath()}" style="color:var(--color-link)">${s("backToLib")}</a></p>
-        </div>`;
+        document.body.innerHTML = `<main class="case-missing">
+          <h1>${s("caseNotFound")}</h1>
+          <p><a href="${basePath()}">${s("backToLib")}</a></p>
+        </main>`;
         return;
       }
 

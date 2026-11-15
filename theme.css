@@ -24,16 +24,16 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--e-muted, var(--color-muted, #6f7875));
+  color: var(--e-muted);
   font: inherit;
   line-height: 0;
   vertical-align: middle;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.theme-toggle:hover { color: var(--e-ink, var(--color-link, #205c73)); }
+.theme-toggle:hover { color: var(--e-ink); }
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--e-red, var(--color-accent, #8a6a35));
+  outline: 2px solid var(--e-red);
   outline-offset: 2px;
 }
 .theme-toggle svg { display: block; pointer-events: none; }

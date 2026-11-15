@@ -53,3 +53,23 @@
   --e-red-ink: #ec8a80;
   --e-on-ink: #161415;
 }
+
+/* --- Старые переменные site.css (бирюза и золото) ведут на токены --e-* ---
+   site.css задает --color-* старой гаммы для всех страниц. Вместо правки каждого правила
+   в sim.css, sources.css, tools.css и других они подменены здесь один раз: любой
+   var(--color-*) в старом коде, включая редкие состояния (кейс не найден, подсказки,
+   врезки, переключатель языков), получает краску, красный и бумагу журнала в обеих темах.
+   Файл подключается после site.css, при равной специфичности побеждает он. */
+:root {
+  --color-bg: var(--e-paper);
+  --color-surface: var(--e-paper);
+  --color-surface-soft: var(--e-paper-2);
+  --color-ink: var(--e-ink);
+  --color-heading: var(--e-ink);
+  --color-body: var(--e-ink-2);
+  --color-muted: var(--e-muted);
+  --color-link: var(--e-ink);
+  --color-link-strong: var(--e-red-ink);
+  --color-accent: var(--e-red);
+  --color-accent-strong: var(--e-red);
+}
