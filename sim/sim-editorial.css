@@ -157,7 +157,7 @@ details.about > p { font-family: var(--e-serif); font-size: 18px; line-height: 1
   background: transparent;
   box-shadow: none;
 }
-.about-block img { border-radius: 0; filter: grayscale(1) contrast(1.05); }
+.about-block img { border-radius: 50%; filter: grayscale(1) contrast(1.05); }
 .about-block h2 { font-family: var(--e-sans); font-size: 15px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--e-red); }
 .about-block p { font-family: var(--e-serif); font-size: 17px; line-height: 1.55; color: var(--e-ink-2); }
 .about-block .about-method { font-style: italic; color: var(--e-muted); }
