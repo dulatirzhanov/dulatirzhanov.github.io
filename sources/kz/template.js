@@ -182,6 +182,7 @@
         var hint = first ? "Оқу реті белгіленген" : "Оқу реті еркін";
         return '' +
           '<a class="topic-card" href="/sources/kz/' + esc(t.id) + '.html">' +
+          '<span class="tc-tile" aria-hidden="true"><span>Топтама</span><b>' + String(SOURCES_TOPICS.indexOf(t) + 1).padStart(2, "0") + '</b></span>' +
           '<div class="tc-top"><span class="tc-count">' + srcWord(t.sources.length) + ' · шамамен ' + minutesFor(t.sources) + ' мин</span>' +
           (isNew(t.updated) ? '<span class="chip-new">Жаңа</span>' : '') + '</div>' +
           '<div class="title">' + esc(t.title) + '</div>' +

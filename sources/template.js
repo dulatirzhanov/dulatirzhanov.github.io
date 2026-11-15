@@ -188,6 +188,7 @@
         var hint = first ? "Есть порядок чтения" : "Порядок чтения любой";
         return '' +
           '<a class="topic-card" href="/sources/' + esc(t.id) + '.html">' +
+          '<span class="tc-tile" aria-hidden="true"><span>Подборка</span><b>' + String(SOURCES_TOPICS.indexOf(t) + 1).padStart(2, "0") + '</b></span>' +
           '<div class="tc-top"><span class="tc-count">' + srcWord(t.sources.length) + ' · около ' + minutesFor(t.sources) + ' мин</span>' +
           (isNew(t.updated) ? '<span class="chip-new">Новое</span>' : '') + '</div>' +
           '<div class="title">' + esc(t.title) + '</div>' +
