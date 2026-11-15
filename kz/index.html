@@ -42,6 +42,8 @@
 
   <script src="/analytics.js?v=1"></script>
   <link rel="stylesheet" href="/contacts.css?v=1">
+  <link rel="stylesheet" href="/editorial-base.css?v=1">
+  <link rel="stylesheet" href="/home-editorial.css?v=1">
 </head>
 
 <body class="home-page">
@@ -49,6 +51,13 @@
   <div class="lang-switcher">
   <a href="/kz/" class="active">KZ</a> | <a href="/ru/">RU</a> | <a href="/">EN</a>
 </div>
+
+  <nav aria-label="Негізгі мәзір" class="nav">
+    <a href="/blog/?lang=kz">Блог</a>
+    <a href="/sources/kz/">Дереккөздер</a>
+    <a href="/tools/kz/express-audit.html">Мектеп сауалнамасы</a>
+    <button id="openContacts" type="button">Байланыс</button>
+  </nav>
 
   <img src="/profile.png" alt="Dulat Irzhanov" class="hero-photo" width="180" height="180" decoding="async" fetchpriority="high">
   <h1>Дулат Бауыржанұлы</h1>
@@ -69,13 +78,6 @@
       <strong>Мектеп басшыларына арналған кейстер кітапханасы</strong>
     </a>
   </div>
-
-  <nav aria-label="Негізгі мәзір" class="nav">
-    <a href="/blog/?lang=kz">Блог</a>
-    <a href="/sources/kz/">Дереккөздер</a>
-    <a href="/tools/kz/express-audit.html">Мектеп сауалнамасы</a>
-    <button id="openContacts" type="button">Байланыс</button>
-  </nav>
 
   <div id="overlay" class="overlay"></div>
   <div id="contactsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactsTitle">
