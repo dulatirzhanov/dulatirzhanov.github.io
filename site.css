@@ -102,7 +102,7 @@ html {
 }
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --font-sans: "PT Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: "PT Serif", Georgia, "Times New Roman", serif;
   --font-serif: Georgia, "Times New Roman", serif;
@@ -845,173 +845,172 @@ textarea {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .home-page,
-  .blog-page {
-    background: #11110f;
-    color: #e6e2d8;
-  }
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .home-page,
+:where(:root[data-theme="dark"]) .blog-page {
+  background: #11110f;
+  color: #e6e2d8;
+}
 
-  :root {
-    --color-bg: #11110f;
-    --color-surface: #191916;
-    --color-surface-soft: #20201c;
-    --color-ink: #e6e2d8;
-    --color-heading: #dfeee9;
-    --color-body: #c9c3b7;
-    --color-muted: #9d978b;
-    --color-link: #dfeee9;
-    --color-accent: #c59b58;
-    --color-accent-strong: #c59b58;
-    --line-teal: rgba(223, 238, 233, 0.12);
-    --line-teal-strong: rgba(223, 238, 233, 0.22);
-    --line-accent: rgba(197, 155, 88, 0.45);
-  }
+:root:where([data-theme="dark"]) {
+  --color-bg: #11110f;
+  --color-surface: #191916;
+  --color-surface-soft: #20201c;
+  --color-ink: #e6e2d8;
+  --color-heading: #dfeee9;
+  --color-body: #c9c3b7;
+  --color-muted: #9d978b;
+  --color-link: #dfeee9;
+  --color-accent: #c59b58;
+  --color-accent-strong: #c59b58;
+  --line-teal: rgba(223, 238, 233, 0.12);
+  --line-teal-strong: rgba(223, 238, 233, 0.22);
+  --line-accent: rgba(197, 155, 88, 0.45);
+}
 
-  .home-page h1,
-  .blog-page h1,
-  .proof-card strong,
-  .blog-page .post-title {
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .home-page h1,
+:where(:root[data-theme="dark"]) .blog-page h1,
+:where(:root[data-theme="dark"]) .proof-card strong,
+:where(:root[data-theme="dark"]) .blog-page .post-title {
+  color: #dfeee9;
+}
 
-  .home-page p,
-  .blog-page .intro,
-  .blog-page .post-summary {
-    color: #c9c3b7;
-  }
+:where(:root[data-theme="dark"]) .home-page p,
+:where(:root[data-theme="dark"]) .blog-page .intro,
+:where(:root[data-theme="dark"]) .blog-page .post-summary {
+  color: #c9c3b7;
+}
 
-  .home-page .muted,
-  .blog-page .post-meta,
-  .blog-page .filter-note {
-    color: #9d978b;
-  }
+:where(:root[data-theme="dark"]) .home-page .muted,
+:where(:root[data-theme="dark"]) .blog-page .post-meta,
+:where(:root[data-theme="dark"]) .blog-page .filter-note {
+  color: #9d978b;
+}
 
-  .home-page .nav a,
-  .home-page .nav button,
-  .blog-page nav a,
-  .blog-page .read-link {
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .home-page .nav a,
+:where(:root[data-theme="dark"]) .home-page .nav button,
+:where(:root[data-theme="dark"]) .blog-page nav a,
+:where(:root[data-theme="dark"]) .blog-page .read-link {
+  color: #dfeee9;
+}
 
-  .proof-card,
-  .blog-page .post-card,
-  .blog-page .filter-button,
-  .blog-page .iconbtn {
-    background: #191916;
-    border-color: rgba(223, 238, 233, 0.12);
-  }
+:where(:root[data-theme="dark"]) .proof-card,
+:where(:root[data-theme="dark"]) .blog-page .post-card,
+:where(:root[data-theme="dark"]) .blog-page .filter-button,
+:where(:root[data-theme="dark"]) .blog-page .iconbtn {
+  background: #191916;
+  border-color: rgba(223, 238, 233, 0.12);
+}
 
-  .home-page .nav a,
-  .home-page .nav button {
-    background: transparent;
-    border-color: rgba(223, 238, 233, 0.22);
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .home-page .nav a,
+:where(:root[data-theme="dark"]) .home-page .nav button {
+  background: transparent;
+  border-color: rgba(223, 238, 233, 0.22);
+  color: #dfeee9;
+}
 
-  .lang-switcher a {
-    color: #9d978b;
-  }
+:where(:root[data-theme="dark"]) .lang-switcher a {
+  color: #9d978b;
+}
 
-  .lang-switcher a:hover,
-  .lang-switcher a:focus-visible {
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .lang-switcher a:hover,
+:where(:root[data-theme="dark"]) .lang-switcher a:focus-visible {
+  color: #dfeee9;
+}
 
-  .lang-switcher a.active {
-    color: #c59b58 !important;
-  }
+:where(:root[data-theme="dark"]) .lang-switcher a.active {
+  color: #c59b58 !important;
+}
 
-  .modal {
-    background: #191916;
-    border-color: rgba(223, 238, 233, 0.12);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
-  }
+:where(:root[data-theme="dark"]) .modal {
+  background: #191916;
+  border-color: rgba(223, 238, 233, 0.12);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+}
 
-  .modal a.cta {
-    background: #20201c;
-    border-color: rgba(197, 155, 88, 0.22);
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .modal a.cta {
+  background: #20201c;
+  border-color: rgba(197, 155, 88, 0.22);
+  color: #dfeee9;
+}
 
-  .modal a.cta:hover,
-  .modal a.cta:focus-visible {
-    border-color: rgba(197, 155, 88, 0.5);
-    color: #c59b58;
-  }
+:where(:root[data-theme="dark"]) .modal a.cta:hover,
+:where(:root[data-theme="dark"]) .modal a.cta:focus-visible {
+  border-color: rgba(197, 155, 88, 0.5);
+  color: #c59b58;
+}
 
-  .home-page .nav a:hover,
-  .home-page .nav button:hover,
-  .proof-card:hover,
-  .proof-card:focus-visible {
-    background: #20201c;
-    border-color: rgba(154, 106, 39, 0.48);
-  }
+:where(:root[data-theme="dark"]) .home-page .nav a:hover,
+:where(:root[data-theme="dark"]) .home-page .nav button:hover,
+:where(:root[data-theme="dark"]) .proof-card:hover,
+:where(:root[data-theme="dark"]) .proof-card:focus-visible {
+  background: #20201c;
+  border-color: rgba(154, 106, 39, 0.48);
+}
 
-  .home-page .tagline {
-    color: #d4cfc3;
-  }
+:where(:root[data-theme="dark"]) .home-page .tagline {
+  color: #d4cfc3;
+}
 
-  .site-footer {
-    border-top-color: rgba(223, 238, 233, 0.12);
-  }
+:where(:root[data-theme="dark"]) .site-footer {
+  border-top-color: rgba(223, 238, 233, 0.12);
+}
 
-  .site-footer p,
-  .site-footer .social-links a {
-    color: #9d978b;
-  }
+:where(:root[data-theme="dark"]) .site-footer p,
+:where(:root[data-theme="dark"]) .site-footer .social-links a {
+  color: #9d978b;
+}
 
-  .site-footer .social-links a:hover,
-  .site-footer .social-links a:focus-visible {
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .site-footer .social-links a:hover,
+:where(:root[data-theme="dark"]) .site-footer .social-links a:focus-visible {
+  color: #dfeee9;
+}
 
-  .home-page .cta-primary {
-    color: #c59b58;
-    text-decoration-color: rgba(197, 155, 88, 0.45);
-  }
+:where(:root[data-theme="dark"]) .home-page .cta-primary {
+  color: #c59b58;
+  text-decoration-color: rgba(197, 155, 88, 0.45);
+}
 
-  .home-page .cta-primary:hover,
-  .home-page .cta-primary:focus-visible {
-    text-decoration-color: #c59b58;
-  }
+:where(:root[data-theme="dark"]) .home-page .cta-primary:hover,
+:where(:root[data-theme="dark"]) .home-page .cta-primary:focus-visible {
+  text-decoration-color: #c59b58;
+}
 
-  .proof-card span,
-  .home-page .bio p:first-child strong,
-  .home-page .bio .bio-heading strong {
-    color: #c59b58;
-  }
+:where(:root[data-theme="dark"]) .proof-card span,
+:where(:root[data-theme="dark"]) .home-page .bio p:first-child strong,
+:where(:root[data-theme="dark"]) .home-page .bio .bio-heading strong {
+  color: #c59b58;
+}
 
-  .home-page .bio {
-    border-top-color: rgba(223, 238, 233, 0.12);
-  }
+:where(:root[data-theme="dark"]) .home-page .bio {
+  border-top-color: rgba(223, 238, 233, 0.12);
+}
 
-  .blog-page .post-card {
-    box-shadow: none;
-  }
+:where(:root[data-theme="dark"]) .blog-page .post-card {
+  box-shadow: none;
+}
 
-  .blog-page .summary-tooltip {
-    background: #141413;
-    border-color: rgba(223, 238, 233, 0.24);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-    color: #e6e2d8;
-  }
+:where(:root[data-theme="dark"]) .blog-page .summary-tooltip {
+  background: #141413;
+  border-color: rgba(223, 238, 233, 0.24);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  color: #e6e2d8;
+}
 
-  .blog-page .summary-close {
-    color: #aaa;
-  }
+:where(:root[data-theme="dark"]) .blog-page .summary-close {
+  color: #aaa;
+}
 
-  .blog-page .summary-close:hover,
-  .blog-page .summary-close:focus-visible {
-    background: rgba(223, 238, 233, 0.12);
-    color: #dfeee9;
-  }
+:where(:root[data-theme="dark"]) .blog-page .summary-close:hover,
+:where(:root[data-theme="dark"]) .blog-page .summary-close:focus-visible {
+  background: rgba(223, 238, 233, 0.12);
+  color: #dfeee9;
+}
 
-  .blog-page .filter-button:hover,
-  .blog-page .filter-button.active {
-    background: #dfeee9;
-    color: #11110f;
-  }
+:where(:root[data-theme="dark"]) .blog-page .filter-button:hover,
+:where(:root[data-theme="dark"]) .blog-page .filter-button.active {
+  background: #dfeee9;
+  color: #11110f;
 }
 
 @media (max-width: 700px) {

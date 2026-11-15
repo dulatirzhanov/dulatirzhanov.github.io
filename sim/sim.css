@@ -1,5 +1,5 @@
 /* ===== BASE — mirrors blog/index.html ===== */
-:root { color-scheme: light dark; }
+:root { color-scheme: light; }
 * { box-sizing: border-box; }
 
 body {
@@ -600,132 +600,224 @@ body.case-view {
 }
 
 /* ===== DARK MODE — mirrors blog + main index.html ===== */
-@media (prefers-color-scheme: dark) {
-  body { background: #11110f; color: #e6e2d8; }
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) body { background: #11110f; color: #e6e2d8; }
 
-  /* Library */
-  body.lib-view h1 { color: #dfeee9; }
-  .subtitle { color: #c9c3b7; }
-  .cases-heading,
-  .how-block summary,
-  .about-block h2,
-  .how-step strong { color: #dfeee9; }
-  .about-block,
-  .how-note { background: #191916; border-color: rgba(223,238,233,.18); }
-  .how-block,
-  .how-step { border-color: rgba(223,238,233,.18); }
-  .how-block summary small { color: #888; }
-  .library-actions a { background: #191916; border-color: rgba(223,238,233,.18); color: #dfeee9; }
-  .library-actions a.primary { background: #dfeee9; border-color: #dfeee9; color: #11110f; }
-  .how-step p,
-  .section-intro,
-  .about-block p { color: #c9c3b7; }
-  .how-note,
-  .about-block .about-method { color: #aaa; }
-  nav.backnav a { color: #dfeee9; }
-  .subscribe-label { color: #aaa; }
-  .subscribe-note { color: #777; }
-  .subscribe-form input[type="email"] { background: #141413; border-color: rgba(255,255,255,.1); }
-  .subscribe-form input[type="email"]:focus { border-color: rgba(255,255,255,.3); }
-  .subscribe-form button { background: #141413; color: #dfeee9; border-color: rgba(255,255,255,.1); }
-  .subscribe-form button:hover { background: #191916; }
-  .subscribe-sent { color: #dfeee9; }
-  .lang-note { background: rgba(223,238,233,.03); border-color: rgba(223,238,233,.12); color: #777; }
-  .i18n-banner { background: rgba(223,238,233,.06); border-color: rgba(223,238,233,.22); color: #dfeee9; }
-  .filter-chip { background: #191916; border-color: rgba(223,238,233,.12); color: #dfeee9; }
-  .filter-chip.active,
-  .filter-chip:hover { background: #dfeee9; color: #11110f; border-color: #dfeee9; }
-  .filter-chip.active:hover { background: #dfeee9; }
+/* Library */
+:where(:root[data-theme="dark"]) body.lib-view h1 { color: #dfeee9; }
 
-  /* Cards — blog dark #191916 */
-  .card { background: #191916; border-color: rgba(223,238,233,.12); box-shadow: none; }
-  .reflection-section-title { color: #c59b58; }
-  .card .chapter { color: #c59b58; }
-  .card .title { color: #dfeee9; }
-  .card .excerpt { color: #c9c3b7; }
-  .card .tag { color: #888; }
-  .card .langs .lang-pill { color: #dfeee9; }
-  .card .langs .lang-pill.off { color: #555; }
-  .empty-state { color: #777; }
+:where(:root[data-theme="dark"]) .subtitle { color: #c9c3b7; }
 
-  /* Case top bar (mobile) */
-  .case-topbar { background: #11110f; border-bottom-color: rgba(223,238,233,.15); }
-  .case-topbar .hamburger { background: rgba(223,238,233,.06); border-color: rgba(223,238,233,.22); color: #dfeee9; }
-  .case-topbar .topbar-title { color: #dfeee9; }
-  .case-topbar .topbar-progress { background: rgba(223,238,233,.12); }
-  .case-topbar .topbar-progress > span { background: #c59b58; }
+:where(:root[data-theme="dark"]) .cases-heading,
+:where(:root[data-theme="dark"]) .how-block summary,
+:where(:root[data-theme="dark"]) .about-block h2,
+:where(:root[data-theme="dark"]) .how-step strong { color: #dfeee9; }
 
-  /* Sidebar — blog iconbtn dark #141413 */
-  .sidebar { background: #141413; border-color: rgba(223,238,233,.18); }
-  .sidebar h1 { color: #dfeee9; }
-  .sidebar .case-label { color: #888; }
-  .case-version { color: #777; }
-  .nav-item { color: #aaa; }
-  .nav-item:hover { background: rgba(223,238,233,.06); }
-  .nav-item.active { background: rgba(197,155,88,.14); color: #dfeee9; }
-  .nav-item .check { border-color: #3f3f38; }
-  .nav-item.visited .check { background: #c59b58; border-color: #c59b58; color: #11110f; }
-  .nav-section-title { color: #777; }
-  .progress-track { background: rgba(223,238,233,.12); }
-  .progress-fill { background: #c59b58; }
-  .progress-label { color: #c59b58; }
-  .sidebar-back { color: #dfeee9; }
-  .sidebar-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
-  .sidebar-footer .footer-links a { color: #dfeee9; }
-  .sidebar-footer .footer-links a:hover { color: #dfeee9; }
+:where(:root[data-theme="dark"]) .about-block,
+:where(:root[data-theme="dark"]) .how-note { background: #191916; border-color: rgba(223,238,233,.18); }
 
-  /* Case content */
-  .content h2 { color: #dfeee9; }
-  .content p { color: #c9c3b7; }
-  .analysis-section + .analysis-section { border-color: rgba(223,238,233,.18); }
-  .analysis-label { color: #c59b58; }
-  .analysis-application { background: #191916; border-color: rgba(223,238,233,.18); }
-  .actions-guidance { background: #191916; border-color: rgba(223,238,233,.18); }
-  .actions-guidance strong { color: #dfeee9; }
-  .eyebrow { color: #c59b58; }
-  .bridge-question { background: #191916; border-color: rgba(223,238,233,.18); border-left-color: #c59b58; color: #dfeee9; }
-  .action-row { border-color: rgba(223,238,233,.18); background: #191916; }
-  .action-row .label { color: #dfeee9; }
-  .action-row .desc { color: #aaa; }
-  .action-row button { background: #141413; border-color: rgba(255,255,255,.1); color: #dfeee9; }
-  .action-row button:hover { background: #191916; }
-  .pull-quote { background: #191916; border-color: rgba(223,238,233,.18); color: #c9c3b7; }
-  .pull-quote .source { color: #888; }
-  .resource-list a { color: #dfeee9; }
-  .back-link { color: #c59b58; }
-  .accreditation-block { border-color: rgba(223,238,233,.18); }
-  .accreditation-block summary { color: #dfeee9; }
-  .accreditation-block summary small { color: #888; }
-  .accreditation-disclaimer { background: rgba(197, 155, 88, 0.08); border-color: rgba(197, 155, 88, 0.5); color: #aaa; }
-  .accreditation-note { color: #bbb; }
-  .reflection-list li { color: #bbb; }
-  .reflection-list li::before { background: #c59b58; color: #11110f; }
-  .share-block { background: #191916; border-color: rgba(223,238,233,.18); }
-  .share-block .share-heading { color: #dfeee9; }
-  .feedback-questions { color: #c9c3b7; }
-  .share-block .share-privacy { color: #888; }
-  .share-block .cta { background: rgba(223,238,233,.06); border-color: rgba(223,238,233,.22); color: #dfeee9; }
-  .share-block .cta:hover { background: rgba(223,238,233,.12); }
-  .share-block .email-text { color: #aaa; }
-  .coming-soon-pane h2 { color: #dfeee9; }
-  .content-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
-  .content-footer .footer-links a { color: #dfeee9; }
-  .content-footer .footer-links a:hover { color: #dfeee9; }
-  .case-page-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
-  .case-page-footer .footer-links a { color: #dfeee9; }
-  .case-page-footer .footer-links a:hover { color: #dfeee9; }
-  .lib-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
-  .lib-footer .footer-links a { color: #dfeee9; }
-  .lib-footer .footer-links a:hover { color: #dfeee9; }
-}
+:where(:root[data-theme="dark"]) .how-block,
+:where(:root[data-theme="dark"]) .how-step { border-color: rgba(223,238,233,.18); }
 
-@media (max-width: 700px) and (prefers-color-scheme: dark) {
-  .sidebar { background: #191916; }
+:where(:root[data-theme="dark"]) .how-block summary small { color: #888; }
+
+:where(:root[data-theme="dark"]) .library-actions a { background: #191916; border-color: rgba(223,238,233,.18); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .library-actions a.primary { background: #dfeee9; border-color: #dfeee9; color: #11110f; }
+
+:where(:root[data-theme="dark"]) .how-step p,
+:where(:root[data-theme="dark"]) .section-intro,
+:where(:root[data-theme="dark"]) .about-block p { color: #c9c3b7; }
+
+:where(:root[data-theme="dark"]) .how-note,
+:where(:root[data-theme="dark"]) .about-block .about-method { color: #aaa; }
+
+:where(:root[data-theme="dark"]) nav.backnav a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .subscribe-label { color: #aaa; }
+
+:where(:root[data-theme="dark"]) .subscribe-note { color: #777; }
+
+:where(:root[data-theme="dark"]) .subscribe-form input[type="email"] { background: #141413; border-color: rgba(255,255,255,.1); }
+
+:where(:root[data-theme="dark"]) .subscribe-form input[type="email"]:focus { border-color: rgba(255,255,255,.3); }
+
+:where(:root[data-theme="dark"]) .subscribe-form button { background: #141413; color: #dfeee9; border-color: rgba(255,255,255,.1); }
+
+:where(:root[data-theme="dark"]) .subscribe-form button:hover { background: #191916; }
+
+:where(:root[data-theme="dark"]) .subscribe-sent { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .lang-note { background: rgba(223,238,233,.03); border-color: rgba(223,238,233,.12); color: #777; }
+
+:where(:root[data-theme="dark"]) .i18n-banner { background: rgba(223,238,233,.06); border-color: rgba(223,238,233,.22); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .filter-chip { background: #191916; border-color: rgba(223,238,233,.12); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .filter-chip.active,
+:where(:root[data-theme="dark"]) .filter-chip:hover { background: #dfeee9; color: #11110f; border-color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .filter-chip.active:hover { background: #dfeee9; }
+
+/* Cards — blog dark #191916 */
+:where(:root[data-theme="dark"]) .card { background: #191916; border-color: rgba(223,238,233,.12); box-shadow: none; }
+
+:where(:root[data-theme="dark"]) .reflection-section-title { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .card .chapter { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .card .title { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .card .excerpt { color: #c9c3b7; }
+
+:where(:root[data-theme="dark"]) .card .tag { color: #888; }
+
+:where(:root[data-theme="dark"]) .card .langs .lang-pill { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .card .langs .lang-pill.off { color: #555; }
+
+:where(:root[data-theme="dark"]) .empty-state { color: #777; }
+
+/* Case top bar (mobile) */
+:where(:root[data-theme="dark"]) .case-topbar { background: #11110f; border-bottom-color: rgba(223,238,233,.15); }
+
+:where(:root[data-theme="dark"]) .case-topbar .hamburger { background: rgba(223,238,233,.06); border-color: rgba(223,238,233,.22); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .case-topbar .topbar-title { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .case-topbar .topbar-progress { background: rgba(223,238,233,.12); }
+
+:where(:root[data-theme="dark"]) .case-topbar .topbar-progress > span { background: #c59b58; }
+
+/* Sidebar — blog iconbtn dark #141413 */
+:where(:root[data-theme="dark"]) .sidebar { background: #141413; border-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .sidebar h1 { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .sidebar .case-label { color: #888; }
+
+:where(:root[data-theme="dark"]) .case-version { color: #777; }
+
+:where(:root[data-theme="dark"]) .nav-item { color: #aaa; }
+
+:where(:root[data-theme="dark"]) .nav-item:hover { background: rgba(223,238,233,.06); }
+
+:where(:root[data-theme="dark"]) .nav-item.active { background: rgba(197,155,88,.14); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .nav-item .check { border-color: #3f3f38; }
+
+:where(:root[data-theme="dark"]) .nav-item.visited .check { background: #c59b58; border-color: #c59b58; color: #11110f; }
+
+:where(:root[data-theme="dark"]) .nav-section-title { color: #777; }
+
+:where(:root[data-theme="dark"]) .progress-track { background: rgba(223,238,233,.12); }
+
+:where(:root[data-theme="dark"]) .progress-fill { background: #c59b58; }
+
+:where(:root[data-theme="dark"]) .progress-label { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .sidebar-back { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .sidebar-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
+
+:where(:root[data-theme="dark"]) .sidebar-footer .footer-links a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .sidebar-footer .footer-links a:hover { color: #dfeee9; }
+
+/* Case content */
+:where(:root[data-theme="dark"]) .content h2 { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .content p { color: #c9c3b7; }
+
+:where(:root[data-theme="dark"]) .analysis-section + .analysis-section { border-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .analysis-label { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .analysis-application { background: #191916; border-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .actions-guidance { background: #191916; border-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .actions-guidance strong { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .eyebrow { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .bridge-question { background: #191916; border-color: rgba(223,238,233,.18); border-left-color: #c59b58; color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .action-row { border-color: rgba(223,238,233,.18); background: #191916; }
+
+:where(:root[data-theme="dark"]) .action-row .label { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .action-row .desc { color: #aaa; }
+
+:where(:root[data-theme="dark"]) .action-row button { background: #141413; border-color: rgba(255,255,255,.1); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .action-row button:hover { background: #191916; }
+
+:where(:root[data-theme="dark"]) .pull-quote { background: #191916; border-color: rgba(223,238,233,.18); color: #c9c3b7; }
+
+:where(:root[data-theme="dark"]) .pull-quote .source { color: #888; }
+
+:where(:root[data-theme="dark"]) .resource-list a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .back-link { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .accreditation-block { border-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .accreditation-block summary { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .accreditation-block summary small { color: #888; }
+
+:where(:root[data-theme="dark"]) .accreditation-disclaimer { background: rgba(197, 155, 88, 0.08); border-color: rgba(197, 155, 88, 0.5); color: #aaa; }
+
+:where(:root[data-theme="dark"]) .accreditation-note { color: #bbb; }
+
+:where(:root[data-theme="dark"]) .reflection-list li { color: #bbb; }
+
+:where(:root[data-theme="dark"]) .reflection-list li::before { background: #c59b58; color: #11110f; }
+
+:where(:root[data-theme="dark"]) .share-block { background: #191916; border-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .share-block .share-heading { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .feedback-questions { color: #c9c3b7; }
+
+:where(:root[data-theme="dark"]) .share-block .share-privacy { color: #888; }
+
+:where(:root[data-theme="dark"]) .share-block .cta { background: rgba(223,238,233,.06); border-color: rgba(223,238,233,.22); color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .share-block .cta:hover { background: rgba(223,238,233,.12); }
+
+:where(:root[data-theme="dark"]) .share-block .email-text { color: #aaa; }
+
+:where(:root[data-theme="dark"]) .coming-soon-pane h2 { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .content-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
+
+:where(:root[data-theme="dark"]) .content-footer .footer-links a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .content-footer .footer-links a:hover { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .case-page-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
+
+:where(:root[data-theme="dark"]) .case-page-footer .footer-links a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .case-page-footer .footer-links a:hover { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .lib-footer { border-top-color: rgba(223,238,233,.12); color: #999; }
+
+:where(:root[data-theme="dark"]) .lib-footer .footer-links a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .lib-footer .footer-links a:hover { color: #dfeee9; }
+
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+@media (max-width: 700px) {
+  :where(:root[data-theme="dark"]) .sidebar { background: #191916; }
 }
 
 /* ===== Шапка и подвал библиотеки как у страницы источников ===== */
 :root { --chrome-muted: #5d6764; --chrome-ink: var(--color-heading); }
-@media (prefers-color-scheme: dark) { :root { --chrome-muted: #a39e91; --chrome-ink: #dfeee9; } }
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:root:where([data-theme="dark"]) { --chrome-muted: #a39e91; --chrome-ink: #dfeee9; }
 
 .crumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 52px 0 14px; font-size: 14px; color: var(--chrome-muted); text-align: left; }
 .crumbs a { color: var(--chrome-muted); text-decoration: none; padding: 4px 0; }
@@ -736,9 +828,8 @@ body.case-view {
 
 body.lib-view .subtitle { padding-left: 0; border-left: 0; color: var(--color-body); font-size: 18px; }
 
-@media (prefers-color-scheme: dark) {
-  body.lib-view .subtitle { color: #cfcabd; }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) body.lib-view .subtitle { color: #cfcabd; }
 
 /* вход в кейс, кнопки навигации, путь */
 .content .crumbs { margin: 0 0 22px; }
@@ -752,12 +843,14 @@ body.lib-view .subtitle { padding-left: 0; border-left: 0; color: var(--color-bo
 .pane-nav .back-link { display: inline-block; margin: 0; padding: 10px 18px; border: 1px solid rgba(32,92,115,.3); border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; color: var(--chrome-ink); background: transparent; }
 .pane-nav .back-link:hover { background: var(--color-surface-soft); }
 .pane-nav .back-link.primary { background: var(--color-surface-soft); color: var(--chrome-ink); border-color: rgba(32,92,115,.5); }
-@media (prefers-color-scheme: dark) {
-  .intro-card { background: #191916; border-color: rgba(223,238,233,.14); }
-  .intro-label { color: #c59b58; }
-  .pane-nav .back-link { border-color: rgba(223,238,233,.2); }
-  .pane-nav .back-link.primary { background: #1f1f1b; color: #dfeee9; border-color: rgba(223,238,233,.5); }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .intro-card { background: #191916; border-color: rgba(223,238,233,.14); }
+
+:where(:root[data-theme="dark"]) .intro-label { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .pane-nav .back-link { border-color: rgba(223,238,233,.2); }
+
+:where(:root[data-theme="dark"]) .pane-nav .back-link.primary { background: #1f1f1b; color: #dfeee9; border-color: rgba(223,238,233,.5); }
 
 /* телефон. Язык в меню, крупные зоны нажатия */
 .drawer-lang { display: none; }
@@ -825,11 +918,14 @@ details.about > p { margin: 0; padding: 0 2px 20px; font-size: 16px; line-height
 .card .tc-foot .tags { margin: 0; }
 .card .tc-cta { font-size: 14px; font-weight: 700; color: var(--chrome-ink); }
 .card:hover .tc-cta { text-decoration: underline; text-underline-offset: 4px; }
-@media (prefers-color-scheme: dark) {
-  .pm, .card .tc-count, .how-strip li span { color: #c59b58; }
-  details.about { border-color: rgba(223,238,233,.14); }
-  .card .tc-foot { border-color: rgba(223,238,233,.14); }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .pm,
+:where(:root[data-theme="dark"]) .card .tc-count,
+:where(:root[data-theme="dark"]) .how-strip li span { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) details.about { border-color: rgba(223,238,233,.14); }
+
+:where(:root[data-theme="dark"]) .card .tc-foot { border-color: rgba(223,238,233,.14); }
 @media (max-width: 700px) { .card .tc-foot { flex-direction: column; align-items: flex-start; gap: 8px; } }
 .card .tc-count .nw { white-space: nowrap; }
 
@@ -900,19 +996,32 @@ details[open] > summary .pm::before { content: "\2212"; }
   .drawer-lang { margin-bottom: 8px; }
   .sidebar-footer .copyright { margin-bottom: 2px; }
 }
-@media (prefers-color-scheme: dark) {
-  .case-head-label, .facts-label, .takeaway-label, .pm { color: #c59b58; }
-  .stage { border-top-color: rgba(223,238,233,.18); }
-  .stage.done { border-top-color: rgba(223,238,233,.5); }
-  .stage.current { border-top-color: #c59b58; }
-  .stage.current .stage-n { background: #c59b58; border-color: #c59b58; color: #11110f; }
-  .stage.done .stage-n { background: rgba(223,238,233,.12); }
-  .substeps .chip { border-color: rgba(223,238,233,.22); }
-  .substeps .chip.active { background: rgba(197,155,88,.14); border-color: #c59b58; }
-  .facts { background: #191916; border-color: rgba(223,238,233,.14); }
-  .takeaway { background: #191916; border-left-color: #c59b58; }
-  .case-head-title, .sidebar-title { color: #dfeee9; }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .case-head-label,
+:where(:root[data-theme="dark"]) .facts-label,
+:where(:root[data-theme="dark"]) .takeaway-label,
+:where(:root[data-theme="dark"]) .pm { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .stage { border-top-color: rgba(223,238,233,.18); }
+
+:where(:root[data-theme="dark"]) .stage.done { border-top-color: rgba(223,238,233,.5); }
+
+:where(:root[data-theme="dark"]) .stage.current { border-top-color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .stage.current .stage-n { background: #c59b58; border-color: #c59b58; color: #11110f; }
+
+:where(:root[data-theme="dark"]) .stage.done .stage-n { background: rgba(223,238,233,.12); }
+
+:where(:root[data-theme="dark"]) .substeps .chip { border-color: rgba(223,238,233,.22); }
+
+:where(:root[data-theme="dark"]) .substeps .chip.active { background: rgba(197,155,88,.14); border-color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .facts { background: #191916; border-color: rgba(223,238,233,.14); }
+
+:where(:root[data-theme="dark"]) .takeaway { background: #191916; border-left-color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .case-head-title,
+:where(:root[data-theme="dark"]) .sidebar-title { color: #dfeee9; }
 .sub-label { flex: none; align-self: center; font-size: 13px; color: var(--chrome-muted); margin-right: 4px; }
 
 /* Полоса этапов: подписи-кнопки, сегменты-экраны, название экрана и подсказка о следующем */
@@ -941,7 +1050,10 @@ details[open] > summary .pm::before { content: "\2212"; }
 .substeps:has(.seg-caption) { margin-bottom: 22px; }
 .next-hint { flex-basis: 100%; margin-top: 4px; font-size: 14px; color: var(--chrome-muted); }
 .intro-nav-hint { margin: 12px 0 0 !important; padding-top: 12px; border-top: 1px solid rgba(32,92,115,.14); font-size: 15px !important; color: var(--chrome-muted); line-height: 1.55 !important; }
-@media (prefers-color-scheme: dark) { .seg.current::before { background: #c59b58; } .seg-check { color: #c59b58; } .intro-nav-hint { border-top-color: rgba(223,238,233,.14); } }
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .seg.current::before { background: #c59b58; }
+:where(:root[data-theme="dark"]) .seg-check { color: #c59b58; }
+:where(:root[data-theme="dark"]) .intro-nav-hint { border-top-color: rgba(223,238,233,.14); }
 @media (max-width: 700px) {
   .stepper .segbar { gap: 4px; }
   .seg-row { --ow: 24px; --sg: 2px; }

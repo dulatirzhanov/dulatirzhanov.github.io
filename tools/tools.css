@@ -238,27 +238,41 @@
   .audit-actions { display: grid; grid-template-columns: 1fr; }
 }
 
-@media (prefers-color-scheme: dark) {
-  .privacy-note,
-  .scoring-note { color: #bec8c4; }
-  .role-examples p,
-  .map-heading p,
-  .scoring-note p,
-  .risk-summary > div,
-  .field > span { color: #b2bbb8; }
-  .risk-high { background: #4d2925; color: #f0b5ad; }
-  .risk-medium { background: #4a3b24; color: #e9cc96; }
-  .risk-low { background: #223f38; color: #add8cc; }
-  .risk-minimal { background: #303a38; color: #c0cdca; }
-  .risk-unrated { background: #343938; color: #c4ccca; }
-  .button.primary { border-color: #315f72; background: #315f72; color: #fff; }
-  .assessment-panel summary span,
-  .criterion-field { color: #b8c2be; }
-  .criterion-field { background: #151817; }
-  .audit-overview span, .audit-section-head p, .audit-field > span, .audit-complete p { color: #b7c1bd; }
-  .audit-complete .audit-status { color: #dfeee9; }
-  .audit-status a { color: #9fd0e0; }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .privacy-note,
+:where(:root[data-theme="dark"]) .scoring-note { color: #bec8c4; }
+
+:where(:root[data-theme="dark"]) .role-examples p,
+:where(:root[data-theme="dark"]) .map-heading p,
+:where(:root[data-theme="dark"]) .scoring-note p,
+:where(:root[data-theme="dark"]) .risk-summary > div,
+:where(:root[data-theme="dark"]) .field > span { color: #b2bbb8; }
+
+:where(:root[data-theme="dark"]) .risk-high { background: #4d2925; color: #f0b5ad; }
+
+:where(:root[data-theme="dark"]) .risk-medium { background: #4a3b24; color: #e9cc96; }
+
+:where(:root[data-theme="dark"]) .risk-low { background: #223f38; color: #add8cc; }
+
+:where(:root[data-theme="dark"]) .risk-minimal { background: #303a38; color: #c0cdca; }
+
+:where(:root[data-theme="dark"]) .risk-unrated { background: #343938; color: #c4ccca; }
+
+:where(:root[data-theme="dark"]) .button.primary { border-color: #315f72; background: #315f72; color: #fff; }
+
+:where(:root[data-theme="dark"]) .assessment-panel summary span,
+:where(:root[data-theme="dark"]) .criterion-field { color: #b8c2be; }
+
+:where(:root[data-theme="dark"]) .criterion-field { background: #151817; }
+
+:where(:root[data-theme="dark"]) .audit-overview span,
+:where(:root[data-theme="dark"]) .audit-section-head p,
+:where(:root[data-theme="dark"]) .audit-field > span,
+:where(:root[data-theme="dark"]) .audit-complete p { color: #b7c1bd; }
+
+:where(:root[data-theme="dark"]) .audit-complete .audit-status { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .audit-status a { color: #9fd0e0; }
 
 @media print {
   @page { size: A4 landscape; margin: 8mm 9mm 11mm; }

@@ -10,18 +10,17 @@
   --v2-ink: var(--color-heading);
   --v2-focus: var(--color-accent-strong);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --v2-card: #191916;
-    --v2-soft: #1d1d19;
-    --v2-line: rgba(223,238,233,.14);
-    --v2-line-strong: rgba(223,238,233,.38);
-    --v2-accent: #c59b58;
-    --v2-accent-ink: #11110f;
-    --v2-muted: #a39e91;
-    --v2-ink: #dfeee9;
-    --v2-focus: #dfeee9;
-  }
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:root:where([data-theme="dark"]) {
+  --v2-card: #191916;
+  --v2-soft: #1d1d19;
+  --v2-line: rgba(223,238,233,.14);
+  --v2-line-strong: rgba(223,238,233,.38);
+  --v2-accent: #c59b58;
+  --v2-accent-ink: #11110f;
+  --v2-muted: #a39e91;
+  --v2-ink: #dfeee9;
+  --v2-focus: #dfeee9;
 }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -118,10 +117,10 @@ details.src > summary .pm { align-self: center; }
 .subscribe-form button { background: transparent; color: var(--v2-ink); border: 1px solid var(--v2-line-strong); }
 .subscribe-form button:hover { background: var(--v2-soft); }
 .lib-footer .footer-links a { color: var(--color-link); }
-@media (prefers-color-scheme: dark) {
-  .lib-footer .footer-links a { color: #dfeee9; }
-  .subtitle { color: #cfcabd; }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .lib-footer .footer-links a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .subtitle { color: #cfcabd; }
 
 @media (max-width: 700px) {
   .topic-card { padding: 18px 18px 14px; }
@@ -141,7 +140,9 @@ details.src > summary .pm { align-self: center; }
 .subscribe-note { max-width: 440px; margin: 10px 0 0; color: #777; font-size: 12px; line-height: 1.5; }
 .lang-note { margin-top: 48px; }
 .lib-footer { margin-top: 48px; color: #666; }
-@media (prefers-color-scheme: dark) { .subscribe-label { color: #aaa; } .lib-footer { color: #999; } }
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) .subscribe-label { color: #aaa; }
+:where(:root[data-theme="dark"]) .lib-footer { color: #999; }
 
 @media (max-width: 700px) {
   .lib-footer .footer-links a { display: inline-block; padding: 10px 0; }

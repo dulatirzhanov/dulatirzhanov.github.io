@@ -1,5 +1,5 @@
 /* ===== Библиотека источников — стили на токенах site.css ===== */
-:root { color-scheme: light dark; }
+:root { color-scheme: light; }
 * { box-sizing: border-box; }
 
 body {
@@ -192,29 +192,68 @@ h1 {
   .source-card { padding: 20px 18px; }
 }
 
-@media (prefers-color-scheme: dark) {
-  body { background: #11110f; color: #e6e2d8; }
-  h1, .source-title, .topic-card .title, .source-section-label { color: #dfeee9; }
-  .subtitle { color: #cfcabd; border-left-color: #c59b58; }
-  nav.backnav a, .toc a { color: #dfeee9; }
-  .toc, .apa, .practice { background: #191916; border-color: rgba(223,238,233,.12); }
-  .source-card, .topic-card { background: #191916; border-color: rgba(223,238,233,.12); box-shadow: none; }
-  .source-num, .authority .stars, .read-link, .toc .toc-label { color: #c59b58; }
-  .read-link:hover, .practice .source-section-label { color: #c59b58; }
-  .apa, .source-card p.body-text, .practice p, .authority, .topic-card .excerpt { color: #cfcabd; }
-  .apa .apa-label, .topic-updated, .topic-card .meta { color: #8f8a7e; }
-  .practice { border-left-color: #c59b58; }
-  .expert-note { background: #191916; border-color: rgba(223,238,233,.12); border-left-color: #c59b58; }
-  .expert-note .source-section-label { color: #c59b58; }
-  .expert-note p { color: #cfcabd; }
-  .expert-note p.expert-note-small { color: #8f8a7e; }
-  .topic-card:hover .title { color: #ffffff; }
-  .subscribe-label { color: #aaa; }
-  .subscribe-form input[type="email"] { background: #141413; border-color: rgba(255,255,255,.1); }
-  .subscribe-form input[type="email"]:focus { border-color: rgba(255,255,255,.3); }
-  .subscribe-form button { background: #141413; color: #dfeee9; border-color: rgba(255,255,255,.1); }
-  .subscribe-form button:hover { background: #191916; }
-  .lang-note { background: rgba(223,238,233,.03); border-color: rgba(223,238,233,.12); color: #777; }
-  .lib-footer { color: #999; border-top-color: rgba(223,238,233,.12); }
-  .lib-footer .footer-links a { color: #dfeee9; }
-}
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+:where(:root[data-theme="dark"]) body { background: #11110f; color: #e6e2d8; }
+
+:where(:root[data-theme="dark"]) h1,
+:where(:root[data-theme="dark"]) .source-title,
+:where(:root[data-theme="dark"]) .topic-card .title,
+:where(:root[data-theme="dark"]) .source-section-label { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .subtitle { color: #cfcabd; border-left-color: #c59b58; }
+
+:where(:root[data-theme="dark"]) nav.backnav a,
+:where(:root[data-theme="dark"]) .toc a { color: #dfeee9; }
+
+:where(:root[data-theme="dark"]) .toc,
+:where(:root[data-theme="dark"]) .apa,
+:where(:root[data-theme="dark"]) .practice { background: #191916; border-color: rgba(223,238,233,.12); }
+
+:where(:root[data-theme="dark"]) .source-card,
+:where(:root[data-theme="dark"]) .topic-card { background: #191916; border-color: rgba(223,238,233,.12); box-shadow: none; }
+
+:where(:root[data-theme="dark"]) .source-num,
+:where(:root[data-theme="dark"]) .authority .stars,
+:where(:root[data-theme="dark"]) .read-link,
+:where(:root[data-theme="dark"]) .toc .toc-label { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .read-link:hover,
+:where(:root[data-theme="dark"]) .practice .source-section-label { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .apa,
+:where(:root[data-theme="dark"]) .source-card p.body-text,
+:where(:root[data-theme="dark"]) .practice p,
+:where(:root[data-theme="dark"]) .authority,
+:where(:root[data-theme="dark"]) .topic-card .excerpt { color: #cfcabd; }
+
+:where(:root[data-theme="dark"]) .apa .apa-label,
+:where(:root[data-theme="dark"]) .topic-updated,
+:where(:root[data-theme="dark"]) .topic-card .meta { color: #8f8a7e; }
+
+:where(:root[data-theme="dark"]) .practice { border-left-color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .expert-note { background: #191916; border-color: rgba(223,238,233,.12); border-left-color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .expert-note .source-section-label { color: #c59b58; }
+
+:where(:root[data-theme="dark"]) .expert-note p { color: #cfcabd; }
+
+:where(:root[data-theme="dark"]) .expert-note p.expert-note-small { color: #8f8a7e; }
+
+:where(:root[data-theme="dark"]) .topic-card:hover .title { color: #ffffff; }
+
+:where(:root[data-theme="dark"]) .subscribe-label { color: #aaa; }
+
+:where(:root[data-theme="dark"]) .subscribe-form input[type="email"] { background: #141413; border-color: rgba(255,255,255,.1); }
+
+:where(:root[data-theme="dark"]) .subscribe-form input[type="email"]:focus { border-color: rgba(255,255,255,.3); }
+
+:where(:root[data-theme="dark"]) .subscribe-form button { background: #141413; color: #dfeee9; border-color: rgba(255,255,255,.1); }
+
+:where(:root[data-theme="dark"]) .subscribe-form button:hover { background: #191916; }
+
+:where(:root[data-theme="dark"]) .lang-note { background: rgba(223,238,233,.03); border-color: rgba(223,238,233,.12); color: #777; }
+
+:where(:root[data-theme="dark"]) .lib-footer { color: #999; border-top-color: rgba(223,238,233,.12); }
+
+:where(:root[data-theme="dark"]) .lib-footer .footer-links a { color: #dfeee9; }

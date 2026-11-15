@@ -76,8 +76,8 @@ function sheetPage(item,lang,dir) {
   <title>${esc(f(sh.heading))}: ${esc(f(item.title))}</title>
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="${origin+url.replace('.html','-sheet.html')}">
-  <link rel="stylesheet" href="/site.css?v=9">
-  <link rel="stylesheet" href="/editorial-base.css?v=1">
+  <link rel="stylesheet" href="/site.css?v=10">
+  <link rel="stylesheet" href="/editorial-base.css?v=2">
   <link rel="stylesheet" href="/sim/sim-sheet.css?v=1">
 </head>
 <body>

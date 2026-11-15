@@ -1,0 +1,57 @@
+/* Переключатель «день / ночь»: кнопка и системные настройки темы.
+   Логика и тексты: /theme.js. Сами ночные цвета лежат в файлах страниц как правила
+   :where(:root[data-theme="dark"]) ..., здесь только кнопка. Листы кейсов (*-sheet.html) файл не подключают. */
+
+:root[data-theme="dark"] { color-scheme: dark; }
+
+/* Смена темы без анимации всей страницы: на один кадр отключаем все transition. */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after { transition: none !important; }
+
+.theme-toggle {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  margin: 0 0 0 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--e-muted, var(--color-muted, #6f7875));
+  font: inherit;
+  line-height: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.theme-toggle:hover { color: var(--e-ink, var(--color-link, #205c73)); }
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--e-red, var(--color-accent, #8a6a35));
+  outline-offset: 2px;
+}
+.theme-toggle svg { display: block; pointer-events: none; }
+
+/* Луна в дневной теме (нажатие включит ночь), солнце в ночной. */
+.theme-icon-sun { display: none; }
+:root[data-theme="dark"] .theme-icon-moon { display: none; }
+:root[data-theme="dark"] .theme-icon-sun { display: inline; }
+
+/* Зона нажатия не меньше 44 px на телефоне и на сенсорных экранах. */
+@media (max-width: 700px), (pointer: coarse) {
+  .theme-toggle { width: 44px; height: 44px; margin-left: 2px; }
+}
+
+/* Страница без переключателя языка (404): кнопка в том же углу. */
+.theme-toggle-float { position: absolute; top: 14px; right: 14px; z-index: 10; }
+
+@media print {
+  .theme-toggle,
+  .theme-toggle-float { display: none !important; }
+}
