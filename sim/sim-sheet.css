@@ -1,0 +1,111 @@
+/* =====================================================================
+   Печатный лист кейса (/sim/<язык>/<id>-sheet.html): полоса журнала по
+   второй странице образца HBR 2006 (612x792 pt, пересчитано на A4).
+   Метод и числа: «Печатные листы сайта - журнальный стиль, метод и
+   сценарии» в базе. Тонкие линейки нарисованы псевдоэлементами высотой
+   1 px со сжатием scaleY: Chrome округляет границы до 0.75 pt.
+   Шрифты: Source Sans 3 (текст), Open Sans полуузкий (красные заголовки,
+   шапка таблицы), Source Serif 4 (название). Казахские буквы:
+   cyrillic-ext, Ұұ и Іі в cyrillic. Название, логотип и герб журнала
+   не используются. Откат: убрать <link> на этот файл.
+   ===================================================================== */
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3-cyrillic-ext.woff2") format("woff2"); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300 800; font-stretch: 75% 100%; font-display: swap; src: url("/fonts/open-sans-wdth-cyrillic-ext.woff2") format("woff2"); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300 800; font-stretch: 75% 100%; font-display: swap; src: url("/fonts/open-sans-wdth-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300 800; font-stretch: 75% 100%; font-display: swap; src: url("/fonts/open-sans-wdth-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root { --ink: #231f20; --red: #b33333; --lift: 1.6pt; }
+html body { margin: 0; background: #e9e7e4; color: var(--ink); font: 330 9pt/1.33 "Source Sans 3", Arial, sans-serif; }
+
+/* --- экран: серый фон, кнопки сверху, лист как страница A4 --- */
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 210mm; margin: 0 auto; padding: 12px 0; }
+.bar a, .bar button { font: 600 15px "Source Sans 3", Arial, sans-serif; color: var(--red); }
+.bar button { padding: 10px 18px; border: 0; border-radius: 0; background: var(--red); color: #fff; cursor: pointer; }
+.sheet { --fs: 8.7pt; --lh: 1.32; position: relative; box-sizing: border-box; display: flex; flex-direction: column; width: 210mm; min-height: 297mm; margin: 0 auto 24px; padding: 15mm 14.5mm 20mm 16.5mm; background: #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, .18); hyphens: auto; overflow-wrap: break-word; }
+.sheet.kk { --fs: 8.1pt; --lh: 1.29; }
+
+/* --- вертикальная подпись в левом поле: низ на одной линии с разделителем --- */
+.vert { position: absolute; bottom: 20mm; left: 11mm; margin: 0; font: 300 5.5pt/1 "Source Sans 3", Arial, sans-serif; letter-spacing: .05em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+
+/* --- шапка: красная линейка 1.5 pt, название и подзаголовок антиквой --- */
+.head { display: grid; grid-template-columns: 30.5% minmax(0, 1fr); margin: 2mm 0 7mm; }
+.head-main { grid-column: 2; margin-left: 3.2mm; padding-top: 2.6mm; border-top: 1.5pt solid var(--red); }
+.head h1 { margin: 0; font: 400 18.5pt/1.1 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 24; letter-spacing: -.003em; text-wrap: balance; }
+.head .sub { margin: 1.8mm 0 0; font: 400 9.4pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
+
+/* --- две колонки: узкая слева, широкая справа; вертикальный разделитель --- */
+.cols { position: relative; flex: 1 1 auto; display: grid; grid-template-columns: 30.5% minmax(0, 1fr); align-items: stretch; }
+.left, .right { position: relative; display: flex; flex-direction: column; }
+.left { padding-right: 5mm; }
+.right { padding-left: 3.2mm; }
+.body { position: relative; padding-top: 3.8mm; }
+.right > .body { flex: 1 1 auto; }
+.cols h2 { position: relative; margin: 0; padding: 0; color: var(--red); font: 600 16pt/1 "Open Sans", Arial, sans-serif; font-variation-settings: "wdth" 87.5; letter-spacing: 0; }
+.cols h2::after { content: ""; position: absolute; right: 0; bottom: var(--lift); left: 0; height: 1px; background: var(--ink); transform: scaleY(.3333); transform-origin: bottom; }
+.right > h2::after { left: -3.2mm; }
+.left > h2::after { left: -2.1mm; }
+.left > h2 { font-size: 14pt; }
+/* Первый заголовок слева (14 pt) стоит в строке высотой 16 pt, как правый: линейки обоих заголовков лежат на одной высоте. */
+.left > h2:first-child { padding-top: 2pt; }
+.left > h2.next { margin-top: 5mm; }
+.right > .body::before { content: ""; position: absolute; top: calc(-1 * var(--lift)); bottom: 0; left: -3.2mm; width: 1px; background: var(--ink); transform: scaleX(.3333); transform-origin: left; }
+.left > .body.first::before { content: ""; position: absolute; top: calc(-1 * var(--lift)); left: -2.1mm; width: 1px; height: 24pt; background: var(--ink); transform: scaleX(.3333); transform-origin: left; }
+
+/* --- текст --- */
+.left p, .intro { margin: 0 0 2.2mm; font: 330 var(--fs)/var(--lh) "Source Sans 3", Arial, sans-serif; }
+.left b, .intro b, .what li b { font-weight: 600; }
+.intro { margin-bottom: 0; }
+.intro + table { margin-top: 2.6mm; }
+
+/* --- таблица плана: шапка капслоком полуузким, волосяные линейки между группами --- */
+table { width: 100%; margin: 0; border-collapse: collapse; table-layout: fixed; }
+th, td { position: relative; }
+thead th { padding: 1.4mm 2mm 1.5mm 0; font: 600 var(--fs)/1.2 "Open Sans", Arial, sans-serif; font-variation-settings: "wdth" 87.5; text-align: left; text-transform: uppercase; }
+thead th::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--ink); transform: scaleY(.6667); transform-origin: bottom; }
+tbody th, tbody td { padding: 1.5mm 2mm 1.5mm 0; vertical-align: top; text-align: left; font: 330 var(--fs)/var(--lh) "Source Sans 3", Arial, sans-serif; }
+tbody th::first-letter { font-weight: 400; font-size: 1.12em; }
+td.what ul { margin: 0; padding: 0; list-style: none; }
+td.what li { position: relative; margin: 0 0 .9mm; padding-left: 4.4mm; }
+td.what li:last-child { margin-bottom: 0; }
+td.what li::before { content: "\2022"; position: absolute; left: 1.4mm; font-size: .8em; }
+
+/* --- вопросы: подзаголовок полужирным, две колонки сплошным потоком --- */
+h3.sub { margin: 4mm 0 1.2mm; font: 600 calc(var(--fs) + 1pt)/1.25 "Source Sans 3", Arial, sans-serif; }
+ol.qs { column-count: 2; column-gap: 5.5mm; margin: 0; padding: 0; list-style: none; counter-reset: q; orphans: 2; widows: 2; }
+ol.qs li { position: relative; margin: 0 0 1.2mm; padding-left: 4.2mm; counter-increment: q; font: 330 var(--fs)/var(--lh) "Source Sans 3", Arial, sans-serif; }
+ol.qs li::before { content: counter(q) "."; position: absolute; left: 0; font-weight: 600; color: var(--red); }
+
+/* --- подвал: слева строка кейса, справа «Лист 1» антикварными капителями --- */
+.foot { position: absolute; right: 14.5mm; bottom: 12mm; left: 16.5mm; display: flex; justify-content: space-between; gap: 10px; font: 330 7pt/1.2 "Source Sans 3", Arial, sans-serif; }
+.foot a { color: inherit; text-decoration: none; }
+.foot .no { font: 600 8pt/1.2 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; letter-spacing: .08em; text-transform: uppercase; }
+
+.sheet tbody tr + tr > *::after { content: ""; position: absolute; top: 0; right: 0; left: 0; height: 1px; background: var(--ink); transform: scaleY(.3333); transform-origin: top; }
+tbody th { width: 17%; }
+thead th:first-child { width: 17%; }
+
+/* --- телефон: колонки друг под другом, лист читается без прокрутки вбок --- */
+@media screen and (max-width: 840px) {
+  .bar { max-width: none; padding: 12px 16px; }
+  .sheet { width: auto; min-height: 0; margin: 0 0 16px; padding: 18px 16px 16px; box-shadow: none; }
+  .vert { display: none; }
+  .head { display: block; margin: 0 0 18px; }
+  .head-main { margin-left: 0; }
+  .cols { display: block; }
+  .left { padding-right: 0; }
+  .right { margin-top: 20px; padding-left: 0; }
+  .left > h2::after, .right > h2::after { left: 0; }
+  .right > .body::before, .left > .body.first::before { display: none; }
+  ol.qs { column-count: 1; }
+  .foot { position: static; margin-top: 20px; flex-direction: column; }
+}
+
+/* --- печать: ровно одна страница A4, цвета и тонкие линейки сохраняются --- */
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  html body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .bar { display: none; }
+  .sheet { height: 297mm; min-height: 0; margin: 0; box-shadow: none; overflow: hidden; }
+}

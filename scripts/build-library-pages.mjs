@@ -58,10 +58,16 @@ for(const lang of ['ru','kk']) {
 function sheetPage(item,lang,dir) {
  const f=o=>(o&&(o[lang]||o[item.availableLangs[0]]||o.ru))||'';
  const sh=item.printSheet, plan=item.actionPlan, url=`/sim/${dir}/${item.id}.html`;
- const ui={ru:{print:'Распечатать',back:'К кейсу',who:'Кто',open:'Читать кейс онлайн'},kk:{print:'Басып шығару',back:'Кейске қайту',who:'Кім',open:'Кейсті онлайн оқу'}}[lang]||{print:'Print',back:'Back',who:'Who',open:'Read the case online'};
+ const ui={ru:{print:'Распечатать',back:'К кейсу',who:'Кто',when:'Срок',what:'Что делать и кто отвечает',what3:'Что делать',sheet:'Лист 1',author:'Дулат Иржанов'},kk:{print:'Басып шығару',back:'Кейске қайту',who:'Кім',when:'Мерзім',what:'Не істеу және кім жауапты',what3:'Не істеу',sheet:'Парақ 1',author:'Дулат Бауыржанұлы'}}[lang]||{print:'Print',back:'Back',who:'Who',when:'When',what:'What',what3:'What',sheet:'Sheet 1',author:'Dulat Irzhanov'};
+ const paras=a=>a.map(x=>`<p>${esc(f(x))}</p>`).join('');
  const li=a=>a.map(x=>`<li>${esc(f(x))}</li>`).join('');
- const opts=sh.options.map((x,i)=>{const t=f(x),k=t.indexOf('. ');return `<li><b>${'ABCD'[i]}. ${esc(t.slice(0,k+1))}</b> ${esc(t.slice(k+2))}</li>`;}).join('');
- const hor=plan.horizons.map(h=>`<tr><th rowspan="${h.items.length}">${esc(f(h.title))}</th>${h.items.map((it,i)=>`${i?'<tr>':''}<td class="who">${esc(f(it.who))}</td><td>${esc(f(it.what))}</td></tr>`).join('')}`).join('');
+ const opts=sh.options.map((x,i)=>{const t=f(x),k=t.indexOf('. ');return `<p><b>${'ABCD'[i]}. ${esc(t.slice(0,k+1))}</b> ${esc(t.slice(k+2))}</p>`;}).join('');
+ const hor=plan.horizons.map(h=>`<tr><th scope="row">${esc(f(h.title))}</th><td class="what"><ul>${h.items.map(it=>`<li><b>${esc(f(it.who))}.</b> ${esc(f(it.what))}</li>`).join('')}</ul></td></tr>`).join('');
+ const thead=`<th>${ui.when}</th><th>${ui.what}</th>`;
+ /* Intro of the plan: the sentence about the "sign of completion" is not on the sheet, so it is dropped. */
+ const sents=f(plan.intro).split(/(?<=[.!?»])\s+/).filter(Boolean);
+ if(sents.length>1&&/признак|белгі/i.test(sents[sents.length-1])) sents.pop();
+ const intro=sents.length?`<p class="intro"><b>${esc(sents[0])}</b></p>${sents.length>1?`<p class="intro">${esc(sents.slice(1).join(' '))}</p>`:''}`:'';
  return `<!DOCTYPE html>
 <html lang="${lang==='kk'?'kk':'ru'}">
 <head>
@@ -71,45 +77,26 @@ function sheetPage(item,lang,dir) {
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="${origin+url.replace('.html','-sheet.html')}">
   <link rel="stylesheet" href="/site.css?v=9">
-  <style>
-  html body { margin: 0; background: #eef1ef; color: #111; font: 10.5pt/1.32 "PT Sans", Arial, sans-serif; }
-  .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 190mm; margin: 0 auto; padding: 12px 0; }
-  .bar a, .bar button { font: 700 15px "PT Sans", Arial, sans-serif; color: #205c73; }
-  .bar button { padding: 10px 18px; border: 0; border-radius: 8px; background: #205c73; color: #fff; cursor: pointer; }
-  .sheet { box-sizing: border-box; width: 190mm; min-height: 277mm; margin: 0 auto 24px; padding: 11mm 12mm 10mm; background: #fff; box-shadow: 0 1px 6px rgba(0,0,0,.18); }
-  .head { display: flex; align-items: center; gap: 10px; padding-bottom: 6px; border-bottom: 1.5pt solid #17566e; }
-  .mono { flex: none; width: 34px; height: 34px; border-radius: 4px; background: #17566e; color: #fff; font: 700 14px/34px "PT Sans", Arial, sans-serif; text-align: center; }
-  .head h1 { margin: 0; font: 700 15pt/1.15 "PT Sans", Arial, sans-serif; color: #17566e; }
-  .head small { display: block; font-size: 8.5pt; color: #444; }
-  h2 { margin: 9px 0 3px; font: 700 10.5pt/1.2 "PT Sans", Arial, sans-serif; color: #17566e; text-transform: uppercase; letter-spacing: .03em; }
-  ul, ol { margin: 0; padding-left: 16px; }
-  li { margin: 0 0 1.5px; }
-  table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9pt; line-height: 1.25; }
-  th, td { border: .6pt solid #9ba9a5; padding: 2.5px 5px; vertical-align: top; text-align: left; }
-  th { width: 16mm; background: #eaf1ef; color: #173f50; font-size: 8.5pt; }
-  td.who { width: 42mm; color: #17566e; font-weight: 700; }
-${lang==='kk'?`  /* Kazakh text runs longer: a smaller table keeps the sheet on one A4 page. */
-  table { font-size: 8pt; line-height: 1.15; }
-  th { font-size: 7.5pt; }
-  td.who { width: 38mm; }
-`:''}  .foot { margin-top: 8px; padding-top: 4px; border-top: .5pt solid #aeb8b5; display: flex; justify-content: space-between; gap: 10px; font-size: 8pt; color: #444; }
-  @media print {
-    @page { size: A4 portrait; margin: 0; }
-    html body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .bar { display: none; }
-    .sheet { margin: 0; box-shadow: none; width: 210mm; min-height: 0; height: 297mm; padding: 10mm 13mm 8mm; overflow: hidden; }
-  }
-  </style>
+  <link rel="stylesheet" href="/editorial-base.css?v=1">
+  <link rel="stylesheet" href="/sim/sim-sheet.css?v=1">
 </head>
 <body>
-<div class="bar"><a href="${url}">← ${ui.back}</a><button type="button" onclick="window.print()">${ui.print}</button></div>
-<main class="sheet">
-  <div class="head"><div class="mono" aria-hidden="true">DI</div><div><h1>${esc(f(item.title))}</h1><small>${esc(f(sh.heading))}</small></div></div>
-  <h2>${esc(f(sh.situationTitle))}</h2><ul>${li(sh.situation)}</ul>
-  <h2>${esc(f(sh.optionsTitle))}</h2><ul style="list-style:none;padding-left:0">${opts}</ul>
-  <h2>${esc(f(sh.planTitle))}</h2><table><tbody>${hor}</tbody></table>
-  <h2>${esc(f(sh.questionsTitle))}</h2><ol>${li(sh.teamQuestions)}</ol>
-  <div class="foot"><span>${esc(f(sh.footer))}</span><a href="${url}">${origin.replace('https://','')+url}</a></div>
+<div class="bar"><a href="${url}">← ${ui.back}</a><button type="button" onclick="(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){window.print()})">${ui.print}</button></div>
+<main class="sheet${lang==='kk'?' kk':''}">
+  <p class="vert">© 2026 ${ui.author} · dulatedu.com</p>
+  <header class="head"><div class="head-main"><h1>${esc(f(item.title))}</h1><p class="sub">${esc(f(sh.heading))}</p></div></header>
+  <div class="cols">
+    <section class="left">
+      <h2>${esc(f(sh.situationTitle))}</h2><div class="body first">${paras(sh.situation)}</div>
+      <h2 class="next">${esc(f(sh.optionsTitle))}</h2><div class="body">${opts}</div>
+    </section>
+    <section class="right">
+      <h2>${esc(f(sh.planTitle))}</h2>
+      <div class="body">${intro}<table><thead><tr>${thead}</tr></thead><tbody>${hor}</tbody></table>
+      <h3 class="sub">${esc(f(sh.questionsTitle))}</h3><ol class="qs">${li(sh.teamQuestions)}</ol></div>
+    </section>
+  </div>
+  <div class="foot"><span>${esc(f(sh.footer))} · <a href="${url}">${origin.replace('https://','')+url}</a></span><span class="no">${ui.sheet}</span></div>
 </main>
 </body>
 </html>
