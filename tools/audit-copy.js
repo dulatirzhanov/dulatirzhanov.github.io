@@ -31,7 +31,7 @@
           ["Какие крупные планы у школы на ближайшие два-пять лет и какие трудности вы ожидаете? Записаны ли они в документе?","area",""]
         ] },
         { title: "Контакт", note: "Чтобы я мог ответить.", wide: true, questions: [
-          ["Ваше имя, роль в школе и удобный способ связи","text","Имя, должность, телефон или email"]
+          ["Ваше имя, роль в школе и удобный способ связи","text",""]
         ] }
       ],
       required: "обязательно",
@@ -84,7 +84,7 @@
           ["Мектептің алдағы екі-бес жылға қандай ірі жоспарлары бар және қандай қиындықтар болуы мүмкін? Олар құжатта көрсетілген бе?","area",""]
         ] },
         { title: "Байланыс", note: "Сізбен хабарласа алуым үшін.", wide: true, questions: [
-          ["Аты-жөніңіз, мектептегі қызметіңіз және қолайлы байланыс тәсілі","text","Аты-жөніңіз, қызметіңіз, телефон немесе email"]
+          ["Аты-жөніңіз, мектептегі қызметіңіз және қолайлы байланыс тәсілі","text",""]
         ] }
       ],
       required: "міндетті",
@@ -139,7 +139,7 @@
           ["What major plans does the school have for the next two to five years, and what challenges do you expect? Are these documented?","area",""]
         ] },
         { title: "Contact", note: "So that I can reply.", wide: true, questions: [
-          ["Your name, role at the school and preferred way to be contacted","text","Name, position, phone or email"]
+          ["Your name, role at the school and preferred way to be contacted","text",""]
         ] }
       ],
       required: "required",
