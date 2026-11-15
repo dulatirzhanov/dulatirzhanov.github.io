@@ -8,7 +8,7 @@
       title: "Анкета школы", eyebrow: "Перед первым разговором",
       lede: "Ответьте на вопросы, которые помогут провести первый разговор по делу. Обязательны только первый и последний вопросы, остальные можно пропустить.",
       privacy: "Сайт не отправляет ответы автоматически. Черновик ответов хранится только в этом браузере. Удалить его можно кнопкой «Очистить».",
-      metrics: [["15 вопросов","Обязательны первый и последний"],["Около 10 минут","Можно отвечать кратко, точные цифры не нужны"],["Ответ за два рабочих дня","Первый разговор бесплатный"]],
+      metrics: [["15 вопросов","Обязательны первый и последний"],["Около 10 минут","Можно отвечать кратко, цифры указать примерно"],["Ответ за два рабочих дня","Первый разговор бесплатный"]],
       sections: [
         { title: "Повод", note: "С чего начать разговор.", wide: true, questions: [
           ["Что происходит в школе и что вы хотите решить?","long","Двух-трех предложений достаточно"],
@@ -61,7 +61,7 @@
       title: "Мектеп сауалнамасы", eyebrow: "Алғашқы кеңес алдында",
       lede: "Алғашқы кеңеске дайындалуға көмектесетін сұрақтарға жауап беріңіз. Бірінші және соңғы сұраққа жауап беру міндетті. Қалғанын өткізіп жіберуге болады.",
       privacy: "Жауаптар автоматты түрде жіберілмейді. Жауаптарыңыз тек осы браузерде сақталады. Оларды «Тазарту» батырмасымен өшіруге болады.",
-      metrics: [["15 сұрақ","Бірінші және соңғысы міндетті"],["Шамамен 10 минут","Қысқа жазуға болады, нақты сандар қажет емес"],["Екі жұмыс күні ішінде жауап","Алғашқы кеңес тегін"]],
+      metrics: [["15 сұрақ","Бірінші және соңғысы міндетті"],["Шамамен 10 минут","Қысқа жазуға болады, сандарды шамамен көрсетсеңіз жеткілікті"],["Екі жұмыс күні ішінде жауап","Алғашқы кеңес тегін"]],
       sections: [
         { title: "Хабарласу себебі", note: "Әңгімені неден бастаған жөн.", wide: true, questions: [
           ["Мектепте не болып жатыр және қандай мәселені шешкіңіз келеді?","long","Екі-үш сөйлем жеткілікті"],
@@ -116,7 +116,7 @@
       title: "School questionnaire", eyebrow: "Before the first conversation",
       lede: "Answer these questions to help us prepare for a useful first conversation. Only the first and last questions are required; you can skip the rest.",
       privacy: "The website does not send your answers automatically. Your draft is saved only in this browser. You can delete it using the Clear button.",
-      metrics: [["15 questions","Only the first and last questions are required"],["About 10 minutes","Brief answers are fine; exact figures are not needed"],["A reply within two working days","The first conversation is free"]],
+      metrics: [["15 questions","Only the first and last questions are required"],["About 10 minutes","Brief answers are fine, and approximate figures will do"],["A reply within two working days","The first conversation is free"]],
       sections: [
         { title: "Reason for writing", note: "Where the conversation should start.", wide: true, questions: [
           ["What is happening at the school, and what would you like to resolve?","long","Two or three sentences are enough"],

@@ -44,8 +44,8 @@ html, body { background: var(--e-paper); }
 .audit-view .tool-nav { align-items: center; margin-bottom: 34px; font: 700 12px/1 var(--e-sans); letter-spacing: .1em; text-transform: uppercase; }
 .audit-view .tool-nav a { color: var(--e-muted); }
 .audit-view .tool-nav a:hover { color: var(--e-ink); text-decoration: none; }
-.audit-view .language-switch { gap: 4px; }
-.audit-view .language-switch a { padding: 8px 7px; }
+.audit-view .language-switch { align-items: center; gap: 4px; }
+.audit-view .language-switch a { display: inline-flex; align-items: center; min-height: 32px; padding: 0 7px; line-height: 1; }
 .audit-view .language-switch a[aria-current="page"] { color: var(--e-red-ink); text-decoration: none; }
 
 /* --- Заголовок как обложка: тонкая черная линейка, светлая антиква,
