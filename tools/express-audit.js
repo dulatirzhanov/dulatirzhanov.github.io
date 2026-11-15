@@ -45,7 +45,8 @@
   }).join("");
 
   // Печатная версия сверстана как бланк: подпись поля стоит на линейке, ответ набран цветом.
-  const printHead = subtitle => `<header class="form-masthead"><div class="form-brand"><strong>Dulat Irzhanov</strong><span>${t.brandLine}</span></div><div class="form-side">${t.confidential}<br>dulatedu.com</div></header><div class="form-title"><p class="form-name">${t.title}</p><p class="form-sub">${subtitle} · <span class="auditDate"></span></p></div>`;
+  // Шапка по первой полосе журнала: гриф над линейкой, слева курсивный анонс, справа заголовок, подзаголовок и подпись автора.
+  const printHead = subtitle => `<header class="form-masthead"><div class="form-side">${t.confidential} · dulatedu.com</div></header><div class="form-title"><p class="form-dek">${t.brandLine}</p><div class="form-head-main"><p class="form-name">${t.title}</p><p class="form-sub">${subtitle}</p><p class="form-by">Dulat Irzhanov · <span class="auditDate"></span></p></div></div>`;
 
   // items: ответы по порядку вопросов; blank: пустой бланк с линейками для письма от руки.
   function printBody(items, blank) {

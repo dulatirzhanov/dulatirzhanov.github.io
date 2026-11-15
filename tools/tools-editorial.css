@@ -163,16 +163,16 @@ html, body { background: var(--e-paper); }
   html, body { background: #fff; }
   .audit-view { background: #fff; color: #231f20; font: 10.5pt/1.3 "PT Sans", Arial, sans-serif; }
 
-  /* шапка: тонкая красная линейка на всю ширину, имя светлой антиквой, гриф справа */
-  .form-masthead { display: flex; align-items: flex-end; gap: 4mm; padding-top: 3.2mm; border-top: .75pt solid #b33333; }
-  .form-brand strong { display: block; color: #231f20; font: 300 21pt/1.05 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 48; letter-spacing: -.01em; text-transform: none; }
-  .form-brand span { margin-top: 1.2mm; color: #6b6566; font: 700 6.8pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .14em; }
-  .form-side { color: #6b6566; font: 700 6.8pt/1.6 "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-
-  /* название бланка антиквой */
-  .form-title { margin: 5mm 0 3.6mm; padding-bottom: 1.8mm; border-bottom: .5pt solid #231f20; }
-  .form-name { color: #231f20; font: 400 19pt/1.15 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 40; letter-spacing: -.005em; }
-  .form-sub { margin-top: 1mm; color: #3d393a; font: italic 400 10.5pt/1.3 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
+  /* шапка по первой полосе журнала: гриф над линейкой; тонкая черная линейка на всю ширину,
+     поверх нее справа красная полоса 4 pt; слева курсивный анонс, справа заголовок, подзаголовок, подпись гротеском */
+  .form-masthead { display: flex; justify-content: flex-end; padding-bottom: 4.5mm; }
+  .form-side { color: #6b6566; font: 700 6.8pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+  .form-title { position: relative; display: grid; grid-template-columns: 36.7% 1fr; margin: 0 0 4mm; padding: 3.5mm 0 0; border: 0; border-top: .25pt solid #231f20; }
+  .form-title::before { content: ""; position: absolute; top: -2pt; right: 0; left: 36.7%; height: 4pt; background: #b33333; }
+  .form-dek { margin: 0; padding-right: 6.3%; color: #231f20; font: italic 400 12pt/1.28 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 14; }
+  .form-name { margin: 0; color: #231f20; font: 300 28pt/1.05 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 60; letter-spacing: -.012em; }
+  .form-sub { margin: 2mm 0 0; color: #231f20; font: 400 12.5pt/1.18 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 24; }
+  .form-by { margin: 2.6mm 0 0; color: #231f20; font: 400 10.5pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .01em; }
 
   /* разделы: красный гротеск капслоком с тонкой красной линейкой */
   .form-section { margin: 0 0 3.6mm; }
@@ -180,7 +180,10 @@ html, body { background: var(--e-paper); }
 
   /* подписи полей PT Sans, линейки тонкие; плотность подобрана так, чтобы анкета с ответами и примечанием уместилась на одной странице A4 */
   .form-field { min-height: 7.4mm; }
-  .audit-blank .form-field { min-height: 9.6mm; }
+  .audit-blank .form-field { min-height: 10mm; }
+  .form-block i { height: 8.6mm; }
+  /* пустой бланк всегда две страницы: «Управление» и «Контакт» начинаются со второй */
+  .audit-blank .form-section:nth-of-type(3) { break-before: page; }
   .form-block { margin-bottom: 2mm; }
   .form-row:nth-child(3) > .form-field.is-half:first-child { flex: 0 0 36%; }
   .form-row:nth-child(3) > .form-field.is-half:last-child { flex: 1 1 64%; }
