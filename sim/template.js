@@ -217,9 +217,9 @@
 
   /* Подписи входа в кейс («О кейсе») и кнопок навигации */
   const INTRO = {
-    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Прочитать все четыре варианта действий, A-D.", "Сопоставить варианты с разбором и своей школой, ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная", stages: ["Ситуация", "Варианты", "Разбор", "Вопросы"], stagesLabel: "Этапы кейса", screenOf: (n, m) => "Экран " + n + " из " + m, toc: "Содержание", nextUp: "Дальше", navHint: "Полоса вверху показывает ваш путь по кейсу: четыре этапа и по сегменту на каждый экран. Нажмите на название этапа или на любой сегмент, чтобы перейти. Работают и стрелки на клавиатуре.", inStage: n => "Экраны этапа «" + n + "»:", overview: "Обзор", resources: "Ресурсы", questions: "Вопросы", takeaway: "Главное" },
-    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Read all four approaches, A-D.", "Compare the approaches with the analysis and your own school, then answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home", stages: ["Situation", "Options", "Analysis", "Questions"], stagesLabel: "Case stages", screenOf: (n, m) => "Screen " + n + " of " + m, toc: "Contents", nextUp: "Next", navHint: "The bar at the top shows your path through the case: four stages and one segment per screen. Click a stage name or any segment to jump there. The arrow keys work too.", inStage: n => "Screens in “" + n + "”:", overview: "Overview", resources: "Resources", questions: "Questions", takeaway: "Key point" },
-    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Әрекеттің төрт нұсқасын да оқыңыз, A-D.", "Нұсқаларды талдаумен және өз мектебіңізбен салыстырып, сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет", stages: ["Жағдай", "Нұсқалар", "Талдау", "Сұрақтар"], stagesLabel: "Кейс кезеңдері", screenOf: (n, m) => m + " экранның " + n + "-і", toc: "Мазмұны", nextUp: "Әрі қарай", navHint: "Жоғарғы жолақ кейс бойынша жолыңызды көрсетеді: төрт кезең және әр экранға бір сегмент. Өту үшін кезең атауын немесе кез келген сегментті басыңыз. Пернетақтадағы көрсеткілер де жұмыс істейді.", inStage: n => "«" + n + "» кезеңінің экрандары:", overview: "Шолу", resources: "Ресурстар", questions: "Сұрақтар", takeaway: "Негізгі ой" }
+    ru: { nav: "О кейсе", eyebrow: "О кейсе", youWill: "Что вам предстоит", steps: ["Прочитать ситуацию.", "Прочитать все четыре варианта действий, A-D.", "Ознакомиться с разбором и {plan}планом действий{/plan}.", "Ответить на вопросы."], stepsNoPlan: ["Прочитать ситуацию.", "Прочитать все четыре варианта действий, A-D.", "Ознакомиться с разбором.", "Ответить на вопросы."], time: n => "Около " + n + " мин", start: "Начать", back: "← Назад", crumbCases: "Библиотека кейсов", crumbHome: "Главная", stages: ["Ситуация", "Варианты", "Разбор", "Вопросы"], stagesLabel: "Этапы кейса", screenOf: (n, m) => "Экран " + n + " из " + m, toc: "Содержание", nextUp: "Дальше", navHint: "Полоса вверху показывает ваш путь по кейсу: четыре этапа и по сегменту на каждый экран. Нажмите на название этапа или на любой сегмент, чтобы перейти. Работают и стрелки на клавиатуре.", inStage: n => "Экраны этапа «" + n + "»:", overview: "Обзор", resources: "Ресурсы", questions: "Вопросы", takeaway: "Главное" },
+    en: { nav: "About this case", eyebrow: "About this case", youWill: "What you will do", steps: ["Read the situation.", "Read all four approaches, A-D.", "Review the analysis and the {plan}action plan{/plan}.", "Answer the questions."], stepsNoPlan: ["Read the situation.", "Read all four approaches, A-D.", "Review the analysis.", "Answer the questions."], time: n => "About " + n + " min", start: "Start", back: "← Back", crumbCases: "Case Library", crumbHome: "Home", stages: ["Situation", "Options", "Analysis", "Questions"], stagesLabel: "Case stages", screenOf: (n, m) => "Screen " + n + " of " + m, toc: "Contents", nextUp: "Next", navHint: "The bar at the top shows your path through the case: four stages and one segment per screen. Click a stage name or any segment to jump there. The arrow keys work too.", inStage: n => "Screens in “" + n + "”:", overview: "Overview", resources: "Resources", questions: "Questions", takeaway: "Key point" },
+    kk: { nav: "Кейс туралы", eyebrow: "Кейс туралы", youWill: "Сізге не істеу керек", steps: ["Жағдаймен танысыңыз.", "Әрекеттің төрт нұсқасын да оқыңыз, A-D.", "Талдаумен және {plan}іс-қимыл жоспарымен{/plan} танысыңыз.", "Сұрақтарға жауап беріңіз."], stepsNoPlan: ["Жағдаймен танысыңыз.", "Әрекеттің төрт нұсқасын да оқыңыз, A-D.", "Талдаумен танысыңыз.", "Сұрақтарға жауап беріңіз."], time: n => "Шамамен " + n + " мин", start: "Бастау", back: "← Артқа", crumbCases: "Кейстер кітапханасы", crumbHome: "Басты бет", stages: ["Жағдай", "Нұсқалар", "Талдау", "Сұрақтар"], stagesLabel: "Кейс кезеңдері", screenOf: (n, m) => m + " экранның " + n + "-і", toc: "Мазмұны", nextUp: "Әрі қарай", navHint: "Жоғарғы жолақ кейс бойынша жолыңызды көрсетеді: төрт кезең және әр экранға бір сегмент. Өту үшін кезең атауын немесе кез келген сегментті басыңыз. Пернетақтадағы көрсеткілер де жұмыс істейді.", inStage: n => "«" + n + "» кезеңінің экрандары:", overview: "Шолу", resources: "Ресурстар", questions: "Сұрақтар", takeaway: "Негізгі ой" }
   };
 
   /* ===== CASE PAGE ===== */
@@ -304,7 +304,7 @@
             <p class="intro-lead">${f(caseData.excerpt)}</p>
             <div class="intro-card">
               <div class="intro-label">${I.youWill}</div>
-              <ol>${I.steps.map(x => `<li>${x}</li>`).join("")}</ol>
+              <ol>${(hasPlan ? I.steps : I.stepsNoPlan).map(x => `<li>${x.replace(/\{plan\}(.*?)\{\/plan\}/, '<a class="intro-plan-link" href="#plan" data-next="plan" data-scroll=".plan-sheet">$1</a>')}</li>`).join("")}</ol>
               <div class="intro-time">${I.time(readMinutes)}</div>
               <p class="intro-nav-hint">${I.navHint}</p>
             </div>
@@ -695,7 +695,20 @@
 
       navItems.forEach(item => item.addEventListener("click", () => showPane(item.dataset.pane)));
       document.querySelectorAll("[data-next]").forEach(el => {
-        el.addEventListener("click", e => { e.preventDefault(); showPane(el.dataset.next); });
+        el.addEventListener("click", e => {
+          e.preventDefault();
+          showPane(el.dataset.next);
+          // A link may point at a block inside the pane (the print-sheet button in the action plan).
+          const target = el.dataset.scroll && document.querySelector('.pane.active ' + el.dataset.scroll);
+          if (target) {
+            target.scrollIntoView({ block: "center" });
+            target.classList.remove("pointed");
+            void target.offsetWidth;
+            target.classList.add("pointed");
+            const cta = target.querySelector("a.cta");
+            if (cta) cta.focus({ preventScroll: true });
+          }
+        });
       });
       window.addEventListener("popstate", () => {
         const id = location.hash.slice(1);

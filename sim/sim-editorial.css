@@ -303,6 +303,12 @@ body.case-view { max-width: 860px; }
 }
 .intro-card ol { padding-left: 20px; }
 .intro-card li::marker { color: var(--e-red); font-weight: 700; }
+.intro-plan-link { color: var(--e-red-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.intro-plan-link:hover { color: var(--e-red); }
+/* Block the intro link points at: a short red outline so the eye finds the print-sheet button. */
+.plan-sheet.pointed { animation: pointed 2.2s ease-out 1; }
+@keyframes pointed { 0%, 55% { box-shadow: 0 0 0 2px var(--e-red); } 100% { box-shadow: 0 0 0 2px transparent; } }
+@media (prefers-reduced-motion: reduce) { .plan-sheet.pointed { animation: none; box-shadow: 0 0 0 2px var(--e-red); } }
 .intro-time { font-family: var(--e-sans); color: var(--e-muted); }
 .intro-nav-hint { border-top-color: var(--e-rule) !important; font-family: var(--e-sans) !important; font-size: 14px !important; }
 .facts dt { color: var(--e-muted); }
