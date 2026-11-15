@@ -139,10 +139,31 @@ html, body { background: var(--e-paper); }
 .audit-view .tool-footer a { color: var(--e-muted); }
 .audit-view .tool-footer a:hover { color: var(--e-red-ink); }
 
+/* --- Подсказки и примеры ответов --- */
+.audit-view .audit-q { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.audit-view .audit-field > .audit-hint { margin-top: -2px; color: var(--e-muted); font-size: 13px; font-weight: 400; line-height: 1.4; }
+.audit-view .audit-example summary { display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; color: var(--e-red-ink); font: 700 12px/1.2 var(--e-sans); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; list-style: none; }
+.audit-view .audit-example summary::-webkit-details-marker { display: none; }
+.audit-view .audit-example summary::before { content: "+"; display: inline-block; width: 12px; font-size: 15px; font-weight: 400; }
+.audit-view .audit-example[open] summary::before { content: "\2212"; }
+.audit-view .audit-example summary:focus-visible { outline: 2px solid var(--e-red); outline-offset: 3px; }
+.audit-view .audit-example p { margin: 4px 0 0; padding: 10px 14px; border-left: 2px solid var(--e-red); background: var(--e-paper-2); color: var(--e-ink-2); font: italic 400 15px/1.5 var(--e-serif); font-variation-settings: "opsz" 14; }
+
+/* --- Блок «Так выглядит заполненная анкета» --- */
+.audit-view a.button { display: inline-flex; align-items: center; text-decoration: none; }
+.audit-view .audit-example-card { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 26px; align-items: center; margin: 0 0 40px; padding: 4px 0 26px; border-bottom: 1px solid var(--e-rule); }
+.audit-view .audit-example-thumb { display: block; line-height: 0; border: 1px solid var(--e-field); background: #fff; }
+.audit-view .audit-example-thumb img { display: block; width: 100%; height: auto; }
+.audit-view .audit-example-rubric { margin: 0 0 8px; color: var(--e-red-ink); font: 700 12px/1.2 var(--e-sans); letter-spacing: .12em; text-transform: uppercase; }
+.audit-view .audit-example-card h2 { margin: 0 0 8px; color: var(--e-ink); font-family: var(--e-serif); font-variation-settings: "opsz" 30; font-weight: 400; font-size: 26px; line-height: 1.15; }
+.audit-view .audit-example-card .audit-example-text { max-width: 34em; margin: 0 0 16px; color: var(--e-ink-2); font-size: 15px; line-height: 1.5; }
+
 @media (max-width: 800px) {
   .audit-view .audit-fields { gap: 20px; }
 }
 @media (max-width: 520px) {
+  .audit-view .audit-example-card { grid-template-columns: 92px minmax(0, 1fr); gap: 16px; margin-bottom: 30px; }
+  .audit-view .audit-example-card h2 { font-size: 22px; }
   .tool-view.audit-view { padding-top: 20px; }
   .audit-view .tool-nav { flex-direction: row; align-items: center; margin-bottom: 26px; }
   .audit-view .audit-overview > div,

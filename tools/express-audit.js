@@ -7,6 +7,8 @@
   const routes = { ru: "../ru/express-audit.html", kk: "../kz/express-audit.html", en: "../en/express-audit.html" };
   const locale = { ru: "ru-RU", kk: "kk-KZ", en: "en-GB" }[lang];
   const app = document.getElementById("auditApp");
+  // Пример заполненной анкеты: PDF и миниатюра лежат в /tools/examples/, вымышленная школа.
+  const EXAMPLE_BASE = "/tools/examples/school-form-example-" + { ru: "ru", kk: "kz", en: "en" }[lang];
   const AUTHOR_EMAIL = "d@dulatedu.com";
   const AUTHOR_WHATSAPP = "77761070090";
   const DRAFT_KEY = "dulatedu.schoolForm.v2";
@@ -26,15 +28,20 @@
     return String(value || "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   }
 
+  // Подсказка стоит под вопросом видимым текстом (placeholder исчезает при вводе).
+  // Пример ответа лежит в сворачиваемой строке вне label, чтобы клик по ней не переключал поле.
   function questionField(question, index) {
-    const [label, type, placeholder] = question;
+    const [label, type, hint] = question;
     const required = index === FIRST || index === LAST;
-    const attrs = `name="q${index + 1}" placeholder="${escapeHtml(placeholder)}"${required ? ' aria-required="true"' : ""}`;
+    const attrs = `name="q${index + 1}"${required ? ' aria-required="true"' : ""}`;
     const control = type === "text"
       ? `<input ${attrs}>`
       : `<textarea ${attrs} rows="${type === "long" ? 5 : 3}"></textarea>`;
     const mark = required ? ` <em class="audit-required">${t.required}</em>` : "";
-    return `<label class="audit-field"><span><b>${index + 1}.</b> ${escapeHtml(label)}${mark}</span>${control}</label>`;
+    const hintHtml = hint ? `<span class="audit-hint">${escapeHtml(hint)}</span>` : "";
+    const example = t.examples && t.examples[index];
+    const exampleHtml = example ? `<details class="audit-example"><summary>${t.exampleLabel}</summary><p>${escapeHtml(example)}</p></details>` : "";
+    return `<div class="audit-q"><label class="audit-field"><span><b>${index + 1}.</b> ${escapeHtml(label)}${mark}</span>${hintHtml}${control}</label>${exampleHtml}</div>`;
   }
 
   let offset = 0;
@@ -80,7 +87,7 @@
     <nav class="tool-nav"><a href="https://dulatedu.com/">dulatedu.com</a><span class="language-switch"><a href="${routes.ru}"${lang === "ru" ? ' aria-current="page"' : ""}>RU</a><a href="${routes.kk}"${lang === "kk" ? ' aria-current="page"' : ""}>KZ</a><a href="${routes.en}"${lang === "en" ? ' aria-current="page"' : ""}>EN</a></span></nav>
     <main><header class="tool-hero"><div class="tool-eyebrow">${t.eyebrow}</div><h1>${t.title}</h1><p class="tool-lede">${t.lede}</p><p class="privacy-note">${t.privacy}</p></header>
     <section class="audit-overview">${t.metrics.map(item => `<div><strong>${item[0]}</strong><span>${item[1]}</span></div>`).join("")}</section>
-    <form id="auditForm" novalidate>${formSections}<section class="audit-complete"><div><h2>${t.complete}</h2><p id="completionText">${t.filled(0, total)}</p></div><div class="completion-bar"><span id="completionBar"></span></div><div class="audit-actions"><button type="button" class="button primary" id="sendWhatsApp">${t.sendWhatsApp}</button><button type="button" class="button" id="sendEmail">${t.sendEmail}</button></div><p class="audit-status" id="auditStatus" role="status" aria-live="polite" hidden></p><p class="email-note">${t.sendNote}</p><div class="audit-actions audit-actions-secondary"><button type="button" class="button" id="copyAnswers">${t.copy}</button><button type="button" class="button" id="printAudit">${t.print}</button><button type="button" class="button" id="printBlankAudit">${t.printBlank}</button><button type="button" class="button quiet" id="clearAudit">${t.clear}</button></div></section></form>
+    <aside class="audit-example-card"><a class="audit-example-thumb" id="exampleThumb" href="${EXAMPLE_BASE}.pdf" target="_blank" rel="noopener"><img src="${EXAMPLE_BASE}.webp" alt="${t.exampleCard.alt}" width="760" height="1076" loading="lazy"></a><div><p class="audit-example-rubric">${t.exampleCard.rubric}</p><h2>${t.exampleCard.title}</h2><p class="audit-example-text">${t.exampleCard.text}</p><a class="button" id="exampleOpen" href="${EXAMPLE_BASE}.pdf" target="_blank" rel="noopener">${t.exampleCard.open}</a></div></aside><form id="auditForm" novalidate>${formSections}<section class="audit-complete"><div><h2>${t.complete}</h2><p id="completionText">${t.filled(0, total)}</p></div><div class="completion-bar"><span id="completionBar"></span></div><div class="audit-actions"><button type="button" class="button primary" id="sendWhatsApp">${t.sendWhatsApp}</button><button type="button" class="button" id="sendEmail">${t.sendEmail}</button></div><p class="audit-status" id="auditStatus" role="status" aria-live="polite" hidden></p><p class="email-note">${t.sendNote}</p><div class="audit-actions audit-actions-secondary"><button type="button" class="button" id="copyAnswers">${t.copy}</button><button type="button" class="button" id="printAudit">${t.print}</button><button type="button" class="button" id="printBlankAudit">${t.printBlank}</button><button type="button" class="button quiet" id="clearAudit">${t.clear}</button></div></section></form>
     <section class="audit-print audit-report print-only"><header class="rep-head"><div class="rep-head-main"><p class="rep-title">${t.title}</p><p class="rep-sub">${t.reportSubtitle}</p></div></header><div class="rep-cols" id="auditPrintAnswers"></div></section>
     <section class="audit-print audit-blank print-only">${printHead(t.blankSubtitle)}<div id="blankPrintAnswers"></div><p class="form-note">${t.blankInstruction}</p></section>
     </main><footer class="tool-footer"><span>© 2026 Dulat Irzhanov</span><a href="https://dulatedu.com/">dulatedu.com</a></footer></div>`;
@@ -222,6 +229,8 @@
     status.hidden = true;
     update();
   });
+  document.querySelectorAll(".audit-example").forEach(item => item.addEventListener("toggle", () => { if (item.open) track("school_form_example", { kind: "answer" }); }));
+  ["exampleThumb", "exampleOpen"].forEach(id => document.getElementById(id).addEventListener("click", () => track("school_form_example", { kind: "pdf" })));
   if (new URLSearchParams(window.location.search).get("print") === "blank") document.body.classList.add("print-blank");
   if (restoreDraft()) showStatus(t.restored);
   update();
