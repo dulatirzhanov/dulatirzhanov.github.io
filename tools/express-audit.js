@@ -45,7 +45,7 @@
   }).join("");
 
   // Печатная версия сверстана как бланк: подпись поля стоит на линейке, ответ набран цветом.
-  const printHead = subtitle => `<header class="form-masthead"><div class="form-mark" aria-hidden="true">DI</div><div class="form-brand"><strong>Dulat Irzhanov</strong><span>${t.brandLine}</span></div><div class="form-side">${t.confidential}<br>dulatedu.com</div></header><div class="form-title"><p class="form-name">${t.title}</p><p class="form-sub">${subtitle} · <span class="auditDate"></span></p></div>`;
+  const printHead = subtitle => `<header class="form-masthead"><div class="form-brand"><strong>Dulat Irzhanov</strong><span>${t.brandLine}</span></div><div class="form-side">${t.confidential}<br>dulatedu.com</div></header><div class="form-title"><p class="form-name">${t.title}</p><p class="form-sub">${subtitle} · <span class="auditDate"></span></p></div>`;
 
   // items: ответы по порядку вопросов; blank: пустой бланк с линейками для письма от руки.
   function printBody(items, blank) {
@@ -116,7 +116,7 @@
     // на пустом бланке название школы из черновика не печатается
     const blankPrint = document.body.classList.contains("print-blank");
     const running = [blankPrint ? "" : items[Q.school].answer, dateText].filter(Boolean).join("; ").replace(/[\\"\n\r]/g, " ");
-    pageStyle.textContent = `@media print { @page { @top-right { content: "${running}"; color: #333; font: 8pt "PT Sans", Arial, sans-serif; } } }`;
+    pageStyle.textContent = `@media print { @page { @top-right { content: "${running}"; } } }`;
   }
 
   // В сообщение идут только вопросы, на которые есть ответ.
@@ -188,8 +188,15 @@
     showStatus((await copyReport()) ? t.copiedOnly : t.copyFailed);
     track("school_form_send", { method: "copy" });
   });
-  document.getElementById("printAudit").addEventListener("click", () => { document.body.classList.remove("print-blank"); update(); window.print(); track("school_form_send", { method: "print" }); });
-  document.getElementById("printBlankAudit").addEventListener("click", () => { document.body.classList.add("print-blank"); update(); window.print(); });
+  // Печать идет после загрузки шрифтов: блоки для печати скрыты на экране, и без явной загрузки
+  // Source Serif 4 в PDF попал бы запасным шрифтом. Образец текста тянет нужные начертания (кириллица, латиница, казахские буквы).
+  function printWhenReady() {
+    const sample = document.querySelector(".audit-print").textContent.slice(0, 400) + " Аәғқңөүұһі Dulat Irzhanov";
+    const faces = ['300 21pt "Source Serif 4"', '400 11pt "Source Serif 4"', 'italic 400 11pt "Source Serif 4"', '400 10pt "PT Sans"', '700 8pt "PT Sans"'];
+    Promise.all(faces.map(face => document.fonts.load(face, sample))).catch(() => {}).then(() => document.fonts.ready).then(() => window.print());
+  }
+  document.getElementById("printAudit").addEventListener("click", () => { document.body.classList.remove("print-blank"); update(); printWhenReady(); track("school_form_send", { method: "print" }); });
+  document.getElementById("printBlankAudit").addEventListener("click", () => { document.body.classList.add("print-blank"); update(); printWhenReady(); });
   window.addEventListener("afterprint", () => { document.body.classList.remove("print-blank"); update(); });
   document.getElementById("clearAudit").addEventListener("click", () => {
     if (!window.confirm(t.confirmClear)) return;

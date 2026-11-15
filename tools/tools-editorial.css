@@ -1,0 +1,200 @@
+/* =====================================================================
+   Анкета школы (/tools/<язык>/express-audit.html): editorial layer
+   (журнальная верстка). Подключается последним, после /site.css,
+   /editorial-base.css, tools.css и tools-motion.css.
+   Шрифт Source Serif 4 и токены --e-* лежат в /editorial-base.css.
+   Тексты, порядок вопросов, отправка и черновик не затронуты: меняется
+   только внешний вид экрана и печатного бланка.
+   Откат: убрать <link tools-editorial.css> и <link editorial-base.css>
+   из трех оболочек tools/<язык>/express-audit.html.
+   Название, логотип и герб журнала не используются.
+   Блок @media print в конце относится только к печати анкеты
+   (.audit-view); печать другого инструмента (.print-sheet) не трогается.
+   ===================================================================== */
+
+:root { --e-field: color-mix(in srgb, var(--e-ink) 38%, transparent); }
+
+html, body { background: var(--e-paper); }
+.audit-view ::selection { background: rgba(179, 51, 51, .18); }
+
+/* --- Основа --- */
+.tool-view.audit-view {
+  max-width: 900px;
+  padding-top: 26px;
+  background: var(--e-paper);
+  color: var(--e-ink);
+  font-family: var(--e-sans);
+}
+.audit-view a:focus-visible,
+.audit-view button:focus-visible { outline: 2px solid var(--e-red); outline-offset: 3px; }
+
+/* --- Меню и язык: мелкий гротеск капслоком --- */
+.audit-view .tool-nav { align-items: center; margin-bottom: 34px; font: 700 12px/1 var(--e-sans); letter-spacing: .1em; text-transform: uppercase; }
+.audit-view .tool-nav a { color: var(--e-muted); }
+.audit-view .tool-nav a:hover { color: var(--e-ink); text-decoration: none; }
+.audit-view .language-switch { gap: 4px; }
+.audit-view .language-switch a { padding: 8px 7px; }
+.audit-view .language-switch a[aria-current="page"] { color: var(--e-red-ink); text-decoration: none; }
+
+/* --- Заголовок как обложка: тонкая черная линейка, светлая антиква,
+       под ней красная полоса 5px и курсивное вступление --- */
+.audit-view .tool-hero { max-width: none; margin-bottom: 30px; padding-top: 20px; border-top: 1px solid var(--e-ink); }
+.audit-view .tool-eyebrow { margin-bottom: 14px; color: var(--e-red-ink); font: 700 12px/1.2 var(--e-sans); letter-spacing: .12em; }
+.audit-view .tool-hero h1 {
+  margin: 0 0 22px;
+  color: var(--e-ink);
+  font-family: var(--e-serif);
+  font-weight: 300;
+  font-variation-settings: "opsz" 60;
+  font-size: clamp(40px, 7vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.audit-view .tool-lede {
+  max-width: 34em;
+  margin: 0 0 20px;
+  padding-top: 18px;
+  border-top: 5px solid var(--e-red);
+  color: var(--e-ink-2);
+  font-family: var(--e-serif);
+  font-style: italic;
+  font-variation-settings: "opsz" 24;
+  font-size: clamp(19px, 2.4vw, 23px);
+  line-height: 1.4;
+}
+.audit-view .privacy-note { max-width: 40em; padding: 0 0 0 14px; border-left: 2px solid var(--e-rule); background: none; color: var(--e-muted); font-size: 13px; line-height: 1.5; }
+
+/* --- Сводка: три колонки с волосяными разделителями --- */
+.audit-view .audit-overview { gap: 0; margin: 0 0 34px; border-top: 1px solid var(--e-rule); border-bottom: 1px solid var(--e-rule); }
+.audit-view .audit-overview > div { padding: 16px 20px 16px 0; border: 0; border-radius: 0; background: none; }
+.audit-view .audit-overview > div + div { padding-left: 20px; border-left: 1px solid var(--e-rule); }
+.audit-view .audit-overview strong { color: var(--e-ink); font-family: var(--e-serif); font-variation-settings: "opsz" 18; font-weight: 600; font-size: 17px; }
+.audit-view .audit-overview span { color: var(--e-muted); font-size: 13px; }
+
+/* --- Разделы: красный гротеск капслоком, красная линейка --- */
+.audit-view .audit-section { margin: 0 0 40px; padding: 0; border: 0; border-radius: 0; background: none; }
+.audit-view .audit-section-head { align-items: baseline; gap: 12px; margin-bottom: 22px; padding-bottom: 9px; border-bottom: 1px solid var(--e-red); }
+.audit-view .audit-section-head > span { display: inline; width: auto; height: auto; border-radius: 0; background: none; color: var(--e-red-ink); font: 700 13px/1.2 var(--e-sans); letter-spacing: .12em; }
+.audit-view .audit-section-head > div { display: flex; flex: 1; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; }
+.audit-view .audit-section-head h2 { color: var(--e-red-ink); font: 700 13px/1.2 var(--e-sans); letter-spacing: .12em; text-transform: uppercase; }
+.audit-view .audit-section-head p { margin: 0; color: var(--e-muted); font-size: 13px; }
+.audit-view .audit-fields { gap: 22px 36px; }
+
+/* --- Поля: вопрос PT Sans, ответ на линейке; длинные ответы в тонкой рамке --- */
+.audit-view .audit-field { gap: 4px; }
+.audit-view .audit-field > span { color: var(--e-ink-2); font-size: 14px; font-weight: 400; line-height: 1.4; }
+.audit-view .audit-field > span b { color: var(--e-red-ink); font-weight: 700; }
+.audit-view .audit-required { margin-left: 6px; color: var(--e-red-ink); font-size: 11px; letter-spacing: .1em; }
+.audit-view .audit-field input,
+.audit-view .audit-field textarea {
+  border: 0;
+  border-bottom: 1px solid var(--e-ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--e-ink);
+  font: 16px/1.45 var(--e-sans);
+  padding: 8px 0 7px;
+}
+.audit-view .audit-field textarea { padding: 9px 11px; border: 1px solid var(--e-field); resize: vertical; }
+.audit-view .audit-field input::placeholder,
+.audit-view .audit-field textarea::placeholder { color: var(--e-muted); opacity: 1; }
+.audit-view .audit-field input:focus,
+.audit-view .audit-field textarea:focus { outline: 0; border-color: var(--e-red); box-shadow: 0 1px 0 var(--e-red); }
+.audit-view .audit-field textarea:focus { box-shadow: 0 0 0 1px var(--e-red); }
+
+/* --- Отправка: линейка сверху, прогресс тонкой линейкой --- */
+.audit-view .audit-complete { margin-top: 12px; padding: 20px 0 0; border: 0; border-top: 1px solid var(--e-ink); border-radius: 0; background: none; }
+.audit-view .audit-complete h2 { color: var(--e-ink); font-family: var(--e-serif); font-variation-settings: "opsz" 30; font-weight: 400; font-size: 26px; letter-spacing: -.005em; }
+.audit-view .audit-complete p { color: var(--e-muted); font-size: 13px; }
+.audit-view .completion-bar { height: 3px; margin: 14px 0 22px; border-radius: 0; background: var(--e-rule); }
+.audit-view .completion-bar span { border-radius: 0; background: var(--e-red); }
+.audit-view .audit-actions-secondary { border-top: 1px solid var(--e-rule); }
+.audit-view .audit-complete .audit-status { padding: 11px 14px; border-left: 2px solid var(--e-red); border-radius: 0; background: var(--e-paper-2); color: var(--e-ink); }
+.audit-view .audit-status a { color: var(--e-red-ink); }
+.audit-view .audit-complete .email-note { color: var(--e-muted); }
+
+/* --- Кнопки: прямоугольные; основная черная --- */
+.audit-view .button { min-height: 42px; padding: 10px 16px; border: 1px solid var(--e-ink); border-radius: 0; background: transparent; color: var(--e-ink); font: 700 13px/1.2 var(--e-sans); letter-spacing: .03em; }
+.audit-view .button:hover { border-color: var(--e-red); color: var(--e-red-ink); }
+.audit-view .button.primary { border-color: var(--e-ink); background: var(--e-ink); color: var(--e-on-ink); }
+.audit-view .button.primary:hover { border-color: var(--e-ink-2); background: var(--e-ink-2); color: var(--e-on-ink); }
+.audit-view .button.quiet { border-color: transparent; color: var(--e-muted); font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
+.audit-view .button.quiet:hover { border-color: transparent; color: var(--e-red-ink); }
+
+/* --- Подвал колонтитулом --- */
+.audit-view .tool-footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--e-rule); color: var(--e-muted); font: 12px/1.4 var(--e-sans); letter-spacing: .04em; }
+.audit-view .tool-footer a { color: var(--e-muted); }
+.audit-view .tool-footer a:hover { color: var(--e-red-ink); }
+
+@media (max-width: 800px) {
+  .audit-view .audit-fields { gap: 20px; }
+}
+@media (max-width: 520px) {
+  .tool-view.audit-view { padding-top: 20px; }
+  .audit-view .tool-nav { flex-direction: row; align-items: center; margin-bottom: 26px; }
+  .audit-view .audit-overview > div,
+  .audit-view .audit-overview > div + div { padding: 13px 0; border-left: 0; }
+  .audit-view .audit-overview > div + div { border-top: 1px solid var(--e-rule); }
+  .audit-view .audit-section-head > div { display: block; }
+  .audit-view .audit-section-head p { margin-top: 3px; }
+  .audit-view .audit-section, .audit-view .audit-complete { padding: 0; }
+  .audit-view .audit-complete { padding-top: 18px; }
+  .audit-view .audit-section-head { margin-bottom: 18px; }
+  .audit-view .button { width: 100%; }
+}
+
+/* =====================================================================
+   ПЕЧАТЬ. Бланк A4 по образцу HKS остается бланком: подпись поля на
+   линейке, ответ на той же линейке, короткие факты по два поля в строке.
+   Меняется только оформление. Цвета заданы значениями, не токенами:
+   на бумаге темная тема не применяется.
+   Ответы: по умолчанию #9E2A2A PT Sans (вариант A); вариант B,
+   класс body.answers-serif: краска #231F20 шрифтом Source Serif 4.
+   ===================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm 17mm 16mm;
+    @top-right { color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    @bottom-left { content: "dulatedu.com"; color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    @bottom-right { content: counter(page) " / " counter(pages); color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; }
+  }
+  html, body { background: #fff; }
+  .audit-view { background: #fff; color: #231f20; font: 10.5pt/1.3 "PT Sans", Arial, sans-serif; }
+
+  /* шапка: тонкая красная линейка на всю ширину, имя светлой антиквой, гриф справа */
+  .form-masthead { display: flex; align-items: flex-end; gap: 4mm; padding-top: 3.2mm; border-top: .75pt solid #b33333; }
+  .form-brand strong { display: block; color: #231f20; font: 300 21pt/1.05 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 48; letter-spacing: -.01em; text-transform: none; }
+  .form-brand span { margin-top: 1.2mm; color: #6b6566; font: 700 6.8pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .14em; }
+  .form-side { color: #6b6566; font: 700 6.8pt/1.6 "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+
+  /* название бланка антиквой */
+  .form-title { margin: 5mm 0 3.6mm; padding-bottom: 1.8mm; border-bottom: .5pt solid #231f20; }
+  .form-name { color: #231f20; font: 400 19pt/1.15 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 40; letter-spacing: -.005em; }
+  .form-sub { margin-top: 1mm; color: #3d393a; font: italic 400 10.5pt/1.3 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
+
+  /* разделы: красный гротеск капслоком с тонкой красной линейкой */
+  .form-section { margin: 0 0 3.6mm; }
+  .form-section h2 { margin: 0 0 1.4mm; padding-bottom: 1.1mm; border-bottom: .5pt solid #b33333; color: #9e2a2a; font: 700 8.4pt/1.25 "PT Sans", Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+
+  /* подписи полей PT Sans, линейки тонкие; плотность подобрана так, чтобы анкета с ответами и примечанием уместилась на одной странице A4 */
+  .form-field { min-height: 7.4mm; }
+  .audit-blank .form-field { min-height: 9.6mm; }
+  .form-block { margin-bottom: 2mm; }
+  .form-row:nth-child(3) > .form-field.is-half:first-child { flex: 0 0 36%; }
+  .form-row:nth-child(3) > .form-field.is-half:last-child { flex: 1 1 64%; }
+  .form-field { border-bottom: .5pt solid #231f20; }
+  .form-label { color: #231f20; font: 400 9.5pt/1.25 "PT Sans", Arial, sans-serif; }
+  .form-question { color: #231f20; font: 400 9.5pt/1.3 "PT Sans", Arial, sans-serif; }
+  .form-answer { border-bottom: .5pt solid #231f20; }
+  .form-block i { border-bottom: .5pt solid #231f20; }
+
+  /* ответы цветом: вариант A */
+  .form-value, .form-answer { color: #9e2a2a; font: 400 10.5pt/1.3 "PT Sans", Arial, sans-serif; }
+  /* вариант B: краска и Source Serif 4 */
+  body.answers-serif .form-value,
+  body.answers-serif .form-answer { color: #231f20; font: 400 9.6pt/1.26 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 14; }
+
+  .form-note { margin-top: 3.5mm; color: #6b6566; font: 400 8pt/1.35 "PT Sans", Arial, sans-serif; }
+}
