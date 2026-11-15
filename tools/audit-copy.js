@@ -15,7 +15,7 @@
           ["Что вы уже пробовали?","area",""],
           ["Есть ли срок, к которому нужно принять решение?","text","Дата или событие"]
         ] },
-        { title: "О школе", note: "Основные факты. Точные цифры не нужны.", questions: [
+        { title: "О школе", note: "Основные факты. Цифры можно указать примерно.", questions: [
           ["Название школы и город","text",""],
           ["Тип школы","text","Частная, государственная, сетевая, международная франшиза или другое"],
           ["Год основания и число учеников сейчас","text",""],
@@ -68,7 +68,7 @@
           ["Бұған дейін не істеп көрдіңіз?","area",""],
           ["Шешім қабылдауға белгіленген мерзім бар ма?","text","Күнін немесе оқиғаны көрсетіңіз"]
         ] },
-        { title: "Мектеп туралы", note: "Негізгі деректер. Нақты сандар қажет емес.", questions: [
+        { title: "Мектеп туралы", note: "Негізгі деректер. Сандарды шамамен көрсетсеңіз де болады.", questions: [
           ["Мектептің атауы және орналасқан қаласы","text",""],
           ["Мектептің түрі","text","Жекеменшік, мемлекеттік, желілік, халықаралық франшиза немесе басқа"],
           ["Құрылған жылы және қазіргі оқушы саны","text",""],
@@ -123,7 +123,7 @@
           ["What have you already tried?","area",""],
           ["Is there a deadline by which a decision must be made?","text","A date or an event"]
         ] },
-        { title: "About the school", note: "Essential facts. Exact figures are not needed.", questions: [
+        { title: "About the school", note: "Essential facts. Approximate figures are fine.", questions: [
           ["School name and city","text",""],
           ["Type of school","text","Private, state, part of a school network, international franchise, or other"],
           ["Year founded and current enrolment","text",""],
