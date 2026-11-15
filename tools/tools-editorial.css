@@ -12,6 +12,18 @@
    (.audit-view); печать другого инструмента (.print-sheet) не трогается.
    ===================================================================== */
 
+/* --- Шрифты печатной анкеты: ближайшие к Myriad Pro из образца.
+       Source Sans 3 (Adobe, SIL OFL 1.1, ось wght 200-900) для текста,
+       Open Sans (SIL OFL 1.1, оси wght 300-800 и wdth 75-100) для красных
+       заголовков и шапки таблицы в полуузком начертании.
+       Казахские буквы: cyrillic-ext, Ұұ и Іі в cyrillic. --- */
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3-cyrillic-ext.woff2") format("woff2"); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300 800; font-stretch: 75% 100%; font-display: swap; src: url("/fonts/open-sans-wdth-cyrillic-ext.woff2") format("woff2"); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300 800; font-stretch: 75% 100%; font-display: swap; src: url("/fonts/open-sans-wdth-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300 800; font-stretch: 75% 100%; font-display: swap; src: url("/fonts/open-sans-wdth-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 :root { --e-field: color-mix(in srgb, var(--e-ink) 38%, transparent); }
 
 html, body { background: var(--e-paper); }
@@ -160,9 +172,9 @@ html, body { background: var(--e-paper); }
   @page {
     size: A4 portrait;
     margin: 15mm 17mm 16mm;
-    @top-right { color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-    @bottom-left { content: "dulatedu.com"; color: #231f20; font: 400 7.6pt "PT Sans", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
-    @bottom-right { content: counter(page) " / " counter(pages); color: #231f20; font: 400 7.6pt "PT Sans", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+    @top-right { color: #231f20; font: 400 7.6pt "Source Sans 3", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+    @bottom-left { content: none; }
+    @bottom-right { content: counter(page) " / " counter(pages); color: #231f20; font: 400 7.6pt "Source Sans 3", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; vertical-align: top; padding-top: 1.5mm; }
   }
   html, body { background: #fff; }
   .audit-view { background: #fff; color: #231f20; font: 10.5pt/1.3 "PT Sans", Arial, sans-serif; }
@@ -202,12 +214,13 @@ html, body { background: var(--e-paper); }
   /* ---------- заполненная анкета: полоса журнала ----------
      Размеры сняты с PDF образца (стр. 2, 612x792 pt) и пересчитаны на A4:
      поля 11 / 14.5 мм, колонка повода 29.9%, линейка-разделитель на 32.8%,
-     текст 9 pt гротеском с межстрочным 12 pt, заголовок 16 pt красным,
-     волосяные линейки 0.25 pt, заголовок таблицы 0.5 pt, красная линейка 1.5 pt.
-     Chrome округляет границы до 1 px (0.75 pt), поэтому тонкие линейки
-     нарисованы псевдоэлементами высотой 1 px со сжатием scaleY(.3333). */
-  @page report { size: A4 portrait; margin: 15mm 14.5mm 13mm 11mm; }
-  .audit-report { page: report; position: relative; display: flex !important; flex-direction: column; min-height: 255mm; padding-left: 5.5mm; color: #231f20; }
+     красный заголовок 16 pt стоит на линейке (зазор от базовой линии 0.1 pt),
+     вертикальный разделитель начинается от линейки и идет до низа колонок,
+     текст 9 pt с межстрочным 12 pt, волосяные линейки 0.25 pt, шапка таблицы 0.5 pt,
+     красная линейка 1.5 pt. Chrome округляет границы до 1 px (0.75 pt), поэтому
+     тонкие линейки нарисованы псевдоэлементами высотой 1 px со сжатием scaleY(.3333). */
+  @page report { size: A4 portrait; margin: 15mm 14.5mm 20mm 11mm; }
+  .audit-report { page: report; position: relative; display: flex !important; flex-direction: column; min-height: 254mm; padding-left: 5.5mm; color: #231f20; }
   .rep-head, .rep-cols { display: grid; grid-template-columns: 32.8% minmax(0, 1fr); align-items: stretch; }
   .rep-cols { position: relative; flex: 1 1 auto; }
   .rep-head { margin: 4mm 0 16mm; }
@@ -215,39 +228,41 @@ html, body { background: var(--e-paper); }
   .rep-title { margin: 0; color: #231f20; font: 400 18.5pt/1.1 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 24; letter-spacing: -.003em; }
   .rep-sub { margin: 1.8mm 0 0; color: #231f20; font: 400 10.7pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
 
-  .rep-left { position: relative; padding-right: 5mm; }
-  .rep-right { position: relative; padding-left: 3.2mm; }
-  /* вертикальный разделитель 0.25 pt от линейки заголовка до низа колонок */
-  .rep-right::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
-  .rep-cols h2 { position: relative; margin: 0 0 3.6mm; padding-bottom: .1mm; color: #b33333; font: 700 16pt/1.1 "PT Sans", Arial, sans-serif; letter-spacing: -.02em; }
-  .rep-cols h2::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: bottom; }
+  .rep-left, .rep-right { --lift: 1.6pt; position: relative; display: flex; flex-direction: column; }
+  .rep-left { padding-right: 5mm; }
+  .rep-right { padding-left: 3.2mm; }
+  .rep-body { position: relative; flex: 1 1 auto; padding-top: 3.8mm; }
+  /* красный заголовок: Open Sans полуузкий 600, 16 pt; линейка 0.25 pt проходит у базовой линии */
+  .rep-cols h2 { position: relative; margin: 0; padding: 0; color: #b33333; font: 600 16pt/1 "Open Sans", Arial, sans-serif; font-variation-settings: "wdth" 87.5; letter-spacing: 0; }
+  .rep-cols h2::after { content: ""; position: absolute; right: 0; bottom: var(--lift); left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: bottom; }
   .rep-right > h2::after { left: -3.2mm; }
   .rep-left > h2::after { left: -2.1mm; }
+  /* вертикальный разделитель: от линейки заголовка до низа колонок */
+  .rep-right > .rep-body::before { content: ""; position: absolute; top: calc(-1 * var(--lift)); bottom: 0; left: -3.2mm; width: 1px; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
   /* уголок слева от первого абзаца, как в образце: вертикаль 24 pt от линейки заголовка */
-  .rep-left > h2::before { content: ""; position: absolute; top: 100%; left: -2.1mm; width: 1px; height: 24pt; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
-  .rep-cols .rep-h2-next { margin-top: 8mm; }
+  .rep-left > .rep-body::before { content: ""; position: absolute; top: calc(-1 * var(--lift)); left: -2.1mm; width: 1px; height: 24pt; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
 
   .rep-qa { margin: 0 0 2.2mm; break-inside: avoid; }
-  .rep-qa h3 { margin: 0; color: #231f20; font: 700 9pt/1.33 "PT Sans", Arial, sans-serif; }
-  .rep-qa p { margin: 0; color: #231f20; font: 400 9pt/1.33 "PT Sans", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
-  .rep-school { margin: 0 0 3mm; color: #231f20; font: 400 9pt/1.33 "PT Sans", Arial, sans-serif; }
-  .rep-school b { font-weight: 700; }
+  .rep-qa h3, .rep-label { margin: 0; color: #231f20; font: 600 9pt/1.33 "Source Sans 3", Arial, sans-serif; }
+  .rep-qa p, .rep-school { margin: 0; color: #231f20; font: 330 9pt/1.33 "Source Sans 3", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
+  .rep-school { margin-bottom: 3mm; }
+  .rep-school b { font-weight: 600; }
+  .rep-label { margin: 5mm 0 1.2mm; }
 
-  .rep-table { width: 100%; margin: 0 0 1mm; border-collapse: collapse; table-layout: fixed; }
+  .rep-table { width: 100%; margin: 0; border-collapse: collapse; table-layout: fixed; }
   .rep-table th, .rep-table td { position: relative; }
-  .rep-table thead th { padding: 1.4mm 2mm 1.5mm 0; color: #231f20; font: 700 8.6pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .01em; text-align: left; text-transform: uppercase; }
+  .rep-table thead th { padding: 1.4mm 2mm 1.5mm 0; color: #231f20; font: 600 9pt/1.2 "Open Sans", Arial, sans-serif; font-variation-settings: "wdth" 87.5; text-align: left; text-transform: uppercase; }
   .rep-table thead th::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.6667); transform-origin: bottom; }
   .rep-table thead th:first-child, .rep-table tbody th { width: 27%; }
-  .rep-table tbody th, .rep-table tbody td { padding: 1.9mm 2mm 1.9mm 0; vertical-align: top; text-align: left; }
+  .rep-table tbody th, .rep-table tbody td { padding: 1.9mm 2mm 1.9mm 0; vertical-align: top; text-align: left; color: #231f20; font: 330 9pt/1.33 "Source Sans 3", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
   .rep-table tbody tr + tr th::after, .rep-table tbody tr + tr td::after { content: ""; position: absolute; top: 0; right: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: top; }
-  .rep-table tbody th { color: #231f20; font: 400 9pt/1.3 "PT Sans", Arial, sans-serif; }
-  .rep-table tbody td { color: #231f20; font: 400 9pt/1.33 "PT Sans", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
 
   .rep-text { column-count: 2; column-gap: 5.5mm; }
-  .rep-note { position: relative; margin: 6mm 0 0; padding-top: 2mm; color: #6b6566; font: 400 7.4pt/1.4 "PT Sans", Arial, sans-serif; break-inside: avoid; }
+  /* примечание внизу узкой колонки, чтобы вертикальный разделитель шел до низа, как в образце */
+  .rep-note { position: relative; margin: 0; padding-top: 2mm; color: #6b6566; font: 400 7.2pt/1.35 "Source Sans 3", Arial, sans-serif; break-inside: avoid; }
   .rep-note::before { content: ""; position: absolute; top: 0; right: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: top; }
-  /* вертикальная подпись в левом поле: 5.5 pt, низ на одной линии с разделителем */
-  .rep-vert { position: absolute; bottom: 0; left: -5.5mm; margin: 0; color: #231f20; font: 400 5.5pt/1 "PT Sans", Arial, sans-serif; letter-spacing: .05em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+  /* вертикальная подпись в левом поле: низ на одной линии с разделителем */
+  .rep-vert { position: absolute; bottom: 0; left: -5.5mm; margin: 0; color: #231f20; font: 300 5.5pt/1 "Source Sans 3", Arial, sans-serif; letter-spacing: .05em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
   body.answers-red .rep-qa p, body.answers-red .rep-table tbody td { color: #9e2a2a; }
 
   /* длинные ответы: размер уменьшается ступенями, см. data-rep-size в express-audit.js */
