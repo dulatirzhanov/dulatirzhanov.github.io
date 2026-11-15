@@ -15,6 +15,8 @@
   // Кириллица в адресе занимает шесть знаков на букву, длинные ссылки обрезаются почтой и мессенджером.
   const LINK_LIMIT = 3500;
 
+  // Блоки нумеруются римскими цифрами, вопросы арабскими сквозным номером.
+  const ROMAN = ["I", "II", "III", "IV", "V", "VI"];
   const questions = t.sections.flatMap(section => section.questions);
   const total = questions.length;
   const FIRST = 0;
@@ -48,7 +50,7 @@
   const formSections = t.sections.map((section, sectionIndex) => {
     const fields = section.questions.map((question, localIndex) => questionField(question, offset + localIndex)).join("");
     offset += section.questions.length;
-    return `<section class="audit-section${section.wide ? " is-wide" : ""}"><div class="audit-section-head"><span>${sectionIndex + 1}</span><div><h2>${t.sections[sectionIndex].title}</h2><p>${section.note}</p></div></div><div class="audit-fields">${fields}</div></section>`;
+    return `<section class="audit-section${section.wide ? " is-wide" : ""}"><div class="audit-section-head"><span>${ROMAN[sectionIndex]}</span><div><h2>${t.sections[sectionIndex].title}</h2><p>${section.note}</p></div></div><div class="audit-fields">${fields}</div></section>`;
   }).join("");
 
   // Печатная версия сверстана как бланк: подпись поля стоит на линейке, ответ набран цветом.
