@@ -66,11 +66,13 @@
   function reportBody(items) {
     const val = index => items[index].answer;
     const para = value => escapeHtml(value).replaceAll("\n", "<br>");
-    const qa = (index, label) => val(index) ? `<div class="rep-qa"><h3>${escapeHtml(label || questions[index][0])}</h3><p>${para(val(index))}</p></div>` : "";
+    // label === null: только абзац без заголовка; label не задан: вопрос анкеты; иначе короткая подпись
+    const qa = (index, label) => !val(index) ? "" : label === null ? `<div class="rep-qa"><p>${para(val(index))}</p></div>` : `<div class="rep-qa"><h3>${escapeHtml(label || questions[index][0])}</h3><p>${para(val(index))}</p></div>`;
+    const lab = t.reportLabels || {};
     const short = t.shortLabels;
     const row = (label, index) => `<tr><th scope="row">${escapeHtml(label)}</th><td>${val(index) ? para(val(index)) : "—"}</td></tr>`;
-    const left = `<div class="rep-left"><h2>${t.sections[0].title}</h2><div class="rep-body">${qa(Q.reason)}${qa(Q.tried)}${qa(Q.deadline, t.deadline)}${qa(Q.contact, t.sections[3].title)}</div><p class="rep-note">${t.notice}</p></div>`;
-    const right = `<div class="rep-right"><h2>${t.schoolAndManagement}</h2><div class="rep-body"><p class="rep-school"><b>${val(Q.school) ? para(val(Q.school)) : "—"}</b><br>${t.dateLabel}: ${formatDate(new Date())}</p><table class="rep-table"><thead><tr><th>${t.factHead[0]}</th><th>${t.factHead[1]}</th></tr></thead><tbody>${row(short.type, Q.type)}${row(short.founded, Q.founded)}${row(short.curriculum, Q.curriculum)}${row(short.licence, Q.licence)}${row(short.owner, Q.owner)}${row(short.principal, Q.principal)}</tbody></table><h3 class="rep-label">${t.sections[2].title}</h3><div class="rep-text">${qa(Q.decisions)}${qa(Q.team)}${qa(Q.systems)}${qa(Q.plans)}</div></div></div>`;
+    const left = `<div class="rep-left"><h2>${t.sections[0].title}</h2><div class="rep-body">${qa(Q.reason, null)}${qa(Q.tried, null)}${qa(Q.deadline, t.deadline)}${qa(Q.contact, t.sections[3].title)}</div><p class="rep-note">${t.notice}</p></div>`;
+    const right = `<div class="rep-right"><h2>${t.schoolAndManagement}</h2><div class="rep-body"><p class="rep-school"><b>${val(Q.school) ? para(val(Q.school)) : "—"}</b></p><table class="rep-table"><thead><tr><th>${t.factHead[0]}</th><th>${t.factHead[1]}</th></tr></thead><tbody>${row(short.type, Q.type)}${row(short.founded, Q.founded)}${row(short.curriculum, Q.curriculum)}${row(short.licence, Q.licence)}${row(short.owner, Q.owner)}${row(short.principal, Q.principal)}</tbody></table><h3 class="rep-label">${t.sections[2].title}</h3><div class="rep-text">${qa(Q.decisions, lab.decisions)}${qa(Q.team, lab.team)}${qa(Q.systems, lab.systems)}${qa(Q.plans, lab.plans)}</div></div></div>`;
     return left + right + `<p class="rep-vert">${t.confidential} · Dulat Irzhanov · dulatedu.com</p>`;
   }
 

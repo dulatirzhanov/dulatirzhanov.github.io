@@ -226,7 +226,7 @@ html, body { background: var(--e-paper); }
   .rep-head { margin: 4mm 0 16mm; }
   .rep-head-main { grid-column: 2; margin-left: 3.2mm; padding-top: 2.6mm; border-top: 1.5pt solid #b33333; }
   .rep-title { margin: 0; color: #231f20; font: 400 18.5pt/1.1 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 24; letter-spacing: -.003em; }
-  .rep-sub { margin: 1.8mm 0 0; color: #231f20; font: 400 10.7pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
+  .rep-sub { margin: 1.8mm 0 0; color: #231f20; font: 400 9.4pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
 
   .rep-left, .rep-right { --lift: 1.6pt; position: relative; display: flex; flex-direction: column; }
   .rep-left { padding-right: 5mm; }
@@ -245,8 +245,10 @@ html, body { background: var(--e-paper); }
   .rep-qa { margin: 0 0 2.2mm; break-inside: avoid; }
   .rep-qa h3, .rep-label { margin: 0; color: #231f20; font: 600 9pt/1.33 "Source Sans 3", Arial, sans-serif; }
   .rep-qa p, .rep-school { margin: 0; color: #231f20; font: 330 9pt/1.33 "Source Sans 3", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
-  .rep-school { margin-bottom: 3mm; }
+  .rep-school { margin-bottom: 3.4mm; font-size: 11.5pt; line-height: 1.25; }
   .rep-school b { font-weight: 600; }
+  /* вариант с названием школы капслоком: body.school-caps */
+  body.school-caps .rep-school { font-size: 10pt; letter-spacing: .03em; text-transform: uppercase; }
   .rep-label { margin: 5mm 0 1.2mm; }
 
   .rep-table { width: 100%; margin: 0; border-collapse: collapse; table-layout: fixed; }
