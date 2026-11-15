@@ -128,7 +128,7 @@
     document.getElementById("auditPrintAnswers").innerHTML = reportBody(items);
     // Длинные ответы печатаются мельче, чтобы анкета осталась на одной странице A4.
     const chars = items.reduce((sum, item) => sum + item.answer.length, 0);
-    document.body.dataset.repSize = chars > 2300 ? "xs" : chars > 1800 ? "s" : chars > 1300 ? "m" : "";
+    document.body.dataset.repSize = chars > 2100 ? "xs" : chars > 1600 ? "s" : chars > 1200 ? "m" : "";
     // строка в верхнем поле каждой страницы: школа и дата, как номер дела на бланке
     // на пустом бланке название школы из черновика не печатается
     const blankPrint = document.body.classList.contains("print-blank");
