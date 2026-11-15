@@ -20,6 +20,10 @@
     return `<section class="contact-block" aria-labelledby="contact-heading"><h2 id="contact-heading">${s("contactTitle")}</h2><p>${s("contactText")}</p><div class="contact-actions"><a class="contact-write" href="${homePath()}#contacts">${s("contactWrite")}</a><a href="/tools/${lang}/express-audit.html">${s("contactForm")}</a></div></section>`;
   }
 
+  function collabBlock() {
+    return `<section class="collab-block" id="collab" aria-labelledby="collab-heading"><h2 id="collab-heading">${s("collabTitle")}</h2><p>${s("collabText")}</p><div class="contact-actions"><a class="contact-write" href="${homePath()}#contacts">${s("contactWrite")}</a></div></section>`;
+  }
+
   /* Адрес кейса: отдельная страница <id>.html (собирает tools/build-pages.js),
      если у кейса есть заголовок на этом языке; иначе старый адрес case.html?id= */
   function caseUrl(lang, id) {
@@ -114,6 +118,7 @@
         <div class="filters" id="filters"></div>
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="emptyState" style="display:none">${s("noResults")}</div>
+        ${hasReleaseOneContent ? collabBlock() : ""}
         ${howBlock}
         ${aboutBlock}
         ${hasReleaseOneContent ? subscribeBlock : ""}
@@ -509,6 +514,7 @@
             <li>${s("shareQuestion4")}</li>
           </ol>
           <p class="share-privacy">${s("sharePrivacy")}</p>
+          <p class="share-collab">${s("shareCollab")}</p>
         ` : "";
         panesHtml += `
           <section class="pane" data-id="resources">

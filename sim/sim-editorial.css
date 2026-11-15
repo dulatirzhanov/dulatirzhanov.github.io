@@ -184,6 +184,12 @@ details.about > p { font-family: var(--e-serif); font-size: 18px; line-height: 1
 }
 .lib-footer .footer-links a:hover, .content-footer .footer-links a:hover, .case-page-footer .footer-links a:hover { border-bottom-color: var(--e-red); color: var(--e-ink); }
 
+/* Приглашение писать кейсы вместе (после списка кейсов) */
+.collab-block { margin: 40px 0; padding: 22px 0 8px; border-top: 2px solid var(--e-red); text-align: left; }
+.collab-block h2 { margin: 0 0 10px; font-family: var(--e-serif); font-weight: 400; font-variation-settings: "opsz" 40; font-size: 30px; line-height: 1.2; color: var(--e-ink); }
+.collab-block p { margin: 0 0 18px; max-width: 62ch; font-family: var(--e-serif); font-size: 18px; line-height: 1.55; color: var(--e-ink-2); }
+.share-collab { font-weight: 700; }
+
 /* Блок «Первый разговор» */
 .contact-block { background: var(--e-paper-2); border-top: 2px solid var(--e-ink); border-radius: 0; }
 .contact-block h2 { font-family: var(--e-serif); font-weight: 400; font-variation-settings: "opsz" 40; font-size: 30px; color: var(--e-ink); }
