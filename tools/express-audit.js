@@ -71,7 +71,7 @@
     const row = (label, index) => `<tr><th scope="row">${escapeHtml(label)}</th><td>${val(index) ? para(val(index)) : "—"}</td></tr>`;
     const left = `<div class="rep-left"><h2>${t.sections[0].title}</h2>${qa(Q.reason)}${qa(Q.tried)}${qa(Q.deadline, t.deadline)}${qa(Q.contact, t.sections[3].title)}</div>`;
     const right = `<div class="rep-right"><h2>${t.sections[1].title}</h2><p class="rep-school"><b>${val(Q.school) ? para(val(Q.school)) : "—"}</b><br>${t.dateLabel}: ${formatDate(new Date())}</p><table class="rep-table"><thead><tr><th>${t.factHead[0]}</th><th>${t.factHead[1]}</th></tr></thead><tbody>${row(short.type, Q.type)}${row(short.founded, Q.founded)}${row(short.curriculum, Q.curriculum)}${row(short.licence, Q.licence)}${row(short.owner, Q.owner)}${row(short.principal, Q.principal)}</tbody></table><h2 class="rep-h2-next">${t.sections[2].title}</h2><div class="rep-text">${qa(Q.decisions)}${qa(Q.team)}${qa(Q.systems)}${qa(Q.plans)}</div></div>`;
-    return left + right;
+    return left + right + `<p class="rep-vert">${t.confidential} · Dulat Irzhanov · dulatedu.com</p>`;
   }
 
   app.innerHTML = `<div class="tool-view audit-view">
@@ -79,7 +79,7 @@
     <main><header class="tool-hero"><div class="tool-eyebrow">${t.eyebrow}</div><h1>${t.title}</h1><p class="tool-lede">${t.lede}</p><p class="privacy-note">${t.privacy}</p></header>
     <section class="audit-overview">${t.metrics.map(item => `<div><strong>${item[0]}</strong><span>${item[1]}</span></div>`).join("")}</section>
     <form id="auditForm" novalidate>${formSections}<section class="audit-complete"><div><h2>${t.complete}</h2><p id="completionText">${t.filled(0, total)}</p></div><div class="completion-bar"><span id="completionBar"></span></div><div class="audit-actions"><button type="button" class="button primary" id="sendWhatsApp">${t.sendWhatsApp}</button><button type="button" class="button" id="sendEmail">${t.sendEmail}</button></div><p class="audit-status" id="auditStatus" role="status" aria-live="polite" hidden></p><p class="email-note">${t.sendNote}</p><div class="audit-actions audit-actions-secondary"><button type="button" class="button" id="copyAnswers">${t.copy}</button><button type="button" class="button" id="printAudit">${t.print}</button><button type="button" class="button" id="printBlankAudit">${t.printBlank}</button><button type="button" class="button quiet" id="clearAudit">${t.clear}</button></div></section></form>
-    <section class="audit-print audit-report print-only"><header class="rep-head"><div class="rep-head-main"><p class="rep-title">${t.title}</p><p class="rep-sub">${t.reportSubtitle}</p></div></header><div class="rep-cols" id="auditPrintAnswers"></div><p class="rep-note">${t.notice}</p><p class="rep-vert">${t.confidential} · Dulat Irzhanov · dulatedu.com</p></section>
+    <section class="audit-print audit-report print-only"><header class="rep-head"><div class="rep-head-main"><p class="rep-title">${t.title}</p><p class="rep-sub">${t.reportSubtitle}</p></div></header><div class="rep-cols" id="auditPrintAnswers"></div><p class="rep-note">${t.notice}</p></section>
     <section class="audit-print audit-blank print-only">${printHead(t.blankSubtitle)}<div id="blankPrintAnswers"></div><p class="form-note">${t.blankInstruction}</p></section>
     </main><footer class="tool-footer"><span>© 2026 Dulat Irzhanov</span><a href="https://dulatedu.com/">dulatedu.com</a></footer></div>`;
 

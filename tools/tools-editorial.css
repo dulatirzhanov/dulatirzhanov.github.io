@@ -161,8 +161,8 @@ html, body { background: var(--e-paper); }
     size: A4 portrait;
     margin: 15mm 17mm 16mm;
     @top-right { color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-    @bottom-left { content: "dulatedu.com"; color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-    @bottom-right { content: counter(page) " / " counter(pages); color: #6b6566; font: 700 6.8pt "PT Sans", Arial, sans-serif; letter-spacing: .12em; }
+    @bottom-left { content: "dulatedu.com"; color: #231f20; font: 400 7.6pt "PT Sans", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+    @bottom-right { content: counter(page) " / " counter(pages); color: #231f20; font: 400 7.6pt "PT Sans", Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
   }
   html, body { background: #fff; }
   .audit-view { background: #fff; color: #231f20; font: 10.5pt/1.3 "PT Sans", Arial, sans-serif; }
@@ -199,48 +199,62 @@ html, body { background: var(--e-paper); }
 
   .form-note { margin-top: 3.5mm; color: #6b6566; font: 400 8pt/1.35 "PT Sans", Arial, sans-serif; }
 
-  /* ---------- заполненная анкета: полоса журнала ---------- */
-  .audit-report { position: relative; display: flex !important; flex-direction: column; min-height: 252mm; padding-left: 5.5mm; color: #231f20; }
-  .rep-head, .rep-cols { display: grid; grid-template-columns: 31% minmax(0, 1fr); align-items: stretch; }
-  .rep-cols { flex: 1 1 auto; }
-  .rep-head { margin: 4mm 0 10mm; }
-  .rep-head-main { grid-column: 2; margin-left: 3mm; padding-top: 3mm; border-top: 1.5pt solid #b33333; }
-  .rep-title { margin: 0; color: #231f20; font: 400 21pt/1.12 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 36; letter-spacing: -.005em; }
-  .rep-sub { margin: 1.6mm 0 0; color: #3d393a; font: 400 11.5pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 14; }
+  /* ---------- заполненная анкета: полоса журнала ----------
+     Размеры сняты с PDF образца (стр. 2, 612x792 pt) и пересчитаны на A4:
+     поля 11 / 14.5 мм, колонка повода 29.9%, линейка-разделитель на 32.8%,
+     текст 9 pt гротеском с межстрочным 12 pt, заголовок 16 pt красным,
+     волосяные линейки 0.25 pt, заголовок таблицы 0.5 pt, красная линейка 1.5 pt.
+     Chrome округляет границы до 1 px (0.75 pt), поэтому тонкие линейки
+     нарисованы псевдоэлементами высотой 1 px со сжатием scaleY(.3333). */
+  @page report { size: A4 portrait; margin: 15mm 14.5mm 13mm 11mm; }
+  .audit-report { page: report; position: relative; display: flex !important; flex-direction: column; min-height: 255mm; padding-left: 5.5mm; color: #231f20; }
+  .rep-head, .rep-cols { display: grid; grid-template-columns: 32.8% minmax(0, 1fr); align-items: stretch; }
+  .rep-cols { position: relative; flex: 1 1 auto; }
+  .rep-head { margin: 4mm 0 16mm; }
+  .rep-head-main { grid-column: 2; margin-left: 3.2mm; padding-top: 2.6mm; border-top: 1.5pt solid #b33333; }
+  .rep-title { margin: 0; color: #231f20; font: 400 18.5pt/1.1 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 24; letter-spacing: -.003em; }
+  .rep-sub { margin: 1.8mm 0 0; color: #231f20; font: 400 10.7pt/1.25 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 12; }
 
-  .rep-left { padding-right: 4mm; }
-  .rep-right { padding-left: 3mm; border-left: .25pt solid #231f20; }
-  .rep-cols h2 { margin: 0 0 2.6mm; padding-bottom: 1.3mm; border-bottom: .5pt solid #231f20; color: #b33333; font: 700 16pt/1.1 "PT Sans", Arial, sans-serif; letter-spacing: -.01em; }
+  .rep-left { position: relative; padding-right: 5mm; }
+  .rep-right { position: relative; padding-left: 3.2mm; }
+  /* вертикальный разделитель 0.25 pt от линейки заголовка до низа колонок */
+  .rep-right::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
+  .rep-cols h2 { position: relative; margin: 0 0 3.6mm; padding-bottom: .9mm; color: #b33333; font: 700 16pt/1.1 "PT Sans", Arial, sans-serif; letter-spacing: -.02em; }
+  .rep-cols h2::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: bottom; }
+  .rep-right > h2::after { left: -3.2mm; }
+  .rep-left > h2::after { left: -2.1mm; }
+  /* уголок слева от первого абзаца, как в образце: вертикаль 24 pt от линейки заголовка */
+  .rep-left > h2::before { content: ""; position: absolute; top: 100%; left: -2.1mm; width: 1px; height: 24pt; background: #231f20; transform: scaleX(.3333); transform-origin: left; }
   .rep-cols .rep-h2-next { margin-top: 8mm; }
 
-  .rep-qa { margin: 0 0 3.2mm; break-inside: avoid; }
-  .rep-qa h3 { margin: 0 0 .9mm; color: #231f20; font: 700 8.3pt/1.25 "PT Sans", Arial, sans-serif; }
-  .rep-qa p { margin: 0; color: #231f20; font: 400 9.6pt/1.42 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 11; hyphens: auto; overflow-wrap: anywhere; }
-  .rep-school { margin: 0 0 3mm; color: #231f20; font: 400 8.6pt/1.35 "PT Sans", Arial, sans-serif; }
+  .rep-qa { margin: 0 0 2.2mm; break-inside: avoid; }
+  .rep-qa h3 { margin: 0; color: #231f20; font: 700 9pt/1.33 "PT Sans", Arial, sans-serif; }
+  .rep-qa p { margin: 0; color: #231f20; font: 400 9pt/1.33 "PT Sans", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
+  .rep-school { margin: 0 0 3mm; color: #231f20; font: 400 9pt/1.33 "PT Sans", Arial, sans-serif; }
   .rep-school b { font-weight: 700; }
 
   .rep-table { width: 100%; margin: 0 0 1mm; border-collapse: collapse; table-layout: fixed; }
-  .rep-table thead th { padding: 1.6mm 2mm 1.3mm 0; border-bottom: .5pt solid #231f20; color: #231f20; font: 700 7.4pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .09em; text-align: left; text-transform: uppercase; }
-  .rep-table thead th:first-child, .rep-table tbody th { width: 31%; }
-  .rep-table tbody th, .rep-table tbody td { padding: 1.9mm 2mm 1.9mm 0; border-top: .25pt solid #231f20; vertical-align: top; text-align: left; }
-  .rep-table tbody tr:first-child th, .rep-table tbody tr:first-child td { border-top: 0; }
-  .rep-table tbody th { color: #231f20; font: 400 8.4pt/1.3 "PT Sans", Arial, sans-serif; }
-  .rep-table tbody td { color: #231f20; font: 400 9.4pt/1.35 "Source Serif 4", "PT Serif", Georgia, serif; font-variation-settings: "opsz" 11; hyphens: auto; overflow-wrap: anywhere; }
+  .rep-table th, .rep-table td { position: relative; }
+  .rep-table thead th { padding: 1.4mm 2mm 1.5mm 0; color: #231f20; font: 700 8.6pt/1.2 "PT Sans", Arial, sans-serif; letter-spacing: .01em; text-align: left; text-transform: uppercase; }
+  .rep-table thead th::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.6667); transform-origin: bottom; }
+  .rep-table thead th:first-child, .rep-table tbody th { width: 27%; }
+  .rep-table tbody th, .rep-table tbody td { padding: 1.9mm 2mm 1.9mm 0; vertical-align: top; text-align: left; }
+  .rep-table tbody tr + tr th::after, .rep-table tbody tr + tr td::after { content: ""; position: absolute; top: 0; right: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: top; }
+  .rep-table tbody th { color: #231f20; font: 400 9pt/1.3 "PT Sans", Arial, sans-serif; }
+  .rep-table tbody td { color: #231f20; font: 400 9pt/1.33 "PT Sans", Arial, sans-serif; hyphens: auto; overflow-wrap: anywhere; }
 
-  .rep-text { column-count: 2; column-gap: 5mm; }
-  .rep-note { margin: 6mm 0 0; padding-top: 2mm; border-top: .25pt solid #231f20; color: #6b6566; font: 400 7.4pt/1.4 "PT Sans", Arial, sans-serif; break-inside: avoid; }
-  .rep-vert { position: absolute; bottom: 0; left: 0; margin: 0; color: #231f20; font: 700 5.8pt/1 "PT Sans", Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .rep-text { column-count: 2; column-gap: 5.5mm; }
+  .rep-note { position: relative; margin: 6mm 0 0; padding-top: 2mm; color: #6b6566; font: 400 7.4pt/1.4 "PT Sans", Arial, sans-serif; break-inside: avoid; }
+  .rep-note::before { content: ""; position: absolute; top: 0; right: 0; left: 0; height: 1px; background: #231f20; transform: scaleY(.3333); transform-origin: top; }
+  /* вертикальная подпись в левом поле: 5.5 pt, низ на одной линии с разделителем */
+  .rep-vert { position: absolute; bottom: 0; left: -5.5mm; margin: 0; color: #231f20; font: 400 5.5pt/1 "PT Sans", Arial, sans-serif; letter-spacing: .05em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
   body.answers-red .rep-qa p, body.answers-red .rep-table tbody td { color: #9e2a2a; }
 
   /* длинные ответы: размер уменьшается ступенями, см. data-rep-size в express-audit.js */
-  body[data-rep-size="m"] .rep-qa p, body[data-rep-size="m"] .rep-table tbody td { font-size: 8.8pt; line-height: 1.36; }
-  body[data-rep-size="m"] .rep-qa { margin-bottom: 2.6mm; }
-  body[data-rep-size="s"] .rep-qa p, body[data-rep-size="s"] .rep-table tbody td { font-size: 8pt; line-height: 1.32; }
-  body[data-rep-size="s"] .rep-qa h3 { font-size: 7.6pt; }
-  body[data-rep-size="s"] .rep-qa { margin-bottom: 2.2mm; }
-  body[data-rep-size="s"] .rep-table tbody th, body[data-rep-size="s"] .rep-table tbody td { padding-top: 1.4mm; padding-bottom: 1.4mm; }
-  body[data-rep-size="xs"] .rep-qa p, body[data-rep-size="xs"] .rep-table tbody td { font-size: 7.5pt; line-height: 1.28; }
-  body[data-rep-size="xs"] .rep-qa h3, body[data-rep-size="xs"] .rep-table tbody th { font-size: 7.2pt; }
-  body[data-rep-size="xs"] .rep-qa { margin-bottom: 1.8mm; }
-  body[data-rep-size="xs"] .rep-table tbody th, body[data-rep-size="xs"] .rep-table tbody td { padding-top: 1.1mm; padding-bottom: 1.1mm; }
+  body[data-rep-size="m"] .rep-qa h3, body[data-rep-size="m"] .rep-qa p, body[data-rep-size="m"] .rep-table tbody td, body[data-rep-size="m"] .rep-table tbody th { font-size: 8.5pt; line-height: 1.3; }
+  body[data-rep-size="s"] .rep-qa h3, body[data-rep-size="s"] .rep-qa p, body[data-rep-size="s"] .rep-table tbody td, body[data-rep-size="s"] .rep-table tbody th { font-size: 7.9pt; line-height: 1.28; }
+  body[data-rep-size="s"] .rep-qa { margin-bottom: 1.8mm; }
+  body[data-rep-size="xs"] .rep-qa h3, body[data-rep-size="xs"] .rep-qa p, body[data-rep-size="xs"] .rep-table tbody td, body[data-rep-size="xs"] .rep-table tbody th { font-size: 7.3pt; line-height: 1.26; }
+  body[data-rep-size="xs"] .rep-qa { margin-bottom: 1.5mm; }
+  body[data-rep-size="xs"] .rep-table tbody th, body[data-rep-size="xs"] .rep-table tbody td { padding-top: 1.2mm; padding-bottom: 1.2mm; }
 }
