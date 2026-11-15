@@ -41,17 +41,20 @@
   --e-red-ink: #9e2a2a;      /* красный для мелкого текста, контраст 6.9:1 */
   --e-on-ink: #ffffff;
 }
-/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js */
+/* Ночная тема: атрибут data-theme="dark" на <html> ставит /theme.js.
+   Палитра «Тёплая бумага» (15.11.2026): фон светлее чистого черного, текст и заголовки приглушены,
+   красный мягче. Контраст на --e-paper (WCAG / APCA Lc): ink 12.6 / 84, ink-2 10.3 / 72, muted 7.3 / 54,
+   red 5.2, red-ink 7.4 / 55; на --e-paper-2 не ниже 4.7 у красного и 6.6 у muted. */
 :root:where([data-theme="dark"]) {
-  --e-paper: #161415;
-  --e-paper-2: #201d1e;
-  --e-ink: #efebe6;
-  --e-ink-2: #d6d0c9;
-  --e-muted: #a49d97;
-  --e-rule: #3a3536;
-  --e-red: #e0675c;
-  --e-red-ink: #ec8a80;
-  --e-on-ink: #161415;
+  --e-paper: #1c1a1b;
+  --e-paper-2: #262324;
+  --e-ink: #e0dbd4;
+  --e-ink-2: #cdc7bf;
+  --e-muted: #b0a79c;
+  --e-rule: #463f40;
+  --e-red: #d96e64;
+  --e-red-ink: #ea928a;
+  --e-on-ink: #1c1a1b;
 }
 
 /* --- Старые переменные site.css (бирюза и золото) ведут на токены --e-* ---
@@ -73,3 +76,6 @@
   --color-accent: var(--e-red);
   --color-accent-strong: var(--e-red);
 }
+
+/* Ссылки языка в ночной теме: site.css красит их жестким #9d978b (6.3:1), ведем на токен. Наведение и .active остаются прежними. */
+:where(:root[data-theme="dark"]) .lang-switcher a { color: var(--e-muted); }

@@ -219,6 +219,7 @@ body.case-view { max-width: 860px; }
 }
 .case-head-byline { margin-top: 14px; font-family: var(--e-sans); font-size: 15px; color: var(--e-ink-2); }
 .case-head-byline span { color: var(--e-rule); margin: 0 4px; }
+:where(:root[data-theme="dark"]) .case-head-byline span { color: var(--e-muted); } /* точка-разделитель: в ночной теме линейка на фоне почти не видна */
 
 /* Полоса этапов: тонкие линейки, текущий экран красный */
 .seg-label { font-family: var(--e-sans); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--e-muted); }
@@ -470,3 +471,11 @@ body > h1 { box-sizing: border-box; width: min(980px, 100% - 48px); margin: 40px
 /* Наведение там, где старые правила sim.css сильнее слоя по специфичности */
 .filter-chip.active:hover { background: var(--e-ink); border-color: var(--e-ink); color: var(--e-on-ink); }
 .sidebar-footer .footer-links a:hover { border-bottom-color: var(--e-red); color: var(--e-ink); }
+
+/* Ночная тема: серые и бирюзовые остатки старого sim.css (#888, #aaa, #dfeee9) ведем на токены.
+   Найдены проверкой контраста 15.11.2026: «Сообщение не публикуется...» было 4.4:1. Дневная тема не затронута. */
+:where(:root[data-theme="dark"]) .share-block .share-heading { color: var(--e-ink); }
+:where(:root[data-theme="dark"]) .share-block .share-privacy,
+:where(:root[data-theme="dark"]) .share-block .email-text,
+:where(:root[data-theme="dark"]) .how-block summary small,
+:where(:root[data-theme="dark"]) .accreditation-block summary small { color: var(--e-muted); }
