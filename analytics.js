@@ -1,7 +1,7 @@
 /*
  * Общий счетчик Google Analytics (ресурс G-P430YKCERB) и события сайта.
  * Подключается одной строкой в <head> каждой оболочки:
- *   <script src="/analytics.js?v=1"></script>
+ *   <script src="/analytics.js?v=2"></script>
  * При смене файла менять версию ?v= во всех оболочках.
  *
  * События:
@@ -33,6 +33,11 @@
 
   function pageLang() {
     var p = location.pathname;
+    if (p.indexOf("/blog/") === 0) {
+      // язык интерфейса блога задает ?lang=; без него остается en
+      var q = new URLSearchParams(location.search).get("lang");
+      return q === "kz" ? "kk" : q === "ru" ? "ru" : "en";
+    }
     if (/^\/(kz)(\/|$)/.test(p) || /\/kz\//.test(p)) return "kk";
     if (/^\/ru(\/|$)/.test(p) || /\/ru\//.test(p) || p.indexOf("/sim/") === 0 || p.indexOf("/sources/") === 0) return "ru";
     return "en";
