@@ -1,17 +1,8 @@
-/* =====================================================================
-   Blog: editorial layer (журнальная верстка).
-   Подключается последним, после editorial-base.css, site.css,
-   blog-motion.css и blog-shell.css, и переопределяет их.
-   Шрифт и токены --e-* лежат в /editorial-base.css.
-   Логика (navigation.js и скрипт в index.html) не затронута: меняется
-   только внешний вид. Чтобы откатить: убрать <link blog-editorial.css>
-   и <link editorial-base.css> из blog/index.html и строку-рубрику
-   <p class="section-rubric"> из шапки.
-   ===================================================================== */
+/* Блог: журнальная верстка. Подключается последним, после editorial-base.css, site.css,
+   blog-motion.css и blog-shell.css, и переопределяет их. Шрифт и токены --e-* в /editorial-base.css. */
 
 :root { --chrome-muted: var(--e-muted); --chrome-ink: var(--e-ink); }
 
-/* --- Основа --- */
 html { background: var(--e-paper); }
 body.blog-page {
   max-width: 980px;
@@ -28,7 +19,6 @@ body.blog-page ::selection { background: rgba(179, 51, 51, .18); }
 .lang-switcher a:hover, .lang-switcher a:focus-visible { color: var(--e-ink); }
 .lang-switcher a.active { color: var(--e-red-ink) !important; } /* site.css ставит !important */
 
-/* переключателя языков вверху больше нет: верхний отступ меньше */
 .blog-page .crumbs { margin-top: 28px; }
 @media (max-width: 700px) { .blog-page .crumbs { margin-top: 20px; } }
 .blog-page .crumbs, .blog-page .crumbs a { color: var(--e-muted); font-family: var(--e-sans); font-size: 13px; letter-spacing: .02em; }
