@@ -34,7 +34,7 @@ function metadata(shell,title,description,url,ru,kk,type) {
 }
 for(const lang of ['ru','kk']) {
  const dir=lang==='kk'?'kz':'ru';
- const files=['sim/cases-data.js',...(lang==='kk'?['sim/kz/cases-data-kz.js']:[]),'sim/ui-strings.js','sim/tag-labels.js'];
+ const files=['sim/cases-data.js',...(lang==='kk'?['sim/kz/cases-data-kz.js']:[]),'sim/ui-strings.js','sim/tag-labels.js','sim/case-revisions.js'];
  const globals={CURRENT_LANG:lang,LANG_BASE_PATHS:{ru:'/sim/ru/',kk:'/sim/kz/'}};
  const data=vm.runInContext('CASES_DATA',context(files,globals));
  for(const item of data.filter(x=>x.availableLangs.includes(lang))) {
@@ -104,7 +104,7 @@ function sheetPage(item,lang,dir) {
 }
 for(const lang of ['ru','kk']) {
  const dir=lang==='kk'?'kz':'ru';
- const files=['sim/cases-data.js',...(lang==='kk'?['sim/kz/cases-data-kz.js']:[]),'sim/ui-strings.js','sim/tag-labels.js'];
+ const files=['sim/cases-data.js',...(lang==='kk'?['sim/kz/cases-data-kz.js']:[]),'sim/ui-strings.js','sim/tag-labels.js','sim/case-revisions.js'];
  const data=vm.runInContext('CASES_DATA',context(files,{CURRENT_LANG:lang,LANG_BASE_PATHS:{ru:'/sim/ru/',kk:'/sim/kz/'}}));
  for(const item of data.filter(x=>x.availableLangs.includes(lang)&&x.printSheet&&x.actionPlan&&x.actionPlan.intro&&x.actionPlan.intro[lang])) write(`sim/${dir}/${item.id}-sheet.html`,sheetPage(item,lang,dir));
 }

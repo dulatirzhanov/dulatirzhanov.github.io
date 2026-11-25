@@ -485,3 +485,19 @@ body > h1 { box-sizing: border-box; width: min(980px, 100% - 48px); margin: 40px
 :where(:root[data-theme="dark"]) .share-block .email-text,
 :where(:root[data-theme="dark"]) .how-block summary small,
 :where(:root[data-theme="dark"]) .accreditation-block summary small { color: var(--e-muted); }
+
+/* Edition notes reuse the library instructions and blog explanation card. */
+.how-content .how-step p{margin:7px 0 0;font-family:var(--e-serif);font-size:17px;line-height:1.5;color:var(--e-ink-2)}
+.how-content .how-step strong a,.how-content .how-step strong a:visited{color:inherit;font:inherit;text-decoration:none}
+.how-content .how-step strong a:hover{text-decoration:underline;text-decoration-color:var(--e-red);text-underline-offset:3px}
+.case-view [data-revision]{position:relative}
+.case-view [data-revision]>.summary-text{border:0;color:inherit;text-decoration:underline;text-decoration-color:var(--e-rule);text-decoration-thickness:1px;text-underline-offset:3px;cursor:help}
+.case-view .summary-text:focus-visible{outline:2px solid var(--e-red);outline-offset:3px}
+.case-view [data-revision]>.summary-tooltip{position:absolute;left:0;top:calc(100% + 8px);z-index:20;box-sizing:border-box;width:min(540px,calc(100vw - 80px));max-width:100%;max-height:60vh;overflow-y:auto;overscroll-behavior:contain;padding:16px 44px 18px 20px;border:1px solid var(--e-rule);border-top:2px solid var(--e-ink);border-radius:0;background:var(--e-paper-2);box-shadow:none;font:400 15px/1.5 var(--e-sans);font-style:normal;letter-spacing:normal;text-transform:none;color:var(--e-ink-2)}
+.case-view [data-revision]>.summary-tooltip[hidden]{display:none}
+.case-view [data-revision]>.summary-tooltip strong{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--e-red-ink)}
+.case-view [data-revision] .summary-close{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;padding:0;border:0;border-radius:0;background:transparent;color:var(--e-muted);cursor:pointer;font:18px/1 var(--e-sans)}
+.case-view [data-revision] .summary-close:hover,.case-view [data-revision] .summary-close:focus-visible{background:transparent;color:var(--e-red-ink)}
+.case-view [data-revision] .summary-close:focus-visible{outline:2px solid var(--e-red);outline-offset:-2px}
+@media(max-width:700px){.case-view [data-revision]>.summary-tooltip{display:block;position:relative;top:auto;left:auto;width:100%;margin-top:12px;padding:14px 40px 16px 16px}}
+@media print{.case-view [data-revision]>.summary-tooltip{display:none!important}}

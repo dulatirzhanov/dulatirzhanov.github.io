@@ -246,6 +246,8 @@
       }
 
       const displayLang = caseData.availableLangs.includes(CURRENT_LANG) ? CURRENT_LANG : caseData.availableLangs[0];
+      const revisions = SimCaseRevisions.create(caseData, CURRENT_LANG);
+      const sequentialActions = caseData.id === "case-001";
       const track = (name, extra) => { if (window.track) window.track(name, Object.assign({ case_id: caseData.id, lang: CURRENT_LANG }, extra || {})); };
       track("case_open");
 
@@ -301,6 +303,7 @@
       } else {
         panesHtml += `
           <section class="pane" data-id="intro">
+            ${revisions.intro()}
             <p class="intro-lead">${f(caseData.excerpt)}</p>
             <div class="intro-card">
               <div class="intro-label">${I.youWill}</div>
@@ -316,7 +319,7 @@
           const isLast = i === scenes.length - 1;
           const nextPane = isLast ? "actionsOverview" : `scene${i + 1}`;
           const nextBtnText = isLast ? s("viewOptions") : s("next");
-          const textHtml = f(scene.text).split("\n\n").map(p => `<p>${p.trim()}</p>`).join("");
+          const textHtml = f(scene.text).split("\n\n").map((p, pi) => revisions.render("p", `scene${i}.text.paragraph${pi}`, p.trim())).join("");
           const bridgeHtml = isLast && f(caseData.bridgeQuestion)
             ? `<div class="bridge-question">${f(caseData.bridgeQuestion)}</div>` : "";
           panesHtml += `
@@ -351,7 +354,7 @@
               <p>${s("actionsGuidanceText")}</p>
             </aside>` : ""}
             <div class="actions-list">${actionRows}</div>
-            <div class="pane-nav"><a class="back-link" data-next="scene${scenes.length - 1}">${I.back}</a><a class="back-link primary" data-next="expert">${s("next")}</a></div>
+            <div class="pane-nav"><a class="back-link" data-next="scene${scenes.length - 1}">${I.back}</a><a class="back-link primary" data-next="${sequentialActions && actions.length ? "action0" : "expert"}">${s("next")}</a></div>
           </section>
         `;
 
@@ -374,7 +377,7 @@
           ).join("");
           const resHtml = resItems ? `<ul class="resource-list">${resItems}</ul>` : "";
 
-          const detailHtml = f(action.detail).split("\n\n").map((p, pi) => `<p${pi === 0 ? " class=\"lead-par\"" : ""}>${p.trim()}</p>`).join("");
+          const detailHtml = f(action.detail).split("\n\n").map((p, pi) => revisions.render("p", `action${i}.detail.paragraph${pi}`, p.trim(), pi === 0 ? ' class="lead-par"' : "")).join("");
 
           panesHtml += `
             <section class="pane" data-id="action${i}">
@@ -383,7 +386,7 @@
               ${detailHtml}
               ${pqHtml}
               ${resHtml}
-              <div class="pane-nav"><a class="back-link" data-next="actionsOverview">${s("backToActions")}</a></div>
+              <div class="pane-nav"><a class="back-link" data-next="actionsOverview">${s("backToActions")}</a>${sequentialActions ? `<a class="back-link primary" data-next="${i + 1 < actions.length ? `action${i + 1}` : "expert"}">${s("next")}</a>` : ""}</div>
             </section>
           `;
         });
@@ -441,14 +444,14 @@
         // Action plan: what to do this week, month and year, what to say, printable sheet
         if (hasPlan) {
           const plan = caseData.actionPlan;
-          const horizonsHtml = (plan.horizons || []).map(h => `
+          const horizonsHtml = (plan.horizons || []).map((h, hi) => `
             <div class="plan-horizon">
               <h3>${f(h.title)}</h3>
               ${h.note ? `<p class="plan-note">${f(h.note)}</p>` : ""}
-              <ol class="plan-list">${(h.items || []).map(it => `
+              <ol class="plan-list">${(h.items || []).map((it, ii) => `
                 <li>
-                  <div class="plan-what">${f(it.what)}</div>
-                  <div class="plan-meta"><span><b>${s("planWho")}:</b> ${f(it.who)}</span><span><b>${s("planDone")}:</b> ${f(it.done)}</span></div>
+                  ${revisions.render("div", `plan.${hi}.${ii}.what`, f(it.what), ' class="plan-what"')}
+                  <div class="plan-meta"><span><b>${s("planWho")}:</b> ${f(it.who)}</span>${revisions.render("span", `plan.${hi}.${ii}.done`, f(it.done), "", `<b>${s("planDone")}:</b> `)}</div>
                 </li>`).join("")}</ol>
             </div>`).join("");
           const say = caseData.sayPhrases;
@@ -456,7 +459,7 @@
             <div class="plan-say">
               <h3>${s("planSayTitle")}</h3>
               ${say.intro ? `<p class="plan-note">${f(say.intro)}</p>` : ""}
-              ${say.items.map(it => `<div class="say-item"><div class="say-to">${f(it.to)}</div><blockquote>${f(it.text)}</blockquote></div>`).join("")}
+              ${say.items.map((it, i) => `<div class="say-item"><div class="say-to">${f(it.to)}</div>${revisions.render("blockquote", `say.${i}`, f(it.text))}</div>`).join("")}
             </div>` : "";
           const sheetHtml = caseData.printSheet ? `
             <div class="plan-sheet share-block">
@@ -716,6 +719,7 @@
       });
       const startId = location.hash.slice(1);
       showPane(paneOrder.includes(startId) ? startId : "intro", false);
+      revisions.mount();
     }
   };
 })();
